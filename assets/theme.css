@@ -25,10 +25,14 @@ img{max-width:100%;display:block}
 @keyframes dcSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes dcFade{from{opacity:0}to{opacity:1}}
 @keyframes dcBadge{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
+@keyframes dcModal{from{opacity:0;transform:translate(-50%,calc(-50% + 26px))}to{opacity:1;transform:translate(-50%,-50%)}}
 
 /* ===== app shell ===== */
 .privat-outer{min-height:100dvh;display:flex;justify-content:center;align-items:stretch;background:var(--page-bg)}
-.privat-app{position:relative;width:min(430px,100vw);height:100dvh;overflow:hidden;background:var(--bg);box-shadow:0 0 60px rgba(60,40,30,.18)}
+.privat-app{position:relative;width:min(430px,100vw);height:100vh;height:100dvh;overflow:hidden;background:var(--bg);box-shadow:0 0 60px rgba(60,40,30,.18)}
+/* section wrappers must not create containing blocks: header sticks to the
+   scroller, drawers/nav position against .privat-app */
+#shopify-section-header{display:contents}
 .privat-scroller{height:100%;overflow-y:auto;overscroll-behavior:contain;padding-bottom:76px}
 .privat-scroller.no-scroll{overflow:hidden}
 
@@ -157,9 +161,15 @@ img{max-width:100%;display:block}
 .privat-shopinfo__v{font-size:13px;font-weight:600;color:var(--ink);text-align:right}
 
 /* ===== footer ===== */
-.privat-footer{padding:28px 22px 34px;text-align:center}
+.privat-footer{padding:28px 22px 34px;text-align:center;border-top:1px solid var(--line);margin-top:26px}
 .privat-footer__name{font-family:'Prata',serif;font-size:18px;letter-spacing:.14em;color:var(--ink)}
-.privat-footer__meta{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.6}
+.privat-footer__nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin:16px 0 0}
+.privat-footer__nav a{font-size:13px;font-weight:600;color:var(--ink)}
+.privat-footer__nav a:hover{color:var(--accent)}
+.privat-footer__legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin:12px 0 0}
+.privat-footer__legal a{font-size:11.5px;color:var(--sub)}
+.privat-footer__legal a:hover{color:var(--accent)}
+.privat-footer__meta{font-size:11.5px;color:var(--sub);margin-top:14px;line-height:1.6}
 
 /* ===== bottom nav ===== */
 .privat-nav{position:absolute;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);
@@ -182,6 +192,9 @@ img{max-width:100%;display:block}
 .privat-drawer__logo-sub{font-size:8px;letter-spacing:.42em;color:var(--accent);font-weight:700}
 .privat-close{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:none;cursor:pointer;color:var(--ink);font-size:16px;display:flex;align-items:center;justify-content:center;flex:none}
 .privat-drawer__link{border:none;background:none;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:16px;font-weight:600;letter-spacing:.04em;color:var(--ink);padding:15px 0;border-bottom:1px solid var(--line);width:100%}
+.privat-drawer__subhead{margin-top:20px;padding-bottom:6px;font-size:10.5px;letter-spacing:.16em;font-weight:700;color:var(--sub);text-transform:uppercase}
+.privat-drawer__sublink{display:block;border:none;background:none;text-align:left;font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:500;color:var(--sub);padding:8px 0;width:100%}
+.privat-drawer__sublink:hover{color:var(--accent)}
 .privat-drawer__foot{margin-top:auto;padding-top:24px;display:flex;flex-direction:column;gap:10px}
 .privat-drawer__contact{font-size:13px;color:var(--sub)}
 .privat-drawer__cart-btn{border:1.5px solid var(--line);background:var(--card);cursor:pointer;border-radius:100px;padding:12px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--ink)}
@@ -243,6 +256,8 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 
 .privat-account{padding:20px 22px calc(28px + env(safe-area-inset-bottom))}
 .privat-account__text{font-size:13.5px;line-height:1.6;color:var(--sub);margin:0 0 16px}
+.privat-account__links{display:flex;flex-direction:column;gap:8px}
+.privat-account__links .privat-btn{text-align:center}
 .privat-input{width:100%;border:1.5px solid var(--line);border-radius:100px;background:var(--card);padding:14px 20px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--ink);outline:none;margin-bottom:10px}
 .privat-input--search{padding:13px 20px}
 .privat-account__submit{width:100%;border:none;cursor:pointer;background:var(--ink);color:var(--bg);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:15px;border-radius:100px}
@@ -448,10 +463,16 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-cat{transition:transform .2s ease}
   .privat-cat:hover{transform:translateY(-2px)}
 
-  /* bottom sheets become centered modals rising from bottom
-     (left/right:0 + margin auto keeps the translateY animation intact) */
-  .privat-sheet{left:0;right:0;margin:0 auto;max-width:520px;border-radius:22px 22px 0 0;
-    box-shadow:0 -10px 60px rgba(25,15,10,.25)}
+  /* bottom sheets become true centered modals on desktop */
+  .privat-sheet{top:50%;left:50%;right:auto;bottom:auto;margin:0;width:min(560px,92vw);
+    transform:translate(-50%,-50%);border-radius:24px;max-height:min(680px,85dvh);
+    animation:dcModal .28s cubic-bezier(.3,.8,.3,1);box-shadow:0 30px 80px rgba(25,15,10,.35)}
+  .privat-sheet--cart,.privat-sheet--favs,.privat-sheet--cats{max-height:min(680px,85dvh)}
+  .privat-sheet--search{height:auto;min-height:400px}
+  .privat-sheet__summary{padding-bottom:20px}
+  .privat-sheet__scroll{padding-bottom:24px}
+  .privat-empty--cart{padding:24px}
+  .privat-account{padding-bottom:26px}
 
   /* inner pages */
   .privat-page{max-width:1140px;margin:0 auto;padding:36px 24px 60px}

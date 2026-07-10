@@ -12,6 +12,22 @@
   {% endfor %}
   <button type="button" class="privat-drawer__link" data-open="cats">Категории</button>
 
+  {%- assign footer_menu = linklists[settings.footer_menu] -%}
+  {% if footer_menu.links.size > 0 %}
+    <div class="privat-drawer__subhead">Покупателям</div>
+    {% for link in footer_menu.links %}
+      <a href="{{ link.url }}" class="privat-drawer__sublink">{{ link.title }}</a>
+    {% endfor %}
+  {% endif %}
+
+  {%- assign legal_menu = linklists[settings.legal_menu] -%}
+  {% if legal_menu.links.size > 0 %}
+    <div class="privat-drawer__subhead">Информация</div>
+    {% for link in legal_menu.links %}
+      <a href="{{ link.url }}" class="privat-drawer__sublink">{{ link.title }}</a>
+    {% endfor %}
+  {% endif %}
+
   <div class="privat-drawer__foot">
     <div class="privat-theme-toggle">
       <span class="privat-theme-toggle__label">Тёмная тема</span>

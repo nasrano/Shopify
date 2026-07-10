@@ -1,19 +1,34 @@
 <div class="privat-sheet" data-drawer="acc">
   <div class="privat-sheet__head">
-    <h3 class="privat-sheet__title">Аккаунт</h3>
+    <h3 class="privat-sheet__title">{% if customer %}Мой аккаунт{% else %}Вход{% endif %}</h3>
     <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
   </div>
   <div class="privat-account">
     {% if customer %}
-      <p class="privat-account__text">Вы вошли как {{ customer.name | default: customer.email }}.</p>
-      <a href="{{ routes.account_url }}" class="privat-btn" style="display:block;text-align:center;margin-bottom:10px">Мои заказы</a>
-      <a href="{{ routes.account_logout_url }}" class="privat-account__submit" style="display:block;text-align:center;text-decoration:none">Выйти</a>
+      <p class="privat-account__text">Здравствуйте, {{ customer.first_name | default: customer.email }}! Заказы, адреса и избранное — под рукой.</p>
+      <div class="privat-account__links">
+        <a href="{{ routes.account_url }}" class="privat-btn privat-btn--outline">Мои заказы</a>
+        <a href="{{ routes.account_addresses_url }}" class="privat-btn privat-btn--outline">Адреса доставки</a>
+      </div>
+      <a href="{{ routes.account_logout_url }}" class="privat-account__submit" style="display:block;text-align:center;text-decoration:none;margin-top:10px">Выйти</a>
     {% else %}
-      <p class="privat-account__text">Войдите по номеру телефона — заказы, избранное и бонусы будут под рукой. Никаких лишних данных.</p>
-      <form action="{{ routes.account_login_url }}" method="post">
-        <input class="privat-input" type="text" name="customer[phone]" placeholder="+996 ___ ___ ___" autocomplete="tel">
-        <button type="submit" class="privat-account__submit">Получить код</button>
-      </form>
+      <p class="privat-account__text">Войдите по email — заказы, адреса и статус доставки будут под рукой. Никаких лишних данных.</p>
+      {% form 'customer_login' %}
+        <input class="privat-input" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
+        <input class="privat-input" type="password" name="customer[password]" placeholder="Пароль" autocomplete="current-password" required>
+        <button type="submit" class="privat-account__submit">Войти</button>
+      {% endform %}
+      <div class="privat-form-links">
+        <a href="{{ routes.account_login_url }}#recover" onclick="document.querySelector('[data-drawer=acc] [data-acc-recover]').style.display='block';this.closest('.privat-form-links').style.display='none';return false">Забыли пароль?</a>
+        <a href="{{ routes.account_register_url }}">Регистрация</a>
+      </div>
+      <div data-acc-recover style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+        <p class="privat-form-note">Укажите email — пришлём ссылку для восстановления пароля.</p>
+        {% form 'recover_customer_password' %}
+          <input class="privat-input" type="email" name="email" placeholder="Email" autocomplete="email" required>
+          <button type="submit" class="privat-account__submit">Восстановить пароль</button>
+        {% endform %}
+      </div>
     {% endif %}
   </div>
 </div>
