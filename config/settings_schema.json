@@ -8,6 +8,27 @@
     "theme_support_email": "coolish.ds@gmail.com"
   },
   {
+    "name": "Заказ и WhatsApp",
+    "settings": [
+      {
+        "type": "select",
+        "id": "checkout_mode",
+        "label": "Оформление заказа из корзины",
+        "options": [
+          { "value": "whatsapp", "label": "Через WhatsApp (кратчайший путь)" },
+          { "value": "shopify", "label": "Стандартный Shopify checkout" }
+        ],
+        "default": "whatsapp"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_phone",
+        "label": "Номер WhatsApp (с кодом страны)",
+        "default": "996500690690"
+      }
+    ]
+  },
+  {
     "name": "Навигация",
     "settings": [
       {

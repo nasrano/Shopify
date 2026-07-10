@@ -36,7 +36,17 @@
       <span class="privat-sheet__total-label">Итого</span>
       <span class="privat-sheet__total-val" id="privat-cart-total">{{ cart.total_price | money }}</span>
     </div>
-    <a href="/checkout" class="privat-checkout-btn" style="text-align:center">Оформить заказ</a>
+    {%- assign wa_digits = settings.whatsapp_phone | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
+    {%- if settings.checkout_mode == 'whatsapp' and wa_digits != blank -%}
+      {%- capture wa_cart_msg -%}
+        Здравствуйте! Я хочу заказать: {% for item in cart.items %}{{ item.product.title }} — {{ item.quantity }} шт × {{ item.price | money }}{% unless forloop.last %}; {% endunless %}{% endfor %}. Итого {{ cart.total_price | money }}
+      {%- endcapture -%}
+      <a href="https://wa.me/{{ wa_digits }}?text={{ wa_cart_msg | strip | url_encode }}"
+        id="privat-cart-checkout" data-wa-checkout data-wa-phone="{{ wa_digits }}"
+        target="_blank" rel="noopener" class="privat-checkout-btn" style="text-align:center">Оформить в WhatsApp</a>
+    {%- else -%}
+      <a href="/checkout" class="privat-checkout-btn" style="text-align:center">Оформить заказ</a>
+    {%- endif -%}
     <div class="privat-sheet__note">Анонимная упаковка · доставка за 1 час по Бишкеку</div>
   </div>
 </div>

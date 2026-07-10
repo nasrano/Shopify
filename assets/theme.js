@@ -150,14 +150,30 @@
     return moneyFormat.replace(/\{\{\s*\w+\s*\}\}/, value);
   }
 
+  var lastCartCount = null;
   function cartBadge(count) {
     var badge = document.getElementById('privat-cart-badge');
     if (badge) {
       badge.textContent = String(count);
       badge.hidden = count <= 0;
+      if (lastCartCount !== null && count > lastCartCount) {
+        badge.style.animation = 'none';
+        void badge.offsetWidth;
+        badge.style.animation = 'dcBadge .4s ease';
+      }
     }
+    lastCartCount = count;
     var menuCount = document.getElementById('privat-menu-cart-count');
     if (menuCount) menuCount.textContent = String(count);
+  }
+
+  function syncWaCheckout(cart) {
+    var btn = document.getElementById('privat-cart-checkout');
+    if (!btn || !btn.hasAttribute('data-wa-checkout')) return;
+    var msg = 'Здравствуйте! Я хочу заказать: ' + cart.items.map(function (i) {
+      return i.product_title + ' — ' + i.quantity + ' шт × ' + formatMoney(i.price);
+    }).join('; ') + '. Итого ' + formatMoney(cart.total_price);
+    btn.href = 'https://wa.me/' + btn.getAttribute('data-wa-phone') + '?text=' + encodeURIComponent(msg);
   }
 
   function renderCart(cartData) {
@@ -169,6 +185,7 @@
 
     function paint(cart) {
       cartBadge(cart.item_count);
+      syncWaCheckout(cart);
       if (!cart.items.length) {
         body.innerHTML = '';
         body.style.display = 'none';

@@ -4,7 +4,8 @@
     <a href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}" class="privat-link-all">Все →</a>
   </div>
   <div class="privat-carousel__track">
-    {% for product in section.settings.collection.products limit: section.settings.limit %}
+    {%- assign src_collection = section.settings.collection | default: collections.all -%}
+    {% for product in src_collection.products limit: section.settings.limit %}
       {% render 'product-card', product: product, badge: section.settings.badge %}
     {% endfor %}
   </div>
