@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EFE9E1;font-family:'Manrope',sans-serif}
+a{color:#B4756A;text-decoration:none}a:hover{color:#96584E}
+*{box-sizing:border-box}
+::-webkit-scrollbar{display:none}
+@keyframes dcSlideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes dcSlideL{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes dcSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes dcFade{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div style="min-height:100dvh;display:flex;justify-content:center;align-items:stretch;background:#EFE9E1">
+<div ref="{{rootRef}}" style="position:relative;width:min(430px,100vw);height:100dvh;overflow:hidden;background:var(--bg,#FAF6F0);box-shadow:0 0 60px rgba(60,40,30,.18)">
+
+  <!-- ============ SCROLLER ============ -->
+  <div ref="{{scrollerRef}}" style="height:100%;overflow-y:auto;overscroll-behavior:contain;padding-bottom:76px">
+
+    <!-- promo bar -->
+    <sc-if value="{{promoBar}}" hint-placeholder-val="{{ true }}">
+      <div style="background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-align:center;padding:8px 16px">{{promoText}}</div>
+    </sc-if>
+
+    <!-- header -->
+    <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:6px;padding:12px 14px;background:color-mix(in srgb, var(--bg,#FAF6F0) 88%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#EADFD3)">
+      <button onClick="{{openMenu}}" aria-label="Меню" style="width:42px;height:42px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px">
+        <span style="display:block;width:20px;height:1.6px;background:var(--ink,#2A211C)"></span>
+        <span style="display:block;width:14px;height:1.6px;background:var(--ink,#2A211C)"></span>
+        <span style="display:block;width:20px;height:1.6px;background:var(--ink,#2A211C)"></span>
+      </button>
+      <div onClick="{{goHome}}" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;cursor:pointer">
+        <div style="font-family:'Prata',serif;font-size:21px;letter-spacing:.14em;color:var(--ink,#2A211C)">PRIVAT</div>
+        <div style="font-size:8.5px;letter-spacing:.42em;color:var(--accent,#B4756A);font-weight:700;margin-top:-1px">SEX&nbsp;SHOP</div>
+      </div>
+      <button onClick="{{openFavs}}" aria-label="Избранное" style="position:relative;margin-left:auto;width:42px;height:42px;border:none;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:19px;line-height:1">♡
+        <sc-if value="{{hasFavs}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:5px;right:3px;min-width:16px;height:16px;border-radius:9px;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px">{{favCount}}</span></sc-if>
+      </button>
+      <button onClick="{{openCart}}" aria-label="Корзина" style="position:relative;width:42px;height:42px;border:none;background:none;cursor:pointer;color:var(--ink,#2A211C)">
+        <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+        <sc-if value="{{hasCart}}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:3px;right:1px;min-width:16px;height:16px;border-radius:9px;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px">{{cartCount}}</span></sc-if>
+      </button>
+    </header>
+
+    <!-- hero -->
+    <section data-screen-label="Hero" style="position:relative;height:52dvh;min-height:380px;overflow:hidden">
+      <div ref="{{heroImgRef}}" style="position:absolute;inset:-12% 0;background:var(--soft,#F1E7DB) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 12px, transparent 12px 24px);display:flex;align-items:flex-start;justify-content:center;padding-top:20%">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--sub,#8A7A6E);background:var(--card,#FFF);padding:6px 12px;border-radius:4px">lifestyle фото · пара / уют / тёплый свет</span>
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top, var(--bg,#FAF6F0) 4%, transparent 55%)"></div>
+      <div ref="{{heroTagRef}}" style="position:absolute;left:0;right:0;bottom:0;padding:0 22px 26px">
+        <h1 style="font-family:'Prata',serif;font-size:31px;line-height:1.22;font-weight:400;color:var(--ink,#2A211C);margin:0 0 10px;text-wrap:pretty">Близость — это забота о&nbsp;себе</h1>
+        <p style="font-size:14.5px;line-height:1.55;color:var(--sub,#8A7A6E);margin:0 0 18px;max-width:32ch">Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки.</p>
+        <div style="display:flex;gap:10px">
+          <button onClick="{{goShop}}" style="flex:none;border:none;cursor:pointer;background:var(--ink,#2A211C);color:var(--bg,#FAF6F0);font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;letter-spacing:.05em;padding:14px 26px;border-radius:100px">В магазин →</button>
+          <button onClick="{{openCats}}" style="flex:none;border:1.5px solid var(--line,#EADFD3);cursor:pointer;background:var(--card,#FFF);color:var(--ink,#2A211C);font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;padding:14px 22px;border-radius:100px">Каталог</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- trust chips -->
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:16px 16px 4px;scroll-snap-type:x proximity">
+      <sc-for list="{{trust}}" as="t" hint-placeholder-count="4">
+        <div style="flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:7px;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:100px;padding:9px 15px;font-size:12.5px;font-weight:600;color:var(--ink,#2A211C)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent,#B4756A)"></span>{{t}}
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- categories -->
+    <section data-screen-label="Категории" data-reveal="" style="padding:26px 16px 8px">
+      <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0 0 16px">Категории</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="12">
+          <button onClick="{{c.open}}" style="border:1px solid var(--line,#EADFD3);background:var(--card,#FFF);border-radius:14px;padding:12px 4px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:84px" style-hover="border-color:var(--accent,#B4756A)">
+            <span style="width:36px;height:36px;border-radius:50%;background:var(--chip,#F6EEE4);color:var(--accent,#B4756A);font-family:'Prata',serif;font-size:14px;display:flex;align-items:center;justify-content:center">{{c.mono}}</span>
+            <span style="font-size:10.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.2;text-align:center">{{c.name}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- hits -->
+    <section data-screen-label="Хиты" data-reveal="" style="padding:28px 0 4px" ref="{{shopRef}}">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;padding:0 16px 14px">
+        <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0">Хиты продаж</h2>
+        <button onClick="{{openCats}}" style="border:none;background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent,#B4756A)">Все →</button>
+      </div>
+      <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 16px 8px;scroll-padding:0 16px;scroll-snap-type:x mandatory">
+        <sc-for list="{{hits}}" as="p" hint-placeholder-count="4">
+          <div style="flex:none;width:176px;scroll-snap-align:start;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:relative;height:150px;background:var(--soft,#F1E7DB) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 10px, transparent 10px 20px);display:flex;align-items:center;justify-content:center">
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--sub,#8A7A6E)">фото товара</span>
+              <button onClick="{{p.fav}}" style="position:absolute;top:8px;right:8px;width:32px;height:32px;border:none;border-radius:50%;background:var(--card,#FFF);cursor:pointer;font-size:15px;line-height:1;color:{{p.favC}}">{{p.favG}}</button>
+            </div>
+            <div style="padding:11px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1">
+              <div style="font-size:12.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.35;flex:1">{{p.name}}</div>
+              <div style="font-family:'Prata',serif;font-size:16px;color:var(--ink,#2A211C)">{{p.price}} сом</div>
+              <button onClick="{{p.add}}" style="border:none;cursor:pointer;background:var(--chip,#F6EEE4);color:var(--ink,#2A211C);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:10px;border-radius:100px" style-hover="background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2)">В корзину</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- new -->
+    <section data-screen-label="Новинки" data-reveal="" style="padding:24px 0 4px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;padding:0 16px 14px">
+        <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0">Новинки</h2>
+        <button onClick="{{openCats}}" style="border:none;background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent,#B4756A)">Все →</button>
+      </div>
+      <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 16px 8px;scroll-padding:0 16px;scroll-snap-type:x mandatory">
+        <sc-for list="{{novelties}}" as="p" hint-placeholder-count="4">
+          <div style="flex:none;width:176px;scroll-snap-align:start;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:relative;height:150px;background:var(--soft,#F1E7DB) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 10px, transparent 10px 20px);display:flex;align-items:center;justify-content:center">
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--sub,#8A7A6E)">фото товара</span>
+              <span style="position:absolute;top:8px;left:8px;background:var(--ink,#2A211C);color:var(--bg,#FAF6F0);font-size:9.5px;font-weight:700;letter-spacing:.06em;padding:4px 8px;border-radius:100px">NEW</span>
+              <button onClick="{{p.fav}}" style="position:absolute;top:8px;right:8px;width:32px;height:32px;border:none;border-radius:50%;background:var(--card,#FFF);cursor:pointer;font-size:15px;line-height:1;color:{{p.favC}}">{{p.favG}}</button>
+            </div>
+            <div style="padding:11px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1">
+              <div style="font-size:12.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.35;flex:1">{{p.name}}</div>
+              <div style="font-family:'Prata',serif;font-size:16px;color:var(--ink,#2A211C)">{{p.price}} сом</div>
+              <button onClick="{{p.add}}" style="border:none;cursor:pointer;background:var(--chip,#F6EEE4);color:var(--ink,#2A211C);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:10px;border-radius:100px" style-hover="background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2)">В корзину</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- discounts -->
+    <section data-screen-label="Скидки" data-reveal="" style="margin:24px 0 0;padding:24px 0 26px;background:var(--soft,#F1E7DB)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;padding:0 16px 14px">
+        <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0">Скидки</h2>
+        <button onClick="{{openCats}}" style="border:none;background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent,#B4756A)">Все →</button>
+      </div>
+      <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 16px 8px;scroll-padding:0 16px;scroll-snap-type:x mandatory">
+        <sc-for list="{{discounts}}" as="p" hint-placeholder-count="4">
+          <div style="flex:none;width:176px;scroll-snap-align:start;background:var(--card,#FFF);border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:relative;height:150px;background:var(--bg,#FAF6F0) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 10px, transparent 10px 20px);display:flex;align-items:center;justify-content:center">
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--sub,#8A7A6E)">фото товара</span>
+              <span style="position:absolute;top:8px;left:8px;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:9.5px;font-weight:700;padding:4px 8px;border-radius:100px">−{{p.pct}}%</span>
+              <button onClick="{{p.fav}}" style="position:absolute;top:8px;right:8px;width:32px;height:32px;border:none;border-radius:50%;background:var(--card,#FFF);cursor:pointer;font-size:15px;line-height:1;color:{{p.favC}}">{{p.favG}}</button>
+            </div>
+            <div style="padding:11px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1">
+              <div style="font-size:12.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.35;flex:1">{{p.name}}</div>
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-family:'Prata',serif;font-size:16px;color:var(--accent,#B4756A)">{{p.price}} сом</span>
+                <span style="font-size:12px;color:var(--sub,#8A7A6E);text-decoration:line-through">{{p.oldPrice}}</span>
+              </div>
+              <button onClick="{{p.add}}" style="border:none;cursor:pointer;background:var(--chip,#F6EEE4);color:var(--ink,#2A211C);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:10px;border-radius:100px" style-hover="background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2)">В корзину</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- why us -->
+    <section data-screen-label="Почему PRIVAT" data-reveal="" style="padding:30px 16px 8px">
+      <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0 0 16px">Почему PRIVAT</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <sc-for list="{{why}}" as="w" hint-placeholder-count="4">
+          <div style="background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;gap:8px">
+            <span style="width:34px;height:34px;border-radius:50%;background:var(--chip,#F6EEE4);color:var(--accent,#B4756A);font-family:'Prata',serif;font-size:15px;display:flex;align-items:center;justify-content:center">{{w.mono}}</span>
+            <div style="font-size:14px;font-weight:700;color:var(--ink,#2A211C)">{{w.title}}</div>
+            <div style="font-size:12.5px;line-height:1.5;color:var(--sub,#8A7A6E)">{{w.text}}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- about us -->
+    <section data-screen-label="О нас" data-reveal="" style="padding:30px 22px 8px">
+      <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0 0 12px">О нас</h2>
+      <p style="font-size:14.5px;line-height:1.65;color:var(--ink,#2A211C);margin:0 0 10px;text-wrap:pretty">Мы верим, что близость — нормальная и здоровая часть жизни. PRIVAT — это место, где о ней можно говорить спокойно: без стеснения, давления и лишних глаз.</p>
+      <p style="font-size:13.5px;line-height:1.65;color:var(--sub,#8A7A6E);margin:0;text-wrap:pretty">Каждый товар мы отбираем сами: сертифицированные материалы, проверенные бренды и честные цены. А если сомневаетесь — тактично подскажем, с чего начать.</p>
+    </section>
+
+    <!-- reviews -->
+    <section data-screen-label="Отзывы" data-reveal="" style="padding:30px 16px 8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0">Нам доверяют</h2>
+        <div style="text-align:right">
+          <div style="font-family:'Prata',serif;font-size:24px;color:var(--ink,#2A211C)">4.9</div>
+          <div style="font-size:11px;color:var(--accent,#B4756A);letter-spacing:.12em">★★★★★</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px">
+        <sc-for list="{{reviews}}" as="r" hint-placeholder-count="2">
+          <figure style="flex:none;width:290px;scroll-snap-align:start;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:16px;padding:18px;margin:0">
+            <div style="font-size:11px;color:var(--accent,#B4756A);letter-spacing:.12em;margin-bottom:10px">★★★★★</div>
+            <blockquote style="font-size:13.5px;line-height:1.6;color:var(--ink,#2A211C);margin:0 0 14px">{{r.text}}</blockquote>
+            <figcaption style="display:flex;align-items:center;gap:10px">
+              <span style="width:34px;height:34px;border-radius:50%;background:var(--chip,#F6EEE4);color:var(--accent,#B4756A);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center">{{r.initial}}</span>
+              <span>
+                <span style="display:block;font-size:13px;font-weight:700;color:var(--ink,#2A211C)">{{r.name}}</span>
+                <span style="display:block;font-size:11.5px;color:var(--sub,#8A7A6E)">{{r.city}}</span>
+              </span>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- whatsapp -->
+    <section data-reveal="" style="padding:24px 16px 8px">
+      <div style="background:var(--ink,#2A211C);border-radius:20px;padding:26px 22px;color:var(--bg,#FAF6F0)">
+        <h3 style="font-family:'Prata',serif;font-size:20px;font-weight:400;margin:0 0 8px">Не знаете, что выбрать?</h3>
+        <p style="font-size:13.5px;line-height:1.6;margin:0 0 16px;opacity:.75">Напишите нам — подберём то, что подойдёт именно вам. Спокойно и анонимно.</p>
+        <button style="border:none;cursor:pointer;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:13px 26px;border-radius:100px">Написать в WhatsApp</button>
+      </div>
+    </section>
+
+    <!-- about the shop -->
+    <section data-screen-label="О магазине" data-reveal="" style="padding:28px 22px 10px">
+      <h2 style="font-family:'Prata',serif;font-size:22px;font-weight:400;color:var(--ink,#2A211C);margin:0 0 14px">О магазине</h2>
+      <div style="display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line,#EADFD3)">
+        <sc-for list="{{shopInfo}}" as="i" hint-placeholder-count="4">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line,#EADFD3)">
+            <span style="font-size:13px;color:var(--sub,#8A7A6E);flex:none">{{i.k}}</span>
+            <span style="font-size:13px;font-weight:600;color:var(--ink,#2A211C);text-align:right">{{i.v}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer style="padding:28px 22px 34px;text-align:center">
+      <div style="font-family:'Prata',serif;font-size:18px;letter-spacing:.14em;color:var(--ink,#2A211C)">PRIVAT</div>
+      <div style="font-size:11.5px;color:var(--sub,#8A7A6E);margin-top:8px;line-height:1.6">Только 18+. Бережно о близости.<br>© 2026 PRIVAT · Бишкек</div>
+    </footer>
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav style="position:absolute;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);background:color-mix(in srgb, var(--card,#FFF) 92%, transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line,#EADFD3);padding:6px 4px calc(6px + env(safe-area-inset-bottom))">
+    <button onClick="{{goHome}}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:{{navC.home}}">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 10 L11 4 L18 10 V18 H4 Z"></path></svg>
+      <span style="font-size:10px;font-weight:600">Главная</span>
+    </button>
+    <button onClick="{{goShop}}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:{{navC.shop}}">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+      <span style="font-size:10px;font-weight:600">Магазин</span>
+    </button>
+    <button onClick="{{openCats}}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:{{navC.cats}}">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="6" height="6" rx="1.5"></rect><rect x="12" y="4" width="6" height="6" rx="1.5"></rect><rect x="4" y="12" width="6" height="6" rx="1.5"></rect><rect x="12" y="12" width="6" height="6" rx="1.5"></rect></svg>
+      <span style="font-size:10px;font-weight:600">Категории</span>
+    </button>
+    <button onClick="{{openSearch}}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:{{navC.search}}">
+      <svg width="21" height="21" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="6.2"></circle><line x1="13.6" y1="13.6" x2="18" y2="18"></line></svg>
+      <span style="font-size:10px;font-weight:600">Поиск</span>
+    </button>
+    <button onClick="{{openAccount}}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:{{navC.acc}}">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="8" r="3.4"></circle><path d="M4.5 19 a6.5 6.5 0 0 1 13 0"></path></svg>
+      <span style="font-size:10px;font-weight:600">Аккаунт</span>
+    </button>
+  </nav>
+
+  <!-- ============ OVERLAYS ============ -->
+  <sc-if value="{{anyOverlay}}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{closeAll}}" style="position:absolute;inset:0;z-index:60;background:rgba(25,15,10,.42);animation:dcFade .25s ease"></div>
+  </sc-if>
+
+  <!-- menu drawer -->
+  <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+    <aside style="position:absolute;top:0;bottom:0;left:0;z-index:70;width:82%;max-width:330px;background:var(--bg,#FAF6F0);animation:dcSlideL .28s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;padding:20px 22px;overflow-y:auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:26px">
+        <div>
+          <div style="font-family:'Prata',serif;font-size:19px;letter-spacing:.14em;color:var(--ink,#2A211C)">PRIVAT</div>
+          <div style="font-size:8px;letter-spacing:.42em;color:var(--accent,#B4756A);font-weight:700">SEX&nbsp;SHOP</div>
+        </div>
+        <button onClick="{{closeAll}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <sc-for list="{{menuLinks}}" as="m" hint-placeholder-count="5">
+        <button onClick="{{m.go}}" style="border:none;background:none;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:16px;font-weight:600;letter-spacing:.04em;color:var(--ink,#2A211C);padding:15px 0;border-bottom:1px solid var(--line,#EADFD3)">{{m.name}}</button>
+      </sc-for>
+      <div style="margin-top:auto;padding-top:24px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;color:var(--sub,#8A7A6E)">0500 690 690 · Калык Акиева 116</div>
+        <button onClick="{{openCartFromMenu}}" style="border:1.5px solid var(--line,#EADFD3);background:var(--card,#FFF);cursor:pointer;border-radius:100px;padding:12px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--ink,#2A211C)">Моя корзина ({{cartCount}})</button>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- cart drawer -->
+  <sc-if value="{{cartOpen}}" hint-placeholder-val="{{ false }}">
+    <aside data-screen-label="Корзина" style="position:absolute;left:0;right:0;bottom:0;z-index:70;max-height:85%;background:var(--bg,#FAF6F0);border-radius:22px 22px 0 0;animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px">
+        <h3 style="font-family:'Prata',serif;font-size:19px;font-weight:400;color:var(--ink,#2A211C);margin:0">Моя корзина</h3>
+        <button onClick="{{closeAll}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <sc-if value="{{cartEmpty}}" hint-placeholder-val="{{ false }}">
+        <div style="min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px calc(24px + env(safe-area-inset-bottom));text-align:center">
+          <div style="width:74px;height:74px;border-radius:50%;background:var(--chip,#F6EEE4);display:flex;align-items:center;justify-content:center;color:var(--accent,#B4756A)">
+            <svg width="30" height="30" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+          </div>
+          <div style="font-size:14.5px;font-weight:600;color:var(--ink,#2A211C)">Пока пусто</div>
+          <div style="font-size:13px;color:var(--sub,#8A7A6E);max-width:24ch;line-height:1.5">Загляните в хиты продаж — там точно найдётся что-то для вас.</div>
+          <button onClick="{{goShopFromDrawer}}" style="border:none;cursor:pointer;background:var(--ink,#2A211C);color:var(--bg,#FAF6F0);font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:12px 26px;border-radius:100px">В магазин</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{cartHasItems}}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow-y:auto;padding:14px 20px;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{cartItems}}" as="ci" hint-placeholder-count="2">
+            <div style="display:flex;gap:12px;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:14px;padding:10px">
+              <div style="flex:none;width:60px;height:60px;border-radius:10px;background:var(--soft,#F1E7DB) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 8px, transparent 8px 16px)"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:4px;min-width:0">
+                <div style="font-size:12.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.3">{{ci.name}}</div>
+                <div style="font-family:'Prata',serif;font-size:14px;color:var(--ink,#2A211C)">{{ci.sum}} сом</div>
+                <div style="display:flex;align-items:center;gap:10px;margin-top:2px">
+                  <button onClick="{{ci.dec}}" style="width:26px;height:26px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:14px;line-height:1">−</button>
+                  <span style="font-size:13px;font-weight:700;color:var(--ink,#2A211C);min-width:14px;text-align:center">{{ci.qty}}</span>
+                  <button onClick="{{ci.inc}}" style="width:26px;height:26px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:14px;line-height:1">+</button>
+                  <button onClick="{{ci.remove}}" style="margin-left:auto;border:none;background:none;cursor:pointer;color:var(--sub,#8A7A6E);font-size:12px">убрать</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:16px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#EADFD3);display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-size:13px;color:var(--sub,#8A7A6E)">Итого</span>
+            <span style="font-family:'Prata',serif;font-size:20px;color:var(--ink,#2A211C)">{{cartTotal}} сом</span>
+          </div>
+          <button style="border:none;cursor:pointer;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:15px;border-radius:100px">Оформить заказ</button>
+          <div style="font-size:11px;color:var(--sub,#8A7A6E);text-align:center">Анонимная упаковка · доставка за 1 час по Бишкеку</div>
+        </div>
+      </sc-if>
+    </aside>
+  </sc-if>
+
+  <!-- favorites drawer -->
+  <sc-if value="{{favsOpen}}" hint-placeholder-val="{{ false }}">
+    <aside data-screen-label="Избранное" style="position:absolute;left:0;right:0;bottom:0;z-index:70;max-height:78%;background:var(--bg,#FAF6F0);border-radius:22px 22px 0 0;animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px">
+        <h3 style="font-family:'Prata',serif;font-size:19px;font-weight:400;color:var(--ink,#2A211C);margin:0">Избранное</h3>
+        <button onClick="{{closeAll}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <sc-if value="{{favsEmpty}}" hint-placeholder-val="{{ true }}">
+        <div style="min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center">
+          <span style="font-size:34px;color:var(--accent,#B4756A)">♡</span>
+          <div style="font-size:13px;color:var(--sub,#8A7A6E);max-width:26ch;line-height:1.5">Нажимайте на сердечко у товара, чтобы сохранить его здесь.</div>
+        </div>
+      </sc-if>
+      <div style="flex:1;overflow-y:auto;padding:14px 20px;display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{favItems}}" as="fi" hint-placeholder-count="0">
+          <div style="display:flex;gap:12px;align-items:center;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:14px;padding:10px">
+            <div style="flex:none;width:54px;height:54px;border-radius:10px;background:var(--soft,#F1E7DB) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 8px, transparent 8px 16px)"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:12.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.3">{{fi.name}}</div>
+              <div style="font-family:'Prata',serif;font-size:14px;color:var(--ink,#2A211C);margin-top:3px">{{fi.price}} сом</div>
+            </div>
+            <button onClick="{{fi.add}}" style="flex:none;border:none;cursor:pointer;background:var(--chip,#F6EEE4);color:var(--ink,#2A211C);font-size:11px;font-weight:700;padding:9px 12px;border-radius:100px;font-family:'Manrope',sans-serif">В корзину</button>
+            <button onClick="{{fi.fav}}" style="flex:none;border:none;background:none;cursor:pointer;color:var(--accent,#B4756A);font-size:16px">♥</button>
+          </div>
+        </sc-for>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- categories sheet -->
+  <sc-if value="{{catsOpen}}" hint-placeholder-val="{{ false }}">
+    <aside data-screen-label="Категории (шторка)" style="position:absolute;left:0;right:0;bottom:0;z-index:70;max-height:78%;background:var(--bg,#FAF6F0);border-radius:22px 22px 0 0;animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px">
+        <h3 style="font-family:'Prata',serif;font-size:19px;font-weight:400;color:var(--ink,#2A211C);margin:0">Категории</h3>
+        <button onClick="{{closeAll}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:0 20px calc(20px + env(safe-area-inset-bottom))">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="12">
+          <button onClick="{{closeAll}}" style="width:100%;display:flex;align-items:center;gap:14px;border:none;background:none;cursor:pointer;padding:13px 0;border-bottom:1px solid var(--line,#EADFD3);text-align:left">
+            <span style="flex:none;width:36px;height:36px;border-radius:50%;background:var(--chip,#F6EEE4);color:var(--accent,#B4756A);font-family:'Prata',serif;font-size:14px;display:flex;align-items:center;justify-content:center">{{c.mono}}</span>
+            <span style="flex:1;font-family:'Manrope',sans-serif;font-size:14.5px;font-weight:600;color:var(--ink,#2A211C)">{{c.name}}</span>
+            <span style="color:var(--sub,#8A7A6E);font-size:14px">›</span>
+          </button>
+        </sc-for>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- account sheet -->
+  <sc-if value="{{accOpen}}" hint-placeholder-val="{{ false }}">
+    <aside data-screen-label="Аккаунт" style="position:absolute;left:0;right:0;bottom:0;z-index:70;background:var(--bg,#FAF6F0);border-radius:22px 22px 0 0;animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);padding:20px 22px calc(28px + env(safe-area-inset-bottom))">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <h3 style="font-family:'Prata',serif;font-size:19px;font-weight:400;color:var(--ink,#2A211C);margin:0">Аккаунт</h3>
+        <button onClick="{{closeAll}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <p style="font-size:13.5px;line-height:1.6;color:var(--sub,#8A7A6E);margin:0 0 16px">Войдите по номеру телефона — заказы, избранное и бонусы будут под рукой. Никаких лишних данных.</p>
+      <input placeholder="+996 ___ ___ ___" style="width:100%;border:1.5px solid var(--line,#EADFD3);border-radius:100px;background:var(--card,#FFF);padding:14px 20px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--ink,#2A211C);outline:none;margin-bottom:10px">
+      <button style="width:100%;border:none;cursor:pointer;background:var(--ink,#2A211C);color:var(--bg,#FAF6F0);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:15px;border-radius:100px">Получить код</button>
+    </aside>
+  </sc-if>
+
+  <!-- search sheet -->
+  <sc-if value="{{searchOpen}}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Поиск" style="position:absolute;left:0;right:0;bottom:0;z-index:70;height:78%;background:var(--bg,#FAF6F0);border-radius:22px 22px 0 0;animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px">
+        <h3 style="font-family:'Prata',serif;font-size:19px;font-weight:400;color:var(--ink,#2A211C);margin:0">Поиск</h3>
+        <button onClick="{{closeAll}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <div style="padding:0 20px 12px">
+        <input ref="{{searchInputRef}}" value="{{searchQ}}" onChange="{{onSearch}}" placeholder="Что ищете?" style="width:100%;border:1.5px solid var(--line,#EADFD3);border-radius:100px;background:var(--card,#FFF);padding:13px 20px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--ink,#2A211C);outline:none">
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:0 20px calc(20px + env(safe-area-inset-bottom))">
+        <sc-if value="{{searchIdle}}" hint-placeholder-val="{{ true }}">
+          <div style="font-size:13px;color:var(--sub,#8A7A6E);padding:14px 6px">Например: смазка, свеча, феромоны…</div>
+        </sc-if>
+        <sc-for list="{{searchResults}}" as="sr" hint-placeholder-count="0">
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line,#EADFD3)">
+            <div style="flex:none;width:46px;height:46px;border-radius:10px;background:var(--soft,#F1E7DB) repeating-linear-gradient(45deg, var(--chip,#F6EEE4) 0 8px, transparent 8px 16px)"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:600;color:var(--ink,#2A211C)">{{sr.name}}</div>
+              <div style="font-family:'Prata',serif;font-size:13.5px;color:var(--ink,#2A211C);margin-top:2px">{{sr.price}} сом</div>
+            </div>
+            <button onClick="{{sr.add}}" style="flex:none;border:none;cursor:pointer;background:var(--chip,#F6EEE4);color:var(--ink,#2A211C);font-size:11px;font-weight:700;padding:9px 12px;border-radius:100px;font-family:'Manrope',sans-serif">В корзину</button>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- toast -->
+  <sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:50%;bottom:92px;transform:translateX(-50%);z-index:90;background:var(--ink,#2A211C);color:var(--bg,#FAF6F0);font-size:12.5px;font-weight:600;padding:10px 20px;border-radius:100px;animation:dcFade .2s ease;white-space:nowrap">{{toastText}}</div>
+  </sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Тёплый крем&quot;,&quot;Слива и золото&quot;,&quot;Светлый минимал&quot;],&quot;default&quot;:&quot;Тёплый крем&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Вид&quot;},&quot;promoBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Промо&quot;},&quot;promoText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;−10% по промокоду LETO26&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Промо&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+    this.scrollerRef = React.createRef();
+    this.heroImgRef = React.createRef();
+    this.heroTagRef = React.createRef();
+    this.shopRef = React.createRef();
+    this.searchInputRef = React.createRef();
+    this.state = {
+      cart: {}, favs: {}, overlay: null, // 'menu'|'cart'|'favs'|'cats'|'acc'|'search'
+      searchQ: '', toast: null,
+    };
+    this.products = [
+      { id: 'h1', name: 'Комплект белья «Мягкий шёлк»', price: 1800, list: 'hits' },
+      { id: 'h2', name: 'Массажная свеча «Тепло»', price: 950, list: 'hits' },
+      { id: 'h3', name: 'Духи с феромонами Terre №6', price: 1850, list: 'hits' },
+      { id: 'h4', name: 'Вибромассажёр «Волна»', price: 3200, list: 'hits' },
+      { id: 'n1', name: 'Гель-смазка «Алоэ», 100 мл', price: 590, list: 'new' },
+      { id: 'n2', name: 'Набор для двоих «Первый шаг»', price: 2400, list: 'new' },
+      { id: 'n3', name: 'Масло для массажа «Ваниль»', price: 780, list: 'new' },
+      { id: 'n4', name: 'Сорочка «Пудра», кружево', price: 2100, list: 'new' },
+      { id: 'd1', name: 'Вибромассажёр «Классик»', price: 1690, oldPrice: 2400, list: 'disc' },
+      { id: 'd2', name: 'Комплект «Кружево»', price: 1540, oldPrice: 2200, list: 'disc' },
+      { id: 'd3', name: 'Свеча массажная «Амбра»', price: 660, oldPrice: 950, list: 'disc' },
+      { id: 'd4', name: 'Феромоны Sexy Life №6', price: 1290, oldPrice: 1850, list: 'disc' },
+    ];
+    this.catNames = ['Мужские','Женские','Для анала','Смазки','Возбудители','Феромоны','Страпоны','БДСМ','Эро бельё','Презервативы','Игры 18+','Массаж'];
+  }
+
+  componentDidMount() {
+    this.applyTheme();
+    this.setupReveals();
+    const sc = this.scrollerRef.current;
+    if (sc) {
+      this._onScroll = () => {
+        const y = sc.scrollTop;
+        if (this.heroImgRef.current) this.heroImgRef.current.style.transform = 'translateY(' + (y * 0.3) + 'px)';
+        if (this.heroTagRef.current) {
+          this.heroTagRef.current.style.opacity = Math.max(0, 1 - y / 340);
+          this.heroTagRef.current.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+        }
+      };
+      sc.addEventListener('scroll', this._onScroll, { passive: true });
+    }
+  }
+
+  componentDidUpdate() {
+    this.applyTheme();
+    if (this.state.overlay === 'search' && this.searchInputRef.current && document.activeElement !== this.searchInputRef.current) {
+      this.searchInputRef.current.focus({ preventScroll: true });
+    }
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    const sc = this.scrollerRef.current;
+    if (sc && this._onScroll) sc.removeEventListener('scroll', this._onScroll);
+    clearTimeout(this._toastT);
+  }
+
+  applyTheme() {
+    const themes = {
+      'Тёплый крем':      { bg:'#FAF6F0', card:'#FFFFFF', ink:'#2A211C', sub:'#8A7A6E', line:'#EADFD3', accent:'#B4756A', 'accent-ink':'#FFF7F2', soft:'#F1E7DB', chip:'#F6EEE4' },
+      'Слива и золото':   { bg:'#221A22', card:'#2D232D', ink:'#F3ECF0', sub:'#B29FAC', line:'#3D2F3C', accent:'#C9A26B', 'accent-ink':'#241B10', soft:'#2A1F29', chip:'#372A36' },
+      'Светлый минимал':  { bg:'#F7F7F5', card:'#FFFFFF', ink:'#202023', sub:'#77767E', line:'#E7E6E2', accent:'#8A6D9E', 'accent-ink':'#FCFAFF', soft:'#EFEDF2', chip:'#F0EFEA' },
+    };
+    const t = themes[this.props.theme] || themes['Тёплый крем'];
+    const el = this.rootRef.current;
+    if (!el) return;
+    Object.keys(t).forEach(k => el.style.setProperty('--' + k, t[k]));
+  }
+
+  setupReveals() {
+    const sc = this.scrollerRef.current;
+    if (!sc || this._io) return;
+    const els = sc.querySelectorAll('[data-reveal]');
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { root: sc, threshold: 0.12 });
+    els.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const inView = r.top < sc.clientHeight * 0.9;
+      if (!inView) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        el.style.transition = 'opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)';
+        this._io.observe(el);
+      }
+    });
+  }
+
+  toast(msg) {
+    clearTimeout(this._toastT);
+    this.setState({ toast: msg });
+    this._toastT = setTimeout(() => this.setState({ toast: null }), 1800);
+  }
+
+  addToCart(id) {
+    this.setState(s => ({ cart: { ...s.cart, [id]: (s.cart[id] || 0) + 1 } }));
+    this.toast('Добавлено в корзину');
+  }
+  changeQty(id, d) {
+    this.setState(s => {
+      const cart = { ...s.cart };
+      const q = (cart[id] || 0) + d;
+      if (q <= 0) delete cart[id]; else cart[id] = q;
+      return { cart };
+    });
+  }
+  removeItem(id) { this.setState(s => { const cart = { ...s.cart }; delete cart[id]; return { cart }; }); }
+  toggleFav(id) {
+    this.setState(s => {
+      const favs = { ...s.favs };
+      if (favs[id]) delete favs[id]; else favs[id] = true;
+      return { favs };
+    });
+  }
+  open(name) { this.setState({ overlay: name }); }
+  scrollTo(top) {
+    const sc = this.scrollerRef.current;
+    if (sc) sc.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const fmt = n => n.toLocaleString('ru-RU').replace(/\u00a0/g, ' ');
+    const deco = p => ({
+      name: p.name, price: fmt(p.price),
+      oldPrice: p.oldPrice ? fmt(p.oldPrice) : '',
+      pct: p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0,
+      favG: s.favs[p.id] ? '♥' : '♡',
+      favC: s.favs[p.id] ? 'var(--accent,#B4756A)' : 'var(--ink,#2A211C)',
+      add: () => this.addToCart(p.id),
+      fav: () => this.toggleFav(p.id),
+    });
+    const cartIds = Object.keys(s.cart);
+    const byId = {};
+    this.products.forEach(p => byId[p.id] = p);
+    const cartItems = cartIds.map(id => {
+      const p = byId[id], qty = s.cart[id];
+      return {
+        name: p.name, qty, sum: fmt(p.price * qty),
+        inc: () => this.changeQty(id, 1),
+        dec: () => this.changeQty(id, -1),
+        remove: () => this.removeItem(id),
+      };
+    });
+    const cartCount = cartIds.reduce((a, id) => a + s.cart[id], 0);
+    const cartTotal = cartIds.reduce((a, id) => a + byId[id].price * s.cart[id], 0);
+    const favIds = Object.keys(s.favs);
+    const q = s.searchQ.trim().toLowerCase();
+    const monos = ['М','Ж','А','С','В','Ф','С','Б','Э','П','И','М'];
+    const closeAll = () => this.setState({ overlay: null, searchQ: '' });
+    const navOn = 'var(--accent,#B4756A)', navOff = 'var(--sub,#8A7A6E)';
+    const ov = s.overlay;
+    return {
+      promoBar: this.props.promoBar ?? true,
+      promoText: this.props.promoText ?? '−10% по промокоду LETO26',
+      trust: ['Анонимная упаковка', 'За 1 час по Бишкеку', '4.9 — оценка покупателей', 'Подбор в WhatsApp'],
+      cats: this.catNames.map((name, i) => ({ name, mono: monos[i], open: () => this.open('cats') })),
+      hits: this.products.filter(p => p.list === 'hits').map(deco),
+      novelties: this.products.filter(p => p.list === 'new').map(deco),
+      discounts: this.products.filter(p => p.list === 'disc').map(deco),
+      why: [
+        { mono: 'В', title: 'Большой выбор', text: 'Сертифицированные товары по честным ценам' },
+        { mono: 'Б', title: 'Быстро', text: 'За 1 час по Бишкеку, за сутки по всей стране' },
+        { mono: 'Т', title: 'Без осуждения', text: 'Поможем выбрать спокойно и тактично' },
+        { mono: 'А', title: 'Анонимно', text: 'Упаковка без логотипов и названий' },
+      ],
+      reviews: [
+        { text: 'Привезли за 40 минут, упаковка нейтральная — никто ничего не понял. Менеджер всё объяснил спокойно, без неловкости.', name: 'Айгерим', city: 'Бишкек', initial: 'А' },
+        { text: 'Стеснялся спрашивать, но подсказали по WhatsApp за пару минут. Качество отличное, вернусь ещё.', name: 'Марат', city: 'Бишкек', initial: 'М' },
+      ],
+      shopInfo: [
+        { k: 'Адрес', v: 'Калык Акиева 116, Бишкек' },
+        { k: 'Телефон', v: '0500 690 690' },
+        { k: 'Режим', v: 'Ежедневно 10:00 – 22:00' },
+        { k: 'Доставка', v: '1 час по Бишкеку · 24 ч по КР' },
+        { k: 'Оплата', v: 'Наличные · карта · Мбанк' },
+      ],
+      menuLinks: [
+        { name: 'Главная', go: () => { closeAll(); this.scrollTo(0); } },
+        { name: 'Магазин', go: () => { closeAll(); this.goShop(); } },
+        { name: 'Категории', go: () => this.open('cats') },
+        { name: 'О нас', go: closeAll },
+        { name: 'Контакты', go: closeAll },
+      ],
+      hasCart: cartCount > 0, cartCount: String(cartCount),
+      hasFavs: favIds.length > 0, favCount: String(favIds.length),
+      cartItems, cartTotal: fmt(cartTotal),
+      cartEmpty: cartCount === 0, cartHasItems: cartCount > 0,
+      favItems: favIds.filter(id => byId[id]).map(id => ({
+        name: byId[id].name, price: fmt(byId[id].price),
+        add: () => this.addToCart(id), fav: () => this.toggleFav(id),
+      })),
+      favsEmpty: favIds.length === 0,
+      menuOpen: ov === 'menu', cartOpen: ov === 'cart', favsOpen: ov === 'favs',
+      catsOpen: ov === 'cats', accOpen: ov === 'acc', searchOpen: ov === 'search',
+      anyOverlay: ov !== null,
+      openMenu: () => this.open('menu'), openCart: () => this.open('cart'),
+      openFavs: () => this.open('favs'), openCats: () => this.open('cats'),
+      openAccount: () => this.open('acc'), openSearch: () => this.open('search'),
+      openCartFromMenu: () => this.open('cart'),
+      closeAll,
+      goHome: () => { closeAll(); this.scrollTo(0); },
+      goShop: () => { closeAll(); this.goShop(); },
+      goShopFromDrawer: () => { closeAll(); this.goShop(); },
+      searchQ: s.searchQ,
+      onSearch: e => this.setState({ searchQ: e.target.value }),
+      searchIdle: q === '',
+      searchResults: q === '' ? [] : this.products
+        .filter(p => p.name.toLowerCase().includes(q))
+        .map(p => ({ name: p.name, price: fmt(p.price), add: () => this.addToCart(p.id) })),
+      toastOn: s.toast !== null, toastText: s.toast || '',
+      navC: {
+        home: ov === null ? navOn : navOff,
+        shop: navOff,
+        cats: ov === 'cats' ? navOn : navOff,
+        search: ov === 'search' ? navOn : navOff,
+        acc: ov === 'acc' ? navOn : navOff,
+      },
+      searchInputRef: this.searchInputRef,
+      rootRef: this.rootRef, scrollerRef: this.scrollerRef,
+      heroImgRef: this.heroImgRef, heroTagRef: this.heroTagRef, shopRef: this.shopRef,
+    };
+  }
+
+  goShop() {
+    const el = this.shopRef.current, sc = this.scrollerRef.current;
+    if (el && sc) sc.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>
