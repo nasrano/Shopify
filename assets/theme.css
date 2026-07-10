@@ -395,6 +395,18 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-article__foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap}
 .privat-article__foot .privat-btn{text-align:center}
 
+/* ===== shopify policy pages (/policies/...) ===== */
+.shopify-policy__container{max-width:640px;margin:0 auto;padding:28px 22px 44px}
+.shopify-policy__title{text-align:left;padding:0}
+.shopify-policy__title h1{font-family:'Prata',serif;font-size:26px;line-height:1.25;font-weight:400;color:var(--ink);margin:0 0 16px}
+.shopify-policy__body{font-size:14.5px;line-height:1.65;color:var(--ink)}
+.shopify-policy__body h2,.shopify-policy__body h3{font-family:'Prata',serif;font-weight:400;color:var(--ink)}
+.shopify-policy__body h2{font-size:20px;margin:26px 0 10px}
+.shopify-policy__body h3{font-size:16px;margin:20px 0 8px}
+.shopify-policy__body p{margin:0 0 10px}
+.shopify-policy__body ul{padding-left:20px;margin:0 0 12px}
+.shopify-policy__body li{margin-bottom:6px}
+
 /* ===== toast ===== */
 .privat-toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--bg);
   font-size:12.5px;font-weight:600;padding:10px 20px;border-radius:100px;animation:dcFade .2s ease;white-space:nowrap;display:none}

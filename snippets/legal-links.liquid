@@ -1,0 +1,27 @@
+{%- comment -%}
+  Юридические ссылки: из «Юридического меню» (настройки темы), а пока оно не
+  настроено — автоматически: страница «Оплата и доставка» (если создана) и
+  политики магазина из Settings → Policies (если заполнены).
+  params: link_class
+{%- endcomment -%}
+{%- assign m = linklists[settings.legal_menu] -%}
+{%- if m.links.size > 0 -%}
+  {%- for link in m.links -%}
+    <a href="{{ link.url }}" class="{{ link_class }}">{{ link.title }}</a>
+  {%- endfor -%}
+{%- else -%}
+  {%- assign delivery_page = pages['oplata-i-dostavka'] -%}
+  {%- if delivery_page.url == blank -%}{%- assign delivery_page = pages['delivery'] -%}{%- endif -%}
+  {%- if delivery_page.url != blank -%}
+    <a href="{{ delivery_page.url }}" class="{{ link_class }}">Оплата и доставка</a>
+  {%- endif -%}
+  {%- if shop.privacy_policy.url != blank -%}
+    <a href="{{ shop.privacy_policy.url }}" class="{{ link_class }}">Политика конфиденциальности</a>
+  {%- endif -%}
+  {%- if shop.terms_of_service.url != blank -%}
+    <a href="{{ shop.terms_of_service.url }}" class="{{ link_class }}">Пользовательское соглашение</a>
+  {%- endif -%}
+  {%- if shop.refund_policy.url != blank -%}
+    <a href="{{ shop.refund_policy.url }}" class="{{ link_class }}">Возврат и обмен</a>
+  {%- endif -%}
+{%- endif -%}

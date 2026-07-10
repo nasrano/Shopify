@@ -15,12 +15,10 @@
   <div class="privat-drawer__subhead">Покупателям</div>
   {% render 'shop-links', link_class: 'privat-drawer__sublink' %}
 
-  {%- assign legal_menu = linklists[settings.legal_menu] -%}
-  {% if legal_menu.links.size > 0 %}
+  {%- capture legal_html -%}{% render 'legal-links', link_class: 'privat-drawer__sublink' %}{%- endcapture -%}
+  {% if legal_html contains '<a' %}
     <div class="privat-drawer__subhead">Информация</div>
-    {% for link in legal_menu.links %}
-      <a href="{{ link.url }}" class="privat-drawer__sublink">{{ link.title }}</a>
-    {% endfor %}
+    {{ legal_html }}
   {% endif %}
 
   <div class="privat-drawer__foot">

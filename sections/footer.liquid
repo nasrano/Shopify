@@ -5,13 +5,9 @@
     {% render 'shop-links' %}
   </nav>
 
-  {%- assign legal_menu = linklists[settings.legal_menu] -%}
-  {% if legal_menu.links.size > 0 %}
-    <nav class="privat-footer__legal">
-      {% for link in legal_menu.links %}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {% endfor %}
-    </nav>
+  {%- capture legal_html -%}{% render 'legal-links' %}{%- endcapture -%}
+  {% if legal_html contains '<a' %}
+    <nav class="privat-footer__legal">{{ legal_html }}</nav>
   {% endif %}
 
   <div class="privat-footer__meta">{{ section.settings.line_1 | default: 'Только 18+. Бережно о близости.' }}<br>{{ section.settings.line_2 | default: '© 2026 PRIVAT · Бишкек' }}</div>
