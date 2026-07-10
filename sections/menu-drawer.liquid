@@ -1,0 +1,37 @@
+<aside class="privat-drawer" data-drawer="menu">
+  <div class="privat-drawer__head">
+    <div>
+      <div class="privat-drawer__logo-name">{{ section.settings.logo_text | default: 'PRIVAT' }}</div>
+      <div class="privat-drawer__logo-sub">{{ section.settings.logo_subtext | default: 'SEX SHOP' }}</div>
+    </div>
+    <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+
+  {% for link in linklists[settings.menu].links %}
+    <a href="{{ link.url }}" class="privat-drawer__link"{% if link.url == routes.root_url %} data-go-home{% endif %}>{{ link.title }}</a>
+  {% endfor %}
+  <button type="button" class="privat-drawer__link" data-open="cats">Категории</button>
+
+  <div class="privat-drawer__foot">
+    <div class="privat-theme-toggle">
+      <span class="privat-theme-toggle__label">Тёмная тема</span>
+      <span class="privat-theme-toggle__switch" data-theme-toggle role="button" aria-label="Переключить тему">
+        <span class="privat-theme-toggle__knob"></span>
+      </span>
+    </div>
+    <div class="privat-drawer__contact">{{ section.settings.phone | default: '0500 690 690' }} · {{ section.settings.address | default: 'Калык Акиева 116' }}</div>
+    <button type="button" class="privat-drawer__cart-btn" data-open="cart">Моя корзина (<span id="privat-menu-cart-count">{{ cart.item_count }}</span>)</button>
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Боковое меню",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Название", "default": "PRIVAT" },
+    { "type": "text", "id": "logo_subtext", "label": "Подпись", "default": "SEX SHOP" },
+    { "type": "text", "id": "phone", "label": "Телефон", "default": "0500 690 690" },
+    { "type": "text", "id": "address", "label": "Адрес", "default": "Калык Акиева 116" }
+  ]
+}
+{% endschema %}

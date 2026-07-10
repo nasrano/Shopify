@@ -1,0 +1,32 @@
+<section class="privat-hero">
+  <div class="privat-hero__img" id="privat-hero-img"
+    {% if section.settings.image %}style="background-image:url({{ section.settings.image | image_url: width: 900 }})"{% endif %}>
+    {% unless section.settings.image %}
+      <span class="privat-hero__placeholder">lifestyle фото · пара / уют / тёплый свет</span>
+    {% endunless %}
+  </div>
+  <div class="privat-hero__scrim"></div>
+  <div class="privat-hero__tag" id="privat-hero-tag">
+    <h1 class="privat-hero__title">{{ section.settings.title | default: 'Близость — это забота о себе' }}</h1>
+    <p class="privat-hero__sub">{{ section.settings.subtitle | default: 'Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки.' }}</p>
+    <div class="privat-hero__ctas">
+      <a href="{{ section.settings.primary_url | default: routes.all_products_collection_url }}" class="privat-btn">{{ section.settings.primary_label | default: 'В магазин →' }}</a>
+      <button type="button" class="privat-btn privat-btn--outline" data-open="cats">{{ section.settings.secondary_label | default: 'Каталог' }}</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Герой",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Изображение (lifestyle)" },
+    { "type": "text", "id": "title", "label": "Заголовок", "default": "Близость — это забота о себе" },
+    { "type": "textarea", "id": "subtitle", "label": "Подзаголовок", "default": "Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки." },
+    { "type": "text", "id": "primary_label", "label": "Кнопка 1 — текст", "default": "В магазин →" },
+    { "type": "url", "id": "primary_url", "label": "Кнопка 1 — ссылка" },
+    { "type": "text", "id": "secondary_label", "label": "Кнопка 2 — текст (открывает каталог категорий)", "default": "Каталог" }
+  ],
+  "presets": [{ "name": "Герой" }]
+}
+{% endschema %}

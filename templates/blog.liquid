@@ -1,0 +1,23 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ blog.title }}</h1>
+  {% paginate blog.articles by 10 %}
+    <div style="display:flex;flex-direction:column;gap:12px">
+      {% for article in blog.articles %}
+        <a href="{{ article.url }}" class="privat-panel" style="display:block;text-decoration:none">
+          <div class="privat-why__title" style="margin-bottom:6px">{{ article.title }}</div>
+          <div class="privat-why__text">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</div>
+          <div class="privat-review__city" style="margin-top:10px">{{ article.published_at | date: '%d.%m.%Y' }}</div>
+        </a>
+      {% else %}
+        <p class="privat-form-note">Записей пока нет.</p>
+      {% endfor %}
+    </div>
+    {% if paginate.pages > 1 %}
+      <div class="privat-pagination">
+        {% if paginate.previous %}<a href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>{% endif %}
+        <span class="privat-pagination__current">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+        {% if paginate.next %}<a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }}</a>{% endif %}
+      </div>
+    {% endif %}
+  {% endpaginate %}
+</section>

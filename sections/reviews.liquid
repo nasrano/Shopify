@@ -1,0 +1,55 @@
+<section class="privat-reviews" data-reveal>
+  <div class="privat-reviews__head">
+    <h2 class="privat-h2">{{ section.settings.heading | default: 'Нам доверяют' }}</h2>
+    <div class="privat-reviews__score">
+      <div class="privat-reviews__num">{{ section.settings.rating | default: '4.9' }}</div>
+      <div class="privat-reviews__stars">★★★★★</div>
+    </div>
+  </div>
+  <div class="privat-reviews__track">
+    {% for block in section.blocks %}
+      <figure class="privat-review" {{ block.shopify_attributes }}>
+        <div class="privat-review__stars">★★★★★</div>
+        <blockquote class="privat-review__quote">{{ block.settings.text }}</blockquote>
+        <figcaption class="privat-review__foot">
+          <span class="privat-review__initial">{{ block.settings.name | slice: 0, 1 | upcase }}</span>
+          <span>
+            <span class="privat-review__name">{{ block.settings.name }}</span>
+            <span class="privat-review__city">{{ block.settings.city }}</span>
+          </span>
+        </figcaption>
+      </figure>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Отзывы",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "Нам доверяют" },
+    { "type": "text", "id": "rating", "label": "Средний рейтинг", "default": "4.9" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Отзыв",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Текст отзыва" },
+        { "type": "text", "id": "name", "label": "Имя" },
+        { "type": "text", "id": "city", "label": "Город" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Отзывы",
+      "blocks": [
+        { "type": "review", "settings": { "text": "Привезли за 40 минут, упаковка нейтральная — никто ничего не понял. Менеджер всё объяснил спокойно, без неловкости.", "name": "Айгерим", "city": "Бишкек" } },
+        { "type": "review", "settings": { "text": "Стеснялся спрашивать, но подсказали по WhatsApp за пару минут. Качество отличное, вернусь ещё.", "name": "Марат", "city": "Бишкек" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

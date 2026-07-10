@@ -1,0 +1,22 @@
+{%- assign wa_digits = section.settings.phone | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
+<section class="privat-wa" data-reveal>
+  <div class="privat-wa__card">
+    <h3 class="privat-wa__title">{{ section.settings.heading | default: 'Не знаете, что выбрать?' }}</h3>
+    <p class="privat-wa__text">{{ section.settings.text | default: 'Напишите нам — подберём то, что подойдёт именно вам. Спокойно и анонимно.' }}</p>
+    <a class="privat-wa__btn" href="https://wa.me/{{ wa_digits }}{% if section.settings.message != blank %}?text={{ section.settings.message | url_encode }}{% endif %}" target="_blank" rel="noopener">{{ section.settings.button_label | default: 'Написать в WhatsApp' }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "WhatsApp блок",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "Не знаете, что выбрать?" },
+    { "type": "textarea", "id": "text", "label": "Текст", "default": "Напишите нам — подберём то, что подойдёт именно вам. Спокойно и анонимно." },
+    { "type": "text", "id": "button_label", "label": "Текст кнопки", "default": "Написать в WhatsApp" },
+    { "type": "text", "id": "phone", "label": "Номер WhatsApp (с кодом страны)", "default": "996500690690" },
+    { "type": "text", "id": "message", "label": "Предзаполненное сообщение", "default": "Здравствуйте! Хочу проконсультироваться." }
+  ],
+  "presets": [{ "name": "WhatsApp блок" }]
+}
+{% endschema %}

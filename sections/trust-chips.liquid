@@ -1,0 +1,35 @@
+<div class="privat-trust">
+  {% for block in section.blocks %}
+    <div class="privat-trust__chip" {{ block.shopify_attributes }}>
+      <span class="privat-trust__dot"></span>{{ block.settings.text }}
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Плашки доверия",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Плашка",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Текст", "default": "Анонимная упаковка" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Плашки доверия",
+      "blocks": [
+        { "type": "chip", "settings": { "text": "Анонимная упаковка" } },
+        { "type": "chip", "settings": { "text": "За 1 час по Бишкеку" } },
+        { "type": "chip", "settings": { "text": "4.9 — оценка покупателей" } },
+        { "type": "chip", "settings": { "text": "Подбор в WhatsApp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

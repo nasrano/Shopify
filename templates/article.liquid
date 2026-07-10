@@ -1,0 +1,10 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ article.title }}</h1>
+  <div class="privat-review__city" style="margin-bottom:16px">{{ article.published_at | date: '%d.%m.%Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</div>
+  {% if article.image %}
+    <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape }}"
+      width="800" height="{{ 800 | divided_by: article.image.aspect_ratio | round }}"
+      style="border-radius:16px;margin-bottom:16px;height:auto">
+  {% endif %}
+  <div class="privat-page__body">{{ article.content }}</div>
+</section>

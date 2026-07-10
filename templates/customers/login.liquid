@@ -1,0 +1,27 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ 'customer.login.title' | t }}</h1>
+
+  <div class="privat-panel">
+    {% form 'customer_login' %}
+      {% if form.errors %}<p class="privat-form-errors">{{ form.errors | default_errors }}</p>{% endif %}
+      <input class="privat-input" type="email" name="customer[email]" placeholder="{{ 'customer.login.email' | t }}" autocomplete="email" required>
+      <input class="privat-input" type="password" name="customer[password]" placeholder="{{ 'customer.login.password' | t }}" autocomplete="current-password" required>
+      <button type="submit" class="privat-account__submit">{{ 'customer.login.submit' | t }}</button>
+    {% endform %}
+    <div class="privat-form-links">
+      <a href="#recover" onclick="document.getElementById('privat-recover').style.display='block';return false">{{ 'customer.login.forgot' | t }}</a>
+      <a href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a>
+    </div>
+  </div>
+
+  <div class="privat-panel" id="privat-recover" style="display:none">
+    <h2 class="privat-sheet__title" style="margin-bottom:10px">{{ 'customer.recover.title' | t }}</h2>
+    <p class="privat-form-note">{{ 'customer.recover.text' | t }}</p>
+    {% form 'recover_customer_password' %}
+      {% if form.errors %}<p class="privat-form-errors">{{ form.errors | default_errors }}</p>{% endif %}
+      {% if form.posted_successfully? %}<p class="privat-form-note">Письмо отправлено — проверьте почту.</p>{% endif %}
+      <input class="privat-input" type="email" name="email" placeholder="{{ 'customer.login.email' | t }}" autocomplete="email" required>
+      <button type="submit" class="privat-account__submit">{{ 'customer.recover.submit' | t }}</button>
+    {% endform %}
+  </div>
+</section>

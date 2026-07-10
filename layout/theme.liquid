@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  <title>
+    {{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('privat-theme');
+        if (saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  {{ content_for_header }}
+</head>
+<body>
+
+  <div class="privat-outer">
+    <div class="privat-app" id="privat-app">
+
+      <div class="privat-scroller" id="privat-scroller">
+        {% section 'header' %}
+
+        {{ content_for_layout }}
+
+        {% section 'footer' %}
+      </div>
+
+      {% section 'bottom-nav' %}
+
+      <div class="privat-backdrop" id="privat-backdrop"></div>
+
+      {% section 'menu-drawer' %}
+      {% render 'cart-drawer' %}
+      {% render 'favorites-drawer' %}
+      {% render 'categories-drawer' %}
+      {% render 'account-drawer' %}
+      {% render 'search-drawer' %}
+      {% render 'toast' %}
+    </div>
+  </div>
+
+  <script id="privat-cart-data" type="application/json">{{ cart | json }}</script>
+  <script>
+    window.Shopify = window.Shopify || {};
+    Shopify.money_format = {{ shop.money_format | json }};
+  </script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

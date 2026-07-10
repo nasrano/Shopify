@@ -1,0 +1,11 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ 'customer.activate.title' | t }}</h1>
+  <div class="privat-panel">
+    {% form 'activate_customer_password' %}
+      {% if form.errors %}<p class="privat-form-errors">{{ form.errors | default_errors }}</p>{% endif %}
+      <input class="privat-input" type="password" name="customer[password]" placeholder="{{ 'customer.login.password' | t }}" autocomplete="new-password" required>
+      <input class="privat-input" type="password" name="customer[password_confirmation]" placeholder="{{ 'customer.login.password' | t }} (ещё раз)" autocomplete="new-password" required>
+      <button type="submit" class="privat-account__submit">{{ 'customer.activate.submit' | t }}</button>
+    {% endform %}
+  </div>
+</section>

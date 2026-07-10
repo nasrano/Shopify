@@ -1,0 +1,53 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ 'customer.addresses.title' | t }}</h1>
+
+  {% paginate customer.addresses by 10 %}
+    {% for address in customer.addresses %}
+      <div class="privat-panel">
+        <div class="privat-why__title" style="margin-bottom:6px">
+          {{ address.first_name }} {{ address.last_name }}
+          {% if address == customer.default_address %}<span class="privat-review__city">· основной</span>{% endif %}
+        </div>
+        <div class="privat-why__text">{{ address | format_address }}</div>
+
+        <details style="margin-top:12px">
+          <summary style="cursor:pointer;font-size:13px;font-weight:600;color:var(--accent)">Изменить</summary>
+          <div style="margin-top:12px">
+            {% form 'customer_address', address %}
+              <input class="privat-input" type="text" name="address[first_name]" value="{{ form.first_name }}" placeholder="{{ 'customer.register.first_name' | t }}">
+              <input class="privat-input" type="text" name="address[last_name]" value="{{ form.last_name }}" placeholder="{{ 'customer.register.last_name' | t }}">
+              <input class="privat-input" type="text" name="address[address1]" value="{{ form.address1 }}" placeholder="Адрес">
+              <input class="privat-input" type="text" name="address[city]" value="{{ form.city }}" placeholder="Город">
+              <input class="privat-input" type="tel" name="address[phone]" value="{{ form.phone }}" placeholder="Телефон">
+              <button type="submit" class="privat-account__submit">Сохранить</button>
+            {% endform %}
+          </div>
+        </details>
+
+        <form method="post" action="{{ address.url }}" style="margin-top:10px"
+          onsubmit="return confirm('Удалить адрес?')">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="privat-line-item__remove" style="margin-left:0">Удалить</button>
+        </form>
+      </div>
+    {% else %}
+      <p class="privat-form-note">Сохранённых адресов пока нет.</p>
+    {% endfor %}
+  {% endpaginate %}
+
+  <div class="privat-panel">
+    <h2 class="privat-sheet__title" style="margin-bottom:12px">Новый адрес</h2>
+    {% form 'customer_address', customer.new_address %}
+      <input class="privat-input" type="text" name="address[first_name]" placeholder="{{ 'customer.register.first_name' | t }}">
+      <input class="privat-input" type="text" name="address[last_name]" placeholder="{{ 'customer.register.last_name' | t }}">
+      <input class="privat-input" type="text" name="address[address1]" placeholder="Адрес">
+      <input class="privat-input" type="text" name="address[city]" placeholder="Город">
+      <input class="privat-input" type="tel" name="address[phone]" placeholder="Телефон">
+      <button type="submit" class="privat-account__submit">Добавить</button>
+    {% endform %}
+  </div>
+
+  <div class="privat-form-links">
+    <a href="{{ routes.account_url }}">← {{ 'customer.account.title' | t }}</a>
+  </div>
+</section>

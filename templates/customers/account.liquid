@@ -1,0 +1,29 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ 'customer.account.title' | t }}</h1>
+  <p class="privat-form-note">{{ customer.name | default: customer.email }}</p>
+
+  <div class="privat-panel">
+    <h2 class="privat-sheet__title" style="margin-bottom:12px">{{ 'customer.account.orders' | t }}</h2>
+    {% paginate customer.orders by 10 %}
+      {% for order in customer.orders %}
+        <a href="{{ order.customer_url }}" class="privat-shopinfo__row" style="text-decoration:none">
+          <span class="privat-shopinfo__k">{{ order.name }} · {{ order.created_at | date: '%d.%m.%Y' }}</span>
+          <span class="privat-shopinfo__v">{{ order.total_price | money }}</span>
+        </a>
+      {% else %}
+        <p class="privat-form-note" style="margin:0">{{ 'customer.account.no_orders' | t }}</p>
+      {% endfor %}
+      {% if paginate.pages > 1 %}
+        <div class="privat-pagination">
+          {% if paginate.previous %}<a href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>{% endif %}
+          {% if paginate.next %}<a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }}</a>{% endif %}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+
+  <div class="privat-form-links">
+    <a href="{{ routes.account_addresses_url }}">{{ 'customer.addresses.title' | t }}</a>
+    <a href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t }}</a>
+  </div>
+</section>

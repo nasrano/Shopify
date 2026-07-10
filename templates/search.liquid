@@ -1,0 +1,38 @@
+<section class="privat-page">
+  <h1 class="privat-page__title">{{ 'general.search.title' | t }}</h1>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" style="margin-bottom:18px">
+    <input type="hidden" name="type" value="product">
+    <input class="privat-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+  </form>
+
+  {% if search.performed %}
+    {% if search.results_count == 0 %}
+      <p class="privat-form-note">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+    {% else %}
+      <p class="privat-form-note">{{ 'general.search.results_for' | t: terms: search.terms }}</p>
+      {% paginate search.results by 12 %}
+        <div class="privat-grid2">
+          {% for item in search.results %}
+            {% if item.object_type == 'product' %}
+              {% render 'product-card', product: item, badge: 'none' %}
+            {% else %}
+              <a href="{{ item.url }}" class="privat-panel" style="grid-column:1/-1;display:block;text-decoration:none">
+                <div class="privat-fav-row__name" style="color:var(--ink)">{{ item.title }}</div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          <div class="privat-pagination">
+            {% if paginate.previous %}<a href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>{% endif %}
+            <span class="privat-pagination__current">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {% if paginate.next %}<a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }}</a>{% endif %}
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    {% endif %}
+  {% else %}
+    <p class="privat-form-note">Например: смазка, свеча, феромоны…</p>
+  {% endif %}
+</section>

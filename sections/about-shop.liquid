@@ -1,0 +1,43 @@
+<section class="privat-shopinfo" data-reveal>
+  <h2 class="privat-h2">{{ section.settings.heading | default: 'О магазине' }}</h2>
+  <div class="privat-shopinfo__list">
+    {% for block in section.blocks %}
+      <div class="privat-shopinfo__row" {{ block.shopify_attributes }}>
+        <span class="privat-shopinfo__k">{{ block.settings.key }}</span>
+        <span class="privat-shopinfo__v">{{ block.settings.value }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "О магазине",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "О магазине" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Строка",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Название", "default": "Адрес" },
+        { "type": "text", "id": "value", "label": "Значение", "default": "Калык Акиева 116, Бишкек" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "О магазине",
+      "blocks": [
+        { "type": "row", "settings": { "key": "Адрес", "value": "Калык Акиева 116, Бишкек" } },
+        { "type": "row", "settings": { "key": "Телефон", "value": "0500 690 690" } },
+        { "type": "row", "settings": { "key": "Режим", "value": "Ежедневно 10:00 – 22:00" } },
+        { "type": "row", "settings": { "key": "Доставка", "value": "1 час по Бишкеку · 24 ч по КР" } },
+        { "type": "row", "settings": { "key": "Оплата", "value": "Наличные · карта · Мбанк" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,28 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "PRIVAT",
+    "theme_version": "1.0.0",
+    "theme_author": "PRIVAT",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_email": "coolish.ds@gmail.com"
+  },
+  {
+    "name": "Навигация",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Меню (гамбургер / шапка)",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "categories_menu",
+        "label": "Меню категорий (сетка + шторка)",
+        "info": "Используется и в сетке категорий на главной, и в шторке «Категории». Пункты меню должны вести на коллекции.",
+        "default": "main-menu"
+      }
+    ]
+  }
+]

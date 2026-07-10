@@ -1,0 +1,25 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'gift_card.title' | t }} · {{ shop.name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+  <div class="privat-outer" style="align-items:center">
+    <div class="privat-panel" style="max-width:360px;margin:24px;text-align:center">
+      <div class="privat-header__logo-name" style="margin-bottom:4px">PRIVAT</div>
+      <h1 class="privat-page__title" style="font-size:20px">{{ 'gift_card.title' | t }}</h1>
+      <div class="privat-reviews__num" style="font-size:30px;margin:10px 0">{{ gift_card.balance | money }}</div>
+      <p class="privat-form-note">{{ 'gift_card.code' | t }}</p>
+      <div class="privat-panel" style="font-family:ui-monospace,Menlo,monospace;font-size:16px;letter-spacing:.1em">{{ gift_card.code | format_code }}</div>
+      <a href="{{ shop.url }}" class="privat-btn" style="display:inline-block;margin-top:16px;text-align:center">В магазин</a>
+    </div>
+  </div>
+</body>
+</html>

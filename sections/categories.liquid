@@ -1,0 +1,22 @@
+<section class="privat-cats" data-reveal>
+  <h2 class="privat-h2">{{ section.settings.heading | default: 'Категории' }}</h2>
+  <div class="privat-cats__grid">
+    {% for link in linklists[settings.categories_menu].links %}
+      <a href="{{ link.url }}" class="privat-cat">
+        <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+        <span class="privat-cat__name">{{ link.title }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Категории",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "Категории" },
+    { "type": "paragraph", "content": "Список категорий берётся из меню «Меню категорий», которое задаётся в настройках темы (Тема → Навигация)." }
+  ],
+  "presets": [{ "name": "Категории" }]
+}
+{% endschema %}

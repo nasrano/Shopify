@@ -1,0 +1,24 @@
+<section class="privat-page">
+  <h1 class="privat-page__title">{{ collection.title }}</h1>
+  {% if collection.description != blank %}
+    <p class="privat-form-note">{{ collection.description | strip_html }}</p>
+  {% endif %}
+
+  {% paginate collection.products by 12 %}
+    <div class="privat-grid2">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product, badge: 'none' %}
+      {% else %}
+        <p class="privat-form-note" style="grid-column:1/-1">В этой коллекции пока пусто.</p>
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <div class="privat-pagination">
+        {% if paginate.previous %}<a href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>{% endif %}
+        <span class="privat-pagination__current">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+        {% if paginate.next %}<a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }}</a>{% endif %}
+      </div>
+    {% endif %}
+  {% endpaginate %}
+</section>

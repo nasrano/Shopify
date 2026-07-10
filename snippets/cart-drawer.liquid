@@ -1,0 +1,42 @@
+<div class="privat-sheet privat-sheet--cart" data-drawer="cart">
+  <div class="privat-sheet__head">
+    <h3 class="privat-sheet__title">Моя корзина</h3>
+    <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+
+  <div class="privat-empty privat-empty--cart" id="privat-cart-empty" style="display:{% if cart.item_count == 0 %}flex{% else %}none{% endif %}">
+    <div class="privat-empty__icon">
+      <svg width="30" height="30" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+    </div>
+    <div class="privat-empty__title">Пока пусто</div>
+    <div class="privat-empty__text">Загляните в хиты продаж — там точно найдётся что-то для вас.</div>
+    <a href="{{ routes.all_products_collection_url }}" class="privat-btn">В магазин</a>
+  </div>
+
+  <div class="privat-sheet__body" id="privat-cart-body" style="display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}">
+    {% for item in cart.items %}
+      <div class="privat-line-item" data-line-key="{{ item.key }}">
+        <div class="privat-line-item__thumb" {% if item.image %}style="background-image:url({{ item.image | image_url: width: 160 }})"{% endif %}></div>
+        <div class="privat-line-item__body">
+          <div class="privat-line-item__name">{{ item.product.title }}</div>
+          <div class="privat-line-item__price">{{ item.line_price | money }}</div>
+          <div class="privat-line-item__qty">
+            <button type="button" class="privat-qty-btn" data-cart-dec="{{ item.key }}" aria-label="Меньше">−</button>
+            <span class="privat-qty-val">{{ item.quantity }}</span>
+            <button type="button" class="privat-qty-btn" data-cart-inc="{{ item.key }}" aria-label="Больше">+</button>
+            <button type="button" class="privat-line-item__remove" data-cart-remove="{{ item.key }}">убрать</button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="privat-sheet__summary" id="privat-cart-summary" style="display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}">
+    <div class="privat-sheet__total-row">
+      <span class="privat-sheet__total-label">Итого</span>
+      <span class="privat-sheet__total-val" id="privat-cart-total">{{ cart.total_price | money }}</span>
+    </div>
+    <a href="/checkout" class="privat-checkout-btn" style="text-align:center">Оформить заказ</a>
+    <div class="privat-sheet__note">Анонимная упаковка · доставка за 1 час по Бишкеку</div>
+  </div>
+</div>

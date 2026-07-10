@@ -1,0 +1,28 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p class="privat-form-note">{{ order.created_at | date: '%d.%m.%Y' }} · {{ order.financial_status_label }}</p>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+    {% for line_item in order.line_items %}
+      <div class="privat-line-item">
+        <div class="privat-line-item__thumb"
+          {% if line_item.image %}style="background-image:url({{ line_item.image | image_url: width: 160 }})"{% endif %}></div>
+        <div class="privat-line-item__body">
+          <div class="privat-line-item__name">{{ line_item.title }}</div>
+          <div class="privat-line-item__price">{{ line_item.final_line_price | money }} · {{ line_item.quantity }} шт.</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="privat-sheet__summary" style="padding:16px 0 0;border-top:none">
+    <div class="privat-sheet__total-row">
+      <span class="privat-sheet__total-label">{{ 'cart.total' | t }}</span>
+      <span class="privat-sheet__total-val">{{ order.total_price | money }}</span>
+    </div>
+  </div>
+
+  <div class="privat-form-links">
+    <a href="{{ routes.account_url }}">← {{ 'customer.account.title' | t }}</a>
+  </div>
+</section>

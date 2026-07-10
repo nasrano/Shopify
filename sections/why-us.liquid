@@ -1,0 +1,44 @@
+<section class="privat-section" data-reveal>
+  <h2 class="privat-h2">{{ section.settings.heading | default: 'Почему PRIVAT' }}</h2>
+  <div class="privat-why__grid">
+    {% for block in section.blocks %}
+      <div class="privat-why__item" {{ block.shopify_attributes }}>
+        <span class="privat-why__mono">{{ block.settings.mono }}</span>
+        <div class="privat-why__title">{{ block.settings.title }}</div>
+        <div class="privat-why__text">{{ block.settings.text }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Почему мы",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "Почему PRIVAT" }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Причина",
+      "settings": [
+        { "type": "text", "id": "mono", "label": "Буква / монограмма", "default": "В" },
+        { "type": "text", "id": "title", "label": "Заголовок", "default": "Большой выбор" },
+        { "type": "textarea", "id": "text", "label": "Текст", "default": "Сертифицированные товары по честным ценам" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Почему мы",
+      "blocks": [
+        { "type": "reason", "settings": { "mono": "В", "title": "Большой выбор", "text": "Сертифицированные товары по честным ценам" } },
+        { "type": "reason", "settings": { "mono": "Б", "title": "Быстро", "text": "За 1 час по Бишкеку, за сутки по всей стране" } },
+        { "type": "reason", "settings": { "mono": "Т", "title": "Без осуждения", "text": "Поможем выбрать спокойно и тактично" } },
+        { "type": "reason", "settings": { "mono": "А", "title": "Анонимно", "text": "Упаковка без логотипов и названий" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

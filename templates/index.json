@@ -1,0 +1,89 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "Близость — это забота о себе",
+        "subtitle": "Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки.",
+        "primary_label": "В магазин →",
+        "secondary_label": "Каталог"
+      }
+    },
+    "trust": {
+      "type": "trust-chips",
+      "blocks": {
+        "chip-1": { "type": "chip", "settings": { "text": "Анонимная упаковка" } },
+        "chip-2": { "type": "chip", "settings": { "text": "За 1 час по Бишкеку" } },
+        "chip-3": { "type": "chip", "settings": { "text": "4.9 — оценка покупателей" } },
+        "chip-4": { "type": "chip", "settings": { "text": "Подбор в WhatsApp" } }
+      },
+      "block_order": ["chip-1", "chip-2", "chip-3", "chip-4"]
+    },
+    "categories": {
+      "type": "categories",
+      "settings": { "heading": "Категории" }
+    },
+    "hits": {
+      "type": "product-carousel",
+      "settings": { "heading": "Хиты продаж", "limit": 8, "badge": "none", "style": "default" }
+    },
+    "new": {
+      "type": "product-carousel",
+      "settings": { "heading": "Новинки", "limit": 8, "badge": "new", "style": "default" }
+    },
+    "discounts": {
+      "type": "product-carousel",
+      "settings": { "heading": "Скидки", "limit": 8, "badge": "none", "style": "soft" }
+    },
+    "why-us": {
+      "type": "why-us",
+      "settings": { "heading": "Почему PRIVAT" },
+      "blocks": {
+        "r1": { "type": "reason", "settings": { "mono": "В", "title": "Большой выбор", "text": "Сертифицированные товары по честным ценам" } },
+        "r2": { "type": "reason", "settings": { "mono": "Б", "title": "Быстро", "text": "За 1 час по Бишкеку, за сутки по всей стране" } },
+        "r3": { "type": "reason", "settings": { "mono": "Т", "title": "Без осуждения", "text": "Поможем выбрать спокойно и тактично" } },
+        "r4": { "type": "reason", "settings": { "mono": "А", "title": "Анонимно", "text": "Упаковка без логотипов и названий" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"]
+    },
+    "about-us": {
+      "type": "about-us",
+      "settings": {
+        "heading": "О нас",
+        "text_1": "Мы верим, что близость — нормальная и здоровая часть жизни. PRIVAT — это место, где о ней можно говорить спокойно: без стеснения, давления и лишних глаз.",
+        "text_2": "Каждый товар мы отбираем сами: сертифицированные материалы, проверенные бренды и честные цены. А если сомневаетесь — тактично подскажем, с чего начать."
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": { "heading": "Нам доверяют", "rating": "4.9" },
+      "blocks": {
+        "rev-1": { "type": "review", "settings": { "text": "Привезли за 40 минут, упаковка нейтральная — никто ничего не понял. Менеджер всё объяснил спокойно, без неловкости.", "name": "Айгерим", "city": "Бишкек" } },
+        "rev-2": { "type": "review", "settings": { "text": "Стеснялся спрашивать, но подсказали по WhatsApp за пару минут. Качество отличное, вернусь ещё.", "name": "Марат", "city": "Бишкек" } }
+      },
+      "block_order": ["rev-1", "rev-2"]
+    },
+    "whatsapp": {
+      "type": "whatsapp-cta",
+      "settings": {
+        "heading": "Не знаете, что выбрать?",
+        "text": "Напишите нам — подберём то, что подойдёт именно вам. Спокойно и анонимно.",
+        "button_label": "Написать в WhatsApp",
+        "phone": "996500690690"
+      }
+    },
+    "about-shop": {
+      "type": "about-shop",
+      "settings": { "heading": "О магазине" },
+      "blocks": {
+        "row-1": { "type": "row", "settings": { "key": "Адрес", "value": "Калык Акиева 116, Бишкек" } },
+        "row-2": { "type": "row", "settings": { "key": "Телефон", "value": "0500 690 690" } },
+        "row-3": { "type": "row", "settings": { "key": "Режим", "value": "Ежедневно 10:00 – 22:00" } },
+        "row-4": { "type": "row", "settings": { "key": "Доставка", "value": "1 час по Бишкеку · 24 ч по КР" } },
+        "row-5": { "type": "row", "settings": { "key": "Оплата", "value": "Наличные · карта · Мбанк" } }
+      },
+      "block_order": ["row-1", "row-2", "row-3", "row-4", "row-5"]
+    }
+  },
+  "order": ["hero", "trust", "categories", "hits", "new", "discounts", "why-us", "about-us", "reviews", "whatsapp", "about-shop"]
+}

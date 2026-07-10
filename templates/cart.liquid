@@ -1,0 +1,46 @@
+<section class="privat-page privat-page--narrow">
+  <h1 class="privat-page__title">{{ 'cart.title' | t }}</h1>
+
+  {% if cart.item_count == 0 %}
+    <div class="privat-empty privat-empty--cart">
+      <div class="privat-empty__icon">
+        <svg width="30" height="30" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+      </div>
+      <div class="privat-empty__title">{{ 'cart.empty' | t }}</div>
+      <div class="privat-empty__text">Загляните в хиты продаж — там точно найдётся что-то для вас.</div>
+      <a href="{{ routes.all_products_collection_url }}" class="privat-btn">В магазин</a>
+    </div>
+  {% else %}
+    <form action="{{ routes.cart_url }}" method="post">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        {% for item in cart.items %}
+          <div class="privat-line-item">
+            <a href="{{ item.url }}" class="privat-line-item__thumb"
+              {% if item.image %}style="background-image:url({{ item.image | image_url: width: 160 }})"{% endif %}></a>
+            <div class="privat-line-item__body">
+              <a href="{{ item.url }}" class="privat-line-item__name" style="color:inherit;text-decoration:none">{{ item.product.title }}</a>
+              <div class="privat-line-item__price">{{ item.line_price | money }}</div>
+              <div class="privat-line-item__qty">
+                <input class="privat-input" type="number" name="updates[]" value="{{ item.quantity }}" min="0"
+                  aria-label="{{ 'products.product.quantity' | t }}" style="max-width:80px;text-align:center;margin:0;padding:8px 12px;font-size:13px">
+                <a href="{{ item.url_to_remove }}" class="privat-line-item__remove">{{ 'cart.remove' | t }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="privat-sheet__summary" style="padding:16px 0 0;border-top:none">
+        <div class="privat-sheet__total-row">
+          <span class="privat-sheet__total-label">{{ 'cart.total' | t }}</span>
+          <span class="privat-sheet__total-val">{{ cart.total_price | money }}</span>
+        </div>
+        <div class="privat-form-row">
+          <button type="submit" class="privat-btn privat-btn--outline" style="flex:1">{{ 'cart.update' | t }}</button>
+          <button type="submit" name="checkout" class="privat-checkout-btn" style="flex:2;width:auto">{{ 'cart.checkout' | t }}</button>
+        </div>
+        <div class="privat-sheet__note">{{ 'cart.note' | t }}</div>
+      </div>
+    </form>
+  {% endif %}
+</section>

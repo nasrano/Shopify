@@ -1,0 +1,11 @@
+<section class="privat-page">
+  <h1 class="privat-page__title">Категории</h1>
+  <div class="privat-cats__grid" style="grid-template-columns:repeat(2,1fr)">
+    {% for collection in collections %}
+      <a href="{{ collection.url }}" class="privat-cat" style="min-height:96px">
+        <span class="privat-cat__mono">{{ collection.title | slice: 0, 1 | upcase }}</span>
+        <span class="privat-cat__name" style="font-size:12px">{{ collection.title }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>

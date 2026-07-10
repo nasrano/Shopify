@@ -1,0 +1,47 @@
+<section class="privat-carousel{% if section.settings.style == 'soft' %} privat-carousel--soft{% endif %}" data-reveal>
+  <div class="privat-section__head">
+    <h2 class="privat-h2">{{ section.settings.heading }}</h2>
+    <a href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}" class="privat-link-all">Все →</a>
+  </div>
+  <div class="privat-carousel__track">
+    {% for product in section.settings.collection.products limit: section.settings.limit %}
+      {% render 'product-card', product: product, badge: section.settings.badge %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Карусель товаров",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "Хиты продаж" },
+    { "type": "collection", "id": "collection", "label": "Коллекция" },
+    { "type": "range", "id": "limit", "label": "Кол-во товаров", "min": 2, "max": 12, "step": 1, "default": 8 },
+    {
+      "type": "select",
+      "id": "badge",
+      "label": "Значок на карточке",
+      "options": [
+        { "value": "none", "label": "Нет / автоматически (скидка)" },
+        { "value": "new", "label": "NEW" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Фон секции",
+      "options": [
+        { "value": "default", "label": "Обычный" },
+        { "value": "soft", "label": "Приглушённый (для «Скидок»)" }
+      ],
+      "default": "default"
+    }
+  ],
+  "presets": [
+    { "name": "Хиты продаж", "settings": { "heading": "Хиты продаж", "badge": "none", "style": "default" } },
+    { "name": "Новинки", "settings": { "heading": "Новинки", "badge": "new", "style": "default" } },
+    { "name": "Скидки", "settings": { "heading": "Скидки", "badge": "none", "style": "soft" } }
+  ]
+}
+{% endschema %}

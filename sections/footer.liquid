@@ -1,0 +1,15 @@
+<footer class="privat-footer">
+  <div class="privat-footer__name">{{ section.settings.logo_text | default: 'PRIVAT' }}</div>
+  <div class="privat-footer__meta">{{ section.settings.line_1 | default: 'Только 18+. Бережно о близости.' }}<br>{{ section.settings.line_2 | default: '© 2026 PRIVAT · Бишкек' }}</div>
+</footer>
+
+{% schema %}
+{
+  "name": "Подвал",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Название", "default": "PRIVAT" },
+    { "type": "text", "id": "line_1", "label": "Строка 1", "default": "Только 18+. Бережно о близости." },
+    { "type": "text", "id": "line_2", "label": "Строка 2", "default": "© 2026 PRIVAT · Бишкек" }
+  ]
+}
+{% endschema %}

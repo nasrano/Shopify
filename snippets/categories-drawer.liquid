@@ -1,0 +1,15 @@
+<div class="privat-sheet privat-sheet--cats" data-drawer="cats">
+  <div class="privat-sheet__head">
+    <h3 class="privat-sheet__title">Категории</h3>
+    <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="privat-sheet__scroll">
+    {% for link in linklists[settings.categories_menu].links %}
+      <a href="{{ link.url }}" class="privat-cat-row">
+        <span class="privat-cat-row__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+        <span class="privat-cat-row__name">{{ link.title }}</span>
+        <span class="privat-cat-row__chev">›</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,43 @@
+{%- comment -%} params: product, badge ("none" | "new" | "sale") {%- endcomment -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign on_sale = false -%}
+{%- if variant.compare_at_price > variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
+{%- assign fav_image = '' -%}
+{%- if product.featured_image -%}{%- assign fav_image = product.featured_image | image_url: width: 200 -%}{%- endif -%}
+
+<div class="privat-card">
+  <a href="{{ product.url }}" class="privat-card__imgwrap"
+    {% if product.featured_image %}style="background-image:url({{ product.featured_image | image_url: width: 400 }})"{% endif %}>
+    {% unless product.featured_image %}<span class="privat-card__ph">фото товара</span>{% endunless %}
+
+    {% if badge == 'new' %}
+      <span class="privat-card__badge privat-card__badge--new">NEW</span>
+    {% elsif on_sale %}
+      {% assign pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price %}
+      <span class="privat-card__badge privat-card__badge--sale">−{{ pct }}%</span>
+    {% endif %}
+
+    <button type="button" class="privat-card__fav" data-fav-toggle
+      data-product-id="{{ product.id }}"
+      data-product-title="{{ product.title | escape }}"
+      data-product-price="{{ variant.price | money }}"
+      data-product-image="{{ fav_image }}"
+      data-product-url="{{ product.url }}"
+      data-variant-id="{{ variant.id }}"
+      aria-label="В избранное">♡</button>
+  </a>
+  <div class="privat-card__body">
+    <a href="{{ product.url }}" class="privat-card__name" style="color:inherit;text-decoration:none">{{ product.title }}</a>
+    {% if on_sale %}
+      <div class="privat-card__price-row">
+        <span class="privat-card__price">{{ variant.price | money }}</span>
+        <span class="privat-card__old">{{ variant.compare_at_price | money }}</span>
+      </div>
+    {% else %}
+      <div class="privat-card__price">{{ variant.price | money }}</div>
+    {% endif %}
+    <button type="button" class="privat-card__add" data-add-to-cart data-variant-id="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>
+      {% if variant.available %}В корзину{% else %}Нет в наличии{% endif %}
+    </button>
+  </div>
+</div>
