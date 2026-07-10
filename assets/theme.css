@@ -45,8 +45,12 @@ img{max-width:100%;display:block}
 .privat-header__logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;cursor:pointer}
 .privat-header__logo-name{font-family:'Prata',serif;font-size:21px;letter-spacing:.14em;color:var(--ink)}
 .privat-header__logo-sub{font-size:8.5px;letter-spacing:.42em;color:var(--accent);font-weight:700;margin-top:-1px}
-.privat-header__icon{position:relative;margin-left:auto;width:42px;height:42px;border:none;background:none;cursor:pointer;color:var(--ink);font-size:19px;line-height:1;display:flex;align-items:center;justify-content:center}
-.privat-header__icon + .privat-header__icon{margin-left:0}
+.privat-header__actions{margin-left:auto;display:flex;align-items:center}
+.privat-header__icon{position:relative;width:42px;height:42px;border:none;background:none;cursor:pointer;color:var(--ink);font-size:19px;line-height:1;display:flex;align-items:center;justify-content:center}
+.privat-header__links{display:none;align-items:center;gap:24px;margin-left:14px}
+.privat-header__links a{font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.privat-header__links a:hover{color:var(--accent)}
+.privat-desktop-only{display:none}
 .privat-badge{position:absolute;top:5px;right:3px;min-width:16px;height:16px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .privat-badge[hidden]{display:none}
 
@@ -287,3 +291,87 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--bg);
   font-size:12.5px;font-weight:600;padding:10px 20px;border-radius:100px;animation:dcFade .2s ease;white-space:nowrap;display:none}
 .privat-toast.is-open{display:block}
+
+/* ============================================================
+   RESPONSIVE — mobile-first is the base; tablet & desktop widen it
+   ============================================================ */
+
+/* ===== tablet ≥720px ===== */
+@media (min-width:720px){
+  .privat-app{width:100%;box-shadow:none}
+  .privat-trust{flex-wrap:wrap;justify-content:center;overflow:visible;padding:20px 24px 6px}
+  .privat-cats__grid{grid-template-columns:repeat(6,1fr);gap:10px}
+  .privat-cat{min-height:96px;padding:14px 6px 12px}
+  .privat-cat__name{font-size:11.5px}
+  .privat-why__grid{grid-template-columns:repeat(4,1fr)}
+  .privat-grid2{grid-template-columns:repeat(3,1fr);gap:12px}
+  .privat-card{width:200px}
+  .privat-card__imgwrap{height:170px}
+  .privat-hero__title{font-size:38px}
+  .privat-hero__sub{font-size:15.5px;max-width:44ch}
+  .privat-page{padding:28px 24px 40px}
+}
+
+/* ===== desktop ≥1080px ===== */
+@media (min-width:1080px){
+  /* full-width site, no phone frame */
+  .privat-scroller{padding-bottom:0}
+  .privat-nav{display:none}
+
+  /* header: inline nav links + desktop-only search/account icons */
+  .privat-header{padding:14px 40px}
+  .privat-header__links{display:flex}
+  .privat-desktop-only{display:flex}
+  .privat-header__logo-name{font-size:23px}
+
+  /* centered content column */
+  .privat-cats,.privat-section,.privat-about,.privat-reviews,.privat-wa,.privat-shopinfo,
+  .privat-trust,.privat-section__head,.privat-carousel__track{
+    max-width:1140px;margin-left:auto;margin-right:auto}
+  .privat-cats,.privat-section{padding-left:24px;padding-right:24px}
+  .privat-h2{font-size:28px}
+
+  /* hero: taller, text column centered (margin auto — JS owns transform) */
+  .privat-hero{height:min(68dvh,660px);min-height:480px}
+  .privat-hero__tag{left:0;right:0;margin:0 auto;max-width:1140px;padding:0 24px 56px}
+  .privat-hero__title{font-size:48px;max-width:18ch}
+  .privat-hero__sub{font-size:16px;max-width:48ch}
+
+  /* grids & cards */
+  .privat-cats__grid{gap:12px}
+  .privat-cat{min-height:104px}
+  .privat-card{width:232px}
+  .privat-card__imgwrap{height:200px}
+  .privat-card__name{font-size:13.5px}
+  .privat-grid2{grid-template-columns:repeat(4,1fr)}
+  .privat-review{width:340px}
+  .privat-wa__card{padding:34px 38px}
+
+  /* hover polish (pointer devices) */
+  .privat-card{transition:transform .25s ease, box-shadow .25s ease}
+  .privat-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(60,40,30,.12)}
+  .privat-cat{transition:transform .2s ease}
+  .privat-cat:hover{transform:translateY(-2px)}
+
+  /* bottom sheets become centered modals rising from bottom
+     (left/right:0 + margin auto keeps the translateY animation intact) */
+  .privat-sheet{left:0;right:0;margin:0 auto;max-width:520px;border-radius:22px 22px 0 0;
+    box-shadow:0 -10px 60px rgba(25,15,10,.25)}
+
+  /* inner pages */
+  .privat-page{max-width:1140px;margin:0 auto;padding:36px 24px 60px}
+  .privat-page--narrow{max-width:640px}
+  .privat-page__title{font-size:32px}
+
+  /* product page: two-column layout */
+  .privat-product{display:grid;grid-template-columns:1.05fr 1fr;gap:14px 56px;
+    max-width:1140px;margin:0 auto;padding:40px 24px 60px}
+  .privat-product__media{grid-column:1;height:520px;border-radius:20px}
+  .privat-product__thumbs{grid-column:1;padding:0}
+  .privat-product__body{grid-column:2;grid-row:1 / span 2;padding:0}
+  .privat-product__title{font-size:32px}
+  .privat-product__price{font-size:24px}
+
+  /* toast above nothing — lift off the bottom edge */
+  .privat-toast{bottom:44px}
+}
