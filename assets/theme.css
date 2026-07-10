@@ -348,6 +348,37 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-form-errors{font-size:12.5px;color:var(--accent);line-height:1.5;margin:0 0 12px}
 .privat-form-links{display:flex;gap:16px;justify-content:center;margin-top:14px;font-size:13px;font-weight:600}
 
+/* ===== contact page ===== */
+.privat-contact{padding:22px 16px 30px}
+.privat-contact__intro{font-size:14px;line-height:1.6;color:var(--sub);margin:0 0 18px;max-width:52ch;text-wrap:pretty}
+.privat-contact__grid{display:flex;flex-direction:column;gap:14px}
+.privat-contact__col{display:flex;flex-direction:column;gap:14px}
+.privat-contact__card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px}
+.privat-contact__card .privat-shopinfo__list{border-top:none}
+.privat-contact__card .privat-shopinfo__row:first-child{padding-top:0}
+.privat-contact__wa{display:block;text-align:center;margin-top:16px}
+.privat-contact__extra{font-size:13.5px;line-height:1.65;color:var(--sub);margin:0;text-wrap:pretty}
+.privat-map{position:relative;width:100%;padding-bottom:150%;height:0;overflow:hidden;border-radius:20px;border:1px solid var(--line);background:var(--soft)}
+.privat-map iframe,.privat-map .dg-widget{position:absolute;top:0;left:0;width:100% !important;height:100% !important;border:0}
+
+/* ===== blog ===== */
+.privat-blog{padding:22px 16px 30px}
+.privat-blog__grid{display:flex;flex-direction:column;gap:12px}
+.privat-blog-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;color:inherit}
+.privat-blog-card:hover{color:inherit;border-color:var(--accent)}
+.privat-blog-card__img{position:relative;aspect-ratio:16/9;background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 12px, transparent 12px 24px);
+  background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center}
+.privat-blog-card__date{position:absolute;top:10px;left:10px;background:var(--card);color:var(--sub);font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:100px}
+.privat-blog-card__body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
+.privat-blog-card__title{font-family:'Prata',serif;font-size:17px;color:var(--ink);line-height:1.35}
+.privat-blog-card__excerpt{font-size:13px;line-height:1.55;color:var(--sub)}
+.privat-blog-card__more{font-size:12.5px;font-weight:700;color:var(--accent)}
+.privat-article .privat-crumbs--article{padding:0 0 16px}
+.privat-article__meta{font-size:12px;color:var(--sub);letter-spacing:.04em;margin:-6px 0 16px}
+.privat-article__img{width:100%;height:auto;border-radius:16px;margin:0 0 18px}
+.privat-article__foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap}
+.privat-article__foot .privat-btn{text-align:center}
+
 /* ===== toast ===== */
 .privat-toast{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--bg);
   font-size:12.5px;font-weight:600;padding:10px 20px;border-radius:100px;animation:dcFade .2s ease;white-space:nowrap;display:none}
@@ -371,6 +402,8 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-hero__title{font-size:38px}
   .privat-hero__sub{font-size:15.5px;max-width:44ch}
   .privat-page{padding:28px 24px 40px}
+  .privat-map{padding-bottom:75%}
+  .privat-blog__grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 }
 
 /* ===== desktop ≥1080px ===== */
@@ -448,6 +481,18 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-seo h3{margin-bottom:8px}
   .privat-seo p{margin-bottom:14px}
   .privat-seo .privat-h2--sm{font-size:24px}
+
+  /* contact page: info left, map right */
+  .privat-contact{max-width:1140px;margin:0 auto;padding:36px 24px 60px}
+  .privat-contact__grid{display:grid;grid-template-columns:1fr 1.25fr;gap:20px;align-items:stretch}
+  .privat-contact__col .privat-map{height:100%;padding-bottom:0;min-height:480px}
+
+  /* blog */
+  .privat-blog{max-width:1140px;margin:0 auto;padding:36px 24px 60px}
+  .privat-blog__grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .privat-blog-card{transition:transform .25s ease, box-shadow .25s ease}
+  .privat-blog-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(60,40,30,.12)}
+  .privat-blog-card__title{font-size:19px}
 
   /* toast above nothing — lift off the bottom edge */
   .privat-toast{bottom:44px}

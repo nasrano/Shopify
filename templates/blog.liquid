@@ -1,17 +1,26 @@
-<section class="privat-page privat-page--narrow">
+<section class="privat-blog">
   <h1 class="privat-page__title">{{ blog.title }}</h1>
-  {% paginate blog.articles by 10 %}
-    <div style="display:flex;flex-direction:column;gap:12px">
+
+  {% paginate blog.articles by 12 %}
+    <div class="privat-blog__grid">
       {% for article in blog.articles %}
-        <a href="{{ article.url }}" class="privat-panel" style="display:block;text-decoration:none">
-          <div class="privat-why__title" style="margin-bottom:6px">{{ article.title }}</div>
-          <div class="privat-why__text">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</div>
-          <div class="privat-review__city" style="margin-top:10px">{{ article.published_at | date: '%d.%m.%Y' }}</div>
+        <a href="{{ article.url }}" class="privat-blog-card">
+          <div class="privat-blog-card__img"
+            {% if article.image %}style="background-image:url({{ article.image | image_url: width: 800 }})"{% endif %}>
+            {% unless article.image %}<span class="privat-card__ph">фото записи</span>{% endunless %}
+            <span class="privat-blog-card__date">{{ article.published_at | date: '%d.%m.%Y' }}</span>
+          </div>
+          <div class="privat-blog-card__body">
+            <div class="privat-blog-card__title">{{ article.title }}</div>
+            <div class="privat-blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</div>
+            <span class="privat-blog-card__more">Читать →</span>
+          </div>
         </a>
       {% else %}
         <p class="privat-form-note">Записей пока нет.</p>
       {% endfor %}
     </div>
+
     {% if paginate.pages > 1 %}
       <div class="privat-pagination">
         {% if paginate.previous %}<a href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>{% endif %}

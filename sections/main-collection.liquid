@@ -81,9 +81,19 @@
   {% endif %}
 </div>
 
+{%- assign pc = collection.products_count -%}
+{%- assign n100 = pc | modulo: 100 -%}
+{%- assign n10 = pc | modulo: 10 -%}
+{%- if n10 == 1 and n100 != 11 -%}
+  {%- assign pc_noun = 'товар' -%}
+{%- elsif n10 >= 2 and n10 <= 4 and n100 != 12 and n100 != 13 and n100 != 14 -%}
+  {%- assign pc_noun = 'товара' -%}
+{%- else -%}
+  {%- assign pc_noun = 'товаров' -%}
+{%- endif -%}
 <div class="privat-coll__head">
   <h1 class="privat-coll__title">{{ collection.title }}</h1>
-  <span class="privat-coll__count">{{ collection.products_count }} товаров</span>
+  <span class="privat-coll__count">{{ pc }} {{ pc_noun }}</span>
 </div>
 
 {% paginate collection.products by section.settings.per_page %}

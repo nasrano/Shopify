@@ -1,10 +1,27 @@
-<section class="privat-page privat-page--narrow">
+<article class="privat-page privat-page--narrow privat-article">
+  <div class="privat-crumbs privat-crumbs--article">
+    <div class="privat-crumbs__path">
+      <a href="{{ routes.root_url }}">Главная</a>
+      <span>›</span>
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <span>›</span>
+      <span class="privat-crumbs__current">{{ article.title }}</span>
+    </div>
+    <a class="privat-back-btn" href="{{ blog.url }}">← Назад</a>
+  </div>
+
   <h1 class="privat-page__title">{{ article.title }}</h1>
-  <div class="privat-review__city" style="margin-bottom:16px">{{ article.published_at | date: '%d.%m.%Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</div>
+  <div class="privat-article__meta">{{ article.published_at | date: '%d.%m.%Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</div>
+
   {% if article.image %}
-    <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape }}"
-      width="800" height="{{ 800 | divided_by: article.image.aspect_ratio | round }}"
-      style="border-radius:16px;margin-bottom:16px;height:auto">
+    <img class="privat-article__img" src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}"
+      width="1200" height="{{ 1200 | divided_by: article.image.aspect_ratio | round }}">
   {% endif %}
+
   <div class="privat-page__body">{{ article.content }}</div>
-</section>
+
+  <div class="privat-article__foot">
+    <a class="privat-btn privat-btn--outline" href="{{ blog.url }}">← Все записи</a>
+    <a class="privat-btn" href="{{ routes.all_products_collection_url }}">В магазин</a>
+  </div>
+</article>

@@ -136,9 +136,18 @@
   /* ---------------- cart (Shopify Ajax API) ---------------- */
   var moneyFormat = (window.Shopify && Shopify.money_format) || '{{amount}}';
   function formatMoney(cents) {
-    var value = (cents / 100).toFixed(2).replace('.00', '');
-    var withSpaces = value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    return moneyFormat.replace(/\{\{\s*amount\s*\}\}/, withSpaces).replace('{{amount_no_decimals}}', withSpaces);
+    var m = moneyFormat.match(/\{\{\s*(\w+)\s*\}\}/);
+    var token = m ? m[1] : 'amount';
+    var noDecimals = token.indexOf('no_decimals') > -1;
+    var comma = token.indexOf('comma_separator') > -1;
+    var thousands = comma ? '.' : ' ';
+    var decimal = comma ? ',' : '.';
+    var num = cents / 100;
+    var parts = (noDecimals ? String(Math.round(num)) : num.toFixed(2)).split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands);
+    var value = parts.join(decimal);
+    if (!noDecimals) value = value.replace(decimal + '00', '');
+    return moneyFormat.replace(/\{\{\s*\w+\s*\}\}/, value);
   }
 
   function cartBadge(count) {

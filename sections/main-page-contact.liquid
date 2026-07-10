@@ -1,0 +1,103 @@
+{%- assign wa_digits = section.settings.whatsapp_phone | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
+
+<section class="privat-contact">
+  <h1 class="privat-page__title">{{ section.settings.heading | default: page.title }}</h1>
+  {% if section.settings.intro != blank %}
+    <p class="privat-contact__intro">{{ section.settings.intro }}</p>
+  {% endif %}
+
+  <div class="privat-contact__grid">
+    <div class="privat-contact__col">
+      <div class="privat-contact__card">
+        <div class="privat-shopinfo__list">
+          {% for block in section.blocks %}
+            <div class="privat-shopinfo__row" {{ block.shopify_attributes }}>
+              <span class="privat-shopinfo__k">{{ block.settings.key }}</span>
+              {% if block.settings.url != blank %}
+                <a class="privat-shopinfo__v" href="{{ block.settings.url }}">{{ block.settings.value }}</a>
+              {% else %}
+                <span class="privat-shopinfo__v">{{ block.settings.value }}</span>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if wa_digits != blank %}
+          <a class="privat-checkout-btn privat-contact__wa" target="_blank" rel="noopener"
+            href="https://wa.me/{{ wa_digits }}{% if section.settings.whatsapp_message != blank %}?text={{ section.settings.whatsapp_message | url_encode }}{% endif %}">
+            {{ section.settings.whatsapp_label | default: 'Написать в WhatsApp' }}
+          </a>
+          <div class="privat-sheet__note" style="margin-top:10px">{{ section.settings.whatsapp_note }}</div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.extra_text != blank %}
+        <div class="privat-contact__card">
+          <p class="privat-contact__extra">{{ section.settings.extra_text }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_map %}
+      <div class="privat-contact__col">
+        <div class="privat-map">
+          <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
+          <script>
+            new DGWidgetLoader({
+              width: '100%',
+              height: '100%',
+              borderColor: '#a3a3a3',
+              pos: {
+                lat: {{ section.settings.map_lat | default: '42.88261533071793' }},
+                lon: {{ section.settings.map_lon | default: '74.57804918289186' }},
+                zoom: {{ section.settings.map_zoom | default: 16 }}
+              },
+              opt: { city: {{ section.settings.map_city | default: 'bishkek' | json }} },
+              org: [{ id: {{ section.settings.map_org_id | default: '70000001060069725' | json }} }]
+            });
+          </script>
+        </div>
+        <noscript>
+          <div class="privat-form-note" style="margin-top:10px">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</div>
+        </noscript>
+      </div>
+    {% endif %}
+  </div>
+
+  {{ page.content }}
+</section>
+
+{% schema %}
+{
+  "name": "Контакты",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Заголовок", "default": "Контакты" },
+    { "type": "textarea", "id": "intro", "label": "Вступление", "default": "Мы рядом — загляните в магазин или напишите: тактично поможем с выбором и ответим на любые вопросы." },
+    { "type": "header", "content": "WhatsApp" },
+    { "type": "text", "id": "whatsapp_phone", "label": "Номер WhatsApp (с кодом страны)", "default": "996500690690" },
+    { "type": "text", "id": "whatsapp_label", "label": "Текст кнопки", "default": "Написать в WhatsApp" },
+    { "type": "text", "id": "whatsapp_message", "label": "Предзаполненное сообщение", "default": "Здравствуйте! Хочу проконсультироваться." },
+    { "type": "text", "id": "whatsapp_note", "label": "Подпись под кнопкой", "default": "Отвечаем за пару минут · анонимно" },
+    { "type": "header", "content": "Карта 2ГИС" },
+    { "type": "checkbox", "id": "show_map", "label": "Показывать карту", "default": true },
+    { "type": "text", "id": "map_lat", "label": "Широта", "default": "42.88261533071793" },
+    { "type": "text", "id": "map_lon", "label": "Долгота", "default": "74.57804918289186" },
+    { "type": "range", "id": "map_zoom", "label": "Масштаб", "min": 10, "max": 18, "step": 1, "default": 16 },
+    { "type": "text", "id": "map_city", "label": "Город (латиницей)", "default": "bishkek" },
+    { "type": "text", "id": "map_org_id", "label": "ID организации в 2ГИС", "default": "70000001060069725" },
+    { "type": "header", "content": "Дополнительно" },
+    { "type": "textarea", "id": "extra_text", "label": "Текст под контактами", "default": "Заходите без стеснения: у нас спокойно, приватно и без осуждения. Если удобнее онлайн — соберём заказ по WhatsApp и доставим в нейтральной упаковке." }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Строка контакта",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Название", "default": "Адрес" },
+        { "type": "text", "id": "value", "label": "Значение", "default": "Калык Акиева 116, Бишкек" },
+        { "type": "text", "id": "url", "label": "Ссылка (необязательно)", "info": "Например tel:+996500690690" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Контакты" }]
+}
+{% endschema %}
