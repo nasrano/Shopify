@@ -1,0 +1,24 @@
+{%- comment -%}
+  Основные ссылки магазина: из «Меню в подвале» (настройки темы), а пока оно
+  не настроено — разумный фолбэк: Главная, Магазин, Блог и Контакты (если есть).
+  params: link_class
+{%- endcomment -%}
+{%- assign m = linklists[settings.footer_menu] -%}
+{%- if m.links.size > 0 -%}
+  {%- for link in m.links -%}
+    <a href="{{ link.url }}" class="{{ link_class }}">{{ link.title }}</a>
+  {%- endfor -%}
+{%- else -%}
+  <a href="{{ routes.root_url }}" class="{{ link_class }}">Главная</a>
+  <a href="{{ routes.all_products_collection_url }}" class="{{ link_class }}">Магазин</a>
+  {%- assign shop_blog = blogs['blog'] -%}
+  {%- if shop_blog.url == blank -%}{%- assign shop_blog = blogs['news'] -%}{%- endif -%}
+  {%- if shop_blog.url != blank -%}
+    <a href="{{ shop_blog.url }}" class="{{ link_class }}">Блог</a>
+  {%- endif -%}
+  {%- assign contact_page = pages['contact'] -%}
+  {%- if contact_page.url == blank -%}{%- assign contact_page = pages['kontakty'] -%}{%- endif -%}
+  {%- if contact_page.url != blank -%}
+    <a href="{{ contact_page.url }}" class="{{ link_class }}">Контакты</a>
+  {%- endif -%}
+{%- endif -%}

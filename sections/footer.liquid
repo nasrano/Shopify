@@ -1,14 +1,9 @@
 <footer class="privat-footer">
   <div class="privat-footer__name">{{ section.settings.logo_text | default: 'PRIVAT' }}</div>
 
-  {%- assign footer_menu = linklists[settings.footer_menu] -%}
-  {% if footer_menu.links.size > 0 %}
-    <nav class="privat-footer__nav">
-      {% for link in footer_menu.links %}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {% endfor %}
-    </nav>
-  {% endif %}
+  <nav class="privat-footer__nav">
+    {% render 'shop-links' %}
+  </nav>
 
   {%- assign legal_menu = linklists[settings.legal_menu] -%}
   {% if legal_menu.links.size > 0 %}
