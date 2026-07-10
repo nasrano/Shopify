@@ -1,0 +1,166 @@
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign on_sale = false -%}
+{%- if variant.compare_at_price > variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
+{%- assign photo_bg = product.metafields.custom.photo_bg -%}
+{%- assign bc_collection = collection | default: product.collections.first -%}
+{%- assign wa_digits = section.settings.whatsapp_phone | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
+{%- capture wa_message -%}Здравствуйте! Я хочу заказать {{ product.title }}{% if variant.sku != blank %}, код {{ variant.sku }}{% endif %}, 1 шт × {{ variant.price | money }}{%- endcapture -%}
+
+<article class="privat-pp" id="privat-pp">
+
+  <div class="privat-pp__photo" id="privat-pp-photo"
+    {%- if photo_bg != blank %} data-photo-bg="{{ photo_bg }}"{% endif %}
+    style="{% if photo_bg != blank %}background-color:{{ photo_bg }};{% endif %}{% if product.featured_image %}background-image:url({{ product.featured_image | image_url: width: 900 }});{% endif %}">
+    {% unless product.featured_image %}<span class="privat-card__ph">фото товара</span>{% endunless %}
+    {% if on_sale %}
+      {% assign pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price %}
+      <span class="privat-pp__badge" id="privat-pp-badge">−{{ pct }}%</span>
+    {% endif %}
+    <button type="button" class="privat-card__fav" data-fav-toggle
+      data-product-id="{{ product.id }}"
+      data-product-title="{{ product.title | escape }}"
+      data-product-price="{{ variant.price | money }}"
+      data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 200 }}{% endif %}"
+      data-product-url="{{ product.url }}"
+      data-variant-id="{{ variant.id }}"
+      aria-label="В избранное">♡</button>
+  </div>
+
+  {% if product.images.size > 1 %}
+    <div class="privat-pp__thumbs">
+      {% for image in product.images %}
+        <button type="button" class="privat-pp__thumb{% if forloop.first %} is-active{% endif %}"
+          data-thumb data-image-url="{{ image | image_url: width: 900 }}"
+          style="background-image:url({{ image | image_url: width: 128 }})" aria-label="Фото {{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="privat-crumbs">
+    <div class="privat-crumbs__path">
+      <a href="{{ routes.root_url }}">Главная</a>
+      {% if bc_collection %}
+        <span>›</span>
+        <a href="{{ bc_collection.url }}">{{ bc_collection.title }}</a>
+      {% endif %}
+      <span>›</span>
+      <span class="privat-crumbs__current">{{ product.title }}</span>
+    </div>
+    <a class="privat-back-btn" href="{% if bc_collection %}{{ bc_collection.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">← Назад</a>
+  </div>
+
+  <section class="privat-pp__head">
+    <h1 class="privat-pp__title">{{ product.title }}</h1>
+    <div class="privat-pp__meta">
+      {% if variant.sku != blank %}Код товара: <b id="privat-pp-sku">{{ variant.sku }}</b> · {% endif -%}
+      <span id="privat-pp-stock">{% if variant.available %}В наличии{% else %}Нет в наличии{% endif %}</span>
+    </div>
+    <div class="privat-pp__price-row">
+      <span class="privat-pp__price" id="privat-pp-price">{{ variant.price | money }}</span>
+      <span class="privat-pp__old" id="privat-pp-old"{% unless on_sale %} hidden{% endunless %}>{{ variant.compare_at_price | money }}</span>
+    </div>
+  </section>
+
+  <section class="privat-pp__buy">
+    {% if product.variants.size > 1 %}
+      <select class="privat-select" id="privat-pp-variant" aria-label="Вариант">
+        {% for v in product.variants %}
+          <option value="{{ v.id }}"
+            {% if v.id == variant.id %}selected{% endif %}
+            {% unless v.available %}disabled{% endunless %}>
+            {{ v.title }} — {{ v.price | money }}{% unless v.available %} · нет в наличии{% endunless %}
+          </option>
+        {% endfor %}
+      </select>
+    {% endif %}
+
+    <div class="privat-pp__row">
+      <div class="privat-qty">
+        <button type="button" class="privat-qty__btn" data-pp-qty-dec aria-label="Меньше">−</button>
+        <span class="privat-qty__val" id="privat-pp-qty">1</span>
+        <button type="button" class="privat-qty__btn" data-pp-qty-inc aria-label="Больше">+</button>
+      </div>
+      <button type="button" class="privat-pp__add" id="privat-pp-add" data-variant-id="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>
+        <svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+        {% if variant.available %}В корзину{% else %}Нет в наличии{% endif %}
+      </button>
+    </div>
+
+    {% if section.settings.show_buy_now and wa_digits != blank %}
+      <a class="privat-buy-now" id="privat-pp-buynow" target="_blank" rel="noopener"
+        href="https://wa.me/{{ wa_digits }}?text={{ wa_message | strip | url_encode }}"
+        data-wa-phone="{{ wa_digits }}"
+        data-product-title="{{ product.title | escape }}">
+        Купить сейчас · <span id="privat-pp-total">{{ variant.price | money }}</span>
+      </a>
+      <div class="privat-pp__note">{{ section.settings.buy_now_note }}</div>
+    {% endif %}
+  </section>
+
+  {% if section.blocks.size > 0 %}
+    <div class="privat-trust privat-trust--pp">
+      {% for block in section.blocks %}
+        <div class="privat-trust__chip" {{ block.shopify_attributes }}>
+          <span class="privat-trust__dot"></span>{{ block.settings.text }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if product.description != blank %}
+    <section class="privat-pp__section">
+      <h2 class="privat-h2 privat-h2--sm">Описание</h2>
+      <div class="privat-pp__desc">{{ product.description }}</div>
+    </section>
+  {% endif %}
+
+  {%- assign specs_raw = product.metafields.custom.specs | newline_to_br -%}
+  {%- if specs_raw != blank -%}
+    {%- assign spec_lines = specs_raw | split: '<br />' -%}
+    <section class="privat-pp__section privat-pp__section--last">
+      <h2 class="privat-h2 privat-h2--sm">Характеристики</h2>
+      <div class="privat-specs">
+        {% for line in spec_lines %}
+          {%- assign clean = line | strip_html | strip -%}
+          {%- if clean contains ':' -%}
+            {%- assign k = clean | split: ':' | first -%}
+            {%- assign v = clean | remove_first: k | remove_first: ':' | strip -%}
+            <div class="privat-specs__row">
+              <span class="privat-specs__k">{{ k | strip }}</span>
+              <span class="privat-specs__v">{{ v }}</span>
+            </div>
+          {%- endif -%}
+        {% endfor %}
+      </div>
+    </section>
+  {%- endif -%}
+
+</article>
+
+<script type="application/json" id="privat-pp-json">
+  {{ product | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Страница товара",
+  "settings": [
+    { "type": "header", "content": "Купить сейчас (WhatsApp)" },
+    { "type": "checkbox", "id": "show_buy_now", "label": "Показывать кнопку «Купить сейчас»", "default": true },
+    { "type": "text", "id": "whatsapp_phone", "label": "Номер WhatsApp (с кодом страны)", "default": "996500690690" },
+    { "type": "text", "id": "buy_now_note", "label": "Подпись под кнопкой", "default": "Заказ уйдёт в WhatsApp — ответим за пару минут. Анонимно." },
+    { "type": "header", "content": "Характеристики" },
+    { "type": "paragraph", "content": "Заполняются метаполем товара custom.specs (многострочный текст, каждая строка «Название: Значение»). Цвет фона фото — метаполе custom.photo_bg (например #E8D9CE)." }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Чип доверия",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Текст", "default": "Анонимная упаковка" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Страница товара" }]
+}
+{% endschema %}

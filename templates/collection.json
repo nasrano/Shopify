@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "per_page": 20,
+        "show_seo": true
+      }
+    }
+  },
+  "order": ["main"]
+}

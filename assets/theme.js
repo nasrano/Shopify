@@ -348,6 +348,159 @@
     }, 220);
   });
 
+  /* ---------------- product page ---------------- */
+  (function () {
+    var jsonEl = document.getElementById('privat-pp-json');
+    if (!jsonEl) return;
+    var product;
+    try { product = JSON.parse(jsonEl.textContent); } catch (e) { return; }
+    if (!product || !product.variants || !product.variants.length) return;
+
+    var select = document.getElementById('privat-pp-variant');
+    var qtyEl = document.getElementById('privat-pp-qty');
+    var addBtn = document.getElementById('privat-pp-add');
+    var qty = 1;
+
+    function variantById(id) {
+      for (var i = 0; i < product.variants.length; i++) {
+        if (String(product.variants[i].id) === String(id)) return product.variants[i];
+      }
+      return null;
+    }
+    function currentVariant() {
+      if (select) return variantById(select.value) || product.variants[0];
+      return variantById(addBtn && addBtn.getAttribute('data-variant-id')) || product.variants[0];
+    }
+
+    function sync() {
+      var v = currentVariant();
+      if (qtyEl) qtyEl.textContent = String(qty);
+      var priceEl = document.getElementById('privat-pp-price');
+      var oldEl = document.getElementById('privat-pp-old');
+      var skuEl = document.getElementById('privat-pp-sku');
+      var stockEl = document.getElementById('privat-pp-stock');
+      var badgeEl = document.getElementById('privat-pp-badge');
+      var totalEl = document.getElementById('privat-pp-total');
+      var buyNow = document.getElementById('privat-pp-buynow');
+      var onSale = v.compare_at_price && v.compare_at_price > v.price;
+      if (priceEl) priceEl.textContent = formatMoney(v.price);
+      if (oldEl) {
+        oldEl.textContent = onSale ? formatMoney(v.compare_at_price) : '';
+        oldEl.hidden = !onSale;
+      }
+      if (badgeEl) {
+        badgeEl.hidden = !onSale;
+        if (onSale) badgeEl.textContent = '−' + Math.round((1 - v.price / v.compare_at_price) * 100) + '%';
+      }
+      if (skuEl && v.sku) skuEl.textContent = v.sku;
+      if (stockEl) stockEl.textContent = v.available ? 'В наличии' : 'Нет в наличии';
+      if (addBtn) {
+        addBtn.disabled = !v.available;
+        addBtn.setAttribute('data-variant-id', String(v.id));
+      }
+      if (totalEl) totalEl.textContent = formatMoney(v.price * qty);
+      if (buyNow) {
+        var msg = 'Здравствуйте! Я хочу заказать ' + buyNow.getAttribute('data-product-title') +
+          (v.sku ? ', код ' + v.sku : '') +
+          (select ? ' (' + v.title + ')' : '') +
+          ', ' + qty + ' шт × ' + formatMoney(v.price) +
+          ', итого ' + formatMoney(v.price * qty);
+        buyNow.href = 'https://wa.me/' + buyNow.getAttribute('data-wa-phone') + '?text=' + encodeURIComponent(msg);
+      }
+    }
+
+    function flyToCart() {
+      var photo = document.getElementById('privat-pp-photo');
+      var cart = document.querySelector('.privat-header [data-open="cart"]');
+      if (!photo || !cart || !app) return;
+      var dot = document.createElement('div');
+      if (!dot.animate) return;
+      var size = 64;
+      var pr = photo.getBoundingClientRect(), cr = cart.getBoundingClientRect(), rr = app.getBoundingClientRect();
+      var startX = pr.left + pr.width / 2 - rr.left - size / 2;
+      var startY = pr.top + pr.height / 2 - rr.top - size / 2;
+      var endX = cr.left + cr.width / 2 - rr.left - size / 2;
+      var endY = cr.top + cr.height / 2 - rr.top - size / 2;
+      dot.className = 'privat-fly-dot';
+      dot.style.width = size + 'px';
+      dot.style.height = size + 'px';
+      dot.style.left = startX + 'px';
+      dot.style.top = startY + 'px';
+      if (photo.style.backgroundImage) dot.style.backgroundImage = photo.style.backgroundImage;
+      var bgColor = photo.getAttribute('data-photo-bg');
+      if (bgColor) dot.style.backgroundColor = bgColor;
+      app.appendChild(dot);
+      var anim = dot.animate([
+        { transform: 'translate(0,0) scale(1)', opacity: 1 },
+        { transform: 'translate(' + (endX - startX) * 0.55 + 'px,' + ((endY - startY) - 90) + 'px) scale(.55)', opacity: 0.95, offset: 0.6 },
+        { transform: 'translate(' + (endX - startX) + 'px,' + (endY - startY) + 'px) scale(.15)', opacity: 0.4 }
+      ], { duration: 650, easing: 'cubic-bezier(.3,.7,.4,1)' });
+      anim.onfinish = function () { dot.remove(); };
+    }
+
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-pp-qty-inc]')) { qty = Math.min(99, qty + 1); sync(); return; }
+      if (e.target.closest('[data-pp-qty-dec]')) { qty = Math.max(1, qty - 1); sync(); return; }
+      var thumb = e.target.closest('[data-thumb]');
+      if (thumb) {
+        var photo = document.getElementById('privat-pp-photo');
+        if (photo) photo.style.backgroundImage = 'url(' + thumb.getAttribute('data-image-url') + ')';
+        document.querySelectorAll('[data-thumb]').forEach(function (t) {
+          t.classList.toggle('is-active', t === thumb);
+        });
+      }
+    });
+
+    if (select) select.addEventListener('change', sync);
+
+    if (addBtn) addBtn.addEventListener('click', function () {
+      var v = currentVariant();
+      if (!v || !v.available) return;
+      addBtn.disabled = true;
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ id: v.id, quantity: qty })
+      }).then(function (r) { return r.json(); }).then(function () {
+        flyToCart();
+        toast('Добавлено: ' + product.title);
+        return fetch('/cart.js');
+      }).then(function (r) { return r.json(); }).then(function (cart) {
+        renderCart(cart);
+      }).finally(function () { addBtn.disabled = !currentVariant().available; });
+    });
+
+    sync();
+  })();
+
+  /* ---------------- collection: load more ---------------- */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-load-more]');
+    if (!btn) return;
+    e.preventDefault();
+    var url = btn.getAttribute('data-next-url');
+    if (!url || btn.disabled) return;
+    btn.disabled = true;
+    fetch(url).then(function (r) { return r.text(); }).then(function (html) {
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var grid = document.getElementById('privat-coll-grid');
+      var newGrid = doc.getElementById('privat-coll-grid');
+      if (grid && newGrid) {
+        while (newGrid.firstElementChild) grid.appendChild(newGrid.firstElementChild);
+      }
+      var shownEl = document.querySelector('[data-shown-count]');
+      if (shownEl && grid) shownEl.textContent = String(grid.querySelectorAll('.privat-card').length);
+      var nextBtn = doc.querySelector('[data-load-more]');
+      if (nextBtn && nextBtn.getAttribute('data-next-url')) {
+        btn.setAttribute('data-next-url', nextBtn.getAttribute('data-next-url'));
+        btn.disabled = false;
+      } else {
+        btn.remove();
+      }
+      syncFavButtons();
+    }).catch(function () { btn.disabled = false; });
+  });
+
   /* ---------------- init ---------------- */
   document.addEventListener('DOMContentLoaded', function () {
     setupReveals();

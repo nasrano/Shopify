@@ -1,0 +1,151 @@
+{%- comment -%}
+  Чипсы категорий и хлебные крошки строятся по «Меню категорий» (настройки темы):
+  - активный пункт с детьми → чипсы = его дети;
+  - активный пункт-лист → чипсы = соседи по уровню, активный подсвечен;
+  - вне меню (например /collections/all) → чипсы = верхний уровень.
+{%- endcomment -%}
+{%- assign menu = linklists[settings.categories_menu] -%}
+{%- assign chip_links = menu.links -%}
+{%- assign active_chip_url = '' -%}
+{%- assign crumb1 = nil -%}{%- assign crumb2 = nil -%}{%- assign crumb3 = nil -%}
+{%- assign parent_url = routes.all_products_collection_url -%}
+
+{%- for l1 in menu.links -%}
+  {%- if l1.active or l1.child_active -%}
+    {%- assign crumb1 = l1 -%}
+    {%- if l1.active -%}
+      {%- if l1.links.size > 0 -%}
+        {%- assign chip_links = l1.links -%}
+      {%- else -%}
+        {%- assign chip_links = menu.links -%}
+        {%- assign active_chip_url = l1.url -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- for l2 in l1.links -%}
+        {%- if l2.active or l2.child_active -%}
+          {%- assign crumb2 = l2 -%}
+          {%- assign parent_url = l1.url -%}
+          {%- if l2.active -%}
+            {%- if l2.links.size > 0 -%}
+              {%- assign chip_links = l2.links -%}
+            {%- else -%}
+              {%- assign chip_links = l1.links -%}
+              {%- assign active_chip_url = l2.url -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- for l3 in l2.links -%}
+              {%- if l3.active -%}
+                {%- assign crumb3 = l3 -%}
+                {%- assign parent_url = l2.url -%}
+                {%- assign chip_links = l2.links -%}
+                {%- assign active_chip_url = l3.url -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<div class="privat-catbar">
+  {% for link in chip_links %}
+    <a href="{{ link.url }}" class="privat-catbar__item{% if link.url == active_chip_url %} is-active{% endif %}">
+      <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+      <span class="privat-catbar__name">{{ link.title }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+<div class="privat-crumbs">
+  <div class="privat-crumbs__path">
+    <a href="{{ routes.root_url }}">Главная</a>
+    {% if crumb1 %}
+      <span>›</span>
+      {% if crumb2 %}<a href="{{ crumb1.url }}">{{ crumb1.title }}</a>{% else %}<span class="privat-crumbs__current">{{ crumb1.title }}</span>{% endif %}
+      {% if crumb2 %}
+        <span>›</span>
+        {% if crumb3 %}<a href="{{ crumb2.url }}">{{ crumb2.title }}</a>{% else %}<span class="privat-crumbs__current">{{ crumb2.title }}</span>{% endif %}
+        {% if crumb3 %}
+          <span>›</span>
+          <span class="privat-crumbs__current">{{ crumb3.title }}</span>
+        {% endif %}
+      {% endif %}
+    {% else %}
+      <span>›</span>
+      <span class="privat-crumbs__current">{{ collection.title }}</span>
+    {% endif %}
+  </div>
+  {% if crumb1 %}
+    <a class="privat-back-btn" href="{{ parent_url }}">← Назад</a>
+  {% endif %}
+</div>
+
+<div class="privat-coll__head">
+  <h1 class="privat-coll__title">{{ collection.title }}</h1>
+  <span class="privat-coll__count">{{ collection.products_count }} товаров</span>
+</div>
+
+{% paginate collection.products by section.settings.per_page %}
+  <section class="privat-coll__products">
+    <div class="privat-grid2" id="privat-coll-grid" data-total="{{ collection.products_count }}">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product, badge: 'none' %}
+      {% else %}
+        <p class="privat-form-note" style="grid-column:1/-1">В этой коллекции пока пусто.</p>
+      {% endfor %}
+    </div>
+
+    {% if paginate.next %}
+      <div class="privat-loadmore" id="privat-loadmore">
+        <button type="button" class="privat-loadmore__btn" data-load-more data-next-url="{{ paginate.next.url }}">Показать ещё</button>
+        <span class="privat-loadmore__meta">Показано <span data-shown-count>{{ paginate.page_size | times: paginate.current_page | at_most: collection.products_count }}</span> из {{ collection.products_count }}</span>
+      </div>
+    {% endif %}
+  </section>
+{% endpaginate %}
+
+{% if section.settings.show_seo %}
+  <section class="privat-seo">
+    <h2 class="privat-h2 privat-h2--sm">
+      {%- if section.settings.seo_heading != blank -%}
+        {{ section.settings.seo_heading }}
+      {%- else -%}
+        {{ collection.title }} — купить в Бишкеке с доставкой
+      {%- endif -%}
+    </h2>
+    <p class="privat-seo__lead">
+      {%- if collection.description != blank -%}
+        {{ collection.description | strip_html }}
+      {%- else -%}
+        {{ section.settings.seo_text }}
+      {%- endif -%}
+    </p>
+    {% if section.settings.seo_sub1_heading != blank %}
+      <h3>{{ section.settings.seo_sub1_heading }}</h3>
+      <p>{{ section.settings.seo_sub1_text }}</p>
+    {% endif %}
+    {% if section.settings.seo_sub2_heading != blank %}
+      <h3>{{ section.settings.seo_sub2_heading }}</h3>
+      <p>{{ section.settings.seo_sub2_text }}</p>
+    {% endif %}
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Страница категории",
+  "settings": [
+    { "type": "range", "id": "per_page", "label": "Товаров на страницу", "min": 8, "max": 48, "step": 4, "default": 20 },
+    { "type": "header", "content": "SEO-блок" },
+    { "type": "checkbox", "id": "show_seo", "label": "Показывать SEO-блок", "default": true },
+    { "type": "text", "id": "seo_heading", "label": "Заголовок (пусто — «{Категория} — купить в Бишкеке с доставкой»)" },
+    { "type": "textarea", "id": "seo_text", "label": "Текст (если у коллекции нет описания)", "default": "PRIVAT — магазин о здоровой близости. В этом разделе собраны сертифицированные товары от проверенных брендов: честные цены, безопасные материалы и бережный подбор. Мы уверены, что забота о себе и партнёре — это нормально, и помогаем выбирать спокойно, без неловкости." },
+    { "type": "text", "id": "seo_sub1_heading", "label": "Подзаголовок 1", "default": "Доставка и анонимность" },
+    { "type": "textarea", "id": "seo_sub1_text", "label": "Текст 1", "default": "Доставим за 1 час по Бишкеку и за сутки по всему Кыргызстану. Упаковка полностью нейтральная — без логотипов и названий. Оплата наличными, картой или через Мбанк." },
+    { "type": "text", "id": "seo_sub2_heading", "label": "Подзаголовок 2", "default": "Как выбрать" },
+    { "type": "textarea", "id": "seo_sub2_text", "label": "Текст 2", "default": "Сомневаетесь — напишите нам в WhatsApp: тактично подскажем и поможем подобрать то, что подойдёт именно вам. Все товары сертифицированы, из безопасных материалов." }
+  ],
+  "presets": [{ "name": "Страница категории" }]
+}
+{% endschema %}

@@ -28,6 +28,9 @@
   </a>
   <div class="privat-card__body">
     <a href="{{ product.url }}" class="privat-card__name" style="color:inherit;text-decoration:none">{{ product.title }}</a>
+    {% if variant.sku != blank %}
+      <div class="privat-card__code">Код: {{ variant.sku }}</div>
+    {% endif %}
     {% if on_sale %}
       <div class="privat-card__price-row">
         <span class="privat-card__price">{{ variant.price | money }}</span>

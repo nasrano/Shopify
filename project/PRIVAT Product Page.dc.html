@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EFE9E1;font-family:'Manrope',sans-serif}
+a{color:#B4756A;text-decoration:none}a:hover{color:#96584E}
+*{box-sizing:border-box}
+::-webkit-scrollbar{display:none}
+@keyframes dcSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes dcSlideL{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes dcFade{from{opacity:0}to{opacity:1}}
+@keyframes dcPop{0%{transform:translateX(-50%) translateY(14px);opacity:0}18%{transform:translateX(-50%) translateY(0);opacity:1}82%{transform:translateX(-50%) translateY(0);opacity:1}100%{transform:translateX(-50%) translateY(10px);opacity:0}}
+@keyframes dcBadge{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
+</style>
+</helmet>
+
+<div style="min-height:100dvh;display:flex;justify-content:center;align-items:stretch;background:#EFE9E1">
+<div ref="{{rootRef}}" style="position:relative;width:min(430px,100vw);height:100dvh;overflow:hidden;background:var(--bg,#FAF6F0);box-shadow:0 0 60px rgba(60,40,30,.18)">
+
+  <div ref="{{scrollerRef}}" style="height:100%;overflow-y:auto;overscroll-behavior:contain;padding-bottom:150px">
+
+    <!-- header -->
+    <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:6px;padding:12px 14px;background:color-mix(in srgb, var(--bg,#FAF6F0) 88%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line,#EADFD3)">
+      <button onClick="{{openMenu}}" aria-label="Меню" style="width:42px;height:42px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px">
+        <span style="display:block;width:20px;height:1.6px;background:var(--ink,#2A211C)"></span>
+        <span style="display:block;width:14px;height:1.6px;background:var(--ink,#2A211C)"></span>
+        <span style="display:block;width:20px;height:1.6px;background:var(--ink,#2A211C)"></span>
+      </button>
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center">
+        <div style="font-family:'Prata',serif;font-size:21px;letter-spacing:.14em;color:var(--ink,#2A211C)">PRIVAT</div>
+        <div style="font-size:8.5px;letter-spacing:.42em;color:var(--accent,#B4756A);font-weight:700;margin-top:-1px">SEX&nbsp;SHOP</div>
+      </div>
+      <button onClick="{{toggleFav}}" aria-label="Избранное" style="margin-left:auto;width:42px;height:42px;border:none;background:none;cursor:pointer;font-size:19px;line-height:1;color:{{favC}}">{{favG}}</button>
+      <button ref="{{cartBtnRef}}" onClick="{{openCart}}" aria-label="Корзина" style="position:relative;width:42px;height:42px;border:none;background:none;cursor:pointer;color:var(--ink,#2A211C)">
+        <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+        <sc-if value="{{hasCart}}" hint-placeholder-val="{{ false }}"><span ref="{{badgeRef}}" style="position:absolute;top:3px;right:1px;min-width:16px;height:16px;border-radius:9px;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px">{{cartCount}}</span></sc-if>
+      </button>
+    </header>
+
+    <!-- photo: square, bg = product color, transparent PNG drops in -->
+    <section data-screen-label="Фото товара" style="position:relative">
+      <div ref="{{photoRef}}" style="position:relative;width:100%;aspect-ratio:1/1;background:{{photoBg}};display:flex;align-items:center;justify-content:center;transition:background .4s ease">
+        <div style="width:86%;height:86%;border-radius:14px;background:repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 12px, transparent 12px 24px);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--ink,#2A211C);background:var(--card,#FFF);padding:5px 10px;border-radius:4px;opacity:.85">product.featured_image · PNG с прозрачным фоном</span>
+        </div>
+        <sc-if value="{{hasDiscount}}" hint-placeholder-val="{{ true }}">
+          <span style="position:absolute;top:14px;left:16px;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:11px;font-weight:700;padding:6px 11px;border-radius:100px;pointer-events:none">−{{pct}}%</span>
+        </sc-if>
+      </div>
+    </section>
+
+    <!-- breadcrumbs + back -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px 0">
+      <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--sub,#8A7A6E);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+        <a href="PRIVAT Homepage.dc.html" style="color:var(--sub,#8A7A6E)">Главная</a>
+        <span>›</span>
+        <a href="PRIVAT Homepage.dc.html" style="color:var(--sub,#8A7A6E)">{{category}}</a>
+        <span>›</span>
+        <span style="color:var(--ink,#2A211C);font-weight:600;overflow:hidden;text-overflow:ellipsis">{{name}}</span>
+      </div>
+      <a href="PRIVAT Homepage.dc.html" style="flex:none;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:var(--accent,#B4756A);border:1px solid var(--line,#EADFD3);border-radius:100px;padding:6px 12px;background:var(--card,#FFF)">← Назад</a>
+    </div>
+
+    <!-- title / code / price -->
+    <section data-screen-label="Товар" style="padding:16px 20px 4px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+        <h1 style="font-family:'Prata',serif;font-size:24px;line-height:1.25;font-weight:400;color:var(--ink,#2A211C);margin:0;text-wrap:pretty">{{name}}</h1>
+      </div>
+      <div style="font-size:12px;color:var(--sub,#8A7A6E);margin-top:7px;letter-spacing:.04em">Код товара: <span style="font-weight:700;color:var(--ink,#2A211C)">{{code}}</span> · В наличии</div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:14px">
+        <span style="font-family:'Prata',serif;font-size:28px;color:var(--ink,#2A211C)">{{priceF}} сом</span>
+        <sc-if value="{{hasDiscount}}" hint-placeholder-val="{{ true }}">
+          <span style="font-size:15px;color:var(--sub,#8A7A6E);text-decoration:line-through">{{oldPriceF}} сом</span>
+        </sc-if>
+      </div>
+    </section>
+
+    <!-- qty + actions -->
+    <section data-screen-label="Покупка" style="padding:18px 20px 6px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;gap:10px">
+        <div style="flex:none;display:flex;align-items:center;gap:2px;border:1.5px solid var(--line,#EADFD3);border-radius:100px;background:var(--card,#FFF);padding:4px">
+          <button onClick="{{dec}}" style="width:40px;height:40px;border:none;border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:18px;line-height:1" style-hover="background:var(--chip,#F6EEE4)">−</button>
+          <span style="min-width:30px;text-align:center;font-size:16px;font-weight:700;color:var(--ink,#2A211C)">{{qty}}</span>
+          <button onClick="{{inc}}" style="width:40px;height:40px;border:none;border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:18px;line-height:1" style-hover="background:var(--chip,#F6EEE4)">+</button>
+        </div>
+        <button onClick="{{addToCart}}" style="flex:1;border:1.5px solid var(--ink,#2A211C);cursor:pointer;background:var(--card,#FFF);color:var(--ink,#2A211C);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;border-radius:100px;display:flex;align-items:center;justify-content:center;gap:8px" style-hover="background:var(--chip,#F6EEE4)">
+          <svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+          В корзину
+        </button>
+      </div>
+      <a href="{{waLink}}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:15px;font-weight:700;padding:17px;border-radius:100px;text-align:center" style-hover="filter:brightness(1.06);color:var(--accent-ink,#FFF7F2)">
+        Купить сейчас · {{totalF}} сом
+      </a>
+      <div style="font-size:11.5px;color:var(--sub,#8A7A6E);text-align:center">Заказ уйдёт в WhatsApp — ответим за пару минут. Анонимно.</div>
+    </section>
+
+    <!-- trust row -->
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:14px 20px 4px">
+      <sc-for list="{{trust}}" as="t" hint-placeholder-count="3">
+        <div style="flex:none;display:flex;align-items:center;gap:7px;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:100px;padding:8px 14px;font-size:12px;font-weight:600;color:var(--ink,#2A211C)">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent,#B4756A)"></span>{{t}}
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- description -->
+    <section data-screen-label="Описание" style="padding:24px 20px 4px">
+      <h2 style="font-family:'Prata',serif;font-size:20px;font-weight:400;color:var(--ink,#2A211C);margin:0 0 10px">Описание</h2>
+      <p style="font-size:14px;line-height:1.65;color:var(--ink,#2A211C);margin:0 0 8px;text-wrap:pretty">{{desc1}}</p>
+      <p style="font-size:13.5px;line-height:1.65;color:var(--sub,#8A7A6E);margin:0;text-wrap:pretty">{{desc2}}</p>
+    </section>
+
+    <!-- specs -->
+    <section data-screen-label="Характеристики" style="padding:24px 20px 10px">
+      <h2 style="font-family:'Prata',serif;font-size:20px;font-weight:400;color:var(--ink,#2A211C);margin:0 0 6px">Характеристики</h2>
+      <div style="border-top:1px solid var(--line,#EADFD3)">
+        <sc-for list="{{specs}}" as="sp" hint-placeholder-count="6">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line,#EADFD3)">
+            <span style="font-size:13px;color:var(--sub,#8A7A6E);flex:none">{{sp.k}}</span>
+            <span style="font-size:13px;font-weight:600;color:var(--ink,#2A211C);text-align:right">{{sp.v}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <footer style="padding:22px 22px 30px;text-align:center">
+      <div style="font-family:'Prata',serif;font-size:18px;letter-spacing:.14em;color:var(--ink,#2A211C)">PRIVAT</div>
+      <div style="font-size:11.5px;color:var(--sub,#8A7A6E);margin-top:8px;line-height:1.6">Только 18+. Бережно о близости.<br>© 2026 PRIVAT · Бишкек</div>
+    </footer>
+  </div>
+
+  <!-- bottom nav -->
+  <nav style="position:absolute;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);background:color-mix(in srgb, var(--card,#FFF) 92%, transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line,#EADFD3);padding:6px 4px calc(6px + env(safe-area-inset-bottom))">
+    <a href="PRIVAT Homepage.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--sub,#8A7A6E)">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 10 L11 4 L18 10 V18 H4 Z"></path></svg>
+      <span style="font-size:10px;font-weight:600">Главная</span>
+    </a>
+    <a href="PRIVAT Homepage.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--accent,#B4756A)">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
+      <span style="font-size:10px;font-weight:600">Магазин</span>
+    </a>
+    <a href="PRIVAT Homepage.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--sub,#8A7A6E)">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="6" height="6" rx="1.5"></rect><rect x="12" y="4" width="6" height="6" rx="1.5"></rect><rect x="4" y="12" width="6" height="6" rx="1.5"></rect><rect x="12" y="12" width="6" height="6" rx="1.5"></rect></svg>
+      <span style="font-size:10px;font-weight:600">Категории</span>
+    </a>
+    <a href="PRIVAT Homepage.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--sub,#8A7A6E)">
+      <svg width="21" height="21" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="6.2"></circle><line x1="13.6" y1="13.6" x2="18" y2="18"></line></svg>
+      <span style="font-size:10px;font-weight:600">Поиск</span>
+    </a>
+    <a href="PRIVAT Homepage.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--sub,#8A7A6E)">
+      <svg width="21" height="21" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="8" r="3.4"></circle><path d="M4.5 19 a6.5 6.5 0 0 1 13 0"></path></svg>
+      <span style="font-size:10px;font-weight:600">Аккаунт</span>
+    </a>
+  </nav>
+
+  <!-- menu drawer -->
+  <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{closeMenu}}" style="position:absolute;inset:0;z-index:60;background:rgba(25,15,10,.42);animation:dcFade .25s ease"></div>
+    <aside style="position:absolute;top:0;bottom:0;left:0;z-index:70;width:82%;max-width:330px;background:var(--bg,#FAF6F0);animation:dcSlideL .28s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;padding:20px 22px;overflow-y:auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:26px">
+        <div>
+          <div style="font-family:'Prata',serif;font-size:19px;letter-spacing:.14em;color:var(--ink,#2A211C)">PRIVAT</div>
+          <div style="font-size:8px;letter-spacing:.42em;color:var(--accent,#B4756A);font-weight:700">SEX&nbsp;SHOP</div>
+        </div>
+        <button onClick="{{closeMenu}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <sc-for list="{{menuLinks}}" as="m" hint-placeholder-count="5">
+        <a href="PRIVAT Homepage.dc.html" style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:600;letter-spacing:.04em;color:var(--ink,#2A211C);padding:15px 0;border-bottom:1px solid var(--line,#EADFD3)">{{m}}</a>
+      </sc-for>
+      <div style="margin-top:auto;padding-top:24px;font-size:13px;color:var(--sub,#8A7A6E)">0500 690 690 · Калык Акиева 116</div>
+    </aside>
+  </sc-if>
+
+  <!-- dim -->
+  <sc-if value="{{cartOpen}}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{closeCart}}" style="position:absolute;inset:0;z-index:60;background:rgba(25,15,10,.42);animation:dcFade .25s ease"></div>
+    <aside data-screen-label="Корзина" style="position:absolute;left:0;right:0;bottom:0;z-index:70;max-height:85%;background:var(--bg,#FAF6F0);border-radius:22px 22px 0 0;animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px">
+        <h3 style="font-family:'Prata',serif;font-size:19px;font-weight:400;color:var(--ink,#2A211C);margin:0">Моя корзина</h3>
+        <button onClick="{{closeCart}}" style="width:38px;height:38px;border:1px solid var(--line,#EADFD3);border-radius:50%;background:none;cursor:pointer;color:var(--ink,#2A211C);font-size:16px">✕</button>
+      </div>
+      <div style="overflow-y:auto;padding:4px 20px 12px;display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{cartItems}}" as="ci" hint-placeholder-count="1">
+          <div style="display:flex;gap:12px;align-items:center;background:var(--card,#FFF);border:1px solid var(--line,#EADFD3);border-radius:14px;padding:10px">
+            <div style="flex:none;width:54px;height:54px;border-radius:10px;background:{{photoBg}}"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:12.5px;font-weight:600;color:var(--ink,#2A211C);line-height:1.3">{{ci.name}}</div>
+              <div style="font-family:'Prata',serif;font-size:14px;color:var(--ink,#2A211C);margin-top:3px">{{ci.qty}} шт · {{ci.sum}} сом</div>
+            </div>
+            <button onClick="{{ci.remove}}" style="flex:none;border:none;background:none;cursor:pointer;color:var(--sub,#8A7A6E);font-size:12px">убрать</button>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:8px 20px calc(18px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#EADFD3);display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:10px">
+          <span style="font-size:13px;color:var(--sub,#8A7A6E)">Итого</span>
+          <span style="font-family:'Prata',serif;font-size:20px;color:var(--ink,#2A211C)">{{cartTotalF}} сом</span>
+        </div>
+        <a href="{{waCartLink}}" target="_blank" style="display:block;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);font-size:14px;font-weight:700;padding:15px;border-radius:100px;text-align:center" style-hover="filter:brightness(1.06);color:var(--accent-ink,#FFF7F2)">Оформить в WhatsApp</a>
+        <div style="font-size:11px;color:var(--sub,#8A7A6E);text-align:center">Анонимная упаковка · доставка за 1 час по Бишкеку</div>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- add-to-cart notification -->
+  <sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:50%;bottom:96px;transform:translateX(-50%);z-index:90;display:flex;align-items:center;gap:10px;background:var(--ink,#2A211C);color:var(--bg,#FAF6F0);font-size:12.5px;font-weight:600;padding:11px 18px;border-radius:100px;animation:dcPop 2.2s ease forwards;white-space:nowrap;box-shadow:0 8px 30px rgba(20,10,5,.3)">
+      <span style="width:20px;height:20px;border-radius:50%;background:var(--accent,#B4756A);color:var(--accent-ink,#FFF7F2);display:flex;align-items:center;justify-content:center;font-size:11px">✓</span>
+      {{toastText}}
+    </div>
+  </sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Тёплый крем&quot;,&quot;Слива и золото&quot;,&quot;Светлый минимал&quot;],&quot;default&quot;:&quot;Тёплый крем&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Вид&quot;},&quot;photoBg&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#E8D9CE&quot;,&quot;#DCCFE3&quot;,&quot;#2A1F29&quot;,&quot;#EFEDE6&quot;],&quot;default&quot;:&quot;#E8D9CE&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Вид&quot;},&quot;name&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Вибромассажёр «Волна»&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Товар&quot;},&quot;code&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PRV-1024&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Товар&quot;},&quot;category&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Массаж&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Товар&quot;},&quot;price&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3200,&quot;min&quot;:0,&quot;unit&quot;:&quot;сом&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Товар&quot;},&quot;oldPrice&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3900,&quot;min&quot;:0,&quot;unit&quot;:&quot;сом&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Товар&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+    this.scrollerRef = React.createRef();
+    this.photoRef = React.createRef();
+    this.cartBtnRef = React.createRef();
+    this.badgeRef = React.createRef();
+    this.state = { qty: 1, fav: false, cartQty: 0, cartOpen: false, menuOpen: false, toast: null };
+  }
+
+  componentDidMount() { this.applyTheme(); }
+  componentDidUpdate() { this.applyTheme(); }
+  componentWillUnmount() { clearTimeout(this._toastT); }
+
+  applyTheme() {
+    const themes = {
+      'Тёплый крем':     { bg:'#FAF6F0', card:'#FFFFFF', ink:'#2A211C', sub:'#8A7A6E', line:'#EADFD3', accent:'#B4756A', 'accent-ink':'#FFF7F2', soft:'#F1E7DB', chip:'#F6EEE4' },
+      'Слива и золото':  { bg:'#221A22', card:'#2D232D', ink:'#F3ECF0', sub:'#B29FAC', line:'#3D2F3C', accent:'#C9A26B', 'accent-ink':'#241B10', soft:'#2A1F29', chip:'#372A36' },
+      'Светлый минимал': { bg:'#F7F7F5', card:'#FFFFFF', ink:'#202023', sub:'#77767E', line:'#E7E6E2', accent:'#8A6D9E', 'accent-ink':'#FCFAFF', soft:'#EFEDF2', chip:'#F0EFEA' },
+    };
+    const t = themes[this.props.theme] || themes['Тёплый крем'];
+    const el = this.rootRef.current;
+    if (!el) return;
+    Object.keys(t).forEach(k => el.style.setProperty('--' + k, t[k]));
+  }
+
+  flyToCart() {
+    const photo = this.photoRef.current, cart = this.cartBtnRef.current, root = this.rootRef.current;
+    if (!photo || !cart || !root) return;
+    const pr = photo.getBoundingClientRect(), cr = cart.getBoundingClientRect(), rr = root.getBoundingClientRect();
+    const dot = document.createElement('div');
+    const size = 64;
+    const startX = pr.left + pr.width / 2 - rr.left - size / 2;
+    const startY = pr.top + pr.height / 2 - rr.top - size / 2;
+    const endX = cr.left + cr.width / 2 - rr.left - size / 2;
+    const endY = cr.top + cr.height / 2 - rr.top - size / 2;
+    dot.style.cssText = 'position:absolute;z-index:95;width:' + size + 'px;height:' + size + 'px;border-radius:50%;pointer-events:none;'
+      + 'background:' + (this.props.photoBg ?? '#E8D9CE') + ';box-shadow:0 10px 30px rgba(20,10,5,.25);'
+      + 'left:' + startX + 'px;top:' + startY + 'px';
+    root.appendChild(dot);
+    const anim = dot.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: 'translate(' + (endX - startX) * 0.55 + 'px,' + ((endY - startY) - 90) + 'px) scale(.55)', opacity: .95, offset: .6 },
+      { transform: 'translate(' + (endX - startX) + 'px,' + (endY - startY) + 'px) scale(.15)', opacity: .4 },
+    ], { duration: 650, easing: 'cubic-bezier(.3,.7,.4,1)' });
+    anim.onfinish = () => {
+      dot.remove();
+      const b = this.badgeRef.current;
+      if (b) { b.style.animation = 'none'; void b.offsetWidth; b.style.animation = 'dcBadge .4s ease'; }
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const fmt = n => n.toLocaleString('ru-RU').replace(/ /g, ' ');
+    const name = this.props.name ?? 'Вибромассажёр «Волна»';
+    const code = this.props.code ?? 'PRV-1024';
+    const price = this.props.price ?? 3200;
+    const oldPrice = this.props.oldPrice ?? 3900;
+    const photoBg = this.props.photoBg ?? '#E8D9CE';
+    const total = price * s.qty;
+    const cartTotal = price * s.cartQty;
+    const waMsg = 'Здравствуйте! Я хочу заказать ' + name + ', код ' + code + ', ' + s.qty + ' шт × ' + fmt(price) + ' сом, итого ' + fmt(total) + ' сом';
+    const waCartMsg = 'Здравствуйте! Я хочу заказать ' + name + ', код ' + code + ', ' + s.cartQty + ' шт × ' + fmt(price) + ' сом, итого ' + fmt(cartTotal) + ' сом';
+    return {
+      name, code, photoBg,
+      priceF: fmt(price), oldPriceF: fmt(oldPrice), totalF: fmt(total),
+      hasDiscount: oldPrice > price,
+      pct: oldPrice > price ? Math.round((1 - price / oldPrice) * 100) : 0,
+      qty: String(s.qty),
+      inc: () => this.setState(st => ({ qty: Math.min(99, st.qty + 1) })),
+      dec: () => this.setState(st => ({ qty: Math.max(1, st.qty - 1) })),
+      favG: s.fav ? '♥' : '♡',
+      favC: s.fav ? 'var(--accent,#B4756A)' : 'var(--ink,#2A211C)',
+      toggleFav: () => this.setState(st => ({ fav: !st.fav })),
+      addToCart: () => {
+        this.flyToCart();
+        this.setState(st => ({ cartQty: st.cartQty + st.qty }));
+        clearTimeout(this._toastT);
+        this.setState({ toast: 'Добавлено: ' + name });
+        this._toastT = setTimeout(() => this.setState({ toast: null }), 2200);
+      },
+      waLink: 'https://wa.me/996500690690?text=' + encodeURIComponent(waMsg),
+      waCartLink: 'https://wa.me/996500690690?text=' + encodeURIComponent(waCartMsg),
+      hasCart: s.cartQty > 0, cartCount: String(s.cartQty),
+      cartOpen: s.cartOpen,
+      category: this.props.category ?? 'Массаж',
+      menuOpen: s.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuLinks: ['Главная', 'Магазин', 'Категории', 'О нас', 'Контакты'],
+      openCart: () => this.setState({ cartOpen: true }),
+      closeCart: () => this.setState({ cartOpen: false }),
+      cartItems: s.cartQty === 0 ? [] : [{
+        name, qty: s.cartQty, sum: fmt(cartTotal),
+        remove: () => this.setState({ cartQty: 0, cartOpen: false }),
+      }],
+      cartTotalF: fmt(cartTotal),
+      toastOn: s.toast !== null, toastText: s.toast || '',
+      trust: ['Анонимная упаковка', 'За 1 час по Бишкеку', 'Сертифицировано'],
+      desc1: this.props.desc1 ?? 'Мягкий вибромассажёр с десятью режимами — от едва заметного до насыщенного. Бесшумный, водозащищённый, с бархатистым покрытием, приятным к коже.',
+      desc2: this.props.desc2 ?? 'Подойдёт и для первого знакомства, и для опытных. Заряжается по USB-C, работает до двух часов. В комплекте — атласный мешочек для хранения.',
+      specs: [
+        { k: 'Материал', v: 'Медицинский силикон' },
+        { k: 'Режимы', v: '10 режимов вибрации' },
+        { k: 'Водозащита', v: 'IPX7 — можно в душе' },
+        { k: 'Зарядка', v: 'USB-C, до 2 ч работы' },
+        { k: 'Размер', v: '18 × 3,5 см' },
+        { k: 'Гарантия', v: '12 месяцев' },
+      ],
+      rootRef: this.rootRef, scrollerRef: this.scrollerRef,
+      photoRef: this.photoRef, cartBtnRef: this.cartBtnRef, badgeRef: this.badgeRef,
+    };
+  }
+}
+</script>
+</body>
+</html>

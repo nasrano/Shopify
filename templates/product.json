@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "chip-1": { "type": "chip", "settings": { "text": "Анонимная упаковка" } },
+        "chip-2": { "type": "chip", "settings": { "text": "За 1 час по Бишкеку" } },
+        "chip-3": { "type": "chip", "settings": { "text": "Сертифицировано" } }
+      },
+      "block_order": ["chip-1", "chip-2", "chip-3"],
+      "settings": {
+        "show_buy_now": true,
+        "whatsapp_phone": "996500690690",
+        "buy_now_note": "Заказ уйдёт в WhatsApp — ответим за пару минут. Анонимно."
+      }
+    }
+  },
+  "order": ["main"]
+}
