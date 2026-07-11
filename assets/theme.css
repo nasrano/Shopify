@@ -238,8 +238,8 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-empty__heart{font-size:34px;color:var(--accent)}
 
 .privat-line-item{display:flex;gap:12px;align-items:stretch;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
-/* квадрат, сторона которого равна высоте контента строки */
-.privat-line-item__thumb{flex:none;align-self:stretch;width:auto;height:auto;aspect-ratio:1/1;min-height:92px;border-radius:12px;
+/* фото тянется на высоту строки; ширину до квадрата доводит JS (squareThumbs) */
+.privat-line-item__thumb{flex:none;align-self:stretch;width:92px;min-height:92px;border-radius:12px;
   background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 8px, transparent 8px 16px);background-size:cover;background-position:center}
 .privat-line-item__thumb--sm{align-self:center;width:54px;height:54px;min-height:54px}
 .privat-line-item__body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
