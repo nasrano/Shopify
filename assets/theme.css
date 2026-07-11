@@ -237,9 +237,11 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-empty__text{font-size:13px;color:var(--sub);max-width:24ch;line-height:1.5}
 .privat-empty__heart{font-size:34px;color:var(--accent)}
 
-.privat-line-item{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
-.privat-line-item__thumb{flex:none;width:92px;height:92px;aspect-ratio:1/1;border-radius:12px;background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 8px, transparent 8px 16px);background-size:cover;background-position:center}
-.privat-line-item__thumb--sm{width:54px;height:54px}
+.privat-line-item{display:flex;gap:12px;align-items:stretch;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+/* квадрат, сторона которого равна высоте контента строки */
+.privat-line-item__thumb{flex:none;align-self:stretch;width:auto;height:auto;aspect-ratio:1/1;min-height:92px;border-radius:12px;
+  background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 8px, transparent 8px 16px);background-size:cover;background-position:center}
+.privat-line-item__thumb--sm{align-self:center;width:54px;height:54px;min-height:54px}
 .privat-line-item__body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
 .privat-line-item__name{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.3}
 .privat-line-item__price{font-family:'Prata',serif;font-size:14px;color:var(--ink)}
