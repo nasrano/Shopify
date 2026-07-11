@@ -20,16 +20,15 @@ img{max-width:100%;display:block}
 ::-webkit-scrollbar{display:none}
 * { scrollbar-width: none; }
 
-@keyframes dcSlideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
-@keyframes dcSlideL{from{transform:translateX(-100%)}to{transform:translateX(0)}}
-@keyframes dcSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes dcSlideL{from{transform:translateX(calc(-100% - 16px))}to{transform:translateX(0)}}
+@keyframes dcSlideLOut{from{transform:translateX(0)}to{transform:translateX(calc(-100% - 16px))}}
+@keyframes dcSlideUp{from{transform:translateY(calc(100% + 16px))}to{transform:translateY(0)}}
+@keyframes dcSlideDown{from{transform:translateY(0)}to{transform:translateY(calc(100% + 16px))}}
+@keyframes dcSlideRIn{from{transform:translateX(calc(100% + 24px))}to{transform:translateX(0)}}
+@keyframes dcSlideROut{from{transform:translateX(0)}to{transform:translateX(calc(100% + 24px))}}
 @keyframes dcFade{from{opacity:0}to{opacity:1}}
-@keyframes dcBadge{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
-@keyframes dcModal{from{opacity:0;transform:translate(-50%,calc(-50% + 26px))}to{opacity:1;transform:translate(-50%,-50%)}}
-@keyframes dcSlideDown{from{transform:translateY(0)}to{transform:translateY(100%)}}
-@keyframes dcSlideLOut{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @keyframes dcFadeOut{from{opacity:1}to{opacity:0}}
-@keyframes dcModalOut{from{opacity:1;transform:translate(-50%,-50%)}to{opacity:0;transform:translate(-50%,calc(-50% + 26px))}}
+@keyframes dcBadge{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
 
 /* ===== app shell ===== */
 .privat-outer{min-height:100dvh;display:flex;justify-content:center;align-items:stretch;background:var(--page-bg)}
@@ -77,7 +76,7 @@ img{max-width:100%;display:block}
 .privat-btn--outline{border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;padding:14px 22px}
 
 /* ===== trust chips ===== */
-.privat-trust{display:flex;flex-wrap:wrap;gap:8px;padding:16px 20px 4px}
+.privat-trust{display:flex;gap:8px;overflow-x:auto;padding:16px 16px 4px;scroll-padding:0 16px;scroll-snap-type:x proximity}
 .privat-trust__chip{flex:none;display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:100px;padding:9px 15px;font-size:12.5px;font-weight:600;color:var(--ink)}
 .privat-trust__dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
@@ -192,8 +191,8 @@ img{max-width:100%;display:block}
 .privat-backdrop.is-open{display:block}
 
 /* ===== side drawer (menu) ===== */
-.privat-drawer{position:absolute;top:0;bottom:0;left:0;z-index:70;width:82%;max-width:330px;background:var(--bg);
-  animation:dcSlideL .28s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;padding:20px 22px;overflow-y:auto;display:none}
+.privat-drawer{position:absolute;top:8px;bottom:8px;left:8px;z-index:70;width:82%;max-width:330px;background:var(--bg);border-radius:26px;
+  box-shadow:0 20px 70px rgba(25,15,10,.3);animation:dcSlideL .28s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;padding:20px 22px;overflow-y:auto;display:none}
 .privat-drawer.is-open{display:flex}
 .privat-drawer__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
 .privat-drawer__logo-name{font-family:'Prata',serif;font-size:19px;letter-spacing:.14em;color:var(--ink)}
@@ -218,9 +217,9 @@ img{max-width:100%;display:block}
 html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 
 /* ===== bottom sheets (cart, favorites, categories, account, search) =====
-   единая высота всех панелей: 58% экрана снизу */
-.privat-sheet{position:absolute;left:0;right:0;bottom:0;z-index:70;background:var(--bg);border-radius:22px 22px 0 0;
-  animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:none;flex-direction:column;height:58%}
+   единая высота всех панелей: 58% экрана снизу, плавающая карточка */
+.privat-sheet{position:absolute;left:8px;right:8px;bottom:8px;z-index:70;background:var(--bg);border-radius:26px;
+  box-shadow:0 20px 70px rgba(25,15,10,.3);animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:none;flex-direction:column;height:58%}
 .privat-sheet.is-open{display:flex}
 .privat-sheet.is-closing{animation:dcSlideDown .26s cubic-bezier(.5,0,.7,.4) forwards}
 .privat-drawer.is-closing{animation:dcSlideLOut .24s cubic-bezier(.5,0,.7,.4) forwards}
@@ -365,13 +364,16 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-form-row{display:flex;gap:10px;align-items:stretch}
 .privat-form-row .privat-input{margin:0}
 
-/* ===== category (collection) page ===== */
-.privat-catbar{display:flex;gap:14px;overflow-x:auto;padding:14px 16px 4px;scroll-padding:0 16px}
-.privat-catbar__item{flex:none;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;width:60px;padding:0}
-.privat-catbar__mono{width:46px;height:46px;border-radius:50%;background:var(--chip);color:var(--accent);border:1.5px solid var(--line);font-family:'Prata',serif;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
-.privat-catbar__item:hover .privat-catbar__mono{border-color:var(--accent)}
-.privat-catbar__item.is-active .privat-catbar__mono{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.privat-catbar__name{font-size:9.5px;font-weight:600;color:var(--ink);line-height:1.15;text-align:center;max-width:62px}
+/* ===== category (collection) page =====
+   плашки как на главной (кружок в карточке), но скролл-лентой */
+.privat-catbar{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 4px;scroll-padding:0 16px}
+.privat-catbar__item{flex:none;width:92px;min-height:84px;border:1px solid var(--line);background:var(--card);border-radius:14px;
+  padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;color:inherit}
+.privat-catbar__item:hover{border-color:var(--accent);color:inherit}
+.privat-catbar__mono{width:36px;height:36px;border-radius:50%;background:var(--chip);color:var(--accent);font-family:'Prata',serif;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
+.privat-catbar__item.is-active{border-color:var(--accent)}
+.privat-catbar__item.is-active .privat-catbar__mono{background:var(--accent);color:var(--accent-ink)}
+.privat-catbar__name{font-size:10.5px;font-weight:600;color:var(--ink);line-height:1.2}
 .privat-catbar__item.is-active .privat-catbar__name{font-weight:700}
 .privat-coll__head{padding:12px 20px 4px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .privat-coll__title{font-family:'Prata',serif;font-size:26px;font-weight:400;color:var(--ink);margin:0}
@@ -507,11 +509,11 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-cat{transition:transform .2s ease}
   .privat-cat:hover{transform:translateY(-2px)}
 
-  /* bottom sheets become true centered modals on desktop — единая высота */
-  .privat-sheet{top:50%;left:50%;right:auto;bottom:auto;margin:0;width:min(560px,92vw);
-    transform:translate(-50%,-50%);border-radius:24px;height:min(600px,80dvh);
-    animation:dcModal .28s cubic-bezier(.3,.8,.3,1);box-shadow:0 30px 80px rgba(25,15,10,.35)}
-  .privat-sheet.is-closing{animation:dcModalOut .22s ease forwards}
+  /* на десктопе все панели — правая колонка со скруглением, как боковое меню */
+  .privat-sheet{top:12px;right:12px;bottom:12px;left:auto;width:460px;height:auto;border-radius:26px;
+    animation:dcSlideRIn .3s cubic-bezier(.3,.8,.3,1);box-shadow:0 20px 70px rgba(25,15,10,.35)}
+  .privat-sheet.is-closing{animation:dcSlideROut .24s cubic-bezier(.5,0,.7,.4) forwards}
+  .privat-drawer{top:12px;bottom:12px;left:12px;max-width:360px}
   .privat-sheet__summary{padding-bottom:20px}
   .privat-sheet__scroll{padding-bottom:24px}
   .privat-catnav__panel{padding-bottom:24px}

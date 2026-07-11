@@ -1,12 +1,35 @@
+{%- comment -%}
+  Сетка категорий: только ссылки на коллекции из «Меню категорий»;
+  пока таких ссылок в меню нет — коллекции магазина.
+{%- endcomment -%}
+{%- assign menu = linklists[settings.categories_menu] -%}
+{%- assign col_links = 0 -%}
+{%- for link in menu.links -%}
+  {%- if link.type == 'collection_link' -%}{%- assign col_links = col_links | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
 <section class="privat-cats" data-reveal>
   <h2 class="privat-h2">{{ section.settings.heading | default: 'Категории' }}</h2>
   <div class="privat-cats__grid">
-    {% for link in linklists[settings.categories_menu].links %}
-      <a href="{{ link.url }}" class="privat-cat">
-        <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
-        <span class="privat-cat__name">{{ link.title }}</span>
-      </a>
-    {% endfor %}
+    {% if col_links > 0 %}
+      {% for link in menu.links %}
+        {% if link.type == 'collection_link' %}
+          <a href="{{ link.url }}" class="privat-cat">
+            <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+            <span class="privat-cat__name">{{ link.title }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% for c in collections limit: 12 %}
+        {% unless c.handle == 'frontpage' or c.handle == 'all' %}
+          <a href="{{ c.url }}" class="privat-cat">
+            <span class="privat-cat__mono">{{ c.title | slice: 0, 1 | upcase }}</span>
+            <span class="privat-cat__name">{{ c.title }}</span>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
   </div>
 </section>
 
@@ -15,7 +38,7 @@
   "name": "Категории",
   "settings": [
     { "type": "text", "id": "heading", "label": "Заголовок", "default": "Категории" },
-    { "type": "paragraph", "content": "Список категорий берётся из меню «Меню категорий», которое задаётся в настройках темы (Тема → Навигация)." }
+    { "type": "paragraph", "content": "Показываются только пункты «Меню категорий», ведущие на коллекции (Тема → Навигация). Пока таких пунктов нет — коллекции магазина." }
   ],
   "presets": [{ "name": "Категории" }]
 }

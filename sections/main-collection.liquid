@@ -48,16 +48,7 @@
   {%- endif -%}
 {%- endfor -%}
 
-<div class="privat-catbar">
-  {% for link in chip_links %}
-    <a href="{{ link.url }}" class="privat-catbar__item{% if link.url == active_chip_url %} is-active{% endif %}">
-      <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
-      <span class="privat-catbar__name">{{ link.title }}</span>
-    </a>
-  {% endfor %}
-</div>
-
-<div class="privat-crumbs">
+<div class="privat-crumbs privat-crumbs--coll">
   <div class="privat-crumbs__path">
     <a href="{{ routes.root_url }}">Главная</a>
     {% if crumb1 %}
@@ -78,6 +69,34 @@
   </div>
   {% if crumb1 %}
     <a class="privat-back-btn" href="{{ parent_url }}">← Назад</a>
+  {% endif %}
+</div>
+
+{%- comment -%} в слайдере категорий показываем только ссылки на коллекции;
+если в меню их нет — сами коллекции магазина {%- endcomment -%}
+{%- assign chip_col_count = 0 -%}
+{%- for link in chip_links -%}
+  {%- if link.type == 'collection_link' -%}{%- assign chip_col_count = chip_col_count | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+<div class="privat-catbar">
+  {% if chip_col_count > 0 %}
+    {% for link in chip_links %}
+      {% if link.type == 'collection_link' %}
+        <a href="{{ link.url }}" class="privat-catbar__item{% if link.url == active_chip_url %} is-active{% endif %}">
+          <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+          <span class="privat-catbar__name">{{ link.title }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% for c in collections limit: 12 %}
+      {% unless c.handle == 'frontpage' or c.handle == 'all' %}
+        <a href="{{ c.url }}" class="privat-catbar__item{% if c.id == collection.id %} is-active{% endif %}">
+          <span class="privat-catbar__mono">{{ c.title | slice: 0, 1 | upcase }}</span>
+          <span class="privat-catbar__name">{{ c.title }}</span>
+        </a>
+      {% endunless %}
+    {% endfor %}
   {% endif %}
 </div>
 
