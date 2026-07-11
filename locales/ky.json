@@ -487,5 +487,124 @@
         "receiver_payment_experience_hint": "Буйрутма бергенден кийин сиз төлөм маалыматын аласыз. Сиз Multibanco кызматтарын колдонуп же %{due_days} күндүн ичинде веб-сайтта төлөй аласыз."
       }
     }
+  },
+  "customer_accounts": {
+    "addresses": {
+      "delete_confirmation_button_accessibility_label": "{{address}} дарегин жок кылуу",
+      "delete_confirmation_message": "Даректи өчүрүү керекпи? Учурдагы буйрутмалар өчүрүлбөйт.",
+      "edit_button": "Түзөтүү",
+      "edit_button_accessibility_label": "{{address}} дарегин өзгөртүү",
+      "edit_section_accessibility_label": "Өзгөртүү {{address}}",
+      "loading_accessibility_message": "Даректи жүктөө",
+      "loading_addresses_accessibility_message": "Даректерди жүктөө",
+      "loading_billing_accessibility_message": "Эсеп-кысап дарегин жүктөө",
+      "loading_finished_accessibility_message": "Даректердин жаңы барагы жүктөлдү",
+      "loading_shipping_accessibility_message": "Жеткирүү дарегин жүктөө",
+      "pagination": {
+        "load_more": "Дагы көрсөтүү",
+        "load_more_accessibility_label": "Дагы даректерди көрсөтүү"
+      },
+      "save_new_address_accessibility_label": "Даректи сактоо",
+      "title": "Даректер",
+      "delete_confirmation_title": "Даректи өчүрүү керекпи?",
+      "delete_confirmation_description": "Учурдагы буйрутмаларга таасир этилбейт.",
+      "edit_modal_title": {
+        "default": "Даректи өзгөртүү",
+        "billing": "Эсеп жөнөтүлүүчү дарек",
+        "shipping": "Жеткирүү дарегин өзгөртүү"
+      },
+      "add_address_banner": "Буйрутмаларды жол-жоболоштуруу үчүн колдонула турган даректерди кошуу",
+      "billing_address_dropdown_placeholder": "Эсеп-фактура дареги",
+      "add_button_text": "Кошуу",
+      "add_button_accessibility_label": "Даректи кошуу",
+      "back_button": "Артка",
+      "back_button_accessibility_label": "Даректи түзөтүүгө кайтуу {{address}}",
+      "no_addresses_banner": "Кошулган даректер жок"
+    },
+    "address_form": {
+      "auto_complete_close_accessibility_label": "Сунуштарды жабуу",
+      "auto_complete_title": "Сунуштар",
+      "billing_address": "Эсептешүү дареги катары колдонуу",
+      "cancel": "Жокко чыгаруу",
+      "cancel_accessibility_label": "Даректи өзгөртүүнү жокко чыгаруу {{address}}",
+      "creation_success_notification": "Дарек кошулду",
+      "default_address": "Бул менин демейки дарегим",
+      "default_address_creation_success_notification": "Демейки дарек кошулду",
+      "default_address_update_success_notification": "Демейки дарек жаңыртылды",
+      "loading_add_form_accessibility_message": "Жаңы дарек киргизүү формасын жүктөө",
+      "loading_edit_form_accessibility_message": "Даректи түзөтүү формасын жүктөө",
+      "loading_finished_accessibility_message": "Дарек киргизүү формасы жүктөлдү",
+      "save": "Сактоо",
+      "save_accessibility_label": "Даректи сактоо {{address}}",
+      "section_title_accessibility_label": "Дарек кошуу",
+      "update_success_notification": "Дарек жаңыртылды",
+      "attention": "Көңүл бургула!",
+      "attention_help_text": "Адамдын аты же бөлүмдүн аталышы",
+      "loading_form_accessibility_message": "Дарек киргизүү формасын жүктөө",
+      "attention_company": "Компания/алуучу"
+    },
+    "B2B": {
+      "account_information": {
+        "company_card_name_label": "Компаниянын аталышы"
+      },
+      "locations": {
+        "contact_email": "Электрондук дарек",
+        "contact_list_title": "Адамдар",
+        "contact_name": "Аты-жөнү",
+        "contact_permissions": "Уруксаттар",
+        "contact_phone_number": "Телефон номери",
+        "location_picker_label": "Жайгашкан жердин аталышы",
+        "net_payment_terms_description": "{{name}}: төлөмдөр {{numberOfDays}} күндүн ичинде жүргүзүлүшү керек.",
+        "payment_details_title": "Төлөм реквизиттери",
+        "payment_terms": "Төлөө шарттары",
+        "permissions_label": "Уруксаттарыңыз",
+        "permissions_title": "Уруксаттар",
+        "section_title": "Жайгашкан жери",
+        "shipping_address_required": "Буйрутма бере баштоо үчүн бул жайгашкан жерге жеткирүү дарегин кошуңуз",
+        "tax_details_title": "Салыктык маалыматтар",
+        "tax_exemptions": "Салыксыз",
+        "multiple_tax_exemptions": "дагы {{taxExemptionsCount}}",
+        "tax_exemptions_modal_close": "Жабуу",
+        "taxes_none": "Жок",
+        "tax_exemption_not_applicable": "Маалымат жок",
+        "tax_exemptions_modal_button_accessibility_label": "Баардык салыксыз товарларды көрүү",
+        "pagination": {
+          "load_more": "Дагы көрсөтүү",
+          "load_more_accessibility_label": "Башка жайгашкан жерлерди көрсөтүү"
+        },
+        "own_role_contact_name": "Сиз",
+        "staff_and_permissions_title": "Кызматкерлер жана уруксаттар",
+        "location_picker_accessibility_label": "Жайгашкан жердин аталышы: {{locationName}}",
+        "contact_contact": "Байланышчу адам"
+      },
+      "location_selection": {
+        "description": "Эгерде корзинада буюмдар бар болсо, жайгашууларды өзгөртүү товарлардын баасынын же алардын санынын өзгөрүшүнө алып келиши мүмкүн.",
+        "list_accessibility_label": "Жайгашуулардын тизмеси",
+        "list_item_without_address_accessibility_label": "{{name}}: дарек жок",
+        "list_loading_accessibility_message": "Жайгашуулардын тизмесин жүктөө",
+        "list_loading_address_accessibility_message": "Даректи жүктөө: {{locationName}}",
+        "list_loading_finished_accessibility_message": "Жайгашкан жерлердин тизмеси жүктөлдү",
+        "loading_store_accessibility_message": "Дүкөнгө өтүү",
+        "selection_cancel_button": "Жокко чыгаруу",
+        "selection_confirmation_button": "Жайгашкан жерди тандоо",
+        "title": "Кайсы жайгашкан жерге сатып алууну жасайсыз?",
+        "continue_to_store": "Дүкөнгө кайтуу",
+        "no_location_title": "Жалгыз жеке буйрутмалар",
+        "no_location_description": "{{company}} атынан заказ берүүгө укугуңуз жок. Сиз дагы деле жеке заказдарды бере аласыз.",
+        "no_locations_found": "Жайгашуулар табылган жок",
+        "search": "Жай издөө",
+        "clear_search": "Издөө суроосун жок кылуу",
+        "try_new_search": "Жаңы издөө",
+        "search_location_title": "Жайгашкан жерди тандаңыз",
+        "selection_continue_button": "Улантуу",
+        "description_switch_later": "Кийинчерээк ар дайым өзгөртө аласыз",
+        "title_choose_location": "Жай тандоо",
+        "error_loading_locations": "Жайгашкан жерлерди жүктөөдө көйгөй келип чыкты. Интернетиңиздин туташуусун текшерип, кайталап көрүңүз."
+      },
+      "addresses": {
+        "add_billing_address_button": "Эсеп-фактура дарегин кошуу",
+        "add_billing_address_section_accessibility_label": "Эсеп-фактура дарегин кошуу"
+      }
+    }
   }
 }
