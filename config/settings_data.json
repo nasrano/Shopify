@@ -1,5 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": "Default",
+  "current": {
+    "categories_menu": "main-menu-1",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_text": "PRIVAT",
+          "logo_subtext": "SEX SHOP",
+          "promo_enabled": true,
+          "promo_text": "−10% по промокоду LETO26"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "logo_text": "PRIVAT",
+          "line_1": "Только 18+. Бережно о близости.",
+          "line_2": "© 2026 PRIVAT · Бишкек"
+        }
+      },
+      "bottom-nav": {
+        "type": "bottom-nav",
+        "settings": {}
+      },
+      "menu-drawer": {
+        "type": "menu-drawer",
+        "settings": {
+          "logo_text": "PRIVAT",
+          "logo_subtext": "SEX SHOP",
+          "phone": "0500 690 690",
+          "address": "Калык Акиева 116"
+        }
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {}
   }
