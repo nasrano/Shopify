@@ -392,18 +392,18 @@
       var f = favs[id];
       var img = f.image ? 'background-image:url(' + f.image + ')' : '';
       return '' +
-        '<div class="privat-fav-row">' +
-          '<a href="' + f.url + '" class="privat-line-item__thumb privat-line-item__thumb--sm" style="' + img + '"></a>' +
-          '<div class="privat-fav-row__body">' +
-            '<a href="' + f.url + '" class="privat-fav-row__name" style="color:inherit;text-decoration:none">' + f.title + '</a>' +
+        '<div class="privat-line-item">' +
+          '<a href="' + f.url + '" class="privat-line-item__thumb" style="' + img + '"></a>' +
+          '<div class="privat-line-item__body">' +
+            '<a href="' + f.url + '" class="privat-line-item__name privat-fav-row__name" style="color:inherit;text-decoration:none">' + f.title + '</a>' +
             (f.sku ? '<div class="privat-fav-row__code">Код: ' + f.sku + '</div>' : '') +
-            '<div class="privat-fav-row__price">' + f.price + '</div>' +
-          '</div>' +
-          '<div class="privat-fav-row__actions">' +
-            (f.variantId ? '<button class="privat-fav-row__add" data-add-to-cart data-variant-id="' + f.variantId + '">В корзину</button>' : '') +
-            '<button class="privat-fav-row__heart is-active" data-fav-toggle data-product-id="' + id + '" data-product-title="' + f.title + '" data-product-price="' + f.price + '" data-product-image="' + f.image + '" data-product-url="' + f.url + '" data-product-sku="' + (f.sku || '') + '" data-variant-id="' + f.variantId + '" aria-label="Убрать из избранного">' +
-              '<svg width="17" height="17" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11 18.6C6.7 15.3 3.8 12.6 3.8 9.6c0-2.2 1.7-3.9 3.9-3.9 1.3 0 2.5.6 3.3 1.7.8-1.1 2-1.7 3.3-1.7 2.2 0 3.9 1.7 3.9 3.9 0 3-2.9 5.7-7.2 9Z"/></svg>' +
-            '</button>' +
+            '<div class="privat-line-item__price">' + f.price + '</div>' +
+            '<div class="privat-line-item__qty">' +
+              (f.variantId ? '<button class="privat-fav-row__add" data-add-to-cart data-variant-id="' + f.variantId + '">В корзину</button>' : '') +
+              '<button class="privat-fav-row__heart is-active" data-fav-toggle data-product-id="' + id + '" data-product-title="' + f.title + '" data-product-price="' + f.price + '" data-product-image="' + f.image + '" data-product-url="' + f.url + '" data-product-sku="' + (f.sku || '') + '" data-variant-id="' + f.variantId + '" aria-label="Убрать из избранного">' +
+                '<svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11 18.6C6.7 15.3 3.8 12.6 3.8 9.6c0-2.2 1.7-3.9 3.9-3.9 1.3 0 2.5.6 3.3 1.7.8-1.1 2-1.7 3.3-1.7 2.2 0 3.9 1.7 3.9 3.9 0 3-2.9 5.7-7.2 9Z"/></svg>' +
+              '</button>' +
+            '</div>' +
           '</div>' +
         '</div>';
     }).join('');
