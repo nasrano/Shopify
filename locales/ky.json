@@ -1255,7 +1255,9 @@
       "local_pickup": {
         "location_far_away": {
           "few": "Сиздин продукцияңыздан %{count} даана жайгашкан жер",
-          "many": "Сиздин товарыңыз менен %{count} жайгашуу орду"
+          "many": "Сиздин товарыңыз менен %{count} жайгашуу орду",
+          "one": "Сиздин товарыңыз менен жайгашкан %{count} жер",
+          "other": "Товарыңыз жайгашкан %{count} жер"
         },
         "toggle_more_locations": {
           "one": "Дагы %{count} жайгашкан жер",
@@ -1326,7 +1328,82 @@
           "few": "Сиздин товарлар жайгашкан жерлердин саны: %{count}",
           "many": "Сиздин товарларыңыз жайгашкан жерлер: %{count}"
         },
-        "location_selected": "Тандалган жайгашкан жер"
+        "location_selected": "Тандалган жайгашкан жер",
+        "location_information": {
+          "one": "Сизге жакын жерде запастары бар %{count} жайгашкан жер бар",
+          "other": "Сизге жакын жерде запасы бар %{count} жайгашкан жер бар",
+          "few": "Жакын жерде запасы бар %{count} даана бар",
+          "many": "Жакынкы жерде кампасы бар %{count} жайгашуу бар"
+        },
+        "toggle_location": "Жайгашуусун өзгөртүү",
+        "or": "ЖЕ",
+        "cancel": "Жокко чыгаруу",
+        "your_location": "жайгашкан жериңиз",
+        "search_button": "Дүкөндөрдү издөө",
+        "no_stores_found": "Дүкөндөр табылган жок",
+        "could_not_resolve_address": "Даректи табуу мүмкүн болгон жок. Кайталап көрүңүз же башка дарек колдонуңуз",
+        "paginator": {
+          "accessibility_label": "Өз алдынча алып кетүү даректери үчүн баракчалоо",
+          "previous": "Мурунку барак",
+          "next": "Кийинки барак",
+          "label": {
+            "one": "%{count} дүкөндүн ичинен %{first}–%{last}",
+            "other": "%{first}–%{last} / %{count} дүкөн",
+            "few": "%{first}–%{last} / %{count} дүкөн",
+            "many": "%{first}–%{last} из %{count} дүкөндөрдүн ичинен"
+          }
+        },
+        "reveal_more_label": {
+          "one": "Башка жерлерди жүктөө: %{count}",
+          "other": "Дагы жайгашкан жерлерди жүктөө: %{count}",
+          "few": "Дагы жайгашкан жерлерди жүктөө: %{count}",
+          "many": "Дагы жайгашкан жерлерди жүктөө: %{count}"
+        },
+        "location_address_search_label": "Дарек",
+        "all_stores_far_away": {
+          "title": "Жакынкы жайгашкан жерлер %{distance} ашык аралыкта",
+          "description": "Жайгашкан жерди же %{ship_to_address_link} тандаңыз",
+          "ship_to_address_link": "дарекке жеткирүү",
+          "change_location_link": "Жайгашкан жериңизди өзгөртүңүз",
+          "title_with_specific_location": "Сиздин товарыңызга эң жакын жайгашкан жер %{location} чекитинен %{distance} ашык аралыкта.",
+          "title_with_item": {
+            "one": "Сиздин өнүм жайгашкан эң жакын жер %{location} дарегинен %{distance} алыстыкта жайгашкан.",
+            "other": "Сиздин товарлар жайгашкан эң жакын жер %{location} дарегинен %{distance} алыстыкта жайгашкан.",
+            "few": "Сиздин товарларыңыз жакынкы жайгашкан жерден %{location} чейинки аралыкта %{distance} ашык жайгашкан.",
+            "many": "Сиздин товарлар жайгашкан эң жакын жер %{location} дарегинен %{distance} ашык аралыкта турат"
+          }
+        },
+        "selected_pickup_option_no_longer_available": {
+          "title": "Сиз мурун тандаган жер жеткиликтүү эмес",
+          "description": "Биз сиздин товарларыңыз бар эң жакын жайгашкан жерди тандадык"
+        },
+        "pickup_unavailable_banner_body": {
+          "ship_items": "Товарларыңызды жөнөтүңүз",
+          "search_elsewhere": "башка жерден издөө",
+          "ship_items_or_search_elsewhere": "%{ship_items} же %{search_elsewhere}",
+          "search_elsewhere_standalone": "Башка жерден издөө"
+        },
+        "location_address_search_placeholder": "%{postal_code_label} же дарек",
+        "location_closest": "Сиздин товарыңызга эң жакын жайгашкан жер",
+        "toggle_multiple_locations": "%{count}+ жайгашкан жер",
+        "location_information_far_away": {
+          "one": "Сиздин товарыңыз менен %{count} жайгашкан жер",
+          "other": "Товарыңыз бар %{count} жер",
+          "few": "Сиздин товарыңыз менен %{count} жайгашуу",
+          "many": "Сиздин товарыңыз менен %{count} жайгашкан жер"
+        },
+        "location_nearby": {
+          "one": "Жакыныңызда буюмуңуз менен жайгашкан %{count} жер бар",
+          "other": "Жакыныңызда буюмуңуз бар %{count} жер бар",
+          "few": "Жакын жерде буюмуңуз бар %{count} жайгашкан жер бар",
+          "many": "Сиздин товарга жакын %{count} жайгашкан жер бар"
+        },
+        "location_nearby_short": {
+          "one": "Жакынкы жерде сиздин товарыңыз бар %{count} жайгашуу",
+          "other": "Сиздин товарга жакын жайгашкан %{count} жер бар",
+          "few": "Сиздин товарга жакын жайгашкан %{count} жер",
+          "many": "Сиздин товарыңызга жакын жайгашкан %{count} жер"
+        }
       },
       "captcha": {
         "title": "Улантуу үчүн, Captcha кодун киргизиңиз",
@@ -1932,6 +2009,77 @@
           "many": "Сизде сакталган даректер бар: {{count}}."
         },
         "rollup_accessibility_label": "Эсептин жөндөөлөрү"
+      },
+      "notice_banner": {
+        "individual_violations_title": {
+          "OtherViolations": "Буйрутманын маалыматтары",
+          "UnhandledViolations": "Буйрутма маалыматтары"
+        },
+        "all_violations_content": "Маалыматты жаңыртуу жана буйрутмаңызды аяктоо үчүн бизге чалыңыз же электрондук кат жөнөтүңүз ({{emailLink}}):",
+        "all_violations_email_link": "электрондук дарек",
+        "editable_shipping_address_violations_message_title": "Заказыңызды аяктоо үчүн маалымат кошуңуз:",
+        "editable_shipping_address_violations_message_footer": "Бул жердин дарегин жаңыртуу үчүн шилтемени колдонуңуз — {{emailLink}}.",
+        "editable_shipping_address_violations_email_link": "Биз менен байланышыңыз",
+        "company_location_changed_product_removed": "Себеттин курамы жаңыланды, анткени кээ бир өнүмдөр бул аймакта сатылбайт. Жөнөтүү алдында буйрутманы карап чыгыңыз.",
+        "shipping_address_incomplete_title": "Жеткирүү дареги толук эмес",
+        "calculating_shipping": "Жеткирүүнүн баасы эсептелүүдө. Бир нече секунддан кийин кайталап көрүңүз. Каражаттар алынган жок.",
+        "calculating_taxes": "Салыктар эсептелүүдө. Бир нече секунддан кийин кайра аракет кылып көрүңүз. Каражаттар алынган жок.",
+        "generic_processing_error": {
+          "title": "Буйрутманы иштетүүдө көйгөй жаралды",
+          "body": "Каражат алынган жок. Кайталап көрүңүз же башка төлөө ыкмасын колдонуңуз."
+        },
+        "contact_information": {
+          "title": "Жараксыз байланыш маалыматы",
+          "header": "Маалыматты жаңыртуу үчүн, {{emailLink}}.",
+          "email_link": "Биз менен байланышыңыз"
+        },
+        "payment_method_not_available_with_payment_terms": "Сиз тандаган төлөм ыкмасы мындан ары жеткиликтүү эмес, себеби бул буйрутма үчүн төлөм {{paymentTerms}} ылайык жүргүзүлөт.",
+        "payment_method_not_available_with_fulfillment_terms": "Сиз тандаган төлөм ыкмасы эми жеткиликтүү эмес, себеби бул буйрутма үчүн төлөм аткарылганда жүргүзүлөт",
+        "payment_method_not_available_with_fixed_terms": "Сиз тандаган төлөм ыкмасы эми жеткиликсиз, анткени бул буйрутманы төлөө кийинчерээк жүргүзүлөт",
+        "payment_method_not_available_with_review_requirement": "Сиз тандаган төлөм ыкмасы эми жеткиликсиз, анткени төлөм сиздин буйрутмаңыз ырасталгандан кийин жүргүзүлөт.",
+        "validation_errors_banner": {
+          "section_label": {
+            "delivery": "Жеткирүү",
+            "contact": "Байланыш маалыматтары",
+            "payment": "Төлөм",
+            "billing": "Эсеп-фактура дареги"
+          },
+          "heading": {
+            "one": "{{count}} ката табылды:",
+            "other": "Каталар табылды: {{count}}:",
+            "few": "Ката табылды: {{count}}:",
+            "many": "Каталар табылды: {{count}}:"
+          },
+          "errors_in_section": {
+            "one": "{{count}} «{{section}}» бөлүмүндөгү ката",
+            "other": "«{{section}}» бөлүмүндөгү каталар: {{count}}",
+            "few": "«{{section}}» бөлүмүндөгү каталар: {{count}}",
+            "many": "«{{section}}» бөлүмүндөгү каталар: {{count}}"
+          }
+        }
+      },
+      "review_address_modal": {
+        "title": "Даректи текшерүү",
+        "subtitle_no_match": "Бул дарек сиздин сакталган даректериңизге туура келбейт.",
+        "subtitle_must_use": "Сиздин буйрутмаңыз ушул дарекке жеткирилет.",
+        "continue": "Бул даректи колдонуу",
+        "use_saved_address": "Башка даректи колдонуу",
+        "return_to_cart": "Корзинага кайтуу",
+        "subtitle": {
+          "one": "Бул буйрутма сатуучу {{merchant}} тарабынан берилген дарекке жеткирилет.",
+          "other": "Бул заказ сатуучу тарабынан берилген дарекке жеткирилет {{merchant}}. Жеткирүү дарегин тандаңыз.",
+          "few": "Бул буйрутма сатуучу {{merchant}} тарабынан берилген дарекке жеткирилет. Жеткирүү дарегин тандаңыз.",
+          "many": "Бул буйрутма сатуучу тарабынан берилген дарекке жеткирилет {{merchant}}. Жеткирүү дарегин тандаңыз."
+        }
+      },
+      "marketplaces": {
+        "legal_notice": {
+          "legal_text": "Көрүү",
+          "link_label": "{{partnerDisplayName}} шарттары"
+        }
+      },
+      "online_store_chat": {
+        "title": "Суроолоруңуз барбы? Бизге чатта жазыңыз"
       }
     },
     "sentence": {
