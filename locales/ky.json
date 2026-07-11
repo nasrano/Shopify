@@ -254,6 +254,132 @@
         "split_shipping_option_lowest_price": "Эң төмөнкү баа",
         "split_shipping_option_fastest": "Эң тез",
         "split_shipping_option_recommended": "Сунушталат"
+      },
+      "general": {
+        "errors": {
+          "sale_attribution": {
+            "unresolvable_target_merchandise_lines": "Сунушталган сатуу атрибуттары учурдагы сүйлөшүүлөрдүн контекстине байланыштуу чечилгис."
+          },
+          "non_negotiable": {
+            "missing_non_negotiable_terms": "Сатып алуучуңуздун сунушу талашсыз шарттарды камтышы керек.",
+            "invalid_signature": "«{{target_terms}}» талаасы үчүн кол тамга жараксыз."
+          },
+          "inventory": {
+            "missing_quantity_value": "Кардардын ассортименттик сабында сан үчүн талаа жок.",
+            "changing_behavior_not_allowed": "Бул кардардын ассортимент менен аракеттерди өзгөртүүгө уруксаты жок.",
+            "only_one_inventory_behavior_allowed": "Учурда бир буйрутмада ассортимент менен бир гана аракетке уруксат берилет."
+          },
+          "optional_duties": {
+            "optional_duties_not_permitted": "Бул төлөм сессиясы үчүн алымдан бошотууга жол берилбейт."
+          },
+          "attribution": {
+            "retail_attribution_not_allowed": "Чек-ауттун бул сеансы үчүн чекене өнүмдөрдүн атрибутуна уруксат берилбейт.",
+            "retail_attribution_required": "Чектештирүү үчүн бул сеанста чекене буюмдардын атрибуттарын көрсөтүү талап кылынат."
+          },
+          "captcha": {
+            "metadata_missing": "Бул текшерүү сеансы үчүн Captcha кодун киргизүү керек.",
+            "metadata_mismatch": "Көрсөтүлгөн провайдер жана Captcha текшерүүлөрүнүн түрү күтүлгөн маанилерге дал келбейт.",
+            "token_missing": "Бул заказды толтуруу үчүн, Captcha токенин көрсөтүү керек.",
+            "job_enqueue_failed": "Captcha текшерүү тапшырмасын кезекке кошууга мүмкүн болгон жок.",
+            "job_already_queued": "Captcha текшерүүсү бул Captcha токены үчүн кезекке кошулган.",
+            "token_expired": "Көрсөтүлгөн Captcha токенынин мөөнөтү бүттү. Буйрутманы андан ары жол-жоболоштуруу үчүн, жаңы Captcha кодун киргизиңиз.",
+            "token_invalid": "Көрсөтүлгөн Captcha токтокен жараксыз. Буюртманы улантуу үчүн, жаңы Captcha кодун киргизиңиз.",
+            "token_not_valid_for_session": "Көрсөтүлгөн Captcha кодун ушул төлөм сеансында колдонууга болбойт."
+          },
+          "fx_reconciliation_override": {
+            "shop_currency_mismatch": "Алынган сумма дүкөндүн валютасында болушу керек."
+          },
+          "checkout_source": {
+            "revoked": "Бул буйрутма жеткиликсиз."
+          }
+        },
+        "full_price": "Жалпы баасы:",
+        "title": "Заказды жайгаштыруу — {{shopName}}",
+        "full_title": "{{pageTitle}} — {{shopName}} — буйрутма берүү",
+        "loading_title": "Заказды тариздөө — {{shopName}}",
+        "google_map_title": "Google Карталары",
+        "submit_order_button_label": "Буйрутманы жөнөтүү",
+        "submit_for_review_button_label": "Текшерүүгө жөнөтүү",
+        "submit_for_review_notice_label": "Заказы текшерилмейинче, төлөм жүргүзүлбөйт",
+        "continue_to_payment_plans_button_label": "Төлөм пландарына өтүү",
+        "back_button_label": "Артка",
+        "choose_delivery_strategy": "Жеткирүү ыкмасын тандоо",
+        "autocomplete_zero_item": "Эч нерсе жеткиликтүү эмес",
+        "autocomplete_powered_by_google": "{{brandName}} платформасында",
+        "submit": "Жөнөтүү",
+        "processing": "Иштетилүүдө…",
+        "stepper": {
+          "increase": "Кошуу {{type}}",
+          "decrease": "Жоюу {{type}}",
+          "minimum_reached": "Минималдуу мааниге жетишилди: {{value}}",
+          "maximum_reached": "Максималдуу маанисине жетти: {{value}}"
+        },
+        "remove_item": "\"%{label}\" жок кылуу",
+        "remove_tag": "Тегди өчүрүү",
+        "dates": {
+          "weekdays": {
+            "monday": "Дүйшөмбү",
+            "tuesday": "Шейшемби",
+            "wednesday": "Шаршемби",
+            "thursday": "Бейшемби",
+            "friday": "Жума",
+            "saturday": "Ишемби",
+            "sunday": "Жекшемби"
+          },
+          "weekdays_abbreviation": {
+            "monday": "Дш",
+            "tuesday": "Шр",
+            "wednesday": "Шр",
+            "thursday": "Эмне",
+            "friday": "Жм",
+            "saturday": "Ишемби",
+            "sunday": "Бардыгы"
+          }
+        },
+        "datepicker": {
+          "show_previous_month": "Мурунку айды көрсөтүү, {{month}} {{year}}",
+          "show_next_month": "Кийинки айды көрсөтүү, {{month}} {{year}}",
+          "range_start": "Убакыт аралыгынын башталышы",
+          "in_range": "Диапазондо",
+          "range_end": "Убакыт аралыгынын аягы"
+        },
+        "map": {
+          "cluster_title": {
+            "one": "Кластердеги маркерлер: {{number}}",
+            "other": "Кластердеги маркерлер: {{number}}",
+            "few": "Кластердеги маркерлер: {{number}}",
+            "many": "Кластердеги маркерлер: {{number}}"
+          }
+        },
+        "sheet": {
+          "expand": "Жайылтуу"
+        },
+        "confirm_order_button_label": "Буйрутманы ырастоо",
+        "dropzone": {
+          "add_file": "Файлды кошуңуз",
+          "invalid_file_type": "Файлдын түрү колдоого алынбайт",
+          "dragged_over": "Файлды жүктөө үчүн сүйрөп келиңиз"
+        },
+        "loading": "Жүктөлүүдө…",
+        "remove_chip": "Затты жок кылуу",
+        "finalize_order_accessibility_label": "Буйрутманы аяктоо"
+      },
+      "contact": {
+        "title": "Маалымат",
+        "address_title": "Дарек",
+        "delivery_option_title": "Жеткирүү ыкмасы",
+        "contact_method_title": "Байланыш маалыматы",
+        "email_label": "Электрондук дарек",
+        "email_placeholder": "Электрондук дарек",
+        "email_or_phone_label": "Электрондук почта дареги же мобилдик телефон номери",
+        "email_or_phone_placeholder": "Электрондук почта же уюлдук телефон номери",
+        "stored_addresses_label": "Сакталган даректер",
+        "new_address_label": "Башка даректи колдонуу",
+        "first_name_label": "Аты",
+        "optional_first_name_label": "Аты-жөнү (милдеттүү эмес)",
+        "last_name_label": "Фамилиясы",
+        "optional_company_label": "Компания (милдеттүү эмес)",
+        "address1_label": "Дарек"
       }
     }
   }
