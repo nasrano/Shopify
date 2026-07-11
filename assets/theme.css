@@ -97,6 +97,8 @@ img{max-width:100%;display:block}
 .privat-cat:hover{border-color:var(--accent)}
 .privat-cat__mono{width:36px;height:36px;border-radius:50%;background:var(--chip);color:var(--accent);font-family:'Prata',serif;font-size:14px;display:flex;align-items:center;justify-content:center}
 .privat-cat__name{font-size:10.5px;font-weight:600;color:var(--ink);line-height:1.2}
+button.privat-cat{font-family:'Manrope',sans-serif}
+.privat-cat--all .privat-cat__mono{background:var(--accent);color:var(--accent-ink)}
 
 /* ===== carousel / product card ===== */
 .privat-carousel{padding:28px 0 4px}

@@ -76,12 +76,12 @@
 если в меню их нет — сами коллекции магазина {%- endcomment -%}
 {%- assign chip_col_count = 0 -%}
 {%- for link in chip_links -%}
-  {%- if link.type == 'collection_link' -%}{%- assign chip_col_count = chip_col_count | plus: 1 -%}{%- endif -%}
+  {%- if link.type == 'collection_link' or link.url contains '/collections/' -%}{%- assign chip_col_count = chip_col_count | plus: 1 -%}{%- endif -%}
 {%- endfor -%}
 <div class="privat-catbar">
   {% if chip_col_count > 0 %}
     {% for link in chip_links %}
-      {% if link.type == 'collection_link' %}
+      {% if link.type == 'collection_link' or link.url contains '/collections/' %}
         <a href="{{ link.url }}" class="privat-catbar__item{% if link.url == active_chip_url %} is-active{% endif %}">
           <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
           <span class="privat-catbar__name">{{ link.title }}</span>

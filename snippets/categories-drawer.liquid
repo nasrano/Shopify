@@ -1,13 +1,16 @@
 {%- comment -%}
   Категории: древо до 3 уровней из «Меню категорий» (настройки темы).
-  Показываются только пункты-коллекции; пока их в меню нет — коллекции магазина.
-  Клик по названию открывает коллекцию любого уровня; кнопка › проваливается
-  на уровень глубже (панели листаются вбок, JS: catShow в theme.js).
+  Пункт считается категорией, если ведёт на коллекцию (тип collection_link
+  или URL содержит /collections/ — так Shopify помечает вставленные ссылки).
+  Пока категорий в меню нет — коллекции магазина. Клик по названию открывает
+  коллекцию любого уровня; кнопка › проваливается глубже (JS: catShow).
 {%- endcomment -%}
 {%- assign menu = linklists[settings.categories_menu] -%}
 {%- assign root_col_links = 0 -%}
 {%- for l1 in menu.links -%}
-  {%- if l1.type == 'collection_link' -%}{%- assign root_col_links = root_col_links | plus: 1 -%}{%- endif -%}
+  {%- if l1.type == 'collection_link' or l1.url contains '/collections/' -%}
+    {%- assign root_col_links = root_col_links | plus: 1 -%}
+  {%- endif -%}
 {%- endfor -%}
 
 <div class="privat-sheet privat-sheet--cats" data-drawer="cats">
@@ -20,7 +23,7 @@
     <div class="privat-catnav__panel is-active" data-cat-panel="root">
       {% if root_col_links > 0 %}
         {% for l1 in menu.links %}
-          {% if l1.type == 'collection_link' %}
+          {% if l1.type == 'collection_link' or l1.url contains '/collections/' %}
             <div class="privat-cat-row">
               <a href="{{ l1.url }}" class="privat-cat-row__link">
                 <span class="privat-cat-row__mono">{{ l1.title | slice: 0, 1 | upcase }}</span>
@@ -48,7 +51,9 @@
 
     {% for l1 in menu.links %}
       {%- assign i1 = forloop.index -%}
-      {% if l1.type == 'collection_link' and l1.links.size > 0 %}
+      {%- assign l1_is_col = false -%}
+      {%- if l1.type == 'collection_link' or l1.url contains '/collections/' -%}{%- assign l1_is_col = true -%}{%- endif -%}
+      {% if l1_is_col and l1.links.size > 0 %}
         <div class="privat-catnav__panel" data-cat-panel="p{{ i1 }}">
           <button type="button" class="privat-cat-back" data-cat-back="root">‹ Все категории</button>
           <div class="privat-cat-row">
@@ -58,7 +63,7 @@
             </a>
           </div>
           {% for l2 in l1.links %}
-            {% if l2.type == 'collection_link' %}
+            {% if l2.type == 'collection_link' or l2.url contains '/collections/' %}
               <div class="privat-cat-row">
                 <a href="{{ l2.url }}" class="privat-cat-row__link">
                   <span class="privat-cat-row__mono">{{ l2.title | slice: 0, 1 | upcase }}</span>
@@ -74,7 +79,9 @@
 
         {% for l2 in l1.links %}
           {%- assign i2 = forloop.index -%}
-          {% if l2.type == 'collection_link' and l2.links.size > 0 %}
+          {%- assign l2_is_col = false -%}
+          {%- if l2.type == 'collection_link' or l2.url contains '/collections/' -%}{%- assign l2_is_col = true -%}{%- endif -%}
+          {% if l2_is_col and l2.links.size > 0 %}
             <div class="privat-catnav__panel" data-cat-panel="p{{ i1 }}-{{ i2 }}">
               <button type="button" class="privat-cat-back" data-cat-back="p{{ i1 }}">‹ {{ l1.title }}</button>
               <div class="privat-cat-row">
@@ -84,7 +91,7 @@
                 </a>
               </div>
               {% for l3 in l2.links %}
-                {% if l3.type == 'collection_link' %}
+                {% if l3.type == 'collection_link' or l3.url contains '/collections/' %}
                   <div class="privat-cat-row">
                     <a href="{{ l3.url }}" class="privat-cat-row__link">
                       <span class="privat-cat-row__mono">{{ l3.title | slice: 0, 1 | upcase }}</span>
