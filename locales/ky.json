@@ -131,6 +131,129 @@
       },
       "review": {
         "title": "Көрүү"
+      },
+      "shipping": {
+        "subscription_delivery_description": {
+          "prepaid_free_shipping_with_cycles": {
+            "other": "Алгачкы %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
+            "few": "Биринчи %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
+            "many": "Биринчи %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_one_cycle": {
+            "one": "Жеткирүүнүн %{shipping_price} баасы дагы %{count} заказ үчүн жарактуу",
+            "other": "Жеткирүү баасы %{shipping_price} кийинки %{count} заказ үчүн жарактуу (%{per_delivery_cost})",
+            "few": "Жеткирүү баасы %{shipping_price} кийинки %{count} заказга колдонулат (%{per_delivery_cost})",
+            "many": "Жеткирүү баасы %{shipping_price} кийинки %{count} заказ үчүн (бир жеткирүүгө %{per_delivery_cost}) жарактуу"
+          },
+          "prepaid_order_one_cycle_delivery_not_included": {
+            "one": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн жарактуу",
+            "other": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн жарактуу (%{per_delivery_cost})",
+            "few": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн жарактуу (%{per_delivery_cost})",
+            "many": "Жеткирүүнүн баасы %{shipping_price} %{count} заказдар үчүн жарактуу (%{per_delivery_cost})"
+          },
+          "prepaid_order_no_cycle": {
+            "one": "Жеткирүүнүн баасы %{shipping_price} дагы %{count} заказ үчүн жарактуу, андан кийин — %{recurring_order_shipping_price}",
+            "other": "Жеткирүү баасы %{shipping_price} дагы %{count} заказга чейин иштейт (%{per_delivery_cost}), андан кийин — %{recurring_order_shipping_price}",
+            "few": "Жеткирүүнүн баасы %{shipping_price} дагы %{count} заказга (%{per_delivery_cost}) жарактуу, андан кийин — %{recurring_order_shipping_price}",
+            "many": "Жеткирүү баасы %{shipping_price} дагы %{count} заказга чейин иштейт (%{per_delivery_cost}), андан кийин — %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_no_cycle_delivery_not_included": {
+            "one": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн, кийин — %{recurring_order_shipping_price}",
+            "other": "Жеткирүү баасы %{shipping_price} %{count} заказга чейин жарактуу (%{per_delivery_cost}), андан кийин — %{recurring_order_shipping_price}",
+            "few": "Жеткирүүнүн баасы %{shipping_price} %{count} заказ үчүн (%{per_delivery_cost}) жарактуу, андан кийин — %{recurring_order_shipping_price}",
+            "many": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн (%{per_delivery_cost}) жарактуу, андан кийин %{recurring_order_shipping_price} болот"
+          }
+        },
+        "estimated_delivery_time": "Болжолдуу жеткирүү убактысы: %{time}",
+        "estimated_delivery_time_range": "Болжолдуу жеткирүү убактысы: %{min_time}–%{max_time}",
+        "arrives_time": "Келүү убактысы: %{time}",
+        "arrives_time_range": "Келиши болжолу менен: %{min_time}–%{max_time}",
+        "estimated_time": "Болжолдуу: %{time}",
+        "estimated_time_range": "Болжол менен: %{min_time}–%{max_time}",
+        "subscription_local_delivery": "Дарекке жеткирүү менен жазылуу",
+        "subscription_pickup": "Өзү алып кетүү мүмкүнчүлүгү менен жазылуу",
+        "delivery_today": "Ошол эле күнү жеткирүү %{time} ичинде",
+        "delivery_tomorrow": "Эртеси күнү саат %{time} жеткирүү",
+        "two_day_delivery": "2 күндөн кийин жеткирилет, саат %{time}",
+        "delivery": "Жеткирүү, %{time}",
+        "duties_and_taxes_title": "Бажы алымдары жана салыктар",
+        "shipping_information_required_notice": "Жеткирүү маалыматын көрсөтүү керек. {{link}}.",
+        "shipping_information_redirect_link": "Керектүү маалыматтарды бул жерге киргизиңиз",
+        "loading_progressive_rates": "Башка баадагы сунуштарды издеп жатабыз...",
+        "no_other_methods_available": "Башка варианттары жок",
+        "duties_and_taxes_options": {
+          "ddu_title": "Албаганда төлөө",
+          "ddu_caption": "Кошумча комиссиялар алынышы мүмкүн",
+          "ddp_title": "Төлөө",
+          "ddp_caption": "Жеткирүү үчүн кошумча комиссиялар жок"
+        },
+        "shipping_method_combinations": {
+          "combination": "%{rest} жана %{current}"
+        },
+        "shipping_used_as_billing_notice": "Бул дарек ушул заказ үчүн эсеп-фактура дареги катары колдонулат.",
+        "address_update": "Даректи жаңыртуу",
+        "shipping_address_title": "Жеткирүү дареги",
+        "add_address": "Башка даректи колдонуу",
+        "add_delivery_instructions": "Жарнаманы жеткирүү боюнча нускамалар",
+        "edit": "Түзөтүү",
+        "delete": "Жок кылуу",
+        "address_more": "Бул жеткирүү дареги үчүн башка аракеттерди көрсөтүү",
+        "address_edit": "Даректи өзгөртүү",
+        "address_delete": "Даректи жок кылуу",
+        "address_confirm": "Бул даректи аккаунттан жок кылгыңыз келеби?",
+        "address_form": {
+          "add_address": "Дарек кошуу",
+          "save": "Сактоо",
+          "cancel": "Жокко чыгаруу",
+          "generic_error": "Даректи сактоодо көйгөй жаралды. Кайталап көрүңүз.",
+          "one_time_address_subtitle": "Көрсөтүлгөн даректи бул буйрутма үчүн гана колдонуу",
+          "edit": "Даректи өзгөртүү",
+          "update": "Өзгөртүүлөрдү сактоо"
+        },
+        "different_shipping_method_summary": "Жеткирип берүүнүн жеткиликтүү ыкмаларын көрүү үчүн башка жеткирүү дарегин көрсөтүңүз",
+        "invalid_shipping_method_summary": "Жеткиликтүү жеткирүү ыкмаларын көрүү үчүн жеткирүү дарегин киргизиңиз.",
+        "method_summary": {
+          "incomplete_address_entered": "Жеткиликтүү жеткирүү ыкмаларын көрүү үчүн толук жеткирүү дарегиңизди киргизиңиз.",
+          "incomplete_address_selected": "Жеткиликтүү жеткирүү ыкмаларын көрүү үчүн толук жеткирүү дарегин тандаңыз."
+        },
+        "local_pickup": {
+          "search_address": "Даректерди издөө",
+          "rollup_title": "Өз алдынча алып кетүү пункту",
+          "rollup_accessibility_label": "Алуучу жайлардын түрлөрү"
+        },
+        "missing_shipping_address": "Жеткирүү дареги жок",
+        "delivery_title": "Жеткирүү",
+        "shipping_method_first_shipment_group_title": {
+          "one": "Биринчи буйрутма",
+          "other": "Биринчи заказдар",
+          "few": "Биринчи заказдар",
+          "many": "Биринчи буйрутмалар"
+        },
+        "shipping_method_recurring_shipments_group_title": {
+          "one": "Туруктуу буйрутма",
+          "other": "Туруктуу заказдар",
+          "few": "Туруктуу буйрутмалар",
+          "many": "Туруктуу буйрутмалар"
+        },
+        "address_default": "Демейки кылып коюу",
+        "split_shipping_merchandise_quantity_label_standard": "Элементтери: %{quantity}",
+        "split_shipping_merchandise_quantity_label_additional": "жана дагы %{quantity}",
+        "split_shipping_merchandise_shipment_number": "%{total} ичинен %{number} жөнөтүү",
+        "pre_order_ships_now": "Азыр жөнөтүлөт",
+        "pre_order_ships_later": "Кийинчерээк жөнөтүлөт",
+        "pre_order_ships_date": "%{date} жөнөтүлөт",
+        "split_shipping_shipped_by_shop": "Жөнөтүүчү: %{shop_name}",
+        "split_shipping_multiple_shipment_label": "Бир нече посылка",
+        "split_shipping_shipping_label": "Ыкма",
+        "split_shipping_multiple_shipment_quantity_label": "Жүктөрдүн саны: %{quantity}",
+        "split_shipping_multiple_shipment_notice": "Сиздин буйрутмаңыз бир нече посылкага бөлүнгөн",
+        "split_shipping_multiple_shipment_notice_one_time_purchase": "Сиздин заказыңыз бир нече (%{quantity}) посылкага бөлүндү",
+        "split_shipping_more_shipping_options": "Жеткирүүнүн башка варианттары",
+        "split_shipping_merchandise_quantity_label_inline_primary": "Саны: %{quantity}",
+        "split_shipping_option_free": "Акысыз жеткирүү",
+        "split_shipping_option_lowest_price": "Эң төмөнкү баа",
+        "split_shipping_option_fastest": "Эң тез",
+        "split_shipping_option_recommended": "Сунушталат"
       }
     }
   }
