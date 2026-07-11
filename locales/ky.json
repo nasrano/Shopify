@@ -1,0 +1,137 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "shopify": {
+    "checkout": {
+      "thank_you": {
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_phone": "Төлөм аяктагандан кийин ырастоо SMS билдирүүсүн аласыз. Shop тиркемеси аркылуу заказыңызды байкасаңыз болот.",
+        "order_status_payments_app_failed_pending_payment": "Буйрутма үчүн төлөм алынган жок. Буйрутманы көрүү жана кайра төлөп көрүү үчүн корзинага кайтыңыз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_email_pick_up": "Төлөм аяктагандан кийин сизге электрондук почта аркылуу ырастоочу кат келет. Буйрутманы Shop колдонмосу аркылуу көзөмөлдөңүз.",
+        "thank_you_confirmed_order_with_missing_payment": "Заказды ырастоо үчүн биз менен электрондук почта же телефон аркылуу байланышыңыз.",
+        "thank_you_confirmed_order_with_missing_pick_up": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "thank_you_confirmed_order_with_draft_payment": "Эгерде кошумча маалымат керек болсо же заказыңыз ырасталганда, сизге билдиребиз.",
+        "thank_you_confirmed_order_with_draft_pick_up": "Эгер кошумча маалымат керек болсо же буйрутмаңыз ырастоодон өтсө, биз сизге билдиребиз.",
+        "thank_you_payments_app_failed_pending_payment_payment": "Заказ үчүн төлөм алынган жок. Заказды көрүү жана аны кайра төлөө аракетин кылуу үчүн корзинага кайтыңыз.",
+        "thank_you_payments_app_failed_pending_payment_pick_up": "Заказ үчүн төлөм алынган жок. Заказды көрүү жана аны кайра төлөөгө аракет кылуу үчүн корзинага кайтыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_missing": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_missing_payment": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_missing_pick_up": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_email_and_phone_payment": "Жакында сиз электрондук почта аркылуу ырастоо аласыз. Shop колдонмосу аркылуу буйрутмаңызга көз салыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_email_and_phone_pick_up": "Жакында сиз ырастоочу электрондук кат аласыз. Буюртмаңызга Shop колдонмосу аркылуу көз салыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_email_payment": "Жакында сиз ырастоочу электрондук кат аласыз. Заказыңызды Shop колдонмосу аркылуу көзөмөлдөңүз.",
+        "order_status_payments_app_pending_payment_description_default_with_email_pick_up": "Жакында сиз ырастоочу электрондук кат аласыз. Буюртмаңызга Shop колдонмосу аркылуу көз салыңыз.",
+        "order_status_payments_app_pending_payment_description_default_with_phone_payment": "Жакында сиз ырастоочу SMS аласыз. Заказыңызды Shop колдонмосу аркылуу көзөмөлдөңүз.",
+        "order_status_payments_app_pending_payment_description_default_with_phone_pick_up": "Жакында сиз ырастоо SMS аласыз. Shop тиркемеси аркылуу заказыңызга көз салыңыз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_missing": "Буйрутмаңыздын ырасталышын алуу үчүн биз менен электрондук почта же телефон аркылуу байланышыңыз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_missing_payment": "Заказды ырастоо үчүн биз менен электрондук почта же телефон аркылуу байланышыңыз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_missing_pick_up": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_email_and_phone_payment": "Төлөм аяктагандан кийин ырастоочу электрондук кат аласыз. Буйрутмаңызды Shop колдонмосу аркылуу көзөмөлдөңүз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_email_and_phone_pick_up": "Төлөм аяктагандан кийин ырастоочу электрондук кат аласыз. Буйрутмаңызды Shop тиркемесинен көзөмөлдөңүз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_email_payment": "Төлөм аяктагандан кийин ырастоочу электрондук кат аласыз. Буйрутмаңызды Shop колдонмосу аркылуу көзөмөлдөңүз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_phone_payment": "Төлөм аяктагандан кийин ырастоо SMS билдирүүсүн аласыз. Shop тиркемеси аркылуу заказыңызды көзөмөлдөңүз.",
+        "order_status_payments_app_pending_payment_description_buyer_action_required_with_phone_pick_up": "Төлөм аяктагандан кийин ырастоо SMS билдирүүсүн аласыз. Shop тиркемеси аркылуу заказыңызга көз салыңыз.",
+        "order_status_payments_app_failed_pending_payment_payment": "Заказ үчүн төлөм алынган жок. Заказды көрүү жана аны кайра төлөө үчүн арабага кайтып барыңыз.",
+        "order_status_payments_app_failed_pending_payment_pick_up": "Заказ үчүн акы алынган жок. Заказды көрүү жана аны кайра төлөп көрүү үчүн, корзинага кайтыңыз.",
+        "order_status_confirmed_order_local_pick_up": "Сиздин заказыңыз жөнөтүүгө даярдалууда.",
+        "order_status_confirmed_order_local_payment": "Сиздин буйрутмаңыз жөнөтүүгө даярдалып жатат.",
+        "thank_you_payments_app_pending_payment_description_default_with_missing": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта же телефон аркылуу байланышыңыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_missing_payment": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта же телефон аркылуу байланышыңыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_missing_pick_up": "Буйрутманы ырастоо үчүн биз менен электрондук почта же телефон аркылуу байланышыңыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_email_and_phone": "Жакында сиз электрондук кат аркылуу ырастоону жана буйрутмаңыздын номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_email_and_phone_payment": "Жакында сиз ырастоочу электрондук катты жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_email_and_phone_pick_up": "Жакында сиз ырастоочу электрондук катты жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_email": "Жакында сиз ырастоочу электрондук катты жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_email_payment": "Жакында сиз электрондук почта аркылуу ырастоо жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_email_pick_up": "Жакында сиз электрондук почта аркылуу ырастоочу катты жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_phone": "Жакында сиз ырастоочу билдирүүнү жана буйрутмаңыздын номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_phone_payment": "Жакында сиз ырастоочу билдирүүнү жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_default_with_phone_pick_up": "Жакында сиз ырастоочу билдирүүнү жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_missing": "Буйрутмаңызды ырастоо үчүн электрондук почта же телефон аркылуу биз менен байланышыңыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_missing_payment": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_missing_pick_up": "Буйрутмаңызды ырастоо үчүн биз менен электрондук почта аркылуу же телефон аркылуу байланышыңыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_email_and_phone": "Төлөм аяктагандан кийин, сиз электрондук почта аркылуу ырастоону жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_email_and_phone_payment": "Төлөм аяктагандан кийин ырастоочу электрондук кат жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_email_and_phone_pick_up": "Төлөм аяктагандан кийин ырастоочу электрондук кат жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_email": "Төлөм ишке ашкандан кийин, сиз тастыктоочу электрондук кат жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_email_payment": "Төлөм аяктагандан кийин ырастоочу электрондук катты жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_email_pick_up": "Төлөм аяктагандан кийин ырастоочу электрондук кат жана буйрутма номери келет.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_phone": "Төлөм аяктагандан кийин электрондук кат аркылуу ырастоо жана буйрутма номерин аласыз.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_phone_payment": "Төлөм аяктагандан кийин ырастоочу билдирүү жана буйрутма номери келет.",
+        "thank_you_payments_app_pending_payment_description_buyer_action_required_with_phone_pick_up": "Төлөм аяктагандан кийин ырастоочу билдирүү жана буйрутма номери келет.",
+        "vat_invoices": {
+          "title": "КНС эсептери"
+        },
+        "thank_you_payments_app_pending_payment_description_provider_action_required_default": "Сиздин төлөмүңүз иштетилип жатат. Төлөм ырасталгандан кийин электрондук почтаңызга кат аласыз.",
+        "verify_shop_account_title": "Shop аккаунтуңузду ырастаңыз",
+        "verify_shop_account_message": "Маалыматыңыз Shop'то сакталды. Жүздөгөн миң дүкөндөрдө автоматтык түрдө колдонуу үчүн аккаунтуңузду ырастаңыз.",
+        "verify_shop_account_cta": "Каттоо эсебин ырастоо",
+        "verify_shop_account_confirmation": "Буйрутманы толтуруу үчүн маалыматтар сакталды",
+        "company_location_section_title": "Компания жана жайгашкан жери",
+        "announcement": {
+          "close": "Жабуу",
+          "expand": "Жайылтуу",
+          "collapse": "Кичирейтүү"
+        },
+        "confirmed_items_count": "%{total_count} объекттин ичинен %{confirmed_count} тастыкталды",
+        "thank_you_confirmed_orders_with_email": "Жакында сиз ырастоочу электрондук каттарды жана заказдарыңыздын номерлерин аласыз",
+        "thank_you_confirmed_orders_with_phone": "Жакында сиз ырастоочу SMS-билдирүүлөрүн жана буйрутмаңыздын номерлерин аласыз",
+        "thank_you_confirmed_orders_with_email_and_phone": "Жакында сиз ырастоочу электрондук каттарды жана заказыңыздын номерлерин аласыз",
+        "track_your_order_link_text": "Буйрутмаңызга көз салыңыз",
+        "checkout_on_remote_shop_link_text": "%{remoteShopName} дүкөнүнө заказ берүү",
+        "confirmed_orders_title": "Сиздин заказдарыңыз ырасталды",
+        "thank_you_unconfirmed_items_heading": {
+          "one": "1 тастыкталбаган продукт",
+          "other": "Кээ бир товарлар тастыкталган жок",
+          "few": "Кээ бир товарлар тастыкталган эмес",
+          "many": "Кээ бир товарлар тастыкталган эмес"
+        },
+        "thank_you_unconfirmed_items_description": {
+          "one": "Ал үчүн сиздеги каражат чегерилген эмес",
+          "other": "Алар үчүн сизден каражат алынган жок",
+          "few": "Сизден алар үчүн каражат алынган жок",
+          "many": "Алар үчүн сиздин эсебиңизден акча алынган жок"
+        },
+        "thank_you_from_shop": "%{shop_name} дүкөнүнөн",
+        "thank_you_item_label": {
+          "one": "%{count} буюм",
+          "other": "%{count} нерсе",
+          "few": "%{count} буюм",
+          "many": "%{count} нерсе"
+        },
+        "payment_method_not_charged": "Эсептен чыгарылган жок",
+        "items_fulfilled_by_store": {
+          "one": "Сиз сатып алган товарлар %{remote_shop_name} дүкөнүнөн жөнөтүлөт.",
+          "other": "Сиз сатып алган товарлар башка дүкөндөрдөн келет.",
+          "few": "Сиз сатып алган товарлар башка дүкөндөрдөн келет.",
+          "many": "Сиз сатып алган товарлар башка дүкөндөрдөн келет."
+        },
+        "thank_you_confirmed_with_email_description": {
+          "single_store": "Жакында сиз ырастоочу электрондук кат аласыз",
+          "multi_store": "Жакында ар бир дүкөндөн өзүнчө ырастоочу электрондук кат аласыз"
+        },
+        "thank_you_confirmed_with_phone_description": {
+          "single_store": "Жакында сиз ырастоочу SMS-билдирүү аласыз",
+          "multi_store": "Жакында ар бир дүкөндөн өзүнчө SMS ырастоолорду аласыз"
+        },
+        "thank_you_confirmed_with_email_and_phone_description": {
+          "single_store": "Жакында сиз ырастоочу электрондук кат аласыз",
+          "multi_store": "Жакында ар бир дүкөндөн өзүнчө ырастоочу электрондук каттарды аласыз"
+        },
+        "thank_you_from_other_store": "Башка дүкөндөн",
+        "checkout_on_another_store": "Башка дүкөндөн буйрутма берүү",
+        "checkout_again": "Кайрадан буйрутма берүү",
+        "cashback_notice": "Кэшбэк сизге 30 күндөн кийин түшөт"
+      },
+      "review": {
+        "title": "Көрүү"
+      }
+    }
+  }
+}
