@@ -280,13 +280,11 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-cat-back{display:inline-flex;align-items:center;gap:6px;border:none;background:none;color:var(--sub);font-weight:700;font-size:12.5px;padding:12px 0 4px;cursor:pointer;font-family:'Manrope',sans-serif}
 .privat-cat-back:hover{color:var(--accent)}
 
-.privat-account{flex:1;min-height:0;overflow-y:auto;padding:20px 22px calc(28px + env(safe-area-inset-bottom))}
-.privat-account__text{font-size:13.5px;line-height:1.6;color:var(--sub);margin:0 0 16px}
+.privat-account{flex:1;min-height:0;overflow-y:auto;padding:12px 22px calc(20px + env(safe-area-inset-bottom))}
+.privat-account__text{font-size:13px;line-height:1.55;color:var(--sub);margin:0 0 12px}
+.privat-account .privat-input{margin-bottom:8px;padding:12px 20px}
 .privat-account__links{display:flex;flex-direction:column;gap:8px}
 .privat-account__links .privat-btn{text-align:center}
-.privat-acc-perks{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
-.privat-acc-perks__row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--sub)}
-.privat-acc-perks__row .privat-trust__dot{flex:none}
 .privat-input{width:100%;border:1.5px solid var(--line);border-radius:100px;background:var(--card);padding:14px 20px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--ink);outline:none;margin-bottom:10px}
 .privat-input--search{padding:13px 20px}
 .privat-account__submit{width:100%;border:none;cursor:pointer;background:var(--ink);color:var(--bg);font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;padding:15px;border-radius:100px}

@@ -12,7 +12,7 @@
       </div>
       <a href="{{ routes.account_logout_url }}" class="privat-account__submit" style="display:block;text-align:center;text-decoration:none;margin-top:10px">Выйти</a>
     {% else %}
-      <p class="privat-account__text">Войдите по email — заказы, адреса и статус доставки будут под рукой. Никаких лишних данных.</p>
+      <p class="privat-account__text">Заказы, адреса и статусы доставки — под рукой. Никаких лишних данных.</p>
       {% form 'customer_login' %}
         <input class="privat-input" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
         <input class="privat-input" type="password" name="customer[password]" placeholder="Пароль" autocomplete="current-password" required>
@@ -22,17 +22,12 @@
         <a href="{{ routes.account_login_url }}#recover" onclick="document.querySelector('[data-drawer=acc] [data-acc-recover]').style.display='block';this.closest('.privat-form-links').style.display='none';return false">Забыли пароль?</a>
         <a href="{{ routes.account_register_url }}">Регистрация</a>
       </div>
-      <div data-acc-recover style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+      <div data-acc-recover style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
         <p class="privat-form-note">Укажите email — пришлём ссылку для восстановления пароля.</p>
         {% form 'recover_customer_password' %}
           <input class="privat-input" type="email" name="email" placeholder="Email" autocomplete="email" required>
           <button type="submit" class="privat-account__submit">Восстановить пароль</button>
         {% endform %}
-      </div>
-      <div class="privat-acc-perks">
-        <div class="privat-acc-perks__row"><span class="privat-trust__dot"></span>История и статусы заказов — всегда под рукой</div>
-        <div class="privat-acc-perks__row"><span class="privat-trust__dot"></span>Сохранённые адреса — оформление в пару касаний</div>
-        <div class="privat-acc-perks__row"><span class="privat-trust__dot"></span>Полная приватность: никто не увидит ваши заказы</div>
       </div>
     {% endif %}
   </div>
