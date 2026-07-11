@@ -445,7 +445,7 @@
             var variantId = p.variant_id || (p.variants && p.variants[0] && p.variants[0].id) || '';
             return '' +
               '<div class="privat-search__row">' +
-                '<a href="' + p.url + '" class="privat-line-item__thumb" style="width:46px;height:46px;' + img + '"></a>' +
+                '<a href="' + p.url + '" class="privat-line-item__thumb" style="width:46px;height:46px;min-height:46px;' + img + '"></a>' +
                 '<div class="privat-search__row-body">' +
                   '<a href="' + p.url + '" class="privat-search__row-name" style="color:inherit;text-decoration:none">' + p.title + '</a>' +
                   '<div class="privat-search__row-price">' + p.price + '</div>' +
