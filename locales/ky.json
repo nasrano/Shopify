@@ -3463,7 +3463,8 @@
           "six_and_more_products_accessibility_label": "Буйрутмада {{lineItemName1}} — {{lineItemQuantity1}} даана, {{lineItemName2}} — {{lineItemQuantity2}} даана, {{lineItemName3}} — {{lineItemQuantity3}} даана, {{lineItemName4}} — {{lineItemQuantity4}} даана, {{lineItemName5}} — {{lineItemQuantity5}} даана, {{lineItemName6}} — {{lineItemQuantity6}} даана жана башкалар камтылган",
           "view_order_details": "Заказ маалыматтарын көрүү",
           "previous": "Артка",
-          "next": "Андан ары"
+          "next": "Андан ары",
+          "one_products_accessibility_label": "Заказ камтыйт {{lineItemName1}} — {{lineItemQuantity1}} даана."
         },
         "show_order_actions_accessibility_label": "{{name}} буйрутмасы менен болгон аракеттерди көрсөтүү",
         "empty_state_title_for_pending_orders": "Ырасталууну күткөн буйрутмалар жок",
@@ -3511,7 +3512,83 @@
         "empty_state_redesign_subtitle": "Соода кылууга даярсызбы?",
         "empty_state_redesign_welcome": "Кош келиңиз",
         "empty_state_redesign_welcome_with_name": "Кош келиңиз, {{firstName}}",
-        "sort_options_accessibility_label": "Тастыкталган буйрутмаларды иргөө жолдору"
+        "sort_options_accessibility_label": "Тастыкталган буйрутмаларды иргөө жолдору",
+        "column_headers": {
+          "total": "Жалпы сумма",
+          "order": "Тапшырык",
+          "actions_accessibility_label": "Аракеттер",
+          "products_accessibility_label": "Азыктар"
+        },
+        "delivered": "Жеткирүү {{date}}",
+        "empty_state_order_source_description": "<p>Бул жерде {{email}} колдонуучусу тарабынан берилген буйрутмалар гана көрсөтүлөт.</p>",
+        "empty_state_subtitle": "Буйрутма берүү үчүн дүкөнгө өтүңүз.",
+        "empty_state_title": "Азырынча заказдар жок",
+        "estimated_delivery": "Жеткирүү болжолдуу датасы: {{date}}",
+        "items": {
+          "other": "Позициялар: {{count}}",
+          "few": "Позициялар: {{count}}",
+          "many": "Позициялар: {{count}}"
+        },
+        "order_link": "Буйрутманы көрүү {{name}}",
+        "orders_title": "Тастыкталды",
+        "pagination": {
+          "nav_accessibility_label": "Буйрутмалар боюнча навигация баскычтары",
+          "next": "Уландысы",
+          "next_accessibility_label": "Кийинки буйрутмалар",
+          "previous": "Артка",
+          "previous_accessibility_label": "Мурдагы заказдар",
+          "load_more": "Дагы көрсөтүү",
+          "load_more_accessibility_label": "Дагы заказдарды көрсөтүү"
+        },
+        "sort_by": "Сорттоо: {{option}}",
+        "sort_hide_options_accessibility_label": "Тастыкталган буйрутмалар үчүн сорттоо параметрлерин жашыруу.",
+        "sort_show_options_accessibility_label": "Ырасталган буйрутмалар үчүн сорттоо параметрлерин көрсөтүү.",
+        "sort_title": "Сорттоо",
+        "sort": {
+          "date": {
+            "newest": "Жаңыдан эскиге карай",
+            "oldest": "Эскиден жаңыга"
+          },
+          "location": {
+            "ascending": "Жайгашуусу (A-Z)",
+            "descending": "Жайгашуусу (Z-A)"
+          },
+          "order_number": {
+            "ascending": "Заказдын номери (өсүү тартибинде)",
+            "descending": "Заказдын номери (кемип көрсөтүлгөн)"
+          },
+          "order_total": {
+            "ascending": "Буйрутманын жалпы суммасы (өсүү тартибинде)",
+            "descending": "Буйрутманын жалпы суммасы (кемитилген тартипте)"
+          }
+        },
+        "one_images_accessibility_label": "Заказдын курамында {{lineItemName1}} бар",
+        "two_images_accessibility_label": "Заказ камтыйт {{lineItemName1}}, {{lineItemName2}}",
+        "three_images_accessibility_label": "Буйрутмада төмөнкүлөр камтылган: {{lineItemName1}}, {{lineItemName2}}, {{lineItemName3}}",
+        "no_filtered_results_description": "Буйрутмаларыңызды көрүү үчүн чыпкаларды өчүрүңүз же өзгөртүңүз",
+        "no_filtered_results_title": "Чыпка колдонулгандан кийин натыйжа жок",
+        "payment_status": {
+          "list_view": {
+            "overdue": "Мөөнөтү өтүп кетти",
+            "due": "Жарамдуу: {{date}}",
+            "due_today": "Төлөө мөөнөтү бүгүн",
+            "due_without_date": "Мөөнөт",
+            "due_on_fulfillment": "Аткарууга даяр",
+            "pay_to_confirm": "Ырастоо үчүн төлөңүз",
+            "payment_not_due": "Мөөнөтү али келе элек",
+            "paid": "Төлөндү"
+          },
+          "gallery_view": {
+            "overdue": "Төлөм мөөнөтү өтүп кетти",
+            "due": "Төлөмдү ишке ашыруу мөөнөтү: {{date}}",
+            "due_today": "Төлөмдү ишке ашыруу мөөнөтү",
+            "due_without_date": "Төлөмдү аткаруу мөөнөтү",
+            "due_on_fulfillment": "Төлөм аткарууга даяр",
+            "pay_to_confirm": "Төлөп, ырастоо үчүн",
+            "payment_not_due": "Төлөмдү аткаруу мөөнөтү али келе элек"
+          }
+        },
+        "sort_currently_sorted_by_accessibility_label": "Учурдагы иреттөө: {{option}}"
       },
       "order_status": {
         "canceled_label": "Жокко чыгарылды",
@@ -3709,7 +3786,9 @@
       "manage_accessiblity_label": "Буйрутманы иреттөө {{orderId}}",
       "fulfillment_status_title": "Аткаруу статусу: {{status}}",
       "list_title_with_pending_orders": "Буйрутмалар:",
-      "list_title_confirmed_orders_accessibility_label": "Буйрутмалар: ырасталды"
+      "list_title_confirmed_orders_accessibility_label": "Буйрутмалар: ырасталды",
+      "list_layout_accessibility_label": "Белгилөө параметрлери",
+      "list_title": "Буюртмалар"
     },
     "order_details": {
       "addresses_section_title": "Төлөм жана жеткирүү",
@@ -4020,7 +4099,61 @@
           "name_cannot_contain_html_tags": "«{{fieldName}}» мааниси HTML-тегдерин камтыбашы керек.",
           "email_cant_be_blank": "Электрондук почта дареги бош болбошу керек",
           "invalid_email_format": "Жарактуу электрондук почта дарегин киргизиңиз"
+        },
+        "editable_email_help_text": "Бул электрондук почта дареги тутумга кирүү жана буйрутмаларды жаңыртуу үчүн колдонулат."
+      },
+      "profile_update_confirmation_message": "Профиль жаңыртылды",
+      "people": {
+        "pagination": {
+          "load_more": "Дагы көрсөтүү",
+          "load_more_accessibility_label": "Дагы адамдарды көрсөт",
+          "loading_accessibility_label": "Колдонуучуларды жүктөө"
         }
+      },
+      "add_button": "Кошуу",
+      "verify_new_email_modal": {
+        "title": "Жаңы электрондук почта дарегин ырастаңыз",
+        "description": "Эми жаңы электрондук почтаңызга жөнөтүлгөн 6 орундуу кодду киргизиңиз:",
+        "one_time_password_label": "6 орундуу код",
+        "email_resend_button": "Кодду кайра жөнөтүү",
+        "email_resend_button_accessibility_label": "Тастыктоо кодун кайра жөнөтүү",
+        "verify_button": "Ырастоо",
+        "verify_button_accessibility_label": "Бир жолку сырсөздү ырастоо",
+        "cancel_button": "Жокко чыгаруу",
+        "cancel_button_accessibility_label": "Профильди оңдоону жокко чыгаруу",
+        "email_resend_button_success_toast_message": "Ырастоо коду жөнөтүлдү",
+        "email_resend_button_failure_banner_message": "Текшерүү кодун жөнөтүү мүмкүн болбой калды"
+      },
+      "email_update_success_modal": {
+        "title": "Электрондук почтаңызды ырастаңыз",
+        "description": "Электрондук почта дареги ийгиликтүү ырасталды. Кирүү барагына багыттоо."
+      },
+      "email_update_confirmation_message": "Электрондук почта дареги {{email}} дарегине өзгөртүлдү",
+      "verify_current_email_modal": {
+        "cancel_button": "Жокко чыгаруу",
+        "cancel_button_accessibility_label": "Профильди түзөтүүнү жокко чыгаруу",
+        "description": "Эски электрондук почтаңызга жөнөтүлгөн 6 орундуу кодду киргизиңиз:",
+        "email_resend_button_accessibility_label": "Текшерүү кодун кайра жөнөтүү",
+        "title": "Бул сиз экениңизди ырастаңыз",
+        "verify_button": "Кийинки",
+        "verify_button_accessibility_label": "Учурдагы электрондук почта дарегиңизди ырастаңыз"
+      },
+      "marketing_preferences": {
+        "email_label": "Электрондук почта",
+        "pending_confirmation": "Ырастоо үчүн, электрондук почтаңыздагы шилтемеге өтүңүз.",
+        "resend_email": "Кайра жөнөтүү",
+        "resend_email_success": "Шилтеме жөнөтүлдү",
+        "title": "Маркетинг жөндөөлөрү",
+        "unsubscribe_confirmation": {
+          "cancel": "Жокко чыгаруу",
+          "description": "Сиз мындан ары {{shopName}} дүкөнүнөн жарнамалык каттарды албайсыз",
+          "title": "Катталууну токтотуу керекпи?",
+          "unsubscribe": "Жазылууну токтотуу"
+        },
+        "update_error": {
+          "description": "Маркетинг жөндөөлөрүн жаңыртууда көйгөй келип чыкты. Бул баракты жаңыртып көрүңүз же интернет байланышыңызды текшериңиз."
+        },
+        "update_success": "Маркетинг жөндөөлөрү жаңыртылды"
       }
     }
   },
