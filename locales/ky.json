@@ -602,8 +602,39 @@
         "discount_codes_modified_summary": {
           "one": "%{count} арзандатуу коду өзгөртүлдү",
           "other": "Арзандатуу коддору (%{count}) өзгөртүлдү",
-          "few": "Арзандатуу коддору (%{count}) өзгөртүлдү"
-        }
+          "few": "Арзандатуу коддору (%{count}) өзгөртүлдү",
+          "many": "Арзандатуу коддору (%{count}) өзгөртүлдү"
+        },
+        "discount_codes_removed_or_modified_summary": {
+          "one": "Арзандатуу коду (%{count}) өчүрүлдү же өзгөртүлдү",
+          "other": "Арзандатуу коддору (%{count}) өчүрүлдү же өзгөртүлдү",
+          "few": "Арзандатуу коддору (%{count}) өчүрүлдү же өзгөртүлдү",
+          "many": "Арзандатуу коддору (%{count}) өчүрүлдү же өзгөртүлдү"
+        },
+        "multiple_primary_payment_not_allowed": "Жараксыз төлөм ыкмалары",
+        "purchase_options_subscription_agreement_label": "Сиздин корзинаңызда автоматтык түрдө жаңыртылуучу жазылуу бар. «%{button_label}» баскычын басуу менен, %{consent_text} %{cancellation_instructions}",
+        "purchase_options_subscription_consent_text": "сиз өзүңүздүн себетте көрсөтүлгөн туруктуу төлөмдүн суммасы (суммалары) (кошумча жеткирүү жана салыктар менен) жазылуу (жазылуулардын) мөөнөтү аяктаганга чейин же сиз тарабынан жокко чыгарылганга чейин автоматтык түрдө алынып салынышына түз жана эч кандай шартсыз макулдугуңузду бересиз.",
+        "purchase_options_subscription_cancellation_instructions": "%{cancel_text} Сураныч, эрежелер менен таанышыңыз: %{cancellation_policy_label}.",
+        "purchase_options_subscription_cancel_text": "Сиз каалаган убакта аккаунтуңуздан же дүкөнгө кайрылуу менен жазылууну жокко чыгара аласыз.",
+        "vault_for_payment_later": {
+          "pay_button_label": "Буйрутманы тариздөө",
+          "notice": "Азыр каражат алынбайт. Төлөмдү улантуу менен, сиз буйрутма иштетилгенде, төлөм ыкмаңыздан каражат алууга макулдугуңузду бересиз."
+        },
+        "pay_with_credit_card": "Кредиттик карта менен төлөө",
+        "pay_with_debit_card": "Дебет картасы менен төлөө",
+        "bogus_test_checkout": {
+          "description": "Ийгиликтүү төлөм жүргүзүү үчүн карта номери катары 1ди киргизиңиз, каалаган келечектеги жарактуулук мөөнөтүн жана 3 орундуу коопсуздук кодун колдонуңуз.",
+          "title": "Тестирлөө боюнча нускама",
+          "intro": "Буйрутманы текшерүү үчүн төмөнкү маанилерди колдонуңуз:",
+          "approved_transaction": "{{card_number}} — ырасталган транзакцияны имитациялоо үчүн",
+          "declined_transaction": "{{card_number}} — четке алынбаган транзакцияны имитациялоо үчүн",
+          "gateway_failure": "{{card_number}} — шлюздун иштебей калгандыгын тууроо үчүн",
+          "additional_instructions": "Келечектеги каалаган жарактуулук мөөнөтүн жана каалаган үч орундуу коопсуздук кодун колдонуңуз."
+        },
+        "order_edit_banner_single_item_updated": "Жаңыртылды",
+        "order_edit_banner_previous_taxes_label": "Мурдагы салыктар:",
+        "order_edit_banner_new_taxes_label": "Жаңы салыктар:",
+        "order_edit_banner_no_taxes_label": "Жок"
       },
       "localized_fields": {
         "additional_information": {
@@ -1027,6 +1058,81 @@
             "billing_address2": "Эсеп-фактура дарегиңиздин үйүнүн, батиринин ж.б. номерин жазыңыз"
           }
         }
+      },
+      "payment_summary": {
+        "gift_card_current_balance_notice": "Учурдагы баланс: %{amount}",
+        "credit_card_expires_on_notice": "Жарактуулук мөөнөтү %{month}/%{year} аяктайт",
+        "manual_payment_gateway_label": "Кол менен",
+        "billing_address_title": "Эсеп-фактура дареги",
+        "free_label": "Акысыз"
+      },
+      "field_errors": {
+        "handle_phone_invalid": "Жарамдуу телефон номерин киргизиңиз",
+        "handle_email_invalid": "Жарактуу электрондук почта дарегин көрсөтүңүз",
+        "email_invalid": "Жарактуу электрондук почта дарегин киргизиңиз",
+        "email_or_phone_blank": "Электрондук почтаңызды же телефон номериңизди киргизиңиз",
+        "email_or_phone_invalid": "Жарамдуу электрондук почта дарегин же мобилдик телефон номерин киргизиңиз",
+        "address_first_name_blank": "Аты-жөнүңүздү көрсөтүңүз",
+        "address_last_name_blank": "Фамилияңызды жазыңыз",
+        "address_address1_blank": "Даректи көрсөтүңүз",
+        "address_address2_blank": "Батирдин, апартаменттердин ж.б. номерин көрсөтүңүз.",
+        "address_city_blank": "Шаарды көрсөтүңүз",
+        "address_country_blank": "Өлкөнү/Аймакты тандаңыз",
+        "address_country_not_supported": "Биз бул өлкөгө же аймакка товар жеткирбейбиз. Башка жеткирүү дарегин киргизип, кайра аракет кылыңыз.",
+        "address_province_blank": "Штатты/провинцияны тандаңыз",
+        "address_company_blank": "Компаниянын аталышын жазыңыз",
+        "address_phone_blank": "Жарамдуу телефон номурун киргизиңиз",
+        "address_zip_blank": "Почта индексин киргизиңиз",
+        "address_zip_invalid_for_country": "\"%{country}\" үчүн жарактуу почта индексин киргизиңиз",
+        "address_zip_invalid_for_country_and_province": "%{country} өлкөсүнүн %{province} аймагы үчүн жарактуу почта индексин киргизиңиз",
+        "credit_card_name_blank": "Картаңыздагыдай эле аты-жөнүңүздү толугу менен жазыңыз",
+        "credit_card_name_invalid": "Картада көрсөтүлгөндөй, аты-жөнүңүздү так жазыңыз",
+        "credit_card_number_invalid": "Жарактуу карта номерин көрсөтүңүз",
+        "credit_card_expiry_invalid": "Жарамдуулук мөөнөтүнүн бүтүү датасын киргизиңиз",
+        "credit_card_month_invalid": "Жарактуулук мөөнөтүнүн бүткөн айын киргизиңиз",
+        "credit_card_year_invalid": "Жарамдуулук мөөнөтү бүтө турган жылды көрсөтүңүз",
+        "credit_card_start_invalid": "Картанын жарактуулук мөөнөтүнүн башталыш датасын көрсөтүңүз",
+        "credit_card_start_month_invalid": "Картанын жарактуулук мөөнөтү башталган айды көрсөтүңүз",
+        "credit_card_start_year_invalid": "Картанын жарактуулук мөөнөтүнүн башталган датасынын жарактуу жылын көрсөтүңүз",
+        "credit_card_verification_value_blank": "Картанын CVV же коопсуздук кодун жазыңыз",
+        "delivery_line_detail_changed": "Жеткирүү маалыматтары өзгөргөн болушу мүмкүн. Жеткирүү ыкмасын ырастап, кайра аракет кылыңыз.",
+        "reduction_code_code_not_found": "Жарамдуу промокодду же белек картасынын кодун киргизиңиз",
+        "reduction_code_discount_not_found": "Жарамдуу промокодду киргизиңиз",
+        "reduction_code_gift_card_code_invalid": "Жарамдуу белек картасын көрсөтүңүз",
+        "reduction_code_gift_card_unusable": "Белек картасын башка белек картасын сатып алуу үчүн колдоно албайсыз",
+        "shipping_line_phone_blank": "Бул жеткирүү ыкмасын колдонуу үчүн телефон номериңизди киргизиңиз",
+        "shipping_line_phone_invalid": "Жарактуу телефон номерин киргизиңиз",
+        "gift_card_already_applied": "Белек картасы буга чейин буйрутмаңызга колдонулган",
+        "gift_card_disabled": "Бул белек картасы мындан ары жеткиликтүү эмес",
+        "gift_card_expired": "Бул белек картасынын жарактуулук мөөнөтү бүттү",
+        "gift_card_depleted": "Бул белек картасында каражат түгөндү",
+        "gift_card_currency_mismatch": "Бул заказга %{checkout_currency} форматындагы белек карталарын гана колдонсо болот",
+        "payment_gateway_needs_paid_plan_error": "Төлөөнүн бул ыкмасы учурда бул дүкөндө жеткиликсиз",
+        "payment_gateway_incompatible_with_multi_currency": "Учурдагы валютада буйрутманы бүтүрүү үчүн, сиз аны кредиттик карта менен төлөшүңүз керек.",
+        "physical_gift_card_invalid_quantity": "Физикалык белек карталары бар буйрутмадагы позициялардын саны белек картасынын коддорунун санына дал келиши керек.",
+        "physical_gift_card_duplicate_code": "Физикалык белек карталары бар заказ позициясында кайталанма код камтылган.",
+        "physical_gift_card_invalid_code": "Физикалык белек картасынын коду жараксыз.",
+        "payment_gateway_not_in_test_mode": "тесттик буйрутмалар үчүн конфигурацияланган эмес. Бул дүкөн чыныгы буйрутмаларды же чыныгы төлөмдөрдү кабыл ала албайт.",
+        "tips_invalid_tip_amount": "%{amount}дан аз чайлык киргизиңиз",
+        "payment_gateway_unsupported_for_subscriptions": "Төлөмдүн бул ыкмасы жазылуу боюнча буйрутмалар үчүн жеткиликсиз.",
+        "address_first_name_too_long": "Аты өтө узун (255 белгиден ашпоого тийиш)",
+        "address_last_name_too_long": "Фамилия өтө узун (255 белгиден ашпоого тийиш)",
+        "address_address1_too_long": "Даректин биринчи сабы өтө узун (255 белгиден ашпашы керек)",
+        "address_address2_too_long": "Даректер тилкесинин экинчи сабы өтө узун (255 белгиден ашпашы керек)",
+        "address_city_too_long": "Шаардын аталышы өтө узун (255 белгиден ашпоого тийиш)",
+        "address_company_too_long": "Компаниянын аталышы өтө узун (255 белгиден ашпоого тийиш)",
+        "address_first_name_contains_html_tags": "Ысым HTML-тегдерин камтышы мүмкүн эмес.",
+        "address_last_name_contains_html_tags": "Фамилия HTML-тегдерди камтышы мүмкүн эмес.",
+        "address_address1_contains_html_tags": "Дарек 1 HTML тегдерди камтый албайт.",
+        "address_address2_contains_html_tags": "Дарек 2 HTML-тегдерди камтышы мүмкүн эмес.",
+        "address_city_contains_html_tags": "Шаардын аталышы HTML-тегдерин камтыбайт.",
+        "address_company_contains_html_tags": "Компаниянын аталышында HTML-тегдер болбошу керек.",
+        "address_first_name_contains_emojis": "Аты эмодзи камтышы мүмкүн эмес",
+        "address_last_name_contains_emojis": "Фамилия эмодзи камтышы мүмкүн эмес",
+        "address_address1_contains_emojis": "Дарек тилкеси 1 эмодзи камтышы мүмкүн эмес",
+        "address_address2_contains_emojis": "Дарек сабы 2 эмодзи камтыбашы керек",
+        "address_city_contains_emojis": "Шаардын аталышы эмодзи камтышы мүмкүн эмес",
+        "address_company_contains_emojis": "Компаниянын аталышы эмодзилерди камтыбашы керек"
       }
     }
   },
@@ -1521,7 +1627,111 @@
         "save_payment_method_button": "Сактоо",
         "cancel_edit_payment_method_button": "Жокко чыгаруу",
         "payment_method_updated_toast": "Төлөм ыкмалары өзгөртүлдү"
-      }
+      },
+      "store_credit": {
+        "details_modal": {
+          "events": {
+            "order_payment": "Буйрутманы төлөө",
+            "order_refund": "Заказ боюнча акчаны кайтаруу",
+            "payment_failure": "Төлөм катасы",
+            "payment_returned": "Төлөм кайтарылды",
+            "order_cancellation": "Буйрутманы жокко чыгаруу",
+            "tax_finalization": "Салыктын акыркы суммасын аныктоо"
+          }
+        },
+        "expirable_amounts_label": "Мөөнөтү бүтүп жаткан суммалар"
+      },
+      "three_d_secure": {
+        "verification_failed": "Төлөмүңүздү ырастоо мүмкүн болбой калды. Кайра аракет кылыңыз же башка төлөм ыкмасын тандаңыз."
+      },
+      "pay_pal": {
+        "iframe_title_accessibility_label": "PayPal аркылуу төлөө ыкмасын кошуу",
+        "loading_accessibility_message": "PayPal жүктөлүүдө",
+        "errors": {
+          "generic": "PayPal менен иштөөдө ката кетти. Кайра аракет кылыңыз же башка төлөм ыкмасын тандаңыз."
+        }
+      },
+      "card_update_consent_subscriptions": "Бул төлөм ыкмасы жаңы сатып алуулар үчүн сакталат жана бардык кайталануучу же кийинкиге калтырылган сатып алуулар үчүн колдонулушу мүмкүн.",
+      "add_payment_method_dropdown": {
+        "bank_account_consent": "Төлөө ыкмасын кошуу менен, сиз төлөмдү жокко чыгарбастан, келечектеги жактырган сатып алууларыңыз үчүн картаңыздан же банк эсебиңизден акча алууга уруксат бересиз."
+      },
+      "replacement_payment_method_title": "Башка төлөм ыкмасы",
+      "bank_account": {
+        "loading_accessibility_message": "Банктык эсеп баскычы жүктөлүп жатат",
+        "iframe_title_accessibility_label": "Банк эсебин жөндөө",
+        "display_name": "Банк эсеби",
+        "generic_error": "Банктык эсеп кошулган жок. Кийинчерээк кайталаңыз."
+      },
+      "update_payment_method": {
+        "title": "Төлөм ыкмасын жаңыртуу",
+        "button_title": "Жаңыртуу",
+        "billing_address": "Эсеп-фактура дареги",
+        "disclaimer": "Бул төлөм ыкмасы жаңы сатып алуулар үчүн сакталат жана бардык кайталануучу же кийинкиге калтырылган сатып алуулар үчүн колдонулушу мүмкүн.",
+        "error_message": "Төлөм ыкмасын жаңыртуу мүмкүн болбой калды",
+        "current": "Учурдагы",
+        "loading_form_accessibility_message": "Төлөм ыкмасын жаңыртуу формасы жүктөлүүдө",
+        "loading_current_payment_method": "Учурдагы төлөм ыкмасы жүктөлүүдө",
+        "loading_digital_wallets": "Санарип капчыктын варианттары жүктөлүүдө",
+        "loading_card_fields": "Кредиттик картанын талаалары жүктөлүүдө",
+        "subscriptions_title": "Жазылуулар",
+        "subscriptions_list_accessibility_label": "Жазылуу аркылуу товарлардын тизмеси",
+        "pre_orders_title": "Кийинки",
+        "pre_orders_list_accessibility_label": "Буйрутма күтүп жаткан товарлардын тизмеси",
+        "resources_list_accessibility_label": "Бул төлөм ыкмасын колдонгон жазылуу өнүмдөрү жана буйрутма күтүп жаткан өнүмдөр",
+        "resources_card_scroll": "Көбүрөөк өнүмдөрдү көрүү үчүн ылдый жылдырыңыз",
+        "resources_card_show_more": "Көбүрөөк көрсөтүү",
+        "resources_card_show_less": "Кичирээк көрсөтүү",
+        "loading_resources": "Жазылуулар жана алдыдагы буйрутмалар жүктөлүүдө"
+      },
+      "update_success": {
+        "title": "Төлөө ыкмасы өзгөртүлдү",
+        "done_button": "Улантуу"
+      },
+      "link_expired": {
+        "message": "Төлөм ыкмасын жаңыртуу үчүн шилтеменин колдонуу мөөнөтү бүттү.",
+        "return_home_button": "Башкы бетке кайтуу",
+        "update_message": "Төлөм ыкмасын жаңыртуу үчүн шилтеменин колдонуу мөөнөтү бүттү.",
+        "add_message": "Төлөм ыкмаңызды жаңыртуу үчүн бул шилтеменин колдонуу мөөнөтү бүттү."
+      },
+      "expired_badge_label": "Мөөнөтү бүттү",
+      "credit_card_title": "Кредиттик карта",
+      "or": "ЖЕ",
+      "additional_payment_methods": "Кошумча төлөм ыкмалары",
+      "add_success": {
+        "title": "Төлөө ыкмасы кошулду",
+        "done_button": "Соода кылууну улантуу"
+      },
+      "expiring_badge_label": "Жарактуулук мөөнөтү бүтөт"
+    },
+    "payment_method_brands": {
+      "visa": "Виза",
+      "shoppay": "Shop Pay",
+      "discover": "Табуу",
+      "dinersclub": "Дайнерс Клаб",
+      "elo": "Салам",
+      "maestro": "Маэстро",
+      "forbrugsforeningen": "Керектөөчүлөрдүн бирикмеси",
+      "dankort": "Дат картасы",
+      "hipercard": "Гиперкард",
+      "laser": "Лазер",
+      "storecredit": "Товардык кредит",
+      "bogus": "Жасалма",
+      "blik": "ЖАЛТ-ЖУЛТ ЭТҮҮ",
+      "mobilepay": "МобайлПей",
+      "swish": "Шыбыш",
+      "twint": "ТВИНТ"
+    },
+    "enable_javascript": "Аккаунттун дайындарын көрүү үчүн браузериңиздин жөндөөлөрүнөн JavaScript'ти иштетиңиз же кирүү үчүн башка браузерди колдонуңуз.",
+    "ui_components": {
+      "closeNotification": "Жабуу",
+      "expandNotification": "Дагы",
+      "closeModal": "Жабуу",
+      "submit": "Жөнөтүү",
+      "processing": "Иштетилип жатат…",
+      "increase": "Кошуу {{type}}",
+      "decrease": "Жоюу {{type}}",
+      "minimumReached": "Минималдуу мааниге жетишилди: {{value}}",
+      "maximumReached": "{{value}}: максималдуу мааниге жетти"
     }
   },
   "general": {
