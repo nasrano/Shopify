@@ -481,7 +481,40 @@
         "subscription_shipping": "Жазылуу аркылуу жеткирүү",
         "shipping_method_one_time_purchase_group_title": "Бир жолку сатып алуу",
         "shipping_method_subscription_group_title": "Жазылуу",
-        "one_time_purchase_shipping": "Бир жеткирүү"
+        "one_time_purchase_shipping": "Бир жеткирүү",
+        "split_shipping_option_custom": "Башка",
+        "default_description": "1 жумушчу күндүн ичинде жөнөтүлөт",
+        "split_shipping_shipment_notice": "Сиздин буйрутма %{quantity_shipments} ичинде келет",
+        "unbranded_default_description": "Жөнөтүүгө даяр",
+        "prime_not_available": {
+          "default": "Сиздин заказыңыз үчүн Prime жеткирүү кызматы жеткиликсиз. Жеткирүү ыкмаларыңыз жаңыртылды."
+        },
+        "split_shipping_first_shipment_notice": "Биринчи буйрутмаңыз %{quantity_shipments} түрүндө келет",
+        "shipping_method_rollup_accessibility_label": "Жеткирүү ыкмалары",
+        "shipping_address_rollup_accessibility_label": "Дарекке жеткирүү жолдору",
+        "back": "Кайра",
+        "invalid_shipping_method_summary_selected": "Жеткиликтүү жеткирүү ыкмаларын көрүү үчүн башка жеткирүү дарегин тандаңыз",
+        "third_party_address_timeout": "Даректер жүктөлбөй калды. Кайра аракет кылып көрүңүз же башка даректи колдонуңуз.",
+        "third_party_address_error": "Жеткиликтүү даректерди жүктөөдө ката кетти. Төмөнкү жерге даректи кол менен киргизиңиз.",
+        "third_party_payment_timeout": "Төлөм ыкмаларын жүктөө мүмкүн болбой калды. Кайра аракет кылып көрүңүз же башка төлөм ыкмасын колдонуңуз.",
+        "third_party_payment_error": "Жеткиликтүү төлөм ыкмаларын жүктөөдө ката кетти. Башка төлөм ыкмасын колдонуңуз.",
+        "add_shipping_address": "Жеткирүү дарегин кошуу",
+        "choose_new_address": "Жаңы даректи тандаңыз",
+        "unbranded_description_same_day": "Ошол эле иш күнү жөнөтүү",
+        "unbranded_description_with_fulfillment_days": {
+          "one": "Кийинки иш күнү жөнөтүлөт",
+          "other": "%{count} жумушчу күндүн ичинде жөнөтүү",
+          "few": "%{count} жумушчу күндүн ичинде жөнөтүлөт",
+          "many": "%{count} жумушчу күндүн ичинде жөнөтүлөт"
+        },
+        "unbranded_description_with_fulfillment_weeks": {
+          "one": "%{count} аптанын ичинде жөнөтүү",
+          "other": "%{count} жума ичинде жөнөтүү",
+          "few": "%{count} жума ичинде жөнөтүү",
+          "many": "%{count} жума ичинде жөнөтүү"
+        },
+        "add_new_delivery_address": "Жаңы жеткирүү дарегин кошуу",
+        "delivery_to": "Жеткирүү дареги"
       },
       "general": {
         "errors": {
@@ -519,6 +552,39 @@
           },
           "checkout_source": {
             "revoked": "Бул буйрутма жеткиликсиз."
+          },
+          "session_identifier_not_unique_error": "Заказыңызды иштетүүдө ката кетти, кийинчерээк кайталап көрүңүз.",
+          "line_item_limit_reached": "Сиз буйрутмадагы позициялардын максималдуу санын көрсөттүңүз.",
+          "only_empty_terms_accepted": "Бул саясат үчүн бош шарттарга гана уруксат берилет.",
+          "session_is_already_finished": "Бул буйрутманы толтуруу сеансы аяктады.",
+          "merchandise": {
+            "only_value_constraint": "Товарды киргизүү талаасы так маанилерди гана кабыл алат.",
+            "merchandise_not_found": "Товар табылган жок.",
+            "merchandise_variant_not_found": "Продукттун түрү табылган жок.",
+            "merchandise_not_applicable": "Буюмдун вариантын сатып алуу мүмкүн эмес.",
+            "bundle_products_not_supported_for_b2b": "Бул аймакта товарлар топтомдорун B2B-заказдарга кошууга мүмкүн эмес.",
+            "gift_card_quantity_mismatch": "Белек карталарынын коддорун киргизгениңизде, буйрутмадагы нерселердин саны белек картасынын коддорунун санына дал келиши керек.",
+            "gift_card_not_supported": "Бул төлөм сеансы үчүн белек карталары колдоого алынбайт.",
+            "gift_card_not_unique": "Ушул заказды бүтүрүү сессиясында {{code}} коду бар белек картасы бир нече жолу кездешет. Коддор салыштыруудан мурун форматталган.",
+            "gift_card_used": "Белек картасынын {{code}} коду буга чейин белек картасы үчүн ыйгарылган. Коддор салыштыруудан мурун форматталат.",
+            "gift_card_invalid": "Белек картасынын коду {{code}} жараксыз.",
+            "gift_card_code_changed": "Белек картасынын коду {{proposed_code}} форматтоо эрежелерине ылайык {{formatted_code}} болуп өзгөртүлдү.",
+            "gift_card_with_attributes_not_supported": "Ыңгайлаштырылган атрибуттары бар белек карталары бул эсептешүү сеансы үчүн колдоого алынбайт.",
+            "gift_card_with_components_not_supported": "Белек карталарынын компоненттери бул сатып алуу сессиясында колдоого алынбайт.",
+            "selling_plan_mismatch": "Жазылуу жаңыртылды.",
+            "selling_plan_not_supported": "Жазылуулар колдоого алынбайт.",
+            "selling_plan_not_supported_b2b": "B2B буйрутмалар үчүн жазылуулар колдоого алынбайт.",
+            "price_mismatch": "Бул товар үчүн мурда сунушталган баа жараксыз болуп калды жана өзгөртүлдү.",
+            "inventory_not_found": "Бул товардын түрлөрү табылган жок.",
+            "product_not_published": "Товар жарыяланган эмес.",
+            "duplicated_stable_id": "Продукту карата берилген маалымат сабында башка саптагыдай эле туруктуу идентификатор көрсөтүлгөн.",
+            "minimum_quantity_not_met": "Айрым товарлардын саны уруксат берилген минималдуу чекке жетпейт.",
+            "maximum_quantity_exceeded": "Айрым товарлардын саны максималдуу жол берилген чектен ашат.",
+            "quantity_increment_not_met": "Кээ бир товарлардын санына коюлган чектөөлөргө дал келбейт.",
+            "quantity_rules_not_met": "Кээ бир товарлардын санына буйрутма чектөөлөрү дал келбейт.",
+            "bundle_requires_components": "Товарлар жыйындысында компоненттер жок.",
+            "title_too_long": "Продуктунун аталышы өтө узун.",
+            "title_empty": "Продукттун аталышы көрсөтүлгөн эмес."
           }
         },
         "full_price": "Жалпы баасы:",
@@ -590,7 +656,45 @@
         },
         "loading": "Жүктөлүүдө…",
         "remove_chip": "Затты жок кылуу",
-        "finalize_order_accessibility_label": "Буйрутманы аяктоо"
+        "finalize_order_accessibility_label": "Буйрутманы аяктоо",
+        "page_title": "Буйрутма берүү",
+        "error_page_title": "Ката",
+        "skip_to_content": "Мазмунга өтүү",
+        "breadcrumb": "Навигациялык тизмек",
+        "continue_button_label": "Улантуу",
+        "complete_purchase_button_label": "Буйрутманы бүтүрүү",
+        "pay_now_button_label": "Төлөө",
+        "authenticate_purchase_button_label": "Төлөмдү уруксаттаңыз",
+        "edit_link_label": "Түзөтүү",
+        "all_rights_reserved": "Бардык укуктар корголгон. %{shop_name}",
+        "print_policies_link_label": "Мөөр",
+        "close_modal_label": "Жабуу",
+        "close_notice_label": "Жабуу",
+        "expand_notice_label": "Дагы",
+        "continue_to_shipping_method": "Жеткирүүгө өтүү",
+        "continue_to_payment_method": "Төлөмгө өтүү",
+        "continue_to_review": "Заказды көрүү",
+        "back_to_cart": "Корзинага кайтуу",
+        "back_to_contact_information": "Маалымат экранына кайтуу",
+        "back_to_shipping_method": "Жеткирүүгө кайтуу",
+        "back_to_payment_method": "Төлөмгө кайтуу",
+        "choose_shipping_method": "Жеткирүү ыкмасын тандоо",
+        "choose_payment_method": "Төлөө ыкмасын тандоо",
+        "choose_billing_address": "Эсеп-фактура дарегин тандоо",
+        "contact_us_html": "Көбүрөөк маалымат алуу үчүн биз менен байланышыңыз",
+        "autocomplete_title": "Сунуштар",
+        "autocomplete_single_item": "1 даана бар",
+        "autocomplete_multi_item": "Жеткиликтүү: {{number}} даана",
+        "autocomplete_close": "Сунуштарды жабуу",
+        "tooltip_accessibility_label": "Кененирээк",
+        "forwarding_indicator": {
+          "new_window": "Жаңы терезеде ачылат.",
+          "external": "Тышкы сайтты ачат.",
+          "external_and_new_window": "Тышкы сайтты жаңы терезеде ачат."
+        },
+        "checkout_context": {
+          "step_one": "%{shop_name} — Заказды тариздөө"
+        }
       },
       "contact": {
         "title": "Маалымат",
@@ -2080,6 +2184,13 @@
       },
       "online_store_chat": {
         "title": "Суроолоруңуз барбы? Бизге чатта жазыңыз"
+      },
+      "change_currency": {
+        "credit_card_will_be_charged_html": "Сиздин кредиттик картаңыздан %{amount} алынат",
+        "payment_total_label": "Жалпы төлөм",
+        "change_currency_link": "%{currency_name} кылып өзгөртүү",
+        "card_provider_fx_charges_warning": "Сиздин картаңыздан %{currency_code} валютасындагы транзакциялар үчүн комиссия алынышы мүмкүн.",
+        "currency_not_supported_by_shop": "Бул валюта мындан ары колдонулбайт. Бардык баалар эми мындай валютада: %{currency_code}."
       }
     },
     "sentence": {
@@ -2256,6 +2367,71 @@
           "partially_refunded": "Каражат жарым-жартылай кайтарылган"
         }
       }
+    },
+    "page_titles": {
+      "collections": "Жыйнактар",
+      "not_found": "404. Барак табылган жок",
+      "challenge": "Чакыруу",
+      "checkpoint": "Көзөмөл түйүнү",
+      "search_results": {
+        "one": "\"%{terms}\" суроосу боюнча %{count} натыйжа табылды",
+        "other": "\"%{terms}\" суроосу боюнча %{count} натыйжа табылды",
+        "few": "%{count} натыйжалар «%{terms}» сурамы боюнча",
+        "many": "\"%{terms}\" суроосу боюнча %{count} натыйжа табылды"
+      },
+      "blog_or_article_with_error": "%{title}: ката табылды"
+    },
+    "cart": {
+      "discounts_with_count": "Колдонулган арзандатуулар: %{count}"
+    },
+    "challenge": {
+      "message": "Улантуу үчүн робот эмес экениңизди ырастаңыз.",
+      "error": "Туура эмес жооп. Кайра аракет кылып көрүңүз.",
+      "submit_button_text": "Жөнөтүү"
+    },
+    "checkpoint": {
+      "message": "Улантуу үчүн Captcha кодун киргизиңиз",
+      "error": "Капчанын коду туура эмес киргизилди",
+      "submit_button_text": "Жөнөтүү"
+    },
+    "store_availability": {
+      "pick_up_time": {
+        "one_hour": "Адатта бир саатта даяр болот",
+        "two_hours": "Адатта 2 саатта даяр болот",
+        "four_hours": "Адатта 4 саатта даяр болот",
+        "twenty_four_hours": "Адатта 24 сааттын ичинде даяр болот",
+        "two_to_four_days": "Адатта 2-4 күндүн ичинде даяр болот",
+        "five_or_more_days": "Адатта 5 же андан көп күндө даяр болот",
+        "zero_to_two_hours": "Адатта 2 саатта даяр болот",
+        "two_to_four_hours": "Адатта 4 саатта даяр болот",
+        "immediately": "Азыр алып кетсе болобу",
+        "next_day": "Эртеси күнү алып кетсе болот"
+      }
+    },
+    "filters": {
+      "availability": {
+        "value": {
+          "in_stock": "Жеткиликтүү",
+          "out_of_stock": "Жок"
+        }
+      },
+      "boolean": {
+        "true_label": "Ооба",
+        "false_label": "Жок"
+      }
+    },
+    "search": {
+      "sorting": {
+        "relevance": "Актуалдуулугу",
+        "price_ascending": "Баасы өсүү тартибинде",
+        "price_descending": "Баасы боюнча төмөндөтүү"
+      },
+      "error": "Издөө натыйжаларын жүктөөдө көйгөй келип чыкты. Баракты кайра жүктөңүз же кийинчерээк кайталап көрүңүз."
+    },
+    "subscriptions": {
+      "buyer_consent_product": "Бул позиция мезгил-мезгили менен же кийинкиге калтырылган төлөм болуп саналат. Улантуу менен, мен %{cancellationPolicyLink} шарттарына макул болом. Ошентип, мен заказ толугу менен аткарылмайынча же мен жокко чыгарбасам, эгер бул каралса, төлөм ыкмамдан белгиленген даталарда, көрсөтүлгөн суммаларда, тиешелүү жыштык менен акча алууга уруксат берем.",
+      "buyer_consent_cart": "Себеттеги бир же бир нече позиция үчүн кийинкиге калтырылган же мезгил-мезгили менен төлөм тандалды. Улантуу менен, мен %{cancellationPolicyLink} шарттарына макул болом. Ошону менен мен буйрутмам толугу менен аткарылмайынча же жокко чыгарбасам (эгер мүмкүн болсо), көрсөтүлгөн суммадагы төлөмдү белгиленген күндөрдө, тиешелүү жыштык менен төлөм ыкмасынан алууга уруксат берем.",
+      "cancellation_policy": "жокко чыгаруу саясаты"
     }
   },
   "customer_accounts": {
@@ -3367,6 +3543,81 @@
         "other": "Буйрутмага арзандатуулар",
         "few": "Буйрутма үчүн арзандатуулар",
         "many": "Заказга арзандатуулар"
+      }
+    },
+    "callback": {
+      "try_again": "Кайра аракет кылыңыз"
+    },
+    "navigation_and_structure": {
+      "account_menu": {
+        "hide_accessibility_label": "Аккаунт менюсун жашыруу",
+        "show_accessibility_label": "Каттоо эсебинин менюсун көрсөтүү",
+        "nav_accessibility_label": "Аккаунт боюнча навигация",
+        "open_menu_accessibility_label": "Каттоо эсебинин навигациясын ачуу",
+        "close_menu_accessibility_label": "Аккаунтта навигациялоо терезесин жабуу",
+        "loading_message": "Каттоо эсебинин багыттоо терезесин жүктөө"
+      },
+      "action_menu_accessibility_label": "Башка аракеттер",
+      "close_menu_accessibility_label": "Негизги навигация терезесин жабуу",
+      "contact_email_subject": "{{shopName}} онлайн-дүкөнүнөн байланыш",
+      "contact_link": "Байланыш маалымат",
+      "delete_confirmation": {
+        "cancel": "Жокко чыгаруу",
+        "delete": "Жок кылуу"
+      },
+      "dismiss_toast": "Жабуу",
+      "document_title": "{{sectionName}} - {{shopName}} - Аккаунт",
+      "loading_message": "Жүктөө",
+      "log_out_link": "Чыгуу",
+      "logout_overlay_label": "Чыгуу...",
+      "nav_label_accessibility_label": "Негизги навигация менюсу",
+      "navigation_accessibility_message": "Сиз «{{sectionName}}» бөлүмүнө өттүңүз",
+      "open_menu_accessibility_label": "Негизги навигация терезесин ачуу",
+      "shop_logo_accessibility_label": "{{shopName}} дүкөнүнүн логотиби",
+      "settings_link": "Жөндөөлөр",
+      "country_switcher_toast_message": "Өлкө {{countryName}} өлкөсүнө өзгөртүлдү",
+      "switch_country": "Өлкөнү өзгөртүү",
+      "search": "Издөө",
+      "location_switcher_toast_message": "Жайгашкан жери өзгөртүлдү: {{locationName}}",
+      "switch_location": "Жайгашкан жерди өзгөртүү",
+      "view_details": "Маалыматтарды ачуу",
+      "company_location": "Компаниянын жайгашкан жери",
+      "no_countries_found": "Өлкөлөр табылган жок",
+      "no_locations_found": "Жайгашуулар табылган жок",
+      "try_new_search": "Жаңы издөө",
+      "skip_to_content": "Мазмунга өтүү",
+      "loading_policy_content_accessibility_label": "Саясаттын мазмунун жүктөө",
+      "policy_load_error": "{{policyName}} жүктөлбөй калды",
+      "policy_try_again": "Кайталап көрүңүз",
+      "loading_section_accessibility_label": "{{sectionName}} бөлүмүн жүктөө",
+      "back_button_accessibility_label": "Артка",
+      "go_to_store_link": "Дүкөнгө баруу",
+      "orders_link_label": "Буйрутмалар",
+      "subscriptions_link_label": "Жазылуулар"
+    },
+    "account_information": {
+      "loading_accessibility_message": "Аккаунт дайындарын жүктөө",
+      "loading_finished_accessibility_message": "Аккаунт дайындары жүктөлдү",
+      "profile_card": {
+        "cancel": "Жокко чыгаруу",
+        "cancel_accessibility_label": "Профильди түзөтүүнү жокко чыгаруу",
+        "edit": "Түзөтүү",
+        "edit_accessibility_label": "Профильди өзгөртүү",
+        "email_help_text": "Электрондук почтаны оңдоого болбойт",
+        "first_name": "Аты",
+        "last_name": "Фамилиясы",
+        "phone_number_help_text": "Телефон номерин өзгөртүү мүмкүн эмес",
+        "save": "Сактоо",
+        "save_accessibility_label": "Профайлды сактоо",
+        "no_name_provided_accessibility_label": "Кошулган аталыштар жок",
+        "email": "Электрондук почта дареги",
+        "errors": {
+          "name_too_long": "{{fieldName}} талаасы өтө узун (максимум 255 символ)",
+          "name_cannot_contain_url": "{{fieldName}} URL-даректи камтыбашы керек",
+          "name_cannot_contain_html_tags": "«{{fieldName}}» мааниси HTML-тегдерин камтыбашы керек.",
+          "email_cant_be_blank": "Электрондук почта дареги бош болбошу керек",
+          "invalid_email_format": "Жарактуу электрондук почта дарегин киргизиңиз"
+        }
       }
     }
   },
