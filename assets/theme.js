@@ -409,6 +409,21 @@
     }).join('');
   }
 
+  /* ---------------- account: switch login <-> register views ---------------- */
+  document.addEventListener('click', function (e) {
+    var sw = e.target.closest('[data-acc-show]');
+    if (!sw) return;
+    var drawer = document.querySelector('[data-drawer="acc"]');
+    if (!drawer) return;
+    e.preventDefault();
+    var name = sw.getAttribute('data-acc-show');
+    drawer.querySelectorAll('[data-acc-view]').forEach(function (v) {
+      v.style.display = v.getAttribute('data-acc-view') === name ? '' : 'none';
+    });
+    var title = drawer.querySelector('.privat-sheet__title');
+    if (title) title.textContent = name === 'register' ? 'Регистрация' : 'Вход';
+  });
+
   /* ---------------- search (predictive) ---------------- */
   document.addEventListener('click', function (e) {
     var fill = e.target.closest('[data-search-fill]');

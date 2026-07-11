@@ -12,22 +12,37 @@
       </div>
       <a href="{{ routes.account_logout_url }}" class="privat-account__submit" style="display:block;text-align:center;text-decoration:none;margin-top:10px">Выйти</a>
     {% else %}
-      <p class="privat-account__text">Заказы, адреса и статусы доставки — под рукой. Никаких лишних данных.</p>
-      {% form 'customer_login' %}
-        <input class="privat-input" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
-        <input class="privat-input" type="password" name="customer[password]" placeholder="Пароль" autocomplete="current-password" required>
-        <button type="submit" class="privat-account__submit">Войти</button>
-      {% endform %}
-      <div class="privat-form-links">
-        <a href="{{ routes.account_login_url }}#recover" onclick="document.querySelector('[data-drawer=acc] [data-acc-recover]').style.display='block';this.closest('.privat-form-links').style.display='none';return false">Забыли пароль?</a>
-        <a href="{{ routes.account_register_url }}">Регистрация</a>
-      </div>
-      <div data-acc-recover style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
-        <p class="privat-form-note">Укажите email — пришлём ссылку для восстановления пароля.</p>
-        {% form 'recover_customer_password' %}
-          <input class="privat-input" type="email" name="email" placeholder="Email" autocomplete="email" required>
-          <button type="submit" class="privat-account__submit">Восстановить пароль</button>
+      <div data-acc-view="login">
+        <p class="privat-account__text">Заказы, адреса и статусы доставки — под рукой. Никаких лишних данных.</p>
+        {% form 'customer_login' %}
+          <input class="privat-input" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
+          <input class="privat-input" type="password" name="customer[password]" placeholder="Пароль" autocomplete="current-password" required>
+          <button type="submit" class="privat-account__submit">Войти</button>
         {% endform %}
+        <div class="privat-form-links">
+          <a href="{{ routes.account_login_url }}#recover" onclick="document.querySelector('[data-drawer=acc] [data-acc-recover]').style.display='block';this.closest('.privat-form-links').style.display='none';return false">Забыли пароль?</a>
+          <a href="{{ routes.account_register_url }}" data-acc-show="register">Регистрация</a>
+        </div>
+        <div data-acc-recover style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)">
+          <p class="privat-form-note">Укажите email — пришлём ссылку для восстановления пароля.</p>
+          {% form 'recover_customer_password' %}
+            <input class="privat-input" type="email" name="email" placeholder="Email" autocomplete="email" required>
+            <button type="submit" class="privat-account__submit">Восстановить пароль</button>
+          {% endform %}
+        </div>
+      </div>
+      <div data-acc-view="register" style="display:none">
+        <p class="privat-account__text">Пара полей — и заказы, адреса и избранное будут сохраняться сами.</p>
+        {% form 'create_customer' %}
+          {% if form.errors %}<p class="privat-form-errors">{{ form.errors | default_errors }}</p>{% endif %}
+          <input class="privat-input" type="text" name="customer[first_name]" placeholder="Имя" autocomplete="given-name">
+          <input class="privat-input" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
+          <input class="privat-input" type="password" name="customer[password]" placeholder="Пароль" autocomplete="new-password" required>
+          <button type="submit" class="privat-account__submit">Создать аккаунт</button>
+        {% endform %}
+        <div class="privat-form-links">
+          <a href="{{ routes.account_login_url }}" data-acc-show="login">Уже есть аккаунт? Войти</a>
+        </div>
       </div>
     {% endif %}
   </div>
