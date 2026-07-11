@@ -896,6 +896,158 @@
           "draft_label": "Алдын ала буйрутма: {{name}}"
         }
       }
+    },
+    "subscriptions": {
+      "update_payment_instrument": {
+        "select_new_payment_method": "Төлөмдүн жаңы ыкмасын тандаңыз",
+        "current_method": "Учурдагы",
+        "cancel": "Жокко чыгаруу",
+        "save": "Сактоо",
+        "success": "Төлөө ыкмалары өзгөртүлдү",
+        "use_new_payment_method": "+ Төлөөнүн жаңы ыкмасын колдонуу"
+      }
+    },
+    "account_menu": {
+      "signed_out_state": {
+        "sheet_title": "Кирүү же каттоо эсебин түзүү",
+        "section_divider": "Кирүүнүн башка жолдору",
+        "alternate_divider": "ЖЕ",
+        "email_field_label": "Электрондук почта",
+        "orders_button": "Буйрутмалар",
+        "shop_login_button": "Shop аркылуу кирүү",
+        "continue_with_google": "Google менен улантуу",
+        "continue_with_facebook": "Facebook аркылуу улантуу",
+        "use_email_button": "Электрондук почтаны колдонуу"
+      },
+      "signed_in_state": {
+        "greeting_with_name": "Саламатсызбы, {{first_name}}",
+        "greeting_without_name": "Каттоо эсеби",
+        "orders_button": "Заказдар"
+      },
+      "location_picker": {
+        "sheet_title": "Жайгашкан жерлери",
+        "search_field_placeholder": "Издөө"
+      },
+      "aria_labels": {
+        "close_menu": "Менюну жабуу",
+        "back_to_main_menu": "{{title}} баракчасынан негизги менюга кайтуу",
+        "open_submenu": "{{title}}, кошумча менюну ачат",
+        "loading_menu": "Жүктөө менюсу",
+        "sign_in_with_email": "Электрондук почта менен кирүү",
+        "sign_in": "Кирүү"
+      }
+    },
+    "intents": {
+      "subscription_replace_payment_method": {
+        "card_number": "Картанын номери",
+        "title": "Төлөм ыкмасын өзгөртүү",
+        "replace_with": "Жаңы ыкма:",
+        "add_new_payment_method": "Жаңыны кошуу",
+        "save_button": "Сактоо",
+        "close_button": "Жабуу",
+        "loading": "Төлөм ыкмасын өзгөртүү үчүн модалдык терезени жүктөө",
+        "success": "Төлөө ыкмасы өзгөртүлдү",
+        "invalid_subscription_contract": "Жазылууну табуу мүмкүн болгон жок",
+        "expiry_date": "Жарамдуулук мөөнөтү: {{expiryDate}} чейин",
+        "edit_current_payment_method": "Учурдагы төлөм ыкмасын өзгөртүү",
+        "edit_selected_payment_method": "Тандалган төлөө ыкмасын өзгөртүү"
+      }
+    },
+    "sign_in": {
+      "brand_logo_alt_text": "%{shop_name} дүкөнүнүн логотиби",
+      "step_one": {
+        "page_title": "Системага кирүү — %{shop_name}",
+        "heading": "Кирүү",
+        "subheading": "Ырастоо кодун жөнөтө турган электрондук почта дарегиңизди киргизиңиз",
+        "input_field_label": "Электрондук дарек",
+        "button": "Улантуу",
+        "subheading_with_sign_in_options": "Кирүү же Каттоо",
+        "or": "же",
+        "consent_agreement": "Улантып, сиз %{terms} менен макул болосуз",
+        "last_used_pill": "Акыркы колдонулган"
+      },
+      "step_two": {
+        "page_title": "Кодду киргизиңиз — %{shop_name}",
+        "heading": "Кодду киргизиңиз",
+        "subheading": "Дарекке жөнөтүлдү: %{email}",
+        "restart_link": "Башка электрондук почта дареги менен кирүү",
+        "input_field_label": "6 орундуу код",
+        "button": "Жөнөтүү",
+        "change_email": "Өзгөртүү"
+      },
+      "error": {
+        "invalid": {
+          "invalid_email": "Жарактуу электрондук почта дарегин көрсөтүңүз",
+          "invalid_code": "Туура 6 орундуу кодду киргизиңиз"
+        }
+      },
+      "processing": "Иштетүүдө…"
+    }
+  },
+  "general": {
+    "meta": {
+      "tags": "Теги менен: {{ tags }}",
+      "page": "Баракча {{ page }}"
+    },
+    "404": {
+      "title": "Барак табылган жок",
+      "text": "Мындай баракча жок окшойт. Каталогду карап көрүңүз — ал жерден сөзсүз бир нерсе таба аласыз.",
+      "button": "Башкы бетке"
+    },
+    "search": {
+      "title": "Издөө",
+      "placeholder": "Эмне издеп жатасыз?",
+      "results_for": "\"{{ terms }}\" суроосунун натыйжалары",
+      "no_results": "\"{{ terms }}\" суроосу боюнча эч нерсе табылган жок"
+    },
+    "pagination": {
+      "previous": "← Артка",
+      "next": "Алдыга →"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Корзинага кошуу",
+      "sold_out": "Жок",
+      "quantity": "Саны"
+    }
+  },
+  "cart": {
+    "title": "Менин себетим",
+    "empty": "Азырынча бош",
+    "checkout": "Буйрутма берүү",
+    "update": "Жаңыртуу",
+    "remove": "алып салуу",
+    "total": "Жыйынтыгында",
+    "note": "Жашыруун таңгак · Бишкек боюнча 1 саатта жеткирүү"
+  },
+  "customer": {
+    "login": {
+      "title": "Кирүү",
+      "email": "Электрондук почта",
+      "password": "Сырсөз",
+      "submit": "Кирүү",
+      "forgot": "Сырсөзүңүздү унуттуңузбу?",
+      "create_account": "Аккаунт түзүү"
+    },
+    "register": {
+      "title": "Каттоо",
+      "first_name": "Аты",
+      "last_name": "Фамилиясы",
+      "submit": "Аккаунт түзүү"
+    },
+    "account": {
+      "orders": "Менин буйрутмаларым",
+      "no_orders": "Азырынча заказдар жок.",
+      "logout": "Чыгуу"
+    },
+    "recover": {
+      "title": "Сырсөздү калыбына келтирүү",
+      "text": "Электрондук почтаңызды жазыңыз — сырсөздү баштапкы абалга келтирүү үчүн шилтеме жөнөтөбүз.",
+      "submit": "Жөнөтүү"
+    },
+    "reset": {
+      "title": "Жаңы сырсөз"
     }
   }
 }
