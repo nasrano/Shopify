@@ -485,6 +485,155 @@
         "purchase_options_card_update_agreement_label_html": "Төлөм ыкмасын жаңыртуу менен, сиз дүкөндүн <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{cancellation_policy}\" href=\"%{policy_href}\">жокко чыгаруу саясатына</a> ылайык, бардык мезгилдик же кийинкиге калтырылган төлөмдөрдүн өтүшүнө макул болосуз.",
         "multibanco_label": "Мультибанко",
         "receiver_payment_experience_hint": "Буйрутма бергенден кийин сиз төлөм маалыматын аласыз. Сиз Multibanco кызматтарын колдонуп же %{due_days} күндүн ичинде веб-сайтта төлөй аласыз."
+      },
+      "localized_fields": {
+        "additional_information": {
+          "tax_credential_br": "ИНН",
+          "shipping_credential_br": "ИНН/ЖСН",
+          "shipping_credential_kr": "Жеке бажы коду",
+          "shipping_credential_cn": "Резиденттин өздүгүн ырастоочу документинин номери",
+          "tax_credential_it": "Салык төлөөчүнүн коду (милдеттүү эмес)",
+          "tax_email_it": "ПЭК (милдеттүү эмес)",
+          "tax_credential_cl": "РУТ",
+          "shipping_credential_cl": "РУТ",
+          "tax_credential_co": "Cédula/НДС күбөлүгү",
+          "tax_credential_type_co": "Күбөлүктүн түрү",
+          "shipping_credential_co": "Cédula/КНС күбөлүгү",
+          "shipping_credential_type_co": "Күбөлүктүн түрү",
+          "tax_credential_cr": "Идентификациялык номер / RUT",
+          "shipping_credential_cr": "Идентификациялык номер / RUT",
+          "tax_credential_ec": "CI/RUC/IVA коду",
+          "shipping_credential_ec": "CI/RUC/IVA коду",
+          "tax_credential_gt": "NIT/IVA коду",
+          "shipping_credential_gt": "NIT/IVA коду",
+          "tax_credential_id": "NPWP идентификациялык номери",
+          "shipping_credential_id": "NPWP идентификациялык номери",
+          "tax_credential_my": "ИНН / Каттоо номери",
+          "shipping_credential_my": "ИНН / Каттоо номери",
+          "shipping_credential_mx": "Иштеп чыгуу сунушу (RFC)",
+          "tax_credential_mx": "Жумуш сунушу (RFC)",
+          "tax_credential_type_mx": "Салык режими",
+          "tax_credential_use_mx": "CFDI колдонуу",
+          "tax_credential_py": "CI/RUC/IVA коду",
+          "shipping_credential_py": "Код КЖ/РОК/КНС",
+          "tax_credential_pe": "DNI/RUC/CE коду",
+          "shipping_credential_pe": "DNI/RUC/CE коду",
+          "tax_credential_pt": "NIF/IVA номери",
+          "shipping_credential_pt": "NIF/IVA номери",
+          "tax_credential_es": "DNI/NIF номери",
+          "shipping_credential_es": "DNI/NIF номери",
+          "shipping_credential_tw": "Улуттук идентификациялык номер/КНС",
+          "tax_credential_tr": "Түркиянын улуттук идентификациялык номери/КНС",
+          "shipping_credential_tr": "Түркиянын улуттук идентификациялык номери/КНС"
+        }
+      },
+      "post_purchase": {
+        "page_title": "Сатып алгандан кийин",
+        "title": "Сатып алгандан кийин",
+        "escape_confirmation": "Сиздин заказыңыз төлөндү",
+        "escape_action": "Буйрутма ырастоосун көрүү ›",
+        "components": {
+          "close": "Жабуу",
+          "expand": "Дагы",
+          "processing": "Иштетүүдө…",
+          "submit": "Жөнөтүү"
+        }
+      },
+      "change_country": {
+        "cart_updated_based_on_country": "Корзинанын мазмуну көрсөтүлгөн жеткирүү өлкөсүнө жараша жаңыртылды.",
+        "cart_and_currency_updated_based_on_country": "Себеттин мазмуну жана валютанын түрү көрсөтүлгөн жеткирүү өлкөсүнүн негизинде жаңыртылды.",
+        "currency_updated_for_country": "Валюта %{country} үчүн жаңыртылды"
+      },
+      "subscriptions": {
+        "recurring_totals": "Ар бир мезгил үчүн %{total_price} (%{interval})",
+        "recurring_totals_with_policies": {
+          "first_cycles": {
+            "one": "Биринчи төлөм %{total_price} өлчөмүндө",
+            "other": "Биринчи %{count} төлөм %{total_price} өлчөмүндө,",
+            "few": "Баштапкы %{count} төлөм, ар бири %{total_price} өлчөмүндө,",
+            "many": "Биринчи %{count} төлөм %{total_price} өлчөмүндө,"
+          },
+          "following_cycles": ", андан соң — %{interval} сайын %{total_price} жолу."
+        },
+        "recurring_total_intervals": {
+          "day": {
+            "one": "күн",
+            "other": "%{count} күн",
+            "few": "%{count} күн",
+            "many": "%{count} күн"
+          },
+          "week": {
+            "one": "жума",
+            "other": "%{count} апта",
+            "few": "%{count} апта",
+            "many": "%{count} жума"
+          },
+          "month": {
+            "one": "ай",
+            "other": "%{count} ай",
+            "few": "%{count} ай",
+            "many": "%{count} ай"
+          },
+          "year": {
+            "one": "жыл",
+            "other": "%{count} жыл",
+            "few": "%{count} жыл",
+            "many": "%{count} жыл"
+          }
+        },
+        "recurring_totals_with_initial_order_shipping_discount": "Биринчи төлөм – %{total_price_with_discount}, андан кийин – %{recurring_total}",
+        "recurring_totals_with_initial_order_shipping_discount_with_policies": {
+          "first_cycles": {
+            "one": ", андан кийин — %{count} төлөм %{total_price}",
+            "other": ", андан кийин — %{count} төлөм %{total_price}",
+            "few": ", андан соң — %{count} тѳлѳм %{total_price}",
+            "many": ", андан кийин — %{count} төлөм %{total_price}"
+          }
+        }
+      },
+      "customer_payment_methods": {
+        "page_title": "Төлөө ыкмалары",
+        "title": "Төлөм ыкмалары",
+        "update_card_button_label": "Картанын маалыматтарын жаңыртуу",
+        "delete_customer_mandate": {
+          "generic_error": "Сурооңузду иштеп чыгууда көйгөй келип чыкты.",
+          "success_message": "Төлөм ыкмасы тууралуу маалымат өчүрүлдү."
+        }
+      },
+      "mor_policies": {
+        "terms_and_conditions": "Катталган сатуучунун шарттары",
+        "privacy_policy": "Катталган сатуучунун купуялык саясаты"
+      },
+      "contextual_availability": {
+        "title": {
+          "one": "Продукт жеткиликсиз",
+          "other": "Продукция жеткиликтүү эмес",
+          "few": "Продукция жеткиликтүү эмес",
+          "many": "Продукция жеткиликтүү эмес"
+        },
+        "products_not_available": {
+          "one": "Бул продукт себеттен өчүрүлөт, анткени ал сиздин өлкөңүздө же аймагыңызда сатылбайт.",
+          "other": "Бул өнүмдөр өлкөңүздө же аймагыңызда сатып алуу үчүн жеткиликтүү болбогондуктан, корзинаңыздан өчүрүлөт.",
+          "few": "Бул өнүмдөр өлкөңүздө же аймагыңызда сатып алууга жеткиликтүү болбогондуктан, корзинаңыздан өчүрүлөт.",
+          "many": "Бул буюмдар сиздин өлкөңүздө же аймагыңызда сатылбай тургандыктан, корзинаңыздан өчүрүлөт."
+        },
+        "all_products_in_cart_unavailable": {
+          "one": "Бул продукт сиздин өлкөңүздө же аймагыңызда сатылбайт.",
+          "other": "Бул өнүмдөр өлкөңүздө же аймагыңызда сатылбайт.",
+          "few": "Бул өнүмдөр өлкөңүздө же аймагыңызда сатылбайт.",
+          "many": "Бул өнүмдөр өлкөңүздө же аймагыңызда сатылбайт."
+        },
+        "unavailable_label": "Жеткиликтүү эмес"
+      },
+      "change_cart_localization": {
+        "verify_shipping_address": "Өлкө/регион тууралуу маалымат жаңыртылды. Заказды улантуу үчүн жеткирүү дарегиңизди киргизиңиз."
+      },
+      "throttle": {
+        "line_to_check_out": "Сиз сатып алууну тариздөө кезегинде турасыз",
+        "merchandise": {
+          "sold_out": "Сатылды",
+          "available": "Жеткиликтүү"
+        }
       }
     }
   },
