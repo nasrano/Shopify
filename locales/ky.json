@@ -877,7 +877,8 @@
             "security_code": "Коопсуздук коду",
             "name": "Картадагы аты-жөнү",
             "billing": "Эсеби"
-          }
+          },
+          "title": "Карта маалыматтарын өзгөртүү"
         },
         "payment_method": "Төлөө ыкмасы",
         "expired_payment_method": "Тандалган төлөм ыкмасынын жарактуулук мөөнөтү бүттү",
@@ -1029,7 +1030,145 @@
         "supported_card_brands_more_label": "жана дагы...",
         "detected_card_brand": "Картанын өзгөчө бренди: {brand}",
         "card_number_label": "Карта номери",
-        "card_number_placeholder": "Картанын номери"
+        "card_number_placeholder": "Картанын номери",
+        "pending_payment": {
+          "due_notice": "%{amount_due} өлчөмүндөгү төлөмдү %{due_date} чейин жүргүзүү зарыл.",
+          "multibanco": {
+            "instruction_html": "Multibanco кызматтарын колдонуп же төмөндөгү маалыматтар менен веб-сайттан төлөңүз. Эгер сизде суроолор болсо же төлөм маалыматтарын өзгөртүү зарылчылыгы келип чыкса, биз менен байланышыңыз %{contact_us}.",
+            "reference": "Маалымат",
+            "amount": "Саны",
+            "find_nearest_atm": "Эң жакын банкомат",
+            "buyer_action_info": "%{amount_due} өлчөмүндө төлөм жүргүзүү зарыл."
+          }
+        },
+        "purchase_options_agreement_label": "Себетиңиздеги бир же бир нече товар кийинкиге калтырылган же үзгүлтүксүз сатып алуулар болуп саналат. Төлөмгө өтүү менен, сиз төлөмдөр аяктаганга же сиз тараптан жокко чыгарылганга чейин, ушул баракта көрсөтүлгөн суммада жана мезгилдүүлүктө төлөм ыкмаңыздан автоматтык түрдө каражат алынып тураарына макулдугуңузду бересиз. Бардык жокко чыгаруулар үчүн %{cancellation_policy_label} колдонулат.",
+        "update_payment_method": "Төлөм ыкмасын жаңыртуу",
+        "paypal_modal": {
+          "order_contains_subscriptions": "Жазылуу",
+          "order_contains_fixed_selling_plans": "Жалпы сумма салыктарды, жеткирүү акысын, кийинкиге калтырылган төлөмдөрдү жана айрым арзандатууларды камтыбай калышы мүмкүн. Бүгүнкү күнгө карата жарактуу суммадагы буйрутманы толтурууга өтүңүз."
+        },
+        "purchase_options_agreement_label_html": "Мен корзинамдагы бир же бир нече буюм кийинкиге калтырылган же үзгүлтүксүз сатып алына турганын түшүндүм. Улантуу менен, мен\n<a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{subscription_policy}\" href=\"%{policy_href}\">жокко чыгаруу саясатына</a>\nмакул болом жана төлөм ыкмасымдан бул баракта көрсөтүлгөн сумманы, жыштыкты жана даталарды чегерүүгө уруксат берем, менин буйрутмам\nиштелип чыкканга чейин же уруксат берилсе, мен аны жокко чыгарганга чейин.\n",
+        "payment_method_saved": "Төлөм ыкмасы сакталды",
+        "card_vaulted_company_location": "Бул жердин картасы сакталды",
+        "order_covered_by_store_credit_notice": "Заказ суммасы товардык кредит менен жабылат.",
+        "order_covered_by_redeemables_notice": "Сиздин заказыңыздын суммасы төлөндү.",
+        "store_credit": {
+          "label": "Товардык кредит",
+          "apply_label": "Товардык насыяны колдонуу",
+          "add_label": "Товардык кредитти кошуу",
+          "manage_label": "Товардык кредитти башкаруу",
+          "buying_gift_card": "Сиз белек картасын сатып алуу үчүн товардык насыяны колдоно албайсыз",
+          "no_fixed_selling_plans": "Сиз товардык кредитиңизди бөлүп төлөө менен сатып алууларда колдоно албайсыз"
+        },
+        "clear": "Өчүрүү",
+        "billing_must_match_shipping_notice": "Төлөө ыкмасында көрсөтүлгөн эсептешүү дареги жеткирүү дарегине дал келиши керек.",
+        "same_billing_address_checkbox_label": "Жеткирүү дарегин эсеп дареги катары колдонуу",
+        "location_billing_address_label": "Эсеп-фактура дареги",
+        "fact_billing_address_label": "Эсеп жөнөтүлүүчү дарек",
+        "location_shipping_address_label": "Жеткирүү дареги",
+        "no_working_method_error": "Бул дүкөн учурда төлөмдөрдү кабыл албайт. Баракчаны кайра жүктөп көрүңүз же кийинчерээк кайталап көрүңүз.",
+        "brand_not_available": "Бул дүкөндө {{brand}} жеткиликтүү эмес. Төлөө үчүн башка картаны колдонуңуз.",
+        "shipping_rate_updated": "Төлөм ыкмалары жөнүндө маалымат өзгөртүлдү. Буйрутманы жайгаштыруудан мурун тандооңузду ырастаңыз.",
+        "billing_address_invalid_phone": "Улантуу үчүн, {{label}} {{last_digits}} менен байланышкан эсептик дарегиңиздеги телефон номериңизди жаңыртыңыз.",
+        "billing_address_invalid_phone_no_card": "Улантуу үчүн, эсеп-кысап дарегиңиздеги телефон номерин жаңыртыңыз.",
+        "preview_not_available": {
+          "title": "Алдын ала кароо мүмкүн эмес",
+          "content": "Кабатыр болбоңуз. Бул экспресс-буюртма сиздин кардарларыңыз үчүн жеткиликтүү.",
+          "button": "Макул"
+        },
+        "card_fields": {
+          "errors": {
+            "required": {
+              "issue_date": "Чыгарылган күндү туура киргизиңиз",
+              "issue_number": "Жарактуу сериялык номер киргизиңиз"
+            },
+            "invalid": {
+              "verification_value": "Жарактуу CVV кодун же коопсуздук кодун киргизиңиз"
+            }
+          }
+        },
+        "simulated_checkout": "Жакында алдын ала кароо мүмкүнчүлүгү жеткиликтүү болот",
+        "vaulting_agreement_label": "Буйрутмаларды тездетүү үчүн %{company} үчүн төлөм маалыматымды сактоо.",
+        "business_customer_vaulting_payment_label": "Бул төлөм ыкмасын текшерүүдө сактаңыз жана %{company} компаниясына бул жайгашкан жер үчүн келечектеги сатып алууларда каражатты алууга уруксат бериңиз. Бул жайгашкан жерге байланган бардык колдонуучулар бул төлөм ыкмасын колдоно алышат.",
+        "purchase_options_and_vaulting_agreement_label": "Бир же андан көп товар – кийинки төлөмдөр же жазылуулар аркылуу төлөөгө боло турган товарлар. Эгер сиз төлөм процессин уланта берсеңиз, бул сиздин эсебиңизден төлөм ыкмасынын мөөнөтү аяктаганга же жокко чыгарылганга чейин ушул баракчада көрсөтүлгөн баага жана жыштыкка ылайык, төлөм ыкмаңызга ылайык автоматтык түрдө каражаттар алынып турарын билдирет. Бардык жокко чыгаруулар %{cancellation_policy_label} талаптарына ылайык жүргүзүлөт.",
+        "purchase_options_cancellation_policy_label": "Жокко чыгаруу саясаты",
+        "use_different_credit_card_label": "Башка картаны колдонуу",
+        "saved_credit_card": "Сакталган кредиттик картаңыздын маалыматтары",
+        "saved_credit_card_info": "Акыркы төрт сан",
+        "saved_credit_cards_modal": {
+          "view_all_label": "Сакталган бардык карталарды көрүү",
+          "done": "Даяр",
+          "cancel": "Жокко чыгаруу"
+        },
+        "expired_cards_info": {
+          "one": "Мөөнөтү өтүп кеткен %{count} карта бар. Аларды өз эсебиңизден көрүп жана өзгөртө аласыз.",
+          "other": "Мөөнөтү өтүп кеткен %{count} карта бар. Аларды өз аккаунтуңуздан көрүп, өзгөртө аласыз.",
+          "few": "Мөөнөтү өтүп кеткен %{count} карта бар. Аларды каттоо эсебиңизден көрүп, өзгөртө аласыз.",
+          "many": "Мөөнөтү өтүп кеткен %{count} карта бар. Сиз аларды аккаунтуңуздан карап, өзгөртө аласыз."
+        },
+        "local_payment_method_receiver_notice": "Буйрутма бергенден кийин төлөм маалыматын аласыз. Сиз банкомат аркылуу же веб-сайтта {{dueDays}} күндүн ичинде төлөй аласыз.",
+        "order_edit_banner_title": "Төлөм {{amount_owed}} өлчөмүндө талап кылынат",
+        "order_edit_banner_subtitle": "Буйрутма {{order_number}} өзгөртүлдү. Бул өзгөртүүлөрдү карап чыгып, андан кийин буйрутманы ырастоо үчүн көрсөтүлгөн сумманы төлөңүз.",
+        "order_edit_banner_single_item_added": "Кошулду",
+        "order_edit_banner_multiple_items_added": "Кошулду: {{amount}}",
+        "order_edit_banner_single_item_removed": "Өчүрүлдү",
+        "order_edit_banner_multiple_items_removed": "Жок кылынды: {{amount}}",
+        "gift_card_wrapper": {
+          "heading": "Белек карта",
+          "apply_gift_card_label": "Белек картасын колдонуу",
+          "payment_tag": "Белек картасы",
+          "apply_another_gift_card_label": "Башка белек картасын колдонуу",
+          "gift_card_label": "Белек картасы %{identifier}",
+          "add_label": "Белек картасын кошуу",
+          "manage_label": "Белек карталарын башкаруу"
+        },
+        "custom_onsite_payment_method_modal": {
+          "title": "Сайтта жеке төлөмдү ырастоо"
+        },
+        "markets_pro_disclaimer_label": "Буйрутма берүү менен сиз Global-e компаниясынын сатуучусу катары %{markets_pro_terms} жана Global-e компаниясынын %{privacy_policy} ылайык сатып алууну жүргүзүүгө, ошондой эле маалыматыңызды %{shop_name} менен бөлүшүүгө макулдугуңузду бересиз.",
+        "markets_pro_disclaimer_terms_and_conditions": "Шарттар",
+        "markets_pro_disclaimer_privacy_policy": "Купуялык саясаты",
+        "markets_pro_disclaimer_terms_and_conditions_title": "Катталган сатуучунун шарттары",
+        "markets_pro_disclaimer_privacy_policy_title": "Катталган сатуучунун купуялуулук саясаты",
+        "purchase_order_number": {
+          "title": "Сатып алуу заказынын номери",
+          "label": "Сатып алуу заказынын номери (милдеттүү эмес)"
+        },
+        "alternative_payment_currency_total_notice": "Эскертүү: %{amount_due} өлчөмүндөгү төлөм алынат.",
+        "waiting_on_taxes_message": "Эгер бир нече секунддан кийин салыктарды эсептөө чыкпаса, баракчаны кайра жүктөңүз.",
+        "waiting_on_taxes_notice": "Салыктарды эсептөө",
+        "order_edit_banner_single_item_returned": "Кайтарылды",
+        "order_edit_banner_multiple_items_returned": "Кайтарылды: {{amount}}",
+        "shop_pay_installments_label": "Shop Pay төлөмдөрү",
+        "add_credit_card_modal": {
+          "title": "Карта кошуу",
+          "cancel": "Жокко чыгаруу",
+          "save": "Сактоо"
+        },
+        "delete_credit_card_modal": {
+          "title": "Картаны өчүрүү",
+          "confirmation": "Сиз {{brandName}} картасын акыркы {{lastDigits}} саны менен чын эле жок кылгыңыз келеби?",
+          "cancel": "Жокко чыгаруу",
+          "delete": "Өчүрүү"
+        },
+        "order_edit_banner_items_added": {
+          "one": "Кошулду",
+          "other": "Кошулду: %{count}",
+          "few": "Кошулду: %{count}",
+          "many": "Кошулду: %{count}"
+        },
+        "order_edit_banner_items_removed": {
+          "in_full": "Жок кылынды",
+          "with_quantities": "{{delta}} / {{quantity}} жок кылынды"
+        },
+        "order_edit_banner_items_returned": {
+          "in_full": "Кайтарылды: {{quantity}}",
+          "with_quantities": "Кайтарылды: {{delta}} / {{quantity}}"
+        },
+        "saved_credit_card_actions": {
+          "edit": "Түзөтүү",
+          "delete": "Өчүрүү"
+        }
       },
       "localized_fields": {
         "additional_information": {
@@ -2937,7 +3076,12 @@
         "title": "Төлөм ыкмасын өзгөртүү",
         "save_payment_method_button": "Сактоо",
         "cancel_edit_payment_method_button": "Жокко чыгаруу",
-        "payment_method_updated_toast": "Төлөм ыкмалары өзгөртүлдү"
+        "payment_method_updated_toast": "Төлөм ыкмалары өзгөртүлдү",
+        "billing_address": "Эсепке алуу дареги",
+        "billing_address_add_new": "Кошуу",
+        "billing_address_choose_from_list": "Тизмеден тандоо",
+        "future_purchases_notice": "Бул төлөм ыкмасы жаңы сатып алуулар үчүн сакталат.",
+        "generic_error": "Жаңылоодо көйгөй келип чыкты. Кайра аракет кылыңыз."
       },
       "store_credit": {
         "details_modal": {
@@ -2947,10 +3091,28 @@
             "payment_failure": "Төлөм катасы",
             "payment_returned": "Төлөм кайтарылды",
             "order_cancellation": "Буйрутманы жокко чыгаруу",
-            "tax_finalization": "Салыктын акыркы суммасын аныктоо"
-          }
+            "tax_finalization": "Салыктын акыркы суммасын аныктоо",
+            "adjustment": "Түзөтүү"
+          },
+          "title": "Мөөнөтү бүтүп жаткан товардык кредит",
+          "expiration_date_label": "Күчүн жоготкон датасы",
+          "amount_label": "Саны",
+          "expirable_balance_info": "Балансыңыздын бир бөлүгүнүн жарактуу мөөнөтү жакында аяктайт",
+          "expirable_amount_label": "Жумшалуучу жалпы сумма",
+          "expirable_amounts_info": "Мөөнөтү эрте бүтө турган суммалар, биринчи кезекте буйрутманы жайгаштырууда колдонулат",
+          "expired_amounts_button": "Мөөнөтү өтүп кеткен суммаларды көрүү",
+          "pagination": {
+            "load_more_label": "Дагы көрсөтүү",
+            "load_more_accessibility_label": "Мөөнөтү бүтүп жаткан суммаларды дагы көрсөтүү"
+          },
+          "date_label": "Күнү",
+          "expirable_amounts_button": "Көрүү",
+          "event_label": "Окуя"
         },
-        "expirable_amounts_label": "Мөөнөтү бүтүп жаткан суммалар"
+        "expirable_amounts_label": "Мөөнөтү бүтүп жаткан суммалар",
+        "label": "Товардык кредит",
+        "accesibility_label": "Товардык насыя — {{formattedBalance}}",
+        "expirable_amounts_button": "Мөөнөтү бүтүп жаткан суммаларды көрүү"
       },
       "three_d_secure": {
         "verification_failed": "Төлөмүңүздү ырастоо мүмкүн болбой калды. Кайра аракет кылыңыз же башка төлөм ыкмасын тандаңыз."
@@ -3012,7 +3174,114 @@
         "title": "Төлөө ыкмасы кошулду",
         "done_button": "Соода кылууну улантуу"
       },
-      "expiring_badge_label": "Жарактуулук мөөнөтү бүтөт"
+      "expiring_badge_label": "Жарактуулук мөөнөтү бүтөт",
+      "card_fields": {
+        "card_number_label": "Картанын номери",
+        "card_number_placeholder": "Карта номери",
+        "name_on_card_label": "Картадагы ысым",
+        "name_on_card_placeholder": "Картадагы ысым",
+        "card_expiry_label": "Жарамдуулук мөөнөтү (АЙ/ЖЫЛ)",
+        "card_expiry_placeholder": "Жарактуулук мөөнөтү (АА/ЖЖ)",
+        "card_verification_value_label": "Коопсуздук коду",
+        "card_verification_value_placeholder": "Коопсуздук коду",
+        "card_start_label": "Чыгарылган күнү (АА/ЖЖ)",
+        "card_start_placeholder": "Чыгарылган күнү (АА/ЖЖ)",
+        "tooltip": {
+          "tooltip_accessibility_label": "Кененирээк",
+          "card_verification_value_explanation_amex": "Картанын алдыңкы бетиндеги 4 орундуу коопсуздук коду",
+          "card_verification_value_explanation_other": "Картанын арткы бетиндеги 3 орундуу коопсуздук коду",
+          "card_verification_value_explanation": "3 орундуу код. Көбүнчө картанын арткы бетинде жайгашкан. American Express карталарынын 4 орундуу коду бар, ал алдыңкы бетинде жайгашкан.",
+          "card_security_notice": "Бардык транзакциялар корголгон жана шифрленген."
+        },
+        "field_errors": {
+          "credit_card_name_invalid": "Атыңызды картада кандай көрсөтүлсө, так ошондой жазыңыз",
+          "credit_card_number_invalid": "Жарамдуу карта номерин көрсөтүңүз",
+          "credit_card_expiry_invalid": "Картаңыздын жарактуулук мөөнөтүнүн акыркы күнүн киргизиңиз",
+          "credit_card_verification_value_blank": "Картанын CVV же коопсуздук кодун жазыңыз"
+        },
+        "unavailable": {
+          "text": "Кредиттик жана дебеттик карталар аркылуу төлөмдөр азыр жеткиликсиз.",
+          "link_text": "Баракты жаңыртыңыз",
+          "suffix": "же кийинчерээк кайталап көрүңүз."
+        }
+      },
+      "add_payment_method": {
+        "title": "Төлөм ыкмасын кошуу",
+        "payment_method_added_confirmation": "Төлөм ыкмасы кошулду",
+        "billing_address": {
+          "title": "Эсеп-фактура дареги",
+          "add_billing_address_button": "Кошуу",
+          "add_billing_address_button_accessibility_label": "Эсеп үчүн дарек кошуу",
+          "choose_billing_address_from_list_button": "Тизмеден тандоо",
+          "choose_billing_address_from_list_button_accessibility_label": "Эсеп коюу үчүн даректи тизмеден тандоо",
+          "missing_billing_address_error_message": "Эсеп-фактураны жөнөтүүчү даректи көрсөтүңүз",
+          "default_checkbox": "Демейки төлөм ыкмасын орнотуу"
+        },
+        "replace_mode_warning": "Төлөм ыкмасын өчүрсөңүз, жазылуулар жана алдын ала буйрутмалар таасир этиши мүмкүн. Келечектеги буйрутмаларды алуу үчүн башка төлөм ыкмасын кошуңуз.",
+        "choose_from_list": "Тизмеден тандаңыз",
+        "add_new_button": "Жаңысын кошуу",
+        "button_title": "Кошуу",
+        "subscription_contracts": {
+          "title": "Кайталануучу заказдар үчүн төлөм ыкмасын колдонуңуз",
+          "product_details": "Буюмдун чоо-жайы",
+          "load_more": "Дагы көрсөтүү",
+          "more_items": {
+            "one": "Дагы {{count}} товар",
+            "other": "Дагы {{count}} товар",
+            "few": "Дагы {{count}} товар",
+            "many": "Дагы {{count}} товар(лар)"
+          },
+          "product_count": {
+            "other": "{{count}} товар",
+            "few": "{{count}} буюм",
+            "many": "{{count}} товар"
+          }
+        },
+        "contracts_update_failed": "Кээ бир жазылуу келишимдерин жаңыртуу мүмкүн болбой калды",
+        "subscription_contracts_updated": "{{succeeded}}/{{total}} жазылуулар жаңыртылды",
+        "invalid_wallet_type_error": "Капчыктын туура эмес түрү.",
+        "updating_contracts": {
+          "one": "Жазылуу келишиминин {{count}} жаңыртылуусу...",
+          "other": "Жазылуу үчүн {{count}} келишим жаңыртылууда…",
+          "few": "Жазылуу үчүн {{count}} келишим жаңыртылууда…",
+          "many": "{{count}} жазылуу келишимдерин жаңыртуу…"
+        },
+        "contracts_updated": {
+          "one": "{{count}} жазылуу келишими жаңыртылды",
+          "other": "{{count}} жазылуу келишими(тери) жаңыртылды",
+          "few": "{{count}} жазылуу келишим(дери) жаңыртылды",
+          "many": "{{count}} жазылуу келишими(тери) жаңыртылды"
+        },
+        "missing_customer_error": "Ката кетти. Кайра аракет кылыңыз же колдоо бөлүмүнө кайрылыңыз."
+      },
+      "expires_soon": "Картанын мөөнөтү жакында бүтөт",
+      "expired": "Картанын мөөнөтү бүттү",
+      "card_update_consent": "Төлөмдүн бул ыкмасы жаңы сатып алуулар үчүн сакталат.",
+      "digital_wallet_title": "Санарип капчык",
+      "credit_or_debit_card_title": "Кредиттик же дебеттик карта",
+      "google_pay": {
+        "errors": {
+          "generic": "Google Pay'де көйгөй келип чыкты. Кайра аракет кылыңыз же башка төлөм ыкмасын колдонуңуз.",
+          "missing_billing_address": "Google Pay'ди колдонуу үчүн, төлөм дарегин көрсөтүшүңүз керек. Каттоо эсебиңизде төлөм дарегин көрсөтүңүз."
+        },
+        "loading": "Google Pay жүктөлүүдө",
+        "iframe_title_accessibility_label": "Google Pay төлөм ыкмасын кошуу",
+        "loading_accessibility_message": "Google Pay жүктөлүүдө"
+      },
+      "apple_pay": {
+        "loading": "Apple Pay жүктөөдө",
+        "errors": {
+          "generic": "Apple Pay'де көйгөй келип чыкты. Кайталап көрүңүз же башка төлөм ыкмасын колдонуңуз.",
+          "not_available": "Apple Pay түзмөгүңүздө жеткиликтүү эмес.",
+          "missing_billing_address": "Apple Pay'ди колдонуу үчүн эсептешүү дарегин көрсөтүңүз. Эсептешүү дарегин каттоо эсебиңизде көрсөтүңүз."
+        }
+      },
+      "add_payment_method_banner": "Буйрутмаларды же алдын ала уруксат берилген операцияларды тез бүтүрүү үчүн төлөм ыкмасын кошуңуз",
+      "edit_payment_method_button_accessibility_label": "{{paymentMethodName}} төлөм ыкмасын оңдоо, акыркы цифралары: {{lastDigits}}",
+      "edit_payment_method_brand_button_accessibility_label": "{{paymentMethodName}} түзөтүү",
+      "expiration_warning_button_accessibility_label": "Жарактуулук мөөнөтү {{lastDigits}} менен аяктаган {{paymentMethodName}} эскертүүсүн көрсөтүү",
+      "no_payment_methods_banner": "Төлөм ыкмалары кошулган эмес",
+      "default": "Демейки"
     },
     "payment_method_brands": {
       "visa": "Виза",
