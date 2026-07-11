@@ -1834,6 +1834,136 @@
       "decrease": "Жоюу {{type}}",
       "minimumReached": "Минималдуу мааниге жетишилди: {{value}}",
       "maximumReached": "{{value}}: максималдуу мааниге жетти"
+    },
+    "orders": {
+      "list_title_pending_orders_accessibility_label": "Буйрутмалар: тариздөөнү күтүүдө",
+      "switch_order_type_pending_orders_accessibility_label": "Буйрутмалардын түрүн өзгөртүү (учурда каралып жаткан буйрутмалар, тариздөөнү күтүп жатышат)",
+      "switch_order_type_confirmed_orders_accessibility_label": "Буйрутмалардын түрүн өзгөртүү (учурда каралып жаткан буйрутмалар ырасталган буйрутмалар)",
+      "group_title_label": "Бөлүм: {{groupTitle}}",
+      "group_title_label_with_parent": "Үчүн: {{groupTitle}}"
+    },
+    "order_details": {
+      "addresses_section_title": "Төлөм жана жеткирүү",
+      "billing_address": "Эсеп-фактура дареги",
+      "card_ending_with": "{{lastDigits}} менен аяктайт",
+      "contact": "Байланыш маалыматтары",
+      "hide_items": "Позицияларды жашыруу",
+      "loading": "Буйрутма маалыматтарын жүктөө",
+      "loading_finished_accessibility_message": "Заказ тууралуу маалымат жүктөлдү",
+      "payment": {
+        "status_in_review": "Текшергенден кийин төлөм жүргүзүлөт",
+        "status_unpaid": "Төлөө мөөнөтү: {{date}}",
+        "title": "Төлөө",
+        "card_payment_details": "менен аяктайт: {{lastDigits}} — {{formattedTransactionAmount}}",
+        "shop_pay_installments": {
+          "paid_in_installments": "Shop Pay аркылуу мезгилдүү төлөмдөр төлөндү",
+          "view_schedule": "Графикти көрүү",
+          "summary": "Мезгил-мезгили менен төлөмдөр Shop"
+        },
+        "gift_card_payment_details": "{{lastDigits}} менен аяктайт — {{formattedTransactionAmount}}",
+        "manual_payment_methods": {
+          "money_order": "Акча которуу — {{formattedTransactionAmount}}",
+          "cash_on_delivery": "Кассадан алганда төлөө — {{formattedTransactionAmount}}",
+          "bank_deposit": "Банктык депозит — {{formattedTransactionAmount}}",
+          "manual": "Кол менен — {{formattedTransactionAmount}}"
+        },
+        "store_credit_payment_details": "Товардык насыя — {{formattedTransactionAmount}}",
+        "transactions": {
+          "show_all": "Баарын көрсөтүү",
+          "show_less": "Азыраак көрсөтүү",
+          "details": "Маалыматтар",
+          "payment_details": "Төлөм реквизиттери"
+        },
+        "emv_details": {
+          "auth": "Авт.:",
+          "aid": "ЖАРДАМ:",
+          "source": "КЫРГЫЗЧА:"
+        },
+        "payment_type": {
+          "gift_card": "Белек картасы",
+          "store_credit": "Дүкөн сатып алууга кредит",
+          "money_order": "Акча которуу",
+          "cash_on_delivery": "Колдон алаарда накталай төлөө",
+          "bank_deposit": "Банктык депозит",
+          "manual": "Кол менен"
+        }
+      },
+      "shipping": {
+        "address": "Жеткирүү дареги",
+        "address_map_marker": "Жеткирүү дареги",
+        "method": "Жеткирүү ыкмасы",
+        "summary": "Жеткирүү",
+        "free": "Бекер",
+        "free_shipping_discount": "Акысыз жеткирүү",
+        "one_time": "Бир жеткирүү",
+        "subscription": "Жазылуу аркылуу жеткирүү",
+        "method_short": "Ыкма",
+        "ship_to": "Жеткирүү дареги"
+      },
+      "show_items": "Позицияларды көрсөтүү",
+      "subtitle": "Ырасталды {{date}}",
+      "subtotal": "Аралык жыйынтык",
+      "summary_list_title_accessibility_label": "Заказдын позициялары",
+      "summary_title": "Буйрутма маалыматтары",
+      "summary_totals_title_accessibility_label": "Буйрутманын жалпы суммасы",
+      "taxes": "Салыктар",
+      "total": "Жалпы сумма",
+      "unit_price": "{{price}}/ар бири",
+      "location": "Жайгашуу",
+      "not_applicable": "Маалымат жок",
+      "fully_refunded_label": "КАРАЖАТТАР КАЙТАРЫЛДЫ",
+      "partially_refunded_label": "КАРАЖАТ ЖАРИМ-ЖАРТЫСЫНДА КАЙТАРЫЛДЫ",
+      "refunded_amount": "Каражат кайтарылды",
+      "discount": "Арзандатуу",
+      "no_data": "Жок",
+      "pagination": {
+        "load_more": "Дагы көрсөтүү",
+        "load_more_accessibility_label": "Дагы нерселерди көрсөтүү",
+        "loading_accessibility_label": "Жүктөлүүдө"
+      },
+      "returns": {
+        "expand_events_label": "Маалыматты көрсөтүү",
+        "hide_events_label": "Маалыматты жашыруу",
+        "print_shipping_label": "Ташуучу этикеткаларды басып чыгаруу",
+        "tracking_number": "Көзөмөлдөө номери:",
+        "return_and_refund_modal_header": "Каражатты кайтаруу саясаты",
+        "ineligible_return_message": "Бул заказда кайтарылып берилүүгө тийиш болгон товарлар жок.",
+        "ineligible_return_message_when_returned": "Бул заказ боюнча кайтарылуучу кошумча товарлар жок.",
+        "exchange_header": "Алмашуу үчүн товарлар",
+        "exchange_subheader": "Алмаштырууга товарлар кайтаруу аяктагандан кийин заказга кошулат."
+      },
+      "request_return_failed": "Сиздин сурооңузду иштеп чыгууда көйгөй келип чыкты. Кайра аракет кылыңыз.",
+      "mobile_summary_toggle_button": {
+        "open": "Буйрутманын чоо-жайын көрсөтүү",
+        "closed": "Буйрутманын чоо-жайын жашыруу"
+      },
+      "shipment_timeline": {
+        "expand_events_label": "Маалыматтарды көрсөтүү",
+        "expand_events_accessibility_label": "Буйрутманы жеткирүү маалыматтарын көрсөтүү",
+        "hide_events_label": "Маалыматты жашыруу",
+        "hide_events_accessibility_label": "Заказ жеткирүү маалыматтарын жашыруу"
+      },
+      "show_order_summary": "Буйрутманын чоо-жайын көрсөтүү",
+      "hide_order_summary": "Буйрутманын чоо-жайын жашыруу",
+      "no_data_provided_accessibility_label": "«{{fieldName}}» талаасы бош",
+      "marketing_section_title": "Жаңылыктар жана сунуштар",
+      "marketing_checkbox_label": "Мага жаңылыктарды жана сунуштарды жөнөтүңүз",
+      "marketing_checkmark_label": "Сиз электрондук жаңылыктар жана сунуштар баракчасына жазылдыңыз",
+      "image_gallery": {
+        "product_name_and_quantity": "{{productName}} — {{quantity}} даана",
+        "next": "Кийинки элементтерди көрсөтүү",
+        "previous": "Мурунку элементтерди көрсөтүү",
+        "load_more_items": {
+          "one": "Дагы {{count}} нерсени көрсөтүү",
+          "other": "Дагы {{count}} нерсе көрсөтүү",
+          "few": "Дагы көрсөтүү {{count}} нерсе",
+          "many": "Дагы {{count}} нерсе көрсөтүү"
+        }
+      },
+      "shop_order_tracking": {
+        "download_shop_to_track": "Жүк ташууну көзөмөлдөө үчүн Shop колдонмосун жүктөп алыңыз",
+        "track_order_with_shop": "Shop аркылуу заказыңызга көз салыңыз"
+      }
     }
   },
   "general": {
