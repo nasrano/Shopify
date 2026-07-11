@@ -264,7 +264,8 @@
           '<div class="privat-line-item" data-line-key="' + item.key + '">' +
             '<div class="privat-line-item__thumb" style="' + img + '"></div>' +
             '<div class="privat-line-item__body">' +
-              '<div class="privat-line-item__name">' + item.product_title + '</div>' +
+              '<div class="privat-line-item__name privat-fav-row__name">' + item.product_title + '</div>' +
+              (item.sku ? '<div class="privat-line-item__code">Код: ' + item.sku + '</div>' : '') +
               '<div class="privat-line-item__price">' + formatMoney(item.line_price) + '</div>' +
               '<div class="privat-line-item__qty">' +
                 '<button class="privat-qty-btn" data-cart-dec="' + item.key + '" aria-label="Меньше">−</button>' +
@@ -410,19 +411,19 @@
       var f = favs[id];
       var img = f.image ? 'background-image:url(' + f.image + ')' : '';
       return '' +
-        '<div class="privat-line-item">' +
+        '<div class="privat-line-item privat-line-item--fav">' +
           '<a href="' + f.url + '" class="privat-line-item__thumb" style="' + img + '"></a>' +
           '<div class="privat-line-item__body">' +
             '<a href="' + f.url + '" class="privat-line-item__name privat-fav-row__name" style="color:inherit;text-decoration:none">' + f.title + '</a>' +
-            (f.sku ? '<div class="privat-fav-row__code">Код: ' + f.sku + '</div>' : '') +
+            (f.sku ? '<div class="privat-line-item__code">Код: ' + f.sku + '</div>' : '') +
             '<div class="privat-line-item__price">' + f.price + '</div>' +
             '<div class="privat-line-item__qty">' +
               (f.variantId ? '<button class="privat-fav-row__add" data-add-to-cart data-variant-id="' + f.variantId + '">В корзину</button>' : '') +
-              '<button class="privat-fav-row__heart is-active" data-fav-toggle data-product-id="' + id + '" data-product-title="' + f.title + '" data-product-price="' + f.price + '" data-product-image="' + f.image + '" data-product-url="' + f.url + '" data-product-sku="' + (f.sku || '') + '" data-variant-id="' + f.variantId + '" aria-label="Убрать из избранного">' +
-                '<svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11 18.6C6.7 15.3 3.8 12.6 3.8 9.6c0-2.2 1.7-3.9 3.9-3.9 1.3 0 2.5.6 3.3 1.7.8-1.1 2-1.7 3.3-1.7 2.2 0 3.9 1.7 3.9 3.9 0 3-2.9 5.7-7.2 9Z"/></svg>' +
-              '</button>' +
             '</div>' +
           '</div>' +
+          '<button class="privat-fav-row__heart is-active" data-fav-toggle data-product-id="' + id + '" data-product-title="' + f.title + '" data-product-price="' + f.price + '" data-product-image="' + f.image + '" data-product-url="' + f.url + '" data-product-sku="' + (f.sku || '') + '" data-variant-id="' + f.variantId + '" aria-label="Убрать из избранного">' +
+            '<svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11 18.6C6.7 15.3 3.8 12.6 3.8 9.6c0-2.2 1.7-3.9 3.9-3.9 1.3 0 2.5.6 3.3 1.7.8-1.1 2-1.7 3.3-1.7 2.2 0 3.9 1.7 3.9 3.9 0 3-2.9 5.7-7.2 9Z"/></svg>' +
+          '</button>' +
         '</div>';
     }).join('');
     squareThumbs();

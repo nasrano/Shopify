@@ -260,11 +260,13 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-sheet__note{font-size:11px;color:var(--sub);text-align:center}
 
 /* избранное — те же карточки, что в корзине */
+.privat-line-item{position:relative}
+.privat-line-item__code{font-size:10px;color:var(--sub);letter-spacing:.04em}
 .privat-fav-row__name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.privat-fav-row__code{font-size:10px;color:var(--sub);letter-spacing:.04em}
-.privat-fav-row__add{flex:none;border:none;cursor:pointer;background:var(--chip);color:var(--ink);font-size:11.5px;font-weight:700;padding:8px 14px;border-radius:100px;font-family:'Manrope',sans-serif;white-space:nowrap}
+.privat-line-item--fav .privat-fav-row__name{padding-right:26px}
+.privat-fav-row__add{margin-left:auto;flex:none;border:none;cursor:pointer;background:var(--chip);color:var(--ink);font-size:11.5px;font-weight:700;padding:8px 14px;border-radius:100px;font-family:'Manrope',sans-serif;white-space:nowrap}
 .privat-fav-row__add:hover{background:var(--accent);color:var(--accent-ink)}
-.privat-fav-row__heart{flex:none;border:none;background:none;cursor:pointer;color:var(--accent);padding:2px;margin-left:auto}
+.privat-fav-row__heart{position:absolute;top:10px;right:10px;border:none;background:none;cursor:pointer;color:var(--accent);padding:2px}
 
 /* категории: панели-уровни, листаются вбок */
 .privat-catnav{position:relative;flex:1;min-height:0;overflow:hidden;border-radius:0 0 26px 26px}

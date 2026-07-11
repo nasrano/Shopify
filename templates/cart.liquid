@@ -19,6 +19,7 @@
               {% if item.image %}style="background-image:url({{ item.image | image_url: width: 160 }})"{% endif %}></a>
             <div class="privat-line-item__body">
               <a href="{{ item.url }}" class="privat-line-item__name" style="color:inherit;text-decoration:none">{{ item.product.title }}</a>
+              {% if item.sku != blank %}<div class="privat-line-item__code">Код: {{ item.sku }}</div>{% endif %}
               <div class="privat-line-item__price">{{ item.line_price | money }}</div>
               <div class="privat-line-item__qty">
                 <input class="privat-input" type="number" name="updates[]" value="{{ item.quantity }}" min="0"
