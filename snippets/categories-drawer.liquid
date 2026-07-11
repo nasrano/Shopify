@@ -1,15 +1,78 @@
+{%- comment -%}
+  Категории: древо до 3 уровней из «Меню категорий» (настройки темы).
+  Клик по названию открывает коллекцию любого уровня; кнопка › проваливается
+  на уровень глубже (панели листаются вбок, JS: catShow в theme.js).
+{%- endcomment -%}
+{%- assign menu = linklists[settings.categories_menu] -%}
+
 <div class="privat-sheet privat-sheet--cats" data-drawer="cats">
   <div class="privat-sheet__head">
     <h3 class="privat-sheet__title">Категории</h3>
     <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
   </div>
-  <div class="privat-sheet__scroll">
-    {% for link in linklists[settings.categories_menu].links %}
-      <a href="{{ link.url }}" class="privat-cat-row">
-        <span class="privat-cat-row__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
-        <span class="privat-cat-row__name">{{ link.title }}</span>
-        <span class="privat-cat-row__chev">›</span>
-      </a>
+
+  <div class="privat-catnav">
+    <div class="privat-catnav__panel is-active" data-cat-panel="root">
+      {% for l1 in menu.links %}
+        <div class="privat-cat-row">
+          <a href="{{ l1.url }}" class="privat-cat-row__link">
+            <span class="privat-cat-row__mono">{{ l1.title | slice: 0, 1 | upcase }}</span>
+            <span class="privat-cat-row__name">{{ l1.title }}</span>
+          </a>
+          {% if l1.links.size > 0 %}
+            <button type="button" class="privat-cat-row__drill" data-cat-drill="p{{ forloop.index }}" aria-label="Подкатегории «{{ l1.title }}»">›</button>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% for l1 in menu.links %}
+      {%- assign i1 = forloop.index -%}
+      {% if l1.links.size > 0 %}
+        <div class="privat-catnav__panel" data-cat-panel="p{{ i1 }}">
+          <button type="button" class="privat-cat-back" data-cat-back="root">‹ Все категории</button>
+          <div class="privat-cat-row">
+            <a href="{{ l1.url }}" class="privat-cat-row__link privat-cat-row__link--all">
+              <span class="privat-cat-row__mono">{{ l1.title | slice: 0, 1 | upcase }}</span>
+              <span class="privat-cat-row__name">Все «{{ l1.title }}» →</span>
+            </a>
+          </div>
+          {% for l2 in l1.links %}
+            <div class="privat-cat-row">
+              <a href="{{ l2.url }}" class="privat-cat-row__link">
+                <span class="privat-cat-row__mono">{{ l2.title | slice: 0, 1 | upcase }}</span>
+                <span class="privat-cat-row__name">{{ l2.title }}</span>
+              </a>
+              {% if l2.links.size > 0 %}
+                <button type="button" class="privat-cat-row__drill" data-cat-drill="p{{ i1 }}-{{ forloop.index }}" aria-label="Подкатегории «{{ l2.title }}»">›</button>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        {% for l2 in l1.links %}
+          {%- assign i2 = forloop.index -%}
+          {% if l2.links.size > 0 %}
+            <div class="privat-catnav__panel" data-cat-panel="p{{ i1 }}-{{ i2 }}">
+              <button type="button" class="privat-cat-back" data-cat-back="p{{ i1 }}">‹ {{ l1.title }}</button>
+              <div class="privat-cat-row">
+                <a href="{{ l2.url }}" class="privat-cat-row__link privat-cat-row__link--all">
+                  <span class="privat-cat-row__mono">{{ l2.title | slice: 0, 1 | upcase }}</span>
+                  <span class="privat-cat-row__name">Все «{{ l2.title }}» →</span>
+                </a>
+              </div>
+              {% for l3 in l2.links %}
+                <div class="privat-cat-row">
+                  <a href="{{ l3.url }}" class="privat-cat-row__link">
+                    <span class="privat-cat-row__mono">{{ l3.title | slice: 0, 1 | upcase }}</span>
+                    <span class="privat-cat-row__name">{{ l3.title }}</span>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     {% endfor %}
   </div>
 </div>

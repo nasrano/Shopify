@@ -12,17 +12,32 @@
     return app.querySelectorAll('[data-drawer]');
   }
 
+  var CLOSE_MS = 260;
   function closeAll() {
-    drawers().forEach(function (d) { d.classList.remove('is-open'); });
-    backdrop.classList.remove('is-open');
+    var any = false;
+    drawers().forEach(function (d) {
+      if (d.classList.contains('is-open') && !d.classList.contains('is-closing')) {
+        any = true;
+        d.classList.add('is-closing');
+        setTimeout(function () { d.classList.remove('is-open', 'is-closing'); }, CLOSE_MS);
+      }
+    });
+    if (any) {
+      backdrop.classList.add('is-closing');
+      setTimeout(function () { backdrop.classList.remove('is-open', 'is-closing'); }, CLOSE_MS);
+    } else {
+      backdrop.classList.remove('is-open');
+    }
     if (scroller) scroller.classList.remove('no-scroll');
     syncNavActive(null);
   }
 
   function open(name) {
     drawers().forEach(function (d) {
+      d.classList.remove('is-closing');
       d.classList.toggle('is-open', d.getAttribute('data-drawer') === name);
     });
+    backdrop.classList.remove('is-closing');
     backdrop.classList.add('is-open');
     if (scroller) scroller.classList.add('no-scroll');
     syncNavActive(name);
@@ -32,14 +47,44 @@
     }
     if (name === 'cart') renderCart();
     if (name === 'favs') renderFavorites();
+    if (name === 'cats') { catStack.length = 0; catStack.push('root'); catShow(); }
+  }
+
+  function defaultNav() {
+    var p = window.location.pathname;
+    if (p === '/' || p === '') return 'home';
+    if (p.indexOf('/collections') === 0 || p.indexOf('/products') === 0) return 'shop';
+    if (p.indexOf('/search') === 0) return 'search';
+    if (p.indexOf('/account') === 0) return 'acc';
+    return null;
   }
 
   function syncNavActive(overlayName) {
+    var current = overlayName === null ? defaultNav() : overlayName;
     app.querySelectorAll('.privat-nav__btn').forEach(function (b) {
       var target = b.getAttribute('data-nav-active-for');
-      b.classList.toggle('is-active', target === overlayName || (overlayName === null && target === 'home'));
+      b.classList.toggle('is-active', target !== null && target === current);
     });
   }
+
+  /* ---------------- categories: 3-level drill panels ---------------- */
+  var catStack = ['root'];
+  function catShow() {
+    document.querySelectorAll('[data-cat-panel]').forEach(function (p) {
+      var id = p.getAttribute('data-cat-panel');
+      p.classList.toggle('is-active', id === catStack[catStack.length - 1]);
+      p.classList.toggle('is-left', id !== catStack[catStack.length - 1] && catStack.indexOf(id) > -1);
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var drill = e.target.closest('[data-cat-drill]');
+    if (drill) { catStack.push(drill.getAttribute('data-cat-drill')); catShow(); return; }
+    var back = e.target.closest('[data-cat-back]');
+    if (back) {
+      if (catStack.length > 1) catStack.pop();
+      catShow();
+    }
+  });
 
   document.addEventListener('click', function (e) {
     var opener = e.target.closest('[data-open]');
@@ -274,9 +319,7 @@
     var favs = getFavs();
     document.querySelectorAll('[data-fav-toggle]').forEach(function (btn) {
       var id = btn.getAttribute('data-product-id');
-      var on = !!favs[id];
-      btn.classList.toggle('is-active', on);
-      btn.textContent = on ? '♥' : '♡';
+      btn.classList.toggle('is-active', !!favs[id]);
     });
     var badge = document.getElementById('privat-favs-badge');
     if (badge) {
@@ -331,12 +374,24 @@
             '<div class="privat-fav-row__price">' + f.price + '</div>' +
           '</div>' +
           (f.variantId ? '<button class="privat-fav-row__add" data-add-to-cart data-variant-id="' + f.variantId + '">В корзину</button>' : '') +
-          '<button class="privat-fav-row__heart" data-fav-toggle data-product-id="' + id + '" data-product-title="' + f.title + '" data-product-price="' + f.price + '" data-product-image="' + f.image + '" data-product-url="' + f.url + '" data-variant-id="' + f.variantId + '">♥</button>' +
+          '<button class="privat-fav-row__heart is-active" data-fav-toggle data-product-id="' + id + '" data-product-title="' + f.title + '" data-product-price="' + f.price + '" data-product-image="' + f.image + '" data-product-url="' + f.url + '" data-variant-id="' + f.variantId + '">' +
+            '<svg width="17" height="17" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11 18.6C6.7 15.3 3.8 12.6 3.8 9.6c0-2.2 1.7-3.9 3.9-3.9 1.3 0 2.5.6 3.3 1.7.8-1.1 2-1.7 3.3-1.7 2.2 0 3.9 1.7 3.9 3.9 0 3-2.9 5.7-7.2 9Z"/></svg>' +
+          '</button>' +
         '</div>';
     }).join('');
   }
 
   /* ---------------- search (predictive) ---------------- */
+  document.addEventListener('click', function (e) {
+    var fill = e.target.closest('[data-search-fill]');
+    if (!fill) return;
+    var input = document.getElementById('privat-search-input');
+    if (!input) return;
+    input.value = fill.getAttribute('data-search-fill');
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.focus({ preventScroll: true });
+  });
+
   var searchTimer = null;
   document.addEventListener('input', function (e) {
     if (e.target.id !== 'privat-search-input') return;

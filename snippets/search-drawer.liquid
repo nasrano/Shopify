@@ -7,7 +7,18 @@
     <input type="text" id="privat-search-input" class="privat-input privat-input--search" placeholder="Что ищете?" autocomplete="off">
   </div>
   <div class="privat-sheet__scroll">
-    <div class="privat-search__idle" id="privat-search-idle">Например: смазка, свеча, феромоны…</div>
+    <div id="privat-search-idle">
+      <div class="privat-search__pop-label">Часто ищут</div>
+      <div class="privat-search__pop-chips">
+        <button type="button" data-search-fill="смазка">смазка</button>
+        <button type="button" data-search-fill="вибратор">вибратор</button>
+        <button type="button" data-search-fill="свеча">свеча</button>
+        <button type="button" data-search-fill="феромоны">феромоны</button>
+        <button type="button" data-search-fill="бельё">бельё</button>
+        <button type="button" data-search-fill="для пар">для пар</button>
+      </div>
+      <div class="privat-search__hint">Начните вводить название — покажем подходящие товары, добавить в корзину можно прямо отсюда.</div>
+    </div>
     <div id="privat-search-results"></div>
   </div>
 </div>

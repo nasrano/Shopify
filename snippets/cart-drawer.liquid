@@ -10,7 +10,12 @@
     </div>
     <div class="privat-empty__title">Пока пусто</div>
     <div class="privat-empty__text">Загляните в хиты продаж — там точно найдётся что-то для вас.</div>
-    <a href="{{ routes.all_products_collection_url }}" class="privat-btn">В магазин</a>
+    {%- assign empty_col = settings.empty_cart_collection -%}
+    {% if empty_col != blank %}
+      <a href="{{ empty_col.url }}" class="privat-btn">К хитам продаж</a>
+    {% else %}
+      <a href="{{ routes.all_products_collection_url }}" class="privat-btn">В магазин</a>
+    {% endif %}
   </div>
 
   <div class="privat-sheet__body" id="privat-cart-body" style="display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}">

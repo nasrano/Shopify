@@ -7,9 +7,6 @@
     <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
   </div>
 
-  {% for link in linklists[settings.menu].links %}
-    <a href="{{ link.url }}" class="privat-drawer__link"{% if link.url == routes.root_url %} data-go-home{% endif %}>{{ link.title }}</a>
-  {% endfor %}
   <button type="button" class="privat-drawer__link" data-open="cats">Категории</button>
 
   <div class="privat-drawer__subhead">Покупателям</div>
@@ -22,13 +19,28 @@
   {% endif %}
 
   <div class="privat-drawer__foot">
+    {% if localization.available_languages.size > 1 %}
+      <div class="privat-lang">
+        {% form 'localization' %}
+          {% for language in localization.available_languages %}
+            <button type="submit" name="locale_code" value="{{ language.iso_code }}"
+              class="privat-lang__btn{% if language.iso_code == localization.language.iso_code %} is-active{% endif %}">
+              {{ language.endonym_name | capitalize }}
+            </button>
+          {% endfor %}
+        {% endform %}
+      </div>
+    {% endif %}
     <div class="privat-theme-toggle">
       <span class="privat-theme-toggle__label">Тёмная тема</span>
       <span class="privat-theme-toggle__switch" data-theme-toggle role="button" aria-label="Переключить тему">
         <span class="privat-theme-toggle__knob"></span>
       </span>
     </div>
-    <div class="privat-drawer__contact">{{ section.settings.phone | default: '0500 690 690' }} · {{ section.settings.address | default: 'Калык Акиева 116' }}</div>
+    <div class="privat-drawer__contact">
+      <b>{{ section.settings.phone | default: '0500 690 690' }}</b><br>
+      Бишкек, {{ section.settings.address | default: 'Калык Акиева 116' }}
+    </div>
     <button type="button" class="privat-drawer__cart-btn" data-open="cart">Моя корзина (<span id="privat-menu-cart-count">{{ cart.item_count }}</span>)</button>
   </div>
 </aside>
@@ -40,7 +52,8 @@
     { "type": "text", "id": "logo_text", "label": "Название", "default": "PRIVAT" },
     { "type": "text", "id": "logo_subtext", "label": "Подпись", "default": "SEX SHOP" },
     { "type": "text", "id": "phone", "label": "Телефон", "default": "0500 690 690" },
-    { "type": "text", "id": "address", "label": "Адрес", "default": "Калык Акиева 116" }
+    { "type": "text", "id": "address", "label": "Адрес (без города)", "default": "Калык Акиева 116" },
+    { "type": "paragraph", "content": "Ссылки «Покупателям» и «Информация» берутся из меню в настройках темы (Тема → Навигация). Переключатель языка появится, когда в Settings → Languages опубликован второй язык (кыргызский)." }
   ]
 }
 {% endschema %}
