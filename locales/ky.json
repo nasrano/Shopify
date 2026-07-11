@@ -236,7 +236,8 @@
           "prepaid_free_shipping_with_cycles": {
             "other": "Алгачкы %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
             "few": "Биринчи %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
-            "many": "Биринчи %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}"
+            "many": "Биринчи %{cycle} үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
+            "one": "Биринчи %{cycle} ичинде акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}"
           },
           "prepaid_order_one_cycle": {
             "one": "Жеткирүүнүн %{shipping_price} баасы дагы %{count} заказ үчүн жарактуу",
@@ -261,6 +262,98 @@
             "other": "Жеткирүү баасы %{shipping_price} %{count} заказга чейин жарактуу (%{per_delivery_cost}), андан кийин — %{recurring_order_shipping_price}",
             "few": "Жеткирүүнүн баасы %{shipping_price} %{count} заказ үчүн (%{per_delivery_cost}) жарактуу, андан кийин — %{recurring_order_shipping_price}",
             "many": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн (%{per_delivery_cost}) жарактуу, андан кийин %{recurring_order_shipping_price} болот"
+          },
+          "prepaid_delivery_frequency": {
+            "one": "%{count} жеткирүүгө чейин",
+            "other": "белгилүү сандагы жеткирүүлөр үчүн (%{count})",
+            "few": "белгилүү бир жеткирүү саны үчүн (%{count})",
+            "many": "белгиленген сандагы жеткирүүлөр үчүн (%{count})"
+          },
+          "subscription_delivery_frequency": {
+            "day": {
+              "one": "күн сайын",
+              "other": "ар бир %{count} күн сайын",
+              "few": "ар бир %{count} күн сайын",
+              "many": "ар бир %{count} күн."
+            },
+            "week": {
+              "one": "жума сайын",
+              "other": "ар бир %{count} жума сайын",
+              "few": "ар %{count} апта сайын",
+              "many": "ар бир %{count} жума сайын"
+            },
+            "month": {
+              "one": "ар бир ай",
+              "other": "ар бир %{count} айда",
+              "few": "ар бир %{count} айда",
+              "many": "ар бир %{count} айда"
+            },
+            "year": {
+              "one": "жыл сайын",
+              "other": "ар бир %{count} жыл.",
+              "few": "ар %{count} жыл.",
+              "many": "ар бир %{count} жыл."
+            }
+          },
+          "multiple_subscriptions_shipping_price_label": "Жеткирүү акысы: %{shipping_price}",
+          "prepaid_shipping_price_label": "жеткирүү үчүн %{shipping_price} x %{delivery_interval_count}",
+          "initial_order_discounted": "Биринчи жеткирүү %{discounted_shipping_cost}, андан соң — %{frequency_description}",
+          "prepaid_initial_order_discounted": "Биринчи жеткирүү %{discounted_shipping_price} үчүн %{prepaid_delivery_frequency}",
+          "prepaid_initial_order_discounted_with_per_delivery_price": "Биринчи жеткирүү %{discounted_shipping_price} %{prepaid_delivery_frequency} үчүн (%{discounted_cost_per_delivery})",
+          "prepaid_initial_order_discounted_with_renewal": "Биринчи жеткирүү %{discounted_shipping_price} %{prepaid_delivery_frequency} үчүн, андан кийин %{shipping_price} %{billing_cycle}",
+          "prepaid_initial_order_discounted_with_per_delivery_price_and_renewal": "Биринчи жеткирүү %{discounted_shipping_price} %{prepaid_delivery_frequency} турат (%{discounted_cost_per_delivery}), андан кийин — %{shipping_price} %{billing_cycle}",
+          "shipping_price_included": "Кошулган",
+          "recurring_order_shipping_price": "%{recurring_order_shipping_price} баштап",
+          "first_order_shipping_price_included": "Биринчи буйрутманы кошо алганда баасы + %{recurring_order_shipping_price}",
+          "first_order_different_shipping_price": "%{first_order_shipping_price} (%{per_delivery_price} жеткирүү үчүн) плюс %{recurring_order_shipping_price}",
+          "first_n_order_free": {
+            "one": "Биринчи буйрутмаңыз акысыз",
+            "other": "Алгачкы бир нече буйрутмаңыз (%{count}) акысыз",
+            "few": "Алгачкы бир нече буйрутмаңыз (%{count}) — акысыз",
+            "many": "Алгачкы бир нече буйрутмаңыз (%{count}) — акысыз"
+          },
+          "free_for_first_n_order": {
+            "one": "Биринчи буйрутма үчүн",
+            "other": "Алдын ала берилген бир нече заказдар үчүн (%{count})",
+            "few": "Бир нече алгачкы заказдар үчүн (%{count})",
+            "many": "Алгачкы бир нече буйрутма үчүн (%{count})"
+          },
+          "subscription_free_with_frequency_label": "Акысыз жеткирүү %{delivery_frequency}",
+          "free_shipping_cycles": {
+            "one": "Дагы %{count} заказга акысыз жеткирүү",
+            "other": "Дагы %{count} заказ үчүн акысыз жеткирүү",
+            "few": "Дагы %{count} заказ үчүн акысыз жеткирүү",
+            "many": "дагы %{count} заказ үчүн акысыз жеткирүү"
+          },
+          "free_shipping_cycles_delivery_not_included": {
+            "one": "%{count} заказдан акысыз жеткирүү",
+            "other": "%{count} заказдарга акысыз жеткирүү",
+            "few": "%{count} буйрутма үчүн акысыз жеткирүү",
+            "many": "%{count} заказдарга акысыз жеткирүү"
+          },
+          "first_n_order_free_with_cycle": {
+            "one": "Дагы %{count} заказ үчүн жеткирүү акысыз, андан кийин — %{recurring_order_shipping_price}",
+            "other": "Дагы %{count} заказ үчүн акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
+            "few": "дагы %{count} жеткирүүгө акысыз, андан кийин — %{recurring_order_shipping_price}",
+            "many": "Дагы %{count} заказга акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}"
+          },
+          "first_n_order_free_with_cycle_delivery_not_included": {
+            "one": "%{count} заказ үчүн жеткирүү акысыз, андан кийин — %{recurring_order_shipping_price}",
+            "other": "%{count} заказдарга акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
+            "few": "%{count} заказдарга акысыз жеткирүү, андан кийин — %{recurring_order_shipping_price}",
+            "many": "Бир нече жеткирүү акысыз, андан кийин — %{recurring_order_shipping_price}"
+          },
+          "max_cycles_base_shipping": {
+            "one": "Жеткирүү баасы %{shipping_price} дагы %{count} заказ үчүн жарактуу",
+            "other": "Жеткирүү баасы %{shipping_price} дагы %{count} заказ үчүн жарактуу",
+            "few": "Дагы %{count} заказ үчүн жеткирүү баасы %{shipping_price} түзөт",
+            "many": "Жеткирүү баасы %{shipping_price} дагы %{count} заказ үчүн жарактуу"
+          },
+          "max_cycles_base_shipping_delivery_not_included": {
+            "one": "Жеткирүү баасы %{shipping_price} %{count} заказ үчүн жарактуу",
+            "other": "Дагы %{count} заказ үчүн жеткирүү баасы %{shipping_price} түзөт",
+            "few": "Жеткирүү баасы %{shipping_price} дагы %{count} заказ үчүн жарактуу",
+            "many": "Жеткирүүнүн баасы %{shipping_price} дагы %{count} заказ үчүн жарактуу"
           }
         },
         "estimated_delivery_time": "Болжолдуу жеткирүү убактысы: %{time}",
@@ -352,7 +445,43 @@
         "split_shipping_option_free": "Акысыз жеткирүү",
         "split_shipping_option_lowest_price": "Эң төмөнкү баа",
         "split_shipping_option_fastest": "Эң тез",
-        "split_shipping_option_recommended": "Сунушталат"
+        "split_shipping_option_recommended": "Сунушталат",
+        "title": "Жеткирүү",
+        "shipping_method_title": "Жеткирүү ыкмасы",
+        "waiting_on_rate_notice": "Жеткиликтүү жеткирүү баасынын варианттарын алууда...",
+        "waiting_on_pickup_location_notice": "Жеткиликтүү алып кетүү пункттарынын тизмесин алуу...",
+        "no_rates_for_cart_or_destination_notice": "Корзинадагы товарлар же дарек үчүн жеткирүү ыкмалары жок",
+        "no_pickup_location_notice": "Буйрутма берилген товарлардын жок дегенде бирөөсү өз алдынча алып кетүүгө мүмкүн эмес",
+        "no_rates_for_country_notice": "Бул дарек боюнча жеткирүү баасы тууралуу маалымат жок.",
+        "no_rates_contact_notice": "Көбүрөөк билүү үчүн биз менен байланышыңыз",
+        "free_rate_label": "Акысыз",
+        "cheapest_rate_label": "Эң төмөнкү баа",
+        "estimated_delivery_date_range": "%{minimum}–%{maximum} жумушчу күн.",
+        "shipping_line_phone_label": "Мобилдик телефон номери (милдеттүү)",
+        "shipping_line_phone": "Курьериңиз сиз менен байланышуу үчүн бул номерди колдоно алат.",
+        "shipping_rate_discounted_amount": "Мурда: %{original_amount}. Азыр: %{amount}",
+        "optional_shipping_line_delivery_instructions_label": "Жеткирүү нускамалары (милдеттүү эмес)",
+        "estimated_delivery_date": {
+          "one": "Жумуш күндөрү: %{count}",
+          "other": "%{count} иш күн",
+          "few": "%{count} жумушчу күн.",
+          "many": "%{count} жумушчу күн"
+        },
+        "other_method": {
+          "zero": "Башка жеткиликтүү варианттар жок",
+          "one": "Башка варианттар бар: %{count}",
+          "other": "Жеткиликтүү варианттар: %{count}, баштап",
+          "few": "Жеткиликтүү варианттар: %{count}, баштап",
+          "many": "Жеткиликтүү варианттар: %{count}, баштап"
+        },
+        "shipping_line_delivery_phone": "Жеткирүүңүз тууралуу жаңы маалыматтар берилиши мүмкүн.",
+        "shipping_line_delivery_phone_label": "Мобилдик телефон номери",
+        "shipping_line_delivery_instructions": "Пайдалуу маалыматты киргизиңиз, мисалы, домофондун кодун же посылканы кайда калтыруу керектигин.",
+        "local_delivery": "Дарекке жеткирүү",
+        "subscription_shipping": "Жазылуу аркылуу жеткирүү",
+        "shipping_method_one_time_purchase_group_title": "Бир жолку сатып алуу",
+        "shipping_method_subscription_group_title": "Жазылуу",
+        "one_time_purchase_shipping": "Бир жеткирүү"
       },
       "general": {
         "errors": {
@@ -1235,7 +1364,137 @@
         "address_address2_contains_emojis": "Дарек сабы 2 эмодзи камтыбашы керек",
         "address_city_contains_emojis": "Шаардын аталышы эмодзи камтышы мүмкүн эмес",
         "address_company_contains_emojis": "Компаниянын аталышы эмодзилерди камтыбашы керек"
+      },
+      "units": {
+        "centiliter": "сш",
+        "ounce": "унция",
+        "fluid_ounce": "суюк. унц.",
+        "pint": "пинта.",
+        "quart": "кв.",
+        "gallon": "галл.",
+        "foot": "футбол",
+        "yard": "гард."
+      },
+      "memberships": {
+        "delivery_promise_unfulfillable": "Бул дарек учурдагы жазылууда колдоого алынбайт.",
+        "items_split_across_locations_unsupported": "Сиздин заказыңыз үчүн Prime жеткирүү кызматы жеткиликсиз. Жеткирүү жолдоруңуз жаңыртылды."
+      },
+      "editor": {
+        "navigation": {
+          "store_logo_accessibility_label": "Онлайн дүкөнгө өтүү"
+        }
+      },
+      "tooltip": {
+        "accessibility_label_context": "Кененирээк %{context} жөнүндө",
+        "additional_payment_methods": "Кошумча төлөө ыкмалары"
+      },
+      "remote": {
+        "errors": {
+          "currency_mismatch": "Бул нерсени себепке кошууга болбойт, анткени дүкөн башка валютаны колдонот.",
+          "max_remote_shops_exceeded": "Бул товарды кошууга болбойт, себеби сиздин себетиңизде башка дүкөндөрдүн товарлары максималдуу санда толуп калган.",
+          "currency_mismatch_removal": "Буюм себеттен өчүрүлдү, анткени ал башка валютаны колдонгон дүкөндөн.",
+          "only_remote_merchandise_lines": "Оформдоо үчүн тандалган буюмдар алыскы кампадан гана болгондуктан, заказды аягына чыгаруу үчүн алыскы дүкөнгө багыттоо керек."
+        }
+      },
+      "remote_merchandise_only": {
+        "title": "Сатып алууну аягына чыгарыңыз",
+        "remote_only_notice": "Бул товарлар башка дүкөндөр тарабынан сатылып жана жеткирилет. Сатып алууну аяктоо үчүн ар бир дүкөнгө баш багыңыз.",
+        "return_to_store_label": "Дүкөнгө кайтуу",
+        "checkout_on_shop_label": "%{shop_name} дүкөнүндө буйрутма берүү",
+        "single_shop_transition": "Сатып алууну аяктоо үчүн %{advertiser} барагына багыттоодобуз.",
+        "detail_item_label": {
+          "one": "{{count}} буюм",
+          "other": "Товарлар: {{count}}",
+          "few": "Продукция: {{count}}",
+          "many": "Продукттар: {{count}}"
+        }
+      },
+      "remote_policies": {
+        "unavailable_policy": "Бул дүкөн үчүн %{policy_name} берилген эмес. Кошумча маалымат алуу үчүн %{shop_name} менен түздөн-түз байланышыңыз."
+      },
+      "offsite_payment_failed": {
+        "payment_not_processed_title": "Төлөм катасы",
+        "payment_not_processed_text": "QR-кодду кайрадан сканерлеп көрүңүз. Эгер бул жардам бербесе, кызматкерлерибизге кабарлаңыз жана башка төлөм ыкмасын колдонуп көрүңүз.",
+        "payment_link_expired_title": "Төлөм шилтемесинин жарактуулук мөөнөтү бүттү",
+        "payment_link_expired_text": "QR-кодду кайрадан сканерлеп көрүңүз.",
+        "title": "Тышкы төлөмдү ишке ашыруу мүмкүн болгон жок"
+      },
+      "taxes": {
+        "tax_details": "Салыктар жөнүндө кошумча маалымат",
+        "vat_number": {
+          "field": {
+            "label": "КНС төлөөчүнүн номери (милдеттүү эмес)",
+            "tooltip": "КНС номерин текшерет жана мүмкүн болгон учурда буйрутмадан КНСти эсептөөнү автоматтык түрдө алып салат"
+          },
+          "add": "КНС төлөөчүнүн номерин кошуу",
+          "vaulted": "КНС төлөөчүнүн номери: %{number}",
+          "badge": "КНС төлөөчүнүн номери: %{number}",
+          "domestic_order": "Тескери эсептөөдөн бошотуу ЕС өлкөлөрүнөн келген трансчекаралык заказдарга гана колдонулат. Өлкө ичинде берилген заказдар үчүн стандарттык КНС алынат.",
+          "status": {
+            "invalid_format": {
+              "at": "Австриянын КНС төлөөчүлөрүнүн номерлеринде AT жана 9 белги бар",
+              "be": "Бельгияда КНС төлөөчүлөрдүн номерлеринде BE жана 10 белги болот",
+              "bg": "Болгариянын КНС төлөөчүлөрүнүн номерлеринде BG жана 9-10 символ болот",
+              "hr": "Хорватиянын КНС төлөөчүлөрүнүн номеринде HR жана 11 белги камтылган",
+              "cy": "Кипрдын КНС төлөөчүлөрүнүн номерлеринде CY жана 9 белги камтылган",
+              "cz": "Чехиянын КНС төлөөчүсүнүн номурларында CZ жана 8-10 символ болот",
+              "dk": "Даниянын КНС төлөөчүсүнүн номерлеринде DK жана 8 белги камтылат",
+              "ee": "Эстониядагы КНС төлөөчүлөрдүн номерлеринде EE жана 9 белги камтылган",
+              "fi": "Финляндиянын КНС төлөөчүлөрүнүн номерлери FI жана 8 символдон турат",
+              "fr": "Францияда КНС төлөөчүлөрдүн номерлеринде FR жана 11 символ болот",
+              "de": "Германиядагы КНС төлөөчүлөрдүн номерлеринде DE жана 9 символ камтылган",
+              "gr": "Грециядагы КНС төлөөчүлөрдүн номерлеринде EL жана 9 символ камтылган",
+              "hu": "Венгриялык КНС төлөөчүлөрдүн номерлеринде HU жана 8 символ камтылат",
+              "ie": "Ирландиянын КНС төлөөчүлөрүнүн номери IE жана 8-9 белгиден турат",
+              "it": "Италиянын КНС төлөөчүлөрүнүн номерлери IT жана 11 белгиден турат",
+              "lv": "Латвиянын КНС төлөөчүлөрүнүн номерлеринде LV жана 11 символ бар",
+              "lt": "Литванын КНС төлөөчүлөрүнүн номерлеринде LT тамгалары жана 9-12 символ камтылган",
+              "lu": "Люксембургдук КНС төлөөчүлөрдүн номери LU жана 8 белгиден турат",
+              "mt": "Мальтада КНС төлөөчүлөрдүн номерлеринде MT жана 8 символ бар",
+              "nl": "Нидерланддардагы КНС төлөөчүлөрдүн номурларында NL жана 12 символ болот",
+              "pl": "Польшанын КНС төлөөчүлөрүнүн номерлеринде PL жана 10 символ камтылган",
+              "pt": "Португалиянын КНС төлөөчүсүнүн номерлеринде PT жана 9 белги бар",
+              "ro": "Румыниянын КНС төлөөчүлөрүнүн номерлеринде RO жана 10 символ камтылат",
+              "sk": "Словакиянын КНС төлөөчүлөрүнүн номерлеринде SK жана 10 белги бар",
+              "si": "Словениянын КНС төлөөчүлөрүнүн номерлеринде SI жана 8 символ камтылган",
+              "es": "Испаниянын КНС төлөөчүлөрүнүн номерлеринде ES тамгалары жана 9 белги камтылган",
+              "se": "Швециянын КНС төлөөчүлөрүнүн номерлеринде SE тамгасы жана 12 символ болот",
+              "gb": "Улуу Британиянын КНС төлөөчүлөрүнүн номеринде GB же XI жана 5-12 белги болот"
+            },
+            "invalid_number": {
+              "at": "Австриянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "be": "Бельгиянын жарактуу КНС номерин киргизиңиз",
+              "bg": "Болгариянын жарактуу КНС номерин киргизиңиз",
+              "hr": "Хорватиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "cy": "Кипрдин ИДН номерин киргизиңиз",
+              "cz": "Чехиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "dk": "Даниянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "ee": "Эстониянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "fi": "Финляндиянын ИДН номурунун туура үлгүсүн киргизиңиз",
+              "fr": "Франциянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "de": "Германиянын жарамдуу КНС номерин киргизиңиз",
+              "gr": "Грециянын ИДН номерин туура киргизиңиз",
+              "hu": "Венгриялык КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "ie": "Ирландиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "it": "Италиянын ИДН номурунун жарактуусун киргизиңиз",
+              "lv": "Латвиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "lt": "Литванын жарактуу КНС номерин киргизиңиз",
+              "lu": "Люксембургдун КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "mt": "Мальтанын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "nl": "Нидерланддардын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "pl": "Польшанын жарактуу КНС төлөөчүнүн номерин киргизиңиз",
+              "pt": "Португалиянын жарактуу КНС номерин киргизиңиз",
+              "ro": "Румыниянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "sk": "Словакиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз"
+            }
+          }
+        }
       }
+    },
+    "sentence": {
+      "words_connector": ",",
+      "two_words_connector": "жана",
+      "last_word_connector": ", жана"
     }
   },
   "customer_accounts": {
@@ -1840,7 +2099,138 @@
       "switch_order_type_pending_orders_accessibility_label": "Буйрутмалардын түрүн өзгөртүү (учурда каралып жаткан буйрутмалар, тариздөөнү күтүп жатышат)",
       "switch_order_type_confirmed_orders_accessibility_label": "Буйрутмалардын түрүн өзгөртүү (учурда каралып жаткан буйрутмалар ырасталган буйрутмалар)",
       "group_title_label": "Бөлүм: {{groupTitle}}",
-      "group_title_label_with_parent": "Үчүн: {{groupTitle}}"
+      "group_title_label_with_parent": "Үчүн: {{groupTitle}}",
+      "order_list": {
+        "carousel": {
+          "two_products_accessibility_label": "Заказга {{lineItemName1}} — {{lineItemQuantity1}} даана, {{lineItemName2}} — {{lineItemQuantity2}} даана кирет.",
+          "three_products_accessibility_label": "Буйрутмада {{lineItemName1}} — {{lineItemQuantity1}} даана, {{lineItemName2}} — {{lineItemQuantity2}} даана, {{lineItemName3}} — {{lineItemQuantity3}} даана камтылган.",
+          "four_products_accessibility_label": "Заказдын курамында: {{lineItemName1}} — {{lineItemQuantity1}} даана, {{lineItemName2}} — {{lineItemQuantity2}} даана, {{lineItemName3}} — {{lineItemQuantity3}} даана, {{lineItemName4}} — {{lineItemQuantity4}} даана.",
+          "five_products_accessibility_label": "Заказ {{lineItemName1}} — {{lineItemQuantity1}} даананы, {{lineItemName2}} — {{lineItemQuantity2}} даананы, {{lineItemName3}} — {{lineItemQuantity3}} даананы, {{lineItemName4}} — {{lineItemQuantity4}} даананы, {{lineItemName5}} — {{lineItemQuantity5}} даананы камтыйт.",
+          "six_products_accessibility_label": "Буйрутмада төмөнкүлөр бар: {{lineItemName1}} — {{lineItemQuantity1}} даана, {{lineItemName2}} — {{lineItemQuantity2}} даана, {{lineItemName3}} — {{lineItemQuantity3}} даана, {{lineItemName4}} — {{lineItemQuantity4}} даана, {{lineItemName5}} — {{lineItemQuantity5}} даана, {{lineItemName6}} — {{lineItemQuantity6}} даана.",
+          "six_and_more_products_accessibility_label": "Буйрутмада {{lineItemName1}} — {{lineItemQuantity1}} даана, {{lineItemName2}} — {{lineItemQuantity2}} даана, {{lineItemName3}} — {{lineItemQuantity3}} даана, {{lineItemName4}} — {{lineItemQuantity4}} даана, {{lineItemName5}} — {{lineItemQuantity5}} даана, {{lineItemName6}} — {{lineItemQuantity6}} даана жана башкалар камтылган",
+          "view_order_details": "Заказ маалыматтарын көрүү",
+          "previous": "Артка",
+          "next": "Андан ары"
+        },
+        "show_order_actions_accessibility_label": "{{name}} буйрутмасы менен болгон аракеттерди көрсөтүү",
+        "empty_state_title_for_pending_orders": "Ырасталууну күткөн буйрутмалар жок",
+        "more_than_four_products_accessibility_label": "Заказга {{lineItemName1}}, {{lineItemName2}}, {{lineItemName3}} жана {{numberOfAdditionalProducts}} кошумча продуктулар кирет.",
+        "plus_more_products": "+ {{numberOfAdditionalProducts}} продукт.",
+        "order_status_message": {
+          "list_view": {
+            "view_order_for_details": "Заказдын маалыматтарын көрүү",
+            "estimated_delivery": "Жеткирүүнүн болжолдуу датасы: {{date}}",
+            "last_updated": "Акыркы жаңыртуу: {{date}}"
+          },
+          "table_view": {
+            "estimated_delivery": "Болжолдуу жеткирүү убактысы: {{date}}"
+          }
+        },
+        "more_than_three_products_accessibility_label": "Заказ {{lineItemName1}}, {{lineItemName2}} жана {{numberOfAdditionalProducts}} кошумча продукттарды камтыйт.",
+        "filter_title": "Сорттоо",
+        "filter": {
+          "clear_section": "Бөлүмдү жок кылуу",
+          "clear_all": "Баарын жок кыл",
+          "apply": "Колдонуу",
+          "date": {
+            "start_date": "Жарыяланган күнү",
+            "end_date": "Жабылган күнү",
+            "title": "Жайгаштырылган күнү",
+            "today": "Бүгүн",
+            "last_7_days": "Акыркы 7 күндүн ичинде",
+            "last_30_days": "Акыркы 30 күндө",
+            "last_90_days": "Акыркы 90 күндө",
+            "last_365_days": "Акыркы 12 айда",
+            "custom": "Башкача айтканда"
+          },
+          "date_section_accessibility_label": "Боюнча чыпкалоо: {{sectionTitle}}"
+        },
+        "no_order_banner": "Заказдын абалы барагындагы кеңейтүүнү текшерүү үчүн буйрутма түзүңүз.",
+        "location_filter_picker": {
+          "all_location": "Баардык орундар",
+          "current_location": "Учурдагы жайгашкан жер",
+          "switch_view": "Көрүнүштү которуу"
+        },
+        "empty_state_with_location_title": "{{locationName}}: буйрутмалар жок",
+        "view_order": "Буйрутманы көрүү",
+        "view_order_accessibility_label": "Буйрутманы көрүү {{orderName}}",
+        "empty_state_redesign_cta": "Сатып алууларга өтүү",
+        "empty_state_redesign_subtitle": "Соода кылууга даярсызбы?",
+        "empty_state_redesign_welcome": "Кош келиңиз",
+        "empty_state_redesign_welcome_with_name": "Кош келиңиз, {{firstName}}",
+        "sort_options_accessibility_label": "Тастыкталган буйрутмаларды иргөө жолдору"
+      },
+      "order_status": {
+        "canceled_label": "Жокко чыгарылды",
+        "canceled_title": "Сиздин буйрутмаңыз жокко чыгарылды",
+        "come_back": "Жеткирүүнүн абалын көзөмөлдөө үчүн ушул баракчага кайтыңыз.",
+        "company_tracking_number": "{{company}} компаниясынан байкоо номери:",
+        "confirmed_label": "Ырасталды",
+        "confirmed_title": "Сиздин буйрутмаңыз ырасталды",
+        "delivered_label": "Жеткізілді",
+        "estimated_delivery": "Жеткирүүнүн болжолдуу датасы: {{date}}",
+        "in_review_label": "Каралууда",
+        "in_review_title": "Сиздин заказыңыз текшерилип жатат",
+        "no_tracking_number": "Бул заказга көзөмөлдөө номери көрсөтүлгөн эмес.",
+        "on_its_way_label": "Жолдо",
+        "out_for_delivery_label": "Жөнөтүү пунктунда",
+        "resume_tracking": "Көзөмөлдөөнү улантуу",
+        "submitted_label": "Жөнөтүлдү",
+        "track_shipment": "Жеткирүүнү көзөмөлдөө",
+        "request_return": "Кайтаруу үчүн суроо-талап түзүү",
+        "attempted_delivery_label": "Жеткирүү аракети",
+        "preparing_for_shipping_label": "Жөнөтүүгө даярдык",
+        "ready_for_pickup_label": "Алып кетсе болобу",
+        "ready_for_pickup_description": "Товарларды алып кетсеңиз болот. Алуу пунктунан буйрутмаңызды ырастоочу документти көрсөтүшүңүз керек болот.",
+        "picked_up_label": "Тапшырык кабыл алынды",
+        "submitted_description": "Заказ жана төлөм маалыматтарын көрүү.",
+        "last_updated": "Акыркы жаңыртуу: {{date}}",
+        "multiple_shipments_label": "Бир нече посылкалар",
+        "view_order_for_details": "Буйрутманын маалыматтарын көрүү",
+        "confirmed_description_digital": "Заказ даяр болгондо сизге электрондук кат келет.",
+        "delivered_description_gift_card": {
+          "one": "Белек карта электрондук почта аркылуу жөнөтүлдү.",
+          "other": "Белек карталары электрондук почта аркылуу жөнөтүлдү.",
+          "few": "Белек карталары электрондук почта аркылуу жөнөтүлдү.",
+          "many": "Белек карталары электрондук почта аркылуу жөнөтүлдү."
+        },
+        "gift_card_label": {
+          "one": "Белек картасы",
+          "other": "Белек карталары",
+          "few": "Белек карталары",
+          "many": "Белек карталар"
+        },
+        "ready_for_pickup_location": "Заказды алып кетүү пунктунан алсаңыз болот",
+        "confirmed_description_pickup": "Биз бул нерселерди алып кетүүгө даярдап жатабыз.",
+        "confirmed_gift_card_additional_description": {
+          "one": "Белек картасы электрондук почта аркылуу өзүнчө кат менен жөнөтүлөт.",
+          "other": "Ар бир белек картасы электрондук почтага өзүнчө кат менен жөнөтүлөт.",
+          "few": "Ар бир белек картасы электрондук почта аркылуу өзүнчө кат менен жөнөтүлөт.",
+          "many": "Ар бир белек картасы электрондук почта аркылуу өзүнчө кат менен жөнөтүлөт."
+        },
+        "confirmed_description_gift_card_text": "Заказ даяр болгондо сизге билдирүү келет.",
+        "delivered_description_gift_card_text": {
+          "one": "Белек картасы билдирүү аркылуу жөнөтүлдү.",
+          "other": "Белек карталары билдирүү менен жөнөтүлдү.",
+          "few": "Белек карталары билдирүү аркылуу жөнөтүлдү.",
+          "many": "Белек карталар билдирүү аркылуу жөнөтүлдү."
+        },
+        "confirmed_gift_card_additional_description_text": {
+          "one": "Белек картасы өзүнчө билдирүү менен жөнөтүлөт.",
+          "other": "Ар бир белек картасы өзүнчө билдирүү менен жөнөтүлөт.",
+          "few": "Ар бир белек картасы өзүнчө билдирүү менен жөнөтүлөт.",
+          "many": "Ар бир белек картасы өзүнчө билдирүү менен жөнөтүлөт."
+        },
+        "gift_resend_success": {
+          "one": "Белек картасы жөнөтүлдү",
+          "other": "Белек карталары жөнөтүлдү",
+          "few": "Белек карталары жөнөтүлдү",
+          "many": "Белек карталары жөнөтүлдү"
+        },
+        "gift_resend_failure": {
+          "one": "Сиздин белек картаңызды кайра жөнөтүүдө көйгөй келип чыкты. Кайра аракет кылыңыз же биз менен байланышыңыз."
+        }
+      }
     },
     "order_details": {
       "addresses_section_title": "Төлөм жана жеткирүү",
