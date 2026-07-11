@@ -2007,7 +2007,20 @@
       "add_button_accessibility_label": "Даректи кошуу",
       "back_button": "Артка",
       "back_button_accessibility_label": "Даректи түзөтүүгө кайтуу {{address}}",
-      "no_addresses_banner": "Кошулган даректер жок"
+      "no_addresses_banner": "Кошулган даректер жок",
+      "add_button": "Даректи кошуу",
+      "address_deleted_notification": "Дарек өчүрүлдү",
+      "cancel_adding_address_accessibility_label": "Даректи кошууну жокко чыгаруу",
+      "cancel_deletion_button": "Жокко чыгаруу",
+      "cancel_deletion_button_accessibility_label": "Жок кылууну жокко чыгаруу {{address}}",
+      "default_address": {
+        "title": "Демейки дарек",
+        "title_accessibility_label": "Демейки дарек: {{address}}",
+        "badge_label": "Демейки"
+      },
+      "delete_button": "Өчүрүү",
+      "delete_button_accessibility_label": "Жок кылуу {{address}}",
+      "delete_confirmation_button": "Даректи өчүрүү"
     },
     "address_form": {
       "auto_complete_close_accessibility_label": "Сунуштарды жабуу",
@@ -2957,7 +2970,121 @@
       },
       "shop_order_tracking": {
         "download_shop_to_track": "Жүк ташууну көзөмөлдөө үчүн Shop колдонмосун жүктөп алыңыз",
-        "track_order_with_shop": "Shop аркылуу заказыңызга көз салыңыз"
+        "track_order_with_shop": "Shop аркылуу заказыңызга көз салыңыз",
+        "title_header": "Кодду телефонуңуз менен сканерлеңиз",
+        "real_time_delivery_updates": "Заказ жөнөтүлгөндөн кийин, Shop сизге анын жүрүшү тууралуу актуалдуу маалыматты реалдуу убакытта жөнөтөт.",
+        "real_time_delivery_updates_with_gift": "Жеткирүү жөнүндө реалдуу убакытта маалымат алыңыз жана Shop колдонмосунан сатып алуулар үчүн {{promoAmount}} өлчөмүндө белек алыңыз.",
+        "shop_app_promo_amount_off": "{{promoAmount}} өлчөмүндө белек алыңыз",
+        "shop_app_promo_text": "{{amountOff}} Shop тиркемесиндеги сатып алууларга"
+      },
+      "shop_pay": {
+        "order_completed_with": "Заказ аягына чыкты саат",
+        "learn_more": "Кененирээк маалымат",
+        "usdc_rewards_terms": "USDC сыйлыктарынын шарттарын көрүү"
+      },
+      "edit_summary": {
+        "added": "Кошулду",
+        "added_with_quantity": "Кошулду: {{quantity}}",
+        "removed": "Жок кылынды",
+        "removed_with_quantity": "Жок кылынды: {{quantity}}",
+        "updated_at": "Сиздин буйрутмаңыз жаңыртылды {{date}}",
+        "returned": "Кайтарылды",
+        "returned_with_quantities": "{{total}} ичинен {{delta}} кайтарылды",
+        "removed_with_quantities": "Өчүрүлдү {{delta}} ичинен {{total}}",
+        "return_line_item_removed": "Кайтаруудан өчүрүлдү",
+        "return_line_item_removed_with_quantities": "Кайтаруудан өчүрүлдү: {{delta}}"
+      },
+      "pickup": {
+        "pickup": "Өзү алып кетүү",
+        "pickup_location": "Өз алдынча алып кетүү түйүнү",
+        "pickup_point": "Өзү алып кетүү түйүнү"
+      },
+      "paid_with_shop_pay_installments_card": {
+        "paid_with_shop_pay_installments": "Shop Pay аркылуу мезгил-мезгили менен төлөнгөн",
+        "description": "Shop тиркемесиндеги эскертмелер аркылуу төлөм графигиңизди көзөмөлдөңүз.",
+        "payment_reminders_button": "Төлөм жөнүндө эскертүүлөрдү алуу",
+        "desktop_qr_code_content": {
+          "title": "Эскертүүлөрдү текшерүү",
+          "description": "Shop аркылуу бөлүп төлөөлөр жөнүндө эскертмелерди алып туруңуз."
+        },
+        "title": "Shop Pay бөлүп төлөөлөрү тууралуу эскертүүлөр"
+      },
+      "order_details": "Заказ тууралуу маалымат",
+      "contact_information": "Байланыш маалымат",
+      "login_to_view_all_order_details": "Заказ жөнүндө бардык маалыматты көрүү үчүн кириңиз.",
+      "log_in": "Кирүү",
+      "paid_amount": "Төлөндү",
+      "remaining_amount": "Төлөөгө",
+      "order_details_skeleton_accessibility_label": "Буйрутма тууралуу толук маалыматты көрүү үчүн кириңиз.",
+      "tip": "Чай пул",
+      "logged_in_account_no_permission_to_order": "Сиз {{email}} катары кирдиңиз. Бул эсептин бул буйрутманы башкарууга уруксаты жок.",
+      "log_in_to_a_different_account": "Башка аккаунтка кириңиз",
+      "duties": "Бажы алымдары",
+      "ok_duties_tooltip": "Бул товар башка өлкөдөн жөнөтүлгөндүктөн, жалпы заказ суммасына бажы кошулган.",
+      "error_duties_tooltip": "Бул товар башка өлкөдөн жөнөтүлгөндүктөн, жалпы заказ суммасына бажы алымдары жана салыктар кошулушу мүмкүн.",
+      "zero_duties_tooltip": "Бул продукт башка өлкөдөн жөнөтүлөт. Мындай суммадагы буйрутмаларга бажы алымдары колдонулбайт.",
+      "group_title_label": "Бөлүм: {{groupTitle}}",
+      "fees": {
+        "restocking_fee": "Товарды кайтаруу үчүн комиссия",
+        "return_shipping_fee": "Товарды кайтаруу"
+      },
+      "vat_invoices": {
+        "title": "КНС эсептери",
+        "label": "КНС"
+      },
+      "taxes_included": "Анын ичинде {{amount}} салык түрүндө",
+      "duties_and_taxes_included": "Жалпы суммага бажы алымдары жана салыктар кирет. Жеткирүүдө кошумча төлөмдөр жок.",
+      "grouped_view_components": {
+        "expand_line_items": "Көрсөтүү {{count}} даана.",
+        "collapse_line_items": "Жашыруу {{count}} даана.",
+        "line_item_summary": "{{productTitle}} ({{refundableQuantity}} даана)",
+        "line_item_summary_accessibility_label": "{{productTitle}} — {{refundableQuantity}} даана.",
+        "line_item_summary_list_accessibility_label": "Набордогу товарлар {{productTitle}}"
+      },
+      "cash_rounding": "Наличка суммасын тегеректөө",
+      "adjusted_payment": "Оңдолгон төлөм суммасы",
+      "adjusted_total": "Түзөтүлгөн жалпы сумма",
+      "login_card": {
+        "log_in": "Системага кирүү",
+        "link_expired": "Шилтеменин мөөнөтү бүттү",
+        "resend_link_and_login": "Буйрутмаңыздын чоо-жайын көрүү үчүн кириңиз же буйрутма берип жатканда колдонгон электрондук почта дарегиңизге же телефон номериңизге жаңы шилтеме жөнөтүңүз.",
+        "resend_link_only": "Заказыңыздын чоо-жайын көрүү үчүн, буйрутма берип жатканда колдонулган электрондук почта дарегиңизге же телефон номериңизге жаңы шилтеме жөнөтүңүз.",
+        "resend_link": "Жаңы шилтемени жөнөтүү",
+        "title": "Заказдын маалыматтарына жетүү"
+      },
+      "link_sent": "Шилтеме жөнөтүлдү",
+      "view_controls": {
+        "list": "Тизме"
+      },
+      "company_and_location": "Компания жана жайгашкан жери",
+      "group_title_label_with_parent": "Үчүн: {{groupTitle}}",
+      "due_on_date": "Төлөө мөөнөтү: {{date}}",
+      "due_on_fulfillment": "Аткарылганда төлөнөт",
+      "due_on_receipt": "Алганда төлөө",
+      "payment_confirmation": {
+        "payment_received": "Рахмат! {{amount}} өлчөмүндөгү төлөм кабыл алынды.",
+        "full_payment_received": "Рахмат! {{amount}} суммасындагы төлөм кабыл алынды. Бул заказ толугу менен төлөндү.",
+        "dismiss_label": "Төлөмдүн ырасталышын жабуу",
+        "payment_authorized": "Рахмат! Төлөм кабыл алынгандан кийин баланс жаңыланат."
+      },
+      "compare_at_sale": "Сатуу ({{saleAmount}})",
+      "marketing_pending_confirmation": "Ырастоо үчүн каттагы шилтемеге өтүңүз.",
+      "marketing_resend_email": "Катты кайра жөнөтүү",
+      "marketing_resend_email_success": "Шилтеме жөнөтүлдү",
+      "subtotal_label_with_quantity": {
+        "one": "Аралык жыйынтык",
+        "other": "Аралык жыйынтык · {{count}} товар",
+        "few": "Аралык жыйынтык · {{count}} товар",
+        "many": "Аралык жыйынтык · {{count}} товарлар"
+      },
+      "total_savings": "Жалпы үнөмдөө",
+      "price_before_discount_accessibility_label": "Баштапкы баа",
+      "price_after_discount_accessibility_label": "Арзандатылган баа",
+      "discount_order_stacking": {
+        "one": "Буйрутма үчүн арзандатуу",
+        "other": "Буйрутмага арзандатуулар",
+        "few": "Буйрутма үчүн арзандатуулар",
+        "many": "Заказга арзандатуулар"
       }
     }
   },
