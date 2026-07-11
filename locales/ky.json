@@ -607,7 +607,56 @@
         "optional_first_name_label": "Аты-жөнү (милдеттүү эмес)",
         "last_name_label": "Фамилиясы",
         "optional_company_label": "Компания (милдеттүү эмес)",
-        "address1_label": "Дарек"
+        "address1_label": "Дарек",
+        "address2_label": "Квартира, апартамент ж.б.",
+        "optional_address2_label": "Батир, апартамент ж. б. (милдеттүү эмес)",
+        "city_label": "Шаар",
+        "country_label": "Өлкө/аймак",
+        "country_code": "Өлкө/аймак коду",
+        "province_label": "Облус",
+        "province_placeholder": "Аймак",
+        "county_label": "Район",
+        "region_label": "Аймак",
+        "region_placeholder": "Аймак",
+        "state_and_territory_label": "Мамлекет/Аймак",
+        "state_and_territory_placeholder": "Мамлекет/Аймак",
+        "optional_phone_label": "Телефон номери (милдеттүү эмес)",
+        "phone_tooltip": "Эгер буйрутмаңыз боюнча сиз менен байланышуу керек болсо",
+        "zip_code_label": "Почта индекси",
+        "zip_code_placeholder": "Почта индекси",
+        "postal_code_label": "Почта индекси",
+        "postal_code_placeholder": "Почта индекси",
+        "postcode_label": "Почта индекси",
+        "postcode_placeholder": "Почта индекси",
+        "pincode_label": "ПИН-код",
+        "pincode_placeholder": "ПИН-код",
+        "region_none": "Эч нерсе тандалган жок",
+        "civic_number_warning": "Керек болсо, үй номерин көрсөтүңүз",
+        "optional_last_name_label": "Фамилиясы (милдеттүү эмес)",
+        "different_shipping_address_label": "Башка дарекке жөнөтүү",
+        "different_shipping_address_text": "Бул даректи ушул заказ үчүн гана колдонуу",
+        "change_company_location_link_label": "Компаниянын жайгашкан жерин өзгөртүү",
+        "change_location_link_label": "Жайгашууну өзгөртүү",
+        "ship_to_company": "{{companyName}} компаниясына жеткирүү",
+        "shipping_used_as_billing_notice": "Бул дарек ушул заказ үчүн эсеп-фактура дареги катары колдонулат.",
+        "company_attention_label": "Компания/алуучу",
+        "optional_company_attention_label": "Компания / Алуучу (милдеттүү эмес)",
+        "available_addresses_label": "Жеткиликтүү даректер",
+        "optional_zip_code_label": "Почта индекси (милдеттүү эмес)",
+        "optional_postal_code_label": "Почта индекси (милдеттүү эмес)",
+        "optional_postcode_label": "Почта индекси (милдеттүү эмес)",
+        "optional_pincode_label": "PIN-код (милдеттүү эмес)",
+        "email_rollup_accessibility_label": "Электрондук почтанын жөндөөлөрү",
+        "phone_rollup_accessibility_label": "Телефондун параметрлери",
+        "phone_country_code_label": "Телефон номеринин өлкө коду",
+        "storefront_link": "сатуучунун веб-сайты",
+        "suburb_label": "Шаар чети",
+        "subdistrict_label": "Кичи район",
+        "optional_subdistrict_label": "Кичи район (милдеттүү эмес)",
+        "optional_street_name_label": "Көчө (милдеттүү эмес)",
+        "field_saved_label": "Сакталды",
+        "field_tooltip_helper_text": "Буйрутманы ырастоо жана себетиңиздеги товарлар тууралуу эскертмелер үчүн колдонулат",
+        "field_tooltip_accessibility_label": "Сиздин байланыш маалыматыңыздын колдонулушу жөнүндө кошумча маалымат"
       },
       "payment": {
         "card_pay_with": "Төлөө жолу:",
@@ -862,7 +911,21 @@
         "order_edit_banner_single_item_updated": "Жаңыртылды",
         "order_edit_banner_previous_taxes_label": "Мурдагы салыктар:",
         "order_edit_banner_new_taxes_label": "Жаңы салыктар:",
-        "order_edit_banner_no_taxes_label": "Жок"
+        "order_edit_banner_no_taxes_label": "Жок",
+        "amazon_payments_login_hint": "Сизге Amazon аккаунту менен кирүү керек болот.",
+        "amazon_payments_logout": "Amazon Pay'ден чыгуу",
+        "amazon_payments_failed_mfa_challenge": "Тандалган төлөм ыкмасын колдонууга мүмкүн эмес. Башка төлөм ыкмасын тандаңыз же банкыңызга же картаны чыгаруучуга кайрылыңыз.",
+        "amazon_payments_abandoned_mfa_challenge": "Төлөм ишке ашкан жок. Башка төлөм ыкмасын колдонуңуз же банкыңызга же картаны чыгарган уюмга кайрылыңыз.",
+        "amazon_payments_could_not_enqueue_authorize": "Төлөмүңүздү иштетүүдө көйгөй келип чыкты. Кайра аракет кылыңыз же башка төлөм ыкмасын колдонуңуз.",
+        "title": "Төлөм",
+        "amount_left_to_pay_label": "Төлөмдү ишке ашыруу мөөнөтү:",
+        "discount_button_action_label": "Промокодду колдонуу",
+        "gift_card_code_label": "Белек картасынын коду",
+        "apply_gift_card_button_label": "Колдонуу",
+        "supported_card_brands_more_label": "жана дагы...",
+        "detected_card_brand": "Картанын өзгөчө бренди: {brand}",
+        "card_number_label": "Карта номери",
+        "card_number_placeholder": "Картанын номери"
       },
       "localized_fields": {
         "additional_information": {
@@ -1718,6 +1781,157 @@
         "standard_errors": {
           "item_unavailable": "Товар сатып алууга мүмкүн эмес"
         }
+      },
+      "order_summary": {
+        "discount_order_stacking": {
+          "other": "Буйрутмаларга арзандатуулар",
+          "few": "Тапшырыктарга арзандатуулар",
+          "many": "Буйрутмаларга арзандатуулар"
+        },
+        "price_per_item": {
+          "accessibility_label": "%{price} бирдик үчүн",
+          "label": "%{price}/ар бири"
+        },
+        "updated_shipping_method": "Жеткирүүнүн жаңыртылган ыкмасы: %{shipping_method}",
+        "discount_not_found": "Көрсөтүлгөн промокод боюнча арзандатуу табылган жок",
+        "total_savings": "Жалпы аманаттардын суммасы",
+        "return_restocking_fee_label": "Товарды кайтаруу үчүн комиссия",
+        "return_shipping_fee_label": "Буюмду кайтаруу",
+        "enter_shipping_address": "Жеткирүү дарегин көрсөтүңүз",
+        "shipping_discount_title": "Жеткирүүгө арзандатуу",
+        "discount_code_applied": "Промокод колдонулду",
+        "discount_code_applied_with_code": "Арзандатуу коду колдонулду %{code}",
+        "gift_card_applied": "Белек карта колдонулду",
+        "duties_included_label": "Жалпы суммага салыктар жана алымдар кирет. Жеткирүү учурунда кошумча төлөмдөр жок.",
+        "deferred_balance_info": {
+          "title": "{{amount_due}} өлчөмүндөгү калдык {{due_at}} чейин төлөнүшү керек",
+          "due_on_fulfillment_title": "{{amount_due}} өлчөмүндөгү калдык аткарылгандан кийин төлөнүүгө тийиш"
+        },
+        "eligible_customer_missing_notice": "<strong style=\"text-transform:uppercase\">%{code}</strong> промокодун алуу үчүн кардар талаптарга жооп бериши керек",
+        "subtotal_label_with_quantity": {
+          "one": "Аралык жыйынтык • %{count} товар",
+          "other": "Аралык жыйынтык • %{count} товар",
+          "few": "Аралык жыйынтык • %{count} товар",
+          "many": "Аралык жыйынтык • %{count} товар"
+        },
+        "cost_table_value_column_header": "Баасы",
+        "product_image_quantity_label": "Саны",
+        "more_items_modal": {
+          "clear_search": "Издөө суроосун өчүрүү",
+          "empty_results": "\"%{searchText}\" сурамы боюнча эч нерсе табылган жок. Жазылышын текшериңиз же башка сөздөрдү же сөз айкашын тандаңыз.",
+          "number_items_shown": "%{totalNumber} ичинен %{shownNumber}",
+          "search_item": "Издөө"
+        },
+        "number_items": {
+          "one": "%{count} товар",
+          "other": "%{count} товар",
+          "few": "%{count} товар",
+          "many": "%{count} товар"
+        },
+        "view_all_items": {
+          "one": "%{count} өнүмдү көрүү",
+          "other": "Бардык товарларды көрүү (%{count})",
+          "few": "Бардык товарларды көрүү (%{count})",
+          "many": "Бардык товарларды көрүү (%{count})"
+        },
+        "price_before_discount_aria_text": "Баштапкы баа",
+        "price_after_discount_aria_text": "Арзандатылган баа",
+        "pickup_unavailable_banner_body": {
+          "ship_to_address": "Дарекке жеткирүүнү тандаңыз",
+          "ship_to_address_instead_html": "Анын ордуна %{link}"
+        },
+        "pickup_unavailable_banner_title": {
+          "one": "Сиздин өнүмүңүз жеткиликтүү болгон дүкөндөр жок",
+          "other": "Сиздин товарларыңызды сата турган дүкөндөр жок",
+          "few": "Продукцияңызды сунуштаган дүкөндөр жок",
+          "many": "Сиздин товарларыңыз жеткиликтүү болгон дүкөндөр жок"
+        },
+        "total_due_today_label": "Бүгүн төлөнүүчү жалпы сумма",
+        "total_due_later_label": "Кийинчерээк төлөнүүчү жалпы сумма",
+        "discount_code_allocations_mismatch": "Арзандатуу кодуңуз <strong style=\"text-transform:uppercase\">%{code}</strong> өзгөртүлдү. Себетиңизди карап чыгып, кайра аракет кылыңыз.",
+        "deferred_total_due_date_label_next": "Жарактуу: %{date}",
+        "total_due_label": "Баары төлөнүүчү сумма",
+        "total_price_label": "Жалпы сумма",
+        "for_add_on": "Топ үчүн: %{group_title}",
+        "unconfirmed_label": "Ырасталбады",
+        "total_paid_label": "Жалпы төлөм суммасы",
+        "from_shop_heading": "%{shop_name} дүкөнүнөн",
+        "from_other_stores_heading": "Башка дүкөндөрдөн",
+        "order_discounts_apply_to_local_shop": "Заказга арзандатуулар %{shop_name} дүкөнүнүн товарларына гана жарактуу",
+        "gift_cards_apply_to_local_shop": "Белек карталары %{shop_name} дүкөнүндөгү товарларга гана жарактуу",
+        "estimated_taxes_label_short": "Алдын ала",
+        "discount_code_removed": "%{code} арзандатуу коду өчүрүлдү",
+        "discount_code_replaced": "%{old_code} арзандатуу коду алынып салынды жана %{code} колдонулду",
+        "discount_code_replaced_multiple": "Бир нече арзандатуу коддору өчүрүлдү жана %{code} колдонулду",
+        "from_multiple_stores_heading": "Бир нече дүкөндөн",
+        "pay_merchant_label": "%{merchant_name} аркылуу төлөө",
+        "discount_applies_to_subscription_items_only": "Бул арзандатуу жазылуу аркылуу алынган товарларга гана тиешелүү",
+        "estimated_taxes_finalization_tooltip_content_short": "Төлөмдөн кийин салыктын акыркы суммасын аныктоо",
+        "pickup_unavailable_banner_title_with_country": {
+          "one": "%{country} өлкөсүндө буюмуңуз жеткиликтүү болгон дүкөндөр жок",
+          "other": "%{country} өлкөсүндө сиздин буюмдарыңыз бар дүкөндөр жок",
+          "few": "Сиздин буюмдарыңыз жеткиликтүү болгон дүкөндөр %{country} өлкөсүндө жок",
+          "many": "Сиздин буюмдарыңыз жеткиликтүү болгон дүкөндөр %{country} өлкөсүндө жок"
+        },
+        "compare_at_sale": "Сатуу (%{sale_amount})",
+        "discount_code_applied_count": {
+          "few": "%{count} арзандатууну көрсөтүү",
+          "many": "%{count} арзандатууларды көрсөтүү"
+        },
+        "tax_line": {
+          "hst": "HST (бириктирилген сатуу салыгы)",
+          "gst": "КТК (товарларга жана кызмат көрсөтүүлөргө салык)",
+          "qst": "СӨО",
+          "vpt": "ВБТ"
+        },
+        "automatic_discount_tooltip": "Автоматтык түрдө колдонулган арзандатууларды өчүрүү мүмкүн эмес",
+        "alternative_payment_currency_chinese_yuan": "Колдонмодогу %{wallet} тиркемесинде кытай юанындагы жыйынтыктоочу сумманы ырастаңыз."
+      },
+      "delivery_options": {
+        "ship": "Жөнөтүү",
+        "pick_up": "Өзү алып кетүү",
+        "pick_up_in_two_hours": "Көбүнчө 2 саатта даяр болот",
+        "pick_up_in_four_hours": "Адатта 4 саатта даяр болот",
+        "pick_up_immediately": "Азыр алса болобу",
+        "pick_up_next_day": "Эртең алып кетсе болот",
+        "pick_up_in_one_hour": "Адатта бир саатта даяр болот",
+        "pick_up_in_twenty_four_hours": "Адатта 24 сааттын ичинде даяр болот",
+        "pick_up_in_two_to_four_days": "Адатта 2-4 күндө даяр болот",
+        "pick_up_in_five_or_more_days": "Адатта 5 же андан көп күндө даяр болот",
+        "pick_up_in_zero_to_two_hours": "Эки сааттан кийин алып кетсе болот",
+        "pick_up_in_two_to_four_hours": "4 сааттан кийин алып кетүүгө болот",
+        "free_total_label": "Акысыз",
+        "shipping_address": "Жеткирүү дареги",
+        "pick_up_locations": "Өз алдынча алып кетүү пункттары",
+        "pickup_point_method_definition": "Алуу пунктуна жеткирүү",
+        "retail_method_definition": "Чекене товарды жеткирүү",
+        "none_method_definition": "Жеткирүүсүз",
+        "subscription_pickup_information": "Бул сиздин жазылууңуз боюнча бардык келечектеги буйрутмалар үчүн алып кетүү пункту болот.",
+        "ship_to_address": "Дарекке жеткирүү",
+        "pick_up_from_store": "Дүкөндөн алып кетүү",
+        "company_location_no_address_banner": "Жеткирүү дареги көрсөтүлбөгөн буйрутмалар текшерүүгө жөнөтүлөт.",
+        "pickup_point_map_title": "Жеткирүү түйүндөрүнүн картасы",
+        "digital_product": "Санариптик товар"
+      },
+      "customer_account": {
+        "not_user_label": "%{first_name} эмесби?",
+        "have_an_account_label": "Аккаунт барбы?",
+        "sign_in_link_label": "Кирүү",
+        "sign_out_link_label": "Чыгуу",
+        "save_my_information_label": "Бул маалыматты келечекте колдонуу үчүн сактап коюңуз",
+        "invalid_address": "Дарек туура эмес тандалган. %{update_address_link} же башка даректи көрсөтүңүз.",
+        "incomplete_address": "Дарек толук тандалган жок. %{update_address_link} же башка даректи тандаңыз.",
+        "rollup_label": "Аккаунт",
+        "invalid_shipping_method_summary": "Жеткиликтүү жеткирүү ыкмаларын көрүү үчүн жеткирүү дарегин тандаңыз.",
+        "saved_address_option_link": "Сакталган даректи колдонуу",
+        "saved_address_modal_title": "Сакталган даректи колдонуу",
+        "saved_address_option_description": {
+          "one": "Сакталган даректер: {{count}}.",
+          "other": "Сизде сакталган даректер бар: {{count}}.",
+          "few": "Сизде сакталган даректер бар: {{count}}.",
+          "many": "Сизде сакталган даректер бар: {{count}}."
+        },
+        "rollup_accessibility_label": "Эсептин жөндөөлөрү"
       }
     },
     "sentence": {
