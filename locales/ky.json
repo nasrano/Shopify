@@ -229,7 +229,54 @@
         }
       },
       "review": {
-        "title": "Көрүү"
+        "title": "Көрүү",
+        "review_title": "Буйрутманы бүтүрүү",
+        "checkout_as_guest": "Конок катары буйрутма берүү",
+        "blocks": {
+          "contact_method_title": "Байланыш маалыматы",
+          "billing_address_title": "Эсеп-фактураларды берүү",
+          "shipping_address_title": "Жеткирүү дареги",
+          "shipping_method_title": "Жеткирүү ыкмасы",
+          "payment_method_title": "Төлөм ыкмалары",
+          "change_link_label": "Өзгөртүү",
+          "change_contact_method_link_label": "Байланыш маалыматын өзгөртүү",
+          "change_billing_address_link_label": "Эсеп-фактура дарегин өзгөртүү",
+          "change_shipping_address_link_label": "Жеткирүү дарегин өзгөртүү",
+          "change_shipping_method_link_label": "Жеткирүү ыкмасын өзгөртүү",
+          "change_payment_method_link_label": "Төлөм ыкмасын өзгөртүү",
+          "pick_up_in_store_shipping_method_html": "Дүкөндөн алып кетүү · %{location_name}",
+          "purchase_order_number_title": "Сатып алуу заказынын номери",
+          "change_purchase_order_number_label": "Сатып алуу буйрутмасынын номерин өзгөртүү",
+          "change_delivery_method_link_label": "Жеткирүү ыкмасын өзгөртүү",
+          "no_address": "(дарек көрсөтүлгөн эмес)",
+          "no_purchase_order_number": "(Сатып алуу заказынын номери жок)",
+          "due_after_order_reviewed_html": "Төлөм буйрутма текшерилгенден кийин жүргүзүлөт",
+          "review_title_free_order": "Буйрутманы текшерип, аягына чыгарыңыз",
+          "payment_method_saved_company_location": "Бул жер үчүн картаны сактоо",
+          "company_location": "Компаниянын жайгашкан жери",
+          "change_company_location_link_label": "Компаниянын жайгашкан жерин өзгөртүү",
+          "pickup_items_at": {
+            "one": "Буюмдарды алып кетүү %{count} даана",
+            "other": "буюмдарды алып кетүү %{count} даанасы",
+            "few": "Өз алдынча алып кетүү %{count} нерсе:",
+            "many": "буюмдарды алып кетүү %{count} даана"
+          },
+          "ship_items_to": {
+            "one": "%{count} даана товарды дарекке жөнөтүү",
+            "other": "Дарек боюнча %{count} товарды жөнөтүү",
+            "few": "Дарекке %{count} товарды жөнөтүү",
+            "many": "Дарек боюнча %{count} товарды жөнөтүү"
+          }
+        },
+        "block_title": "Маалыматтарды текшериңиз",
+        "checkout_a_different_way": "Башка жол менен заказ кылуу",
+        "item_header": {
+          "change_value": "Маанисин өзгөртүү",
+          "section": "Бөлүм",
+          "value": "Мааниси"
+        },
+        "review_and_confirm_title": "Текшерип, ырастаңыз",
+        "account_more_actions": "Бул аккаунт үчүн кошумча аракеттер"
       },
       "shipping": {
         "subscription_delivery_description": {
@@ -1208,7 +1255,8 @@
           "shipping_credential_es": "DNI/NIF номери",
           "shipping_credential_tw": "Улуттук идентификациялык номер/КНС",
           "tax_credential_tr": "Түркиянын улуттук идентификациялык номери/КНС",
-          "shipping_credential_tr": "Түркиянын улуттук идентификациялык номери/КНС"
+          "shipping_credential_tr": "Түркиянын улуттук идентификациялык номери/КНС",
+          "title": "Кошумча маалымат"
         }
       },
       "post_purchase": {
@@ -2330,6 +2378,92 @@
         "change_currency_link": "%{currency_name} кылып өзгөртүү",
         "card_provider_fx_charges_warning": "Сиздин картаңыздан %{currency_code} валютасындагы транзакциялар үчүн комиссия алынышы мүмкүн.",
         "currency_not_supported_by_shop": "Бул валюта мындан ары колдонулбайт. Бардык баалар эми мындай валютада: %{currency_code}."
+      },
+      "marketing": {
+        "accept_marketing_checkbox_label": "Мага жаңылыктарды жана сунуштарды жөнөтүңүз",
+        "unsubscribe": {
+          "title": "Сиз жазылууну жокко чыгардыңыз",
+          "description": "Сиз эми арабаңыздагы товарлар тууралуу эскертмелерди албайсыз."
+        },
+        "accept_sms_checkbox_label": "Мага жаңылыктар жана сунуштар тууралуу текст билдирүүлөрдү жөнөтүңүз",
+        "sms": {
+          "disclaimer": {
+            "privacy_policy": "Купуялуулук саясаты",
+            "terms_of_service": "Кызмат көрсөтүү шарттары",
+            "description_html": "Көрсөтүлгөн уюлдук телефон номерине тексттик билдирүүлөрдү алууга макул болуу менен, сиз автоматташтырылган жарнамалык билдирүүлөрдү, анын ичинде корзинаңыздын абалы тууралуу эскертүүлөрдү алуу каалооңузду ырастайсыз. Макулдук сатып алуунун шарты эмес. Жазылууну токтотуу үчүн \"STOP\" тексти менен билдирүү жөнөтүңүз. Жардам алуу үчүн \"ЖАРДАМ КЕРЕК\" деп жазыңыз. Тексттик билдирүүлөрдүн жыштыгы өзгөрүшү мүмкүн. Тексттик билдирүүлөр жана маалыматтар үчүн акы алынышы мүмкүн. Көбүрөөк маалыматты бул жерден алыңыз: %{privacy_policy_link} жана %{terms_of_service_link}.",
+            "description_transactional_html": "Буйрутмаңызды ырастоо жана жеткирүү маалыматын жаңыртуу жөнүндө SMS билдирүүлөрдү ала аласыз. Жазылуудан чыгуу үчүн \"STOP\" деп жазылган билдирүү жөнөтүңүз. Жардам алуу үчүн \"HELP\" деп жазыңыз. SMS билдирүүлөрдүн жыштыгы өзгөрүшү мүмкүн. SMS билдирүүлөр жана маалымат үчүн акы алынышы мүмкүн. Көбүрөөк маалыматты бул жерден алыңыз: %{privacy_policy_modal_link} жана %{terms_of_service_modal_link}."
+          },
+          "mobile_phone_number": "Мобилдик телефондун номери",
+          "get_offers_by_text": "Каттоого сунуштарды алыңыз"
+        },
+        "post_accept_marketing_checkbox_label": "Сиз электрондук жаңылыктар жана сунуштар бюллетенине жазылдыңыз",
+        "pending_accept_marketing_checkbox_label": "Почтаңызды ачып, жаңылыктар жана сунуштар басылмасына жазылганыңызды ырастаңыз",
+        "accept_shop_pay_marketing_checkbox_label": "Дүкөндүн жаңылыктарына жана сунуштарына жазылуу",
+        "disclaimer": {
+          "privacy_policy": "Купуялык саясаты",
+          "terms_of_service": "Колдонуу шарттары"
+        }
+      },
+      "shop_policies": {
+        "refund_policy": "Кайтаруу саясаты",
+        "privacy_policy": "Купуялык саясаты",
+        "terms_of_service": "Тейлөө шарттары",
+        "legal_notice": "Укуктук эскертүү",
+        "shipping_policy": "Жеткирүү",
+        "terms_of_sale": "Сатуу шарттары",
+        "subscription_policy": "Жокко чыгаруу",
+        "purchase_options_policy": "Жазылуу параметрлеринин саясаты",
+        "contact_information": "Байланыш маалыматтары",
+        "purchase_options_cancellation_policy": "Жокко чыгаруулар",
+        "cookie_preferences": "Cookie файлдар",
+        "policy_label": "Саясат",
+        "policies_label": "Саясатчылар",
+        "select_policy_label": "Саясатты тандоо",
+        "terms_and_policies": "Шарттар жана саясаттар"
+      },
+      "notifications": {
+        "title": "Эскертмелер"
+      },
+      "order_payment_collection": {
+        "custom_line_item_description": "%{order_name} заказынын суммасы",
+        "additional_payment_requested": "%{total_outstanding} суммасында төлөм керек",
+        "checkout_review_and_pay": "Заказ %{order_name} өзгөртүлдү. Өзгөрүүлөрдү карап чыгып, андан кийин заказыңызды ырастоо үчүн көрсөтүлгөн сумманы төлөңүз.",
+        "order_updated_on": "Сиздин буйрутмаңыз %{last_edited_at} жаңыртылды.",
+        "order_review_and_pay": "Буйрутма өзгөртүлдү. Өзгөртүүлөрдү карап чыгып, андан кийин буйрутманы ырастоо үчүн көрсөтүлгөн сумманы төлөңүз.",
+        "pay_now": "Төлөө",
+        "changes_summary": {
+          "added": {
+            "one": "Кошулду",
+            "other": "Кошулду: %{count}",
+            "few": "Кошулду: %{count}",
+            "many": "Кошулду: %{count}"
+          },
+          "removed": "Өчүрүлдү",
+          "subtracted": "Өчүрүлдү: %{count}",
+          "returned": "Кайтарылды: %{count}",
+          "return_line_item_removed": "Кайтаруудан өчүрүлдү: %{count}"
+        }
+      },
+      "tips": {
+        "title": "Кеңеш кошуңуз",
+        "description": "%{shop_name} тиркемеси менен командаңызга колдоо көрсөтүңүз",
+        "presets_description": "Сунушталган пайыздык ченди тандаңыз",
+        "custom_label": "Конфигурация кеңеши",
+        "add_tip": "Кеңеш кошуңуз",
+        "update_tip": "Кеңешти жаңыртыңыз",
+        "message": "Рахмат!",
+        "preset_label": "%{tip_percent} %",
+        "no_tip_label": "Жок",
+        "not_available_with_spi": "Shop Pay бөлүп төлөөсү жеткиликтүү эмес"
+      },
+      "open_graph_meta_tag": {
+        "title_with_products": {
+          "zero": "Сатып алуу: %{product_name}",
+          "one": "Сатып алуу: %{product_name} жана дагы бир нече нерсе (%{count})",
+          "other": "Сатып алуу: %{product_name} жана дагы бир нече позиция (%{count})",
+          "few": "Сатып алуу: %{product_name} жана дагы бир нече товар (%{count})",
+          "many": "Сатып алуу: %{product_name} жана дагы бир нече позиция (%{count})"
+        }
       }
     },
     "sentence": {
