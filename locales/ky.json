@@ -603,7 +603,149 @@
       },
       "addresses": {
         "add_billing_address_button": "Эсеп-фактура дарегин кошуу",
-        "add_billing_address_section_accessibility_label": "Эсеп-фактура дарегин кошуу"
+        "add_billing_address_section_accessibility_label": "Эсеп-фактура дарегин кошуу",
+        "add_shipping_address_button": "Жеткирүү дарегин кошуу",
+        "add_shipping_address_section_accessibility_label": "Жеткирүү дарегин кошуу",
+        "billing_address_card_title": "Эсеп-фактура дареги",
+        "cancel_adding_billing_address_accessibility_label": "Эсеп дарегин кошууну жокко чыгаруу",
+        "cancel_adding_shipping_address_accessibility_label": "Жеткирүү дарегин кошууну жокко чыгаруу",
+        "save_new_billing_address_accessibility_label": "Эсеп жөнөтүү дарегин сактоо",
+        "save_new_shipping_address_accessibility_label": "Жеткирүү дарегин сактоо",
+        "shipping_address_card_title": "Жеткирүү дареги",
+        "no_billing_address_banner": "Эсеп-фактура дареги кошулган эмес"
+      },
+      "orders": {
+        "draft_order_list": {
+          "hide_all": "Баарын жашыруу",
+          "show_all": "Баарын көрсөтүү",
+          "hide_all_accessibility_label": "Каралып жаткан бардык буйрутмаларды жашыруу",
+          "show_all_accessibility_label": "Кароодогу бардык буйрутмаларды көрсөтүү",
+          "title": "Ырастоону күтүүдө",
+          "pagination": {
+            "nav_accessibility_label": "Кароодогу буйрутмалар боюнча навигация баскычтары"
+          },
+          "show_all_orders_in_review": "Каралып жаткан бардык буйрутмаларды көрсөтүү",
+          "show_less_orders_in_review": "Карап чыгуудагы заказдарды азайтуу",
+          "pending_tab_accessibility_label": {
+            "no_pending_orders": "Ырасталууну күтүп жаткан заказдар жок",
+            "pending_orders": {
+              "one": "Каралып жаткан буйрутмалар: {{count}}",
+              "other": "Каттоодо күтүлүп жаткан буйрутмалар: {{count}}",
+              "few": "Каралып жаткан буйрутмалар: {{count}}",
+              "many": "Ырастоону күтүп жаткан буйрутмалар: {{count}}"
+            },
+            "more_than_pagination_length": "Сизде тариздөөнү күтүп жаткан {{count}}дан ашык буйрутма бар"
+          }
+        },
+        "order_list_column_headers_location": "Жайгашкан жери",
+        "order_list_column_headers_contact": "Байланыш маалыматы",
+        "removed_company_contact_tooltip": "Компаниядан алынды"
+      },
+      "draft_order_details": {
+        "draft_order_subtitle": "Ырасталды {{date}}, буйрутма: {{draftOrderName}}",
+        "loading": "Буйрутма маалыматын жүктөө",
+        "loading_finished_accessibility_message": "Буйрутма тууралуу маалымат жүктөлдү",
+        "payment_status": {
+          "draft": {
+            "description": "Төлөө шарттары буйрутма ырасталгандан кийин аныкталат.",
+            "title": "Төлөө мөөнөтү али келе элек",
+            "in_review": {
+              "description": "Төлөө шарттары буйрук ырасталгандан кийин аныкталат.",
+              "title": "Төлөмдү аткаруу мөөнөтү али келе элек"
+            },
+            "submitted": {
+              "description": "Буйрутманы ырастоо үчүн төлөм жөнөтүңүз.",
+              "title": "Ырастоо үчүн төлөө",
+              "deposit": {
+                "title": "Төлөмдү ишке ашыруу мөөнөтү",
+                "due_later": "Эсептеги калдыкка {{translatedName}} шарттары колдонулат жана төлөмдү {{dueDate}} чейин жүргүзүү зарыл.",
+                "due_on_fulfillment": "Төлөмдү заказыңыз толугу менен аткарылгандан кийин жүргүзүү керек.",
+                "due_on_receipt": "Сиз сумманын калдыгы менен эсеп аласыз.",
+                "due_on_date": "Төлөмдү {{dueDate}} чейин жүргүзүү зарыл."
+              }
+            },
+            "deposit": {
+              "due_later": "Заказдын {{depositAmount}} төлөмүн заказ аткарылгандан кийин жүргүзүү керек. Эсептеги калдык үчүн {{translatedName}} шарттары колдонулат.",
+              "due_on_fulfillment": "Заказдын {{depositAmount}} өлчөмүндөгү акысын заказыңыз аткарылгандан кийин төлөшүңүз керек. Заказыңыз аткарылгандан кийин төлөшүңүз керек.",
+              "due_on_receipt": "Буйрутмаңыз аткарылгандан кийин {{depositAmount}} төлөмүн жүргүзүү керек. Төлөм кийинчерээк жүргүзүлүшү керек.",
+              "due_on_date": "Заказдын {{depositAmount}} өлчөмүндөгү акысын, буйрутмаңыз аткарылгандан кийин төлөшүңүз керек. Төлөм {{dueDate}} чейин жасалышы керек."
+            }
+          },
+          "paid": {
+            "description": "Сиздин буйрутмаңыз толугу менен төлөндү.",
+            "title": "Төлөндү",
+            "title_with_date": "Төлөндү {{date}}"
+          },
+          "pay_now": "Төлөө",
+          "title": "Төлөм абалы",
+          "pending": {
+            "banner_overdue": {
+              "one": "Төлөм мөөнөтү {{count}} күнгө өтүп кетти",
+              "other": "Төлөө мөөнөтү {{count}} күнгө өтүп кетти.",
+              "few": "Төлөө мөөнөтү {{count}} күнгө өтүп кетти.",
+              "many": "Төлөм мөөнөтү {{count}} күнгө өтүп кетти."
+            },
+            "banner_due": {
+              "one": "Төлөм {{count}} күндөн кийин жасалышы керек",
+              "other": "Төлөмдү {{count}} күндөн кийин жүргүзүү керек.",
+              "few": "Төлөм {{count}} күндөн кийин жасалышы керек.",
+              "many": "Төлөм {{count}} күндөн кийин жасалышы керек."
+            },
+            "banner_due_today": "Төлөм бүгүн жасалышы керек",
+            "title": "Төлөмдү ишке ашыруу мөөнөтү",
+            "title_with_date": "Төлөм жүргүзүү мөөнөтү: {{date}}",
+            "description_overdue": "Төлөө мөөнөтү бүттү.",
+            "description_partially_paid": "Бул заказ жарым-жартылай төлөнгөн. Сиздин эсебиңизде калдык бар.",
+            "description_authorized": "Төлөм белгиленген төлөө күнү жүргүзүлөт. Же болбосо, азыр төлөсөңүз болот.",
+            "title_due_on_receipt": "Төлөм ишке ашкан жок",
+            "description_due_on_receipt": "Сиз төлөм мөөнөтү көрсөтүлгөн эсеп аласыз.",
+            "title_due_on_fulfillment": "Төлөм аткарууга даяр",
+            "description_due_on_fulfillment": "Төлөм бул буйрутмадагы бардык товарлар иштетилгенден кийин аткарууга даяр болот.",
+            "description_waiting_for_manual_payment": "Бул буйрутма үчүн төлөм күтүлүүдө. Баланс төлөм кабыл алынгандан кийин жаңыртылат.",
+            "description_due_on_receipt_partially_paid": "Бул буйрутма жарым-жартылай төлөнгөн. Сиздин эсебиңизде калдык бар. Сиз төлөө мөөнөтү көрсөтүлгөн эсеп-фактураны аласыз.",
+            "description_due_on_fulfillment_partially_paid": "Бул заказ жарым-жартылай төлөнгөн. Сиздин эсебиңизде калдык бар. Төлөм бул заказдагы бардык товарлар иштелип чыккандан кийин аткарууга даяр болот.",
+            "banner_due_today_for_single_fulfillment": "Төлөмдү {{amount}} өлчөмүндө бүгүн жүргүзүү зарыл. {{link}}",
+            "banner_due_today_for_multiple_fulfillments": "Бүгүн төмөнкү буйрутмалардын аткарылышын төлөө керек: {{count}}",
+            "banner_overdue_for_multiple_fulfillments": "Заказдардын аткарылышын төлөө керек: {{count}}",
+            "description_due_on_fulfillment_partially_paid_next": "Бул заказ жарым-жартылай төлөнгөн. Сиздин эсебиңизде калдык бар.",
+            "banner_overdue_for_single_fulfillment": {
+              "one": "{{amount}} өлчөмүндөгү төлөм мөөнөтү {{count}} күнгө өтүп кетти. {{link}}",
+              "other": "{{amount}} өлчөмүндөгү төлөм {{count}} күнгө кечиктирилди. {{link}}",
+              "few": "{{amount}} өлчөмүндөгү төлөм {{count}} күнгө кечиктирилди. {{link}}",
+              "many": "Төлөм {{amount}} өлчөмүндө {{count}} күнгө кечиктирилди. {{link}}"
+            }
+          },
+          "refund": {
+            "title": "Каражат кайтарылды",
+            "title_with_date": "Каражаттар кайтарылды {{date}}",
+            "description_full_refund": "Бул заказ үчүн каражат толугу менен кайтарылды.",
+            "description_single_refund": "Бул буйрутма үчүн каражат жарым-жартылай кайтарылды.",
+            "description_multiple_refunds": "Бул буйрутма үчүн каражат жарым-жартылай кайтарылды."
+          },
+          "canceled": {
+            "title": "Төлөм четке кагылды",
+            "description": "Каражат чегерилген жок."
+          },
+          "pay_now_accessibility_label": "Заказ {{orderName}} үчүн азыр төлөңүз",
+          "due_date": "Төлөө мөөнөтү: {{date}} чейин",
+          "total_balance": "Жалпы баланс"
+        },
+        "subtitle": "Жөнөтүлдү {{date}}",
+        "order_timeline": {
+          "expand_events_label": "Маалыматтарды көрсөтүү",
+          "expand_events_accessibility_label": "Алдын ала буйрутма маалыматтарын көрсөтүү",
+          "hide_events_label": "Маалыматты жашыруу",
+          "hide_events_accessibility_label": "Алдын ала буйрутма маалыматын жашыруу"
+        }
+      },
+      "payment_methods": {
+        "payment_delete": {
+          "description_without_replacement": "Төлөөнүн бул ыкмасы ушул жерден жасалган жаңы сатып алуулар үчүн жеткиликтүү болбойт.",
+          "description_with_replacement": "Бул жайгаштыруу үчүн төлөм ыкмасы жок кылынгандан кийин, алдын ала ырасталган төлөмдөр жабыркайт. Жаңы заказдарды алуу үчүн аны башка төлөм ыкмасы менен алмаштырыңыз."
+        },
+        "payment_details": {
+          "draft_label": "Алдын ала буйрутма: {{name}}"
+        }
       }
     }
   }
