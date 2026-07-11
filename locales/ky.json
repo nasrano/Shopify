@@ -1585,9 +1585,138 @@
               "pl": "Польшанын жарактуу КНС төлөөчүнүн номерин киргизиңиз",
               "pt": "Португалиянын жарактуу КНС номерин киргизиңиз",
               "ro": "Румыниянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
-              "sk": "Словакиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз"
+              "sk": "Словакиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "si": "Словениянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "es": "Испаниянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "se": "Швециянын КНС төлөөчүнүн жарактуу номерин киргизиңиз",
+              "gb": "Улуу Британиянын КНС төлөөчүнүн жарактуу номерин киргизиңиз"
+            },
+            "service_unavailable": "Текшерүү кызматы жеткиликсиз",
+            "service_error": "Текшерүү кызматы жеткиликтүү эмес"
+          },
+          "accessibility": {
+            "status": {
+              "validating": "КНС төлөөчүнүн номери текшерилип жатат",
+              "valid": "КНС төлөөчүнүн номери жарактуу",
+              "applied": "КНСтен бошотуу колдонулду",
+              "domestic": "КНСтен бошотуу колдонулган эмес",
+              "invalid_number": "КНСтен бошотуу катасы",
+              "service_unavailable": "Кошумча нарк салыгынан бошотууну ырастоо мүмкүн эмес",
+              "service_error": "КНС бошотууну ырастоо мүмкүн эмес"
             }
           }
+        }
+      },
+      "payment_collection": {
+        "cancelled": "Бул төлөм мындан ары талап кылынбайт. Толук маалыматты буйрутма барагынан караңыз.",
+        "paid": "Төлөм буга чейин жөнөтүлгөн. Толук маалыматты буйрутма барагынан караңыз."
+      },
+      "required_extensions": {
+        "errors": {
+          "interaction_required": "Заказды аяктоо үчүн кеңейтүү менен иштешүү талап кылынат."
+        }
+      },
+      "embed": {
+        "header": {
+          "review_order": "Заказыңызды текшериңиз"
+        },
+        "shipping": {
+          "shipping_options": "Жеткирүүнүн бардык ыкмаларын көрүү"
+        },
+        "payment": {
+          "payment_options": "Бардык төлөм ыкмаларын көрүү"
+        }
+      },
+      "too_many_requests": {
+        "title": "Өтө көп жолу буйрутма берүү аракети болду",
+        "body": "Бир нече мүнөт күтүп, кайрадан себептен аракет кылыңыз.",
+        "return_to_cart": "Себетке кайтуу",
+        "body_no_cart": "Сураныч, бир нече мүнөт күтүп, кайра аракет кылыңыз."
+      },
+      "split_delivery": {
+        "pickup_all_items": "Бардык товарларды алып кетүү",
+        "items_for_pickup": "Өз алдынча алып кетүү үчүн товарлар",
+        "delivery_method": "Бөлүнгөн жеткирүү ыкмасы",
+        "delivery_method_menu": "Бөлүнгөн жеткирүү ыкмаларынын менюсу",
+        "inventory_issue_banner": {
+          "remove_items_or_ship": "%{ship_separately_link} же %{remove_items_link}",
+          "remove_items_or_pickup": "%{pickup_in_store_link} же %{remove_items_link}",
+          "heading": {
+            "cannot_be_picked_up": {
+              "one": "%{count} буюмду алып кетүү мүмкүн эмес",
+              "other": "%{count} товарды алып кетүү мүмкүн эмес",
+              "few": "%{count} буюмду алып кетүү мүмкүн эмес",
+              "many": "%{count} товарды алып кетүү мүмкүн эмес"
+            },
+            "cannot_be_shipped": {
+              "one": "%{count} товарды жөнөтүү мүмкүн эмес",
+              "other": "%{count} товар(лар) жөнөтүү мүмкүн эмес",
+              "few": "%{count} буюм жөнөтүүгө мүмкүн эмес",
+              "many": "%{count} товарды жөнөтүү мүмкүн эмес"
+            }
+          },
+          "remove_item": {
+            "one": "буюмду өчүрүү",
+            "other": "товарларды жок кылуу",
+            "few": "товарларды жок кылуу",
+            "many": "товарларды өчүрүү"
+          },
+          "ship_separately": {
+            "one": "Өзүнчө жөнөтүү",
+            "other": "Аларды өзүнчө жөнөтүү",
+            "few": "Аларды өзүнчө жөнөтүү",
+            "many": "Аларды өзүнчө жөнөтүү"
+          },
+          "pick_them_up_in_store": {
+            "one": "Дүкөндөн алып кетиңиз",
+            "other": "Аларды дүкөндөн алып кетүү",
+            "few": "Аларды дүкөндөн алып кетүү",
+            "many": "Аларды дүкөндөн алып кетүү"
+          },
+          "remove_item_only": {
+            "one": "Товарды өчүрүү",
+            "other": "Товарларды өчүрүү",
+            "few": "Товарларды жок кылуу",
+            "many": "Товарларды жок кылуу"
+          }
+        },
+        "items_for_shipping": "Жеткирүү үчүн товарлар",
+        "pickup_items_count": {
+          "few": "%{count} буюмду алып кетүү",
+          "many": "%{count} буюмду алып кетүү"
+        },
+        "ship_items_count": {
+          "few": "%{count} өнүм жөнөтүү",
+          "many": "%{count} товар жөнөтүү"
+        },
+        "items_moved_to_shipping_toast": "Өз алдынча алып кетүүгө мүмкүн болбогон товарлар жеткирүүгө которулду",
+        "cross_border": {
+          "modal": {
+            "heading": "Өлкөнү өзгөртүү керекпи?",
+            "content": "Өзүңүздүн алып кетүү жана жеткирүү пункттарыңыз бир өлкөдө болушу керек. Өлкөнү өзгөртүү бардык буюмдар үчүн жеткирүү тандалышына алып келет.",
+            "change_country": "Өлкөнү өзгөртүү",
+            "country_changed_heading": "Өлкө өзгөртүлдү"
+          },
+          "banner": "Жеткирүү ыкмаңыз жаңыртылды"
+        },
+        "items_count": {
+          "few": "%{count} товар",
+          "many": "%{count} буюм"
+        },
+        "accessibility": {
+          "status": {
+            "ship_separately": "%{items} өзүнчө жөнөтүлөт.",
+            "pickup_in_store": "%{items} дүкөндөн алып кетсе болот.",
+            "remove_items": "%{items} себетиңизден өчүрүлдү."
+          }
+        }
+      },
+      "address_management": {
+        "saved_with_store": "Бул дүкөндө сакталды"
+      },
+      "ucp": {
+        "standard_errors": {
+          "item_unavailable": "Товар сатып алууга мүмкүн эмес"
         }
       }
     },
@@ -1595,6 +1724,42 @@
       "words_connector": ",",
       "two_words_connector": "жана",
       "last_word_connector": ", жана"
+    },
+    "pagination": {
+      "previous": "Артка",
+      "next": "Кийинки"
+    },
+    "links": {
+      "powered_by_shopify": "Shopify платформасында",
+      "learn_more": "Кененирээк"
+    },
+    "feed": {
+      "more": "Дагы"
+    },
+    "attributes": {
+      "email": "электрондук дарек",
+      "password": "сырсөз",
+      "password_confirmation": "Паролду ырастаңыз",
+      "first_name": "ысым",
+      "body": "негизги бөлүгү",
+      "signature": "Дарек"
+    },
+    "addresses": {
+      "zip_code": "Почта индекси",
+      "postal_code": "Почта индекси",
+      "postcode": "Почта индекси",
+      "pincode": "ПИН-код",
+      "region": "Аймак",
+      "province": "Облус",
+      "state_and_territory": "Мамлекет/Аймак",
+      "confirm": "Бул даректи жок кыласызбы?"
+    },
+    "collections": {
+      "sorting": {
+        "manual": "Сунушталат",
+        "best_selling": "Эң көп сатылган",
+        "az": "Адан Яга чейин"
+      }
     }
   },
   "customer_accounts": {
@@ -2328,9 +2493,135 @@
           "many": "Белек карталары жөнөтүлдү"
         },
         "gift_resend_failure": {
-          "one": "Сиздин белек картаңызды кайра жөнөтүүдө көйгөй келип чыкты. Кайра аракет кылыңыз же биз менен байланышыңыз."
-        }
-      }
+          "one": "Сиздин белек картаңызды кайра жөнөтүүдө көйгөй келип чыкты. Кайра аракет кылыңыз же биз менен байланышыңыз.",
+          "other": "Сиздин белек карталарыңызды кайра жөнөтүүдө көйгөй келип чыкты. Кайра аракет кылып көрүңүз же биз менен байланышыңыз.",
+          "few": "Сиздин белек карталарыңызды кайра жөнөтүүдө көйгөй келип чыкты. Кайталап көрүңүз же биз менен байланышыңыз.",
+          "many": "Сиздин белек карталарыңызды кайра жөнөтүүдө көйгөй келип чыкты. Кайталап көрүңүз же биз менен байланышыңыз."
+        },
+        "amazon_buy_with_prime": {
+          "order_tracking_link": {
+            "text": "Amazon аркылуу башкаруу",
+            "new_window_disclaimer": "(жаңы терезеде ачылат)"
+          }
+        },
+        "attempted_to_deliver_label": "Жеткирүү аракети",
+        "there_was_a_problem_label": "Көйгөй келип чыкты",
+        "buy_with_prime_logo_accessibility_label": "Buy with Prime Amazon логотиби",
+        "delivered": "Жеткерилди {{date}}",
+        "complete_label": "Аяктады",
+        "multiple_statuses_label": "Буйрутманын бир нече статусу",
+        "status_timestamp": "Жаңыртылды {{date}}",
+        "delivery_promise": {
+          "claim_shop_cash_cta": {
+            "no_shop_app_label": "{{appDownloadLink}}, Shop Cash алуу үчүн",
+            "has_shop_app_label": "Shop Cash алыңыз",
+            "download_shop_app_label": "Shop тиркемесин жүктөп алыңыз"
+          },
+          "promise_line": {
+            "single_brand_label": "Жеткирүү колдоосу менен",
+            "mixed_brands_label": "Заказ кепилдик менен жеткирилет",
+            "not_delivered_by_label": "{{date}} чейин жеткирилген жок",
+            "modal_accessibility_button_label": "Жеткирүү мөөнөттөрү тууралуу маалыматтар"
+          },
+          "details_modal": {
+            "title": "Колдоо көрсөтүү менен жеткирүү",
+            "modal_accessiblity_label": "Жеткирүү мөөнөттөрү жөнүндө маалымат",
+            "delivery_by_label": "Жеткирүү {{date}} чейин",
+            "delivery_guaranteed_by_label": "Заказ {{date}} чейин кепилдик менен жеткирилет",
+            "shop_cash_claim": {
+              "may_be_eligible_label": "Shop Promise тез жана ишенимдүү жеткирүүгө кепилдик берет. Эгер заказыңыз өз убагында жеткирилбесе, Shop Cash ала аласыз.",
+              "may_be_eligible_not_authorized_label": "Бул буйрутма өз убагында жеткирилген жок, андыктан сиз Shop Cash алууга укуктуу болушуңуз мүмкүн. Чоо-жайын көрүү үчүн кириңиз.",
+              "redeemed_label": "Бул буйрутма өз убагында жеткирилбей калгандыктан, Сиз Shop Cash алдыңыз.",
+              "expired_label": "Бул буйрутманы кечиктирип жеткирүү үчүн компенсация ала албайсыз, анткени 30 күндүк кепилдик мөөнөтү бүттү.",
+              "no_shop_cash_label": "Сиз бул заказды Shop Pay аркылуу төлөбөгөндүктөн, анын кечигип жеткирилгендиги үчүн компенсация ала албайсыз.",
+              "no_longer_guaranteed_label": "Бул буюмдар үчүн жеткирүү кепилдиги мындан ары жеткиликтүү эмес.",
+              "claim_shop_cash_title": "{{amount}} Shop Cash алуу үчүн сканерлеңиз",
+              "claim_shop_cash_description": "Shop Cash каражатын Shop тиркемесиндеги төмөнкү сатып алууларда колдоно аласыз."
+            },
+            "delivery_guarantee_label": "Жеткирип берүүгө кепилдик"
+          }
+        },
+        "external_promise_manage_button_label": {
+          "buy_with_prime": "Amazon'до башкаруу"
+        },
+        "delivery_promise_v2": {
+          "promise_line": {
+            "shop_promise_brand_label": "Жеткирүүгө кепилдик берет",
+            "external_promise_brand_label": "Жеткирүү чейин",
+            "not_delivered_by_label": "{{date}} кийин жеткирилди",
+            "delivery_guarantee_expired_label": "Жеткирүү кепилдигинин мөөнөтү бүттү",
+            "modal_accessibility_button_label": "Жеткирүү мөөнөттөрү жөнүндө маалымат",
+            "download_shop_app_button_label": "Көз салуу үчүн Shop'ту жүктөп алуу",
+            "track_with_shop_button_label": "Дүкөнү бар трек",
+            "claim_shop_cash_button_label": "Shop Cash алыңыз"
+          },
+          "details_modal": {
+            "title": "Жеткирүү кепилдиги",
+            "active_delivery_guarantee_label": "{{date}} чейин жеткирүү",
+            "expired_delivery_guarantee_description": "Бул заказ үчүн 30 күндүк Shop Promise кепилдигинин мөөнөтү бүттү.",
+            "expired_badge_label": "Мөөнөтү бүттү",
+            "order_includes_guarantees_label": "Сиздин заказыңызга кепилдиктер берилет ({{deliveryAgreementsCount}})",
+            "order_includes_guarantees_description": "Shop Promise тез жана ишенимдүү жеткирүүгө кепилдик берет. Эгер буйрутмаңыз {{date}} кийин жеткирилсе, Shop Cash ала аласыз.",
+            "delivered_after_label": "{{date}} кийин жеткирилди",
+            "delivered_after_description": "Буйрутмаңыз өз убагында жеткирилбегендиктен, сиз {{amount}} Shop Cash ала аласыз.",
+            "claimed_shop_cash_description": "Бул заказ өз убагында жеткирилбегендиктен, сиз {{amount}} Shop Cash алдыңыз.",
+            "eligible_to_claim_shop_cash_description": "Буйрутмаңыз өз убагында жеткирилбегендиктен, сиз {{amount}} Shop Cash ала аласыз.",
+            "learn_more_button_label": "Кененирээк",
+            "claim_shop_cash_button_label": "Shop Cash алыңыз",
+            "view_balance_in_shop_button_label": "Shop'тогу балансты көрүү",
+            "scan_to_claim_shop_cash_label": "{{amount}} Shop Cash алуу үчүн сканерлеңиз"
+          }
+        },
+        "tracking_number": {
+          "one": "Көзөмөлдөө номери",
+          "other": "Көзөмөлдөө номерлери",
+          "few": "Көз салуу номерлери",
+          "many": "Көзөмөлдөө номерлери"
+        },
+        "gift_card_resend_button": {
+          "one": "Белек картасын кайра жөнөтүү",
+          "other": "Белек карталарын кайра жөнөтүү",
+          "few": "Белек карталарын кайра жөнөтүү",
+          "many": "Белек карталарын кайра жөнөтүү"
+        },
+        "expected_by": "Күтүлүүдө {{date}} чейин",
+        "was_expected_by": "Күтүлгөн мөөнөт: {{date}}",
+        "confirmed_description_shipping": "Биз бул буюмдарды жеткирүүгө даярдап жатабыз.",
+        "arrives": "{{date}} келет",
+        "delivery_estimate_backed_by": "Камсыздандырылган",
+        "delivery_estimate_delayed_description": "Сиздин аймакка жеткирүү адаттагыдан көбүрөөк убакытты талап кылат. Сиздин буйрутма кечигип жеткирилиши мүмкүн.",
+        "delivery_estimate_delayed_title": "Кечигип жатат",
+        "delivery_estimate_early_description": "Сиздин аймакка жеткирүү адаттагыдан тезирээк аткарылууда. Бул буйрутма мөөнөтүнөн мурда жеткирилиши мүмкүн.",
+        "delivery_exception_action_required": "Иш-аракет талап кылынат",
+        "delivery_exception_attempted_action": "Жаңы жеткирүүнү пландаштыруу",
+        "delivery_exception_attempted_description": "{{link}} ташуучуда {{carrier}} же жеткирүү жөнүндө билдирүүнү текшерүү",
+        "delivery_exception_attempted_description_unknown": "{{link}} же жеткирүү билдирүүсүн текшериңиз",
+        "delivery_exception_attempted_title": "Жеткирүү аракети",
+        "delivery_exception_delivery_failed": "Жеткирүү ишке ашкан жок",
+        "delivery_exception_failed_action": "Ташуучудан тактаңыз {{carrier}}",
+        "delivery_exception_failed_description": "{{link}} же көбүрөөк маалымат алуу үчүн биз менен байланышыңыз",
+        "delivery_exception_failed_description_unknown": "Кошумча маалымат алуу үчүн ташуучу менен байланышыңыз",
+        "delivery_exception_failed_title": "Жетпей калды",
+        "delivery_exception_on_hold_action": "Жеткирүү маалыматтарын жаңыртуу",
+        "delivery_exception_on_hold_description": "{{link}} дарегине кирип, {{carrier}} жеткирүүчүгө кайрылып, буйрутманы жеткирүүнү улантыңыз",
+        "delivery_exception_on_hold_description_unknown": "{{link}}, буюртманы жеткирүүнү улантуу үчүн",
+        "delivery_exception_on_hold_title": "Күтүүдө",
+        "delivery_exception_returning_to_sender_action": "Ташуучу {{carrier}} менен байланышыңыз",
+        "delivery_exception_returning_to_sender_description": "{{link}} кошумча маалымат алуу үчүн",
+        "delivery_exception_returning_to_sender_description_unknown": "Кошумча маалымат алуу үчүн ташуучуга кайрылыңыз",
+        "delivery_exception_returning_to_sender_title": "Жеткізілген жоқ",
+        "delivery_exception_shop_promise_delivered_late_description": "Сиздин заказыңызга Shop Promise колдонулат. Заказ кечигип жеткирилгендиктен, сиз {{amount}} өлчөмүндө Shop Cash ала аласыз.",
+        "delivery_exception_shop_promise_delivered_late_title": "Кечигип жеткирилди",
+        "predicted_by_shop": "Shopтан божомол"
+      },
+      "status_mark_as_delivered": "Жеткирилди деп белгилөө",
+      "buy_again": "Дагы бир жолу сатып алуу",
+      "buy_again_accessibility_label": "Сатып алууну кайталоо {{orderId}}",
+      "manage": "Тартипке келтирүү",
+      "manage_accessiblity_label": "Буйрутманы иреттөө {{orderId}}",
+      "fulfillment_status_title": "Аткаруу статусу: {{status}}",
+      "list_title_with_pending_orders": "Буйрутмалар:",
+      "list_title_confirmed_orders_accessibility_label": "Буйрутмалар: ырасталды"
     },
     "order_details": {
       "addresses_section_title": "Төлөм жана жеткирүү",
