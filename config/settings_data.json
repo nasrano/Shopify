@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "categories_menu": "main-menu-1",
+    "categories_menu": "categories",
     "sections": {
       "header": {
         "type": "header",

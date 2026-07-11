@@ -1,16 +1,9 @@
 {%- comment -%}
-  Сетка категорий: пункты ПЕРВОГО уровня «Меню категорий». Пункт считается
-  категорией, если ведёт на коллекцию ИЛИ имеет вложенные пункты (родитель
-  с URL «#»). Родители без своей коллекции открывают шторку категорий сразу
-  на своём подуровне. Пока категорий в меню нет — коллекции магазина.
+  Сетка категорий: ВСЕ пункты первого уровня «Меню категорий» как есть.
+  Пункт без ссылки (URL «#») с вложенными открывает шторку категорий сразу
+  на своём подуровне. Фолбэк на коллекции — только если меню пустое/не выбрано.
 {%- endcomment -%}
 {%- assign menu = linklists[settings.categories_menu] -%}
-{%- assign cat_count = 0 -%}
-{%- for link in menu.links -%}
-  {%- if link.type == 'collection_link' or link.url contains '/collections/' or link.links.size > 0 -%}
-    {%- assign cat_count = cat_count | plus: 1 -%}
-  {%- endif -%}
-{%- endfor -%}
 
 <section class="privat-cats" data-reveal>
   <div class="privat-cats__head">
@@ -18,20 +11,20 @@
     <button type="button" class="privat-link-all" data-open="cats">Все →</button>
   </div>
   <div class="privat-cats__grid">
-    {% if cat_count > 0 %}
+    {% if menu.links.size > 0 %}
       {% for link in menu.links %}
-        {%- assign has_col_url = false -%}
-        {%- if link.type == 'collection_link' or link.url contains '/collections/' -%}{%- assign has_col_url = true -%}{%- endif -%}
-        {% if has_col_url %}
+        {% if link.url == '#' or link.url == blank %}
+          {% if link.links.size > 0 %}
+            <button type="button" class="privat-cat" data-open="cats" data-cat-target="p{{ forloop.index }}">
+              <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+              <span class="privat-cat__name">{{ link.title }}</span>
+            </button>
+          {% endif %}
+        {% else %}
           <a href="{{ link.url }}" class="privat-cat">
             <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
             <span class="privat-cat__name">{{ link.title }}</span>
           </a>
-        {% elsif link.links.size > 0 %}
-          <button type="button" class="privat-cat" data-open="cats" data-cat-target="p{{ forloop.index }}">
-            <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
-            <span class="privat-cat__name">{{ link.title }}</span>
-          </button>
         {% endif %}
       {% endfor %}
     {% else %}
@@ -52,7 +45,7 @@
   "name": "Категории",
   "settings": [
     { "type": "text", "id": "heading", "label": "Заголовок", "default": "Категории" },
-    { "type": "paragraph", "content": "Показываются пункты первого уровня «Меню категорий» (Тема → Навигация): ссылки на коллекции и родительские пункты с вложенными. Кнопка «Все →» открывает шторку с полным древом." }
+    { "type": "paragraph", "content": "Показываются все пункты первого уровня «Меню категорий» (Тема → Настройки → Навигация). Кнопка «Все →» открывает шторку с полным древом." }
   ],
   "presets": [{ "name": "Категории" }]
 }

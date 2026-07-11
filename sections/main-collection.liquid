@@ -72,16 +72,18 @@
   {% endif %}
 </div>
 
-{%- comment -%} в слайдере категорий показываем только ссылки на коллекции;
-если в меню их нет — сами коллекции магазина {%- endcomment -%}
-{%- assign chip_col_count = 0 -%}
-{%- for link in chip_links -%}
-  {%- if link.type == 'collection_link' or link.url contains '/collections/' -%}{%- assign chip_col_count = chip_col_count | plus: 1 -%}{%- endif -%}
-{%- endfor -%}
+{%- comment -%} лента категорий: все пункты уровня из «Меню категорий»;
+пункты без ссылки («#») открывают шторку категорий; фолбэк на коллекции —
+только если меню пустое {%- endcomment -%}
 <div class="privat-catbar">
-  {% if chip_col_count > 0 %}
+  {% if menu.links.size > 0 %}
     {% for link in chip_links %}
-      {% if link.type == 'collection_link' or link.url contains '/collections/' %}
+      {% if link.url == '#' or link.url == blank %}
+        <button type="button" class="privat-catbar__item" data-open="cats">
+          <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
+          <span class="privat-catbar__name">{{ link.title }}</span>
+        </button>
+      {% else %}
         <a href="{{ link.url }}" class="privat-catbar__item{% if link.url == active_chip_url %} is-active{% endif %}">
           <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
           <span class="privat-catbar__name">{{ link.title }}</span>
