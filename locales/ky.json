@@ -895,6 +895,21 @@
         "payment_details": {
           "draft_label": "Алдын ала буйрутма: {{name}}"
         }
+      },
+      "purchase_order_number": {
+        "add_accessibility_label": "Сатып алууга буйрутма номерин кошуу",
+        "add_modal_title": "Сатып алуу заказынын номерин кошуу",
+        "cancel": "Жокко чыгаруу",
+        "close_modal_accessibility_label": "Сатып алуу заказынын номеринин модалдык терезесин жабуу",
+        "discard": "Жокко чыгаруу",
+        "discard_changes_modal_title": "Өзгөртүүлөрдү жокко чыгаруу керекпи?",
+        "edit_accessibility_label": "Сатып алуу заказынын номерин өзгөртүү",
+        "edit_modal_title": "Сатып алуу заказынын номерин өзгөртүү",
+        "empty_state": "Сатып алуу номери жок",
+        "modal_po_number_input_label": "Сатып алуу буйрутмасынын номери",
+        "modal_po_number_input_max_length_error": "Сатып алуу буйрутмасынын номери {{maxLength}} белгиден ашпашы керек.",
+        "save": "Сактоо",
+        "title": "Сатып алуу заказынын номери {{poNumber}}"
       }
     },
     "subscriptions": {
@@ -982,6 +997,138 @@
         }
       },
       "processing": "Иштетүүдө…"
+    },
+    "errors": {
+      "address_deletion_error": {
+        "description": "Даректи өчүрүүдө көйгөй келип чыкты. Кайра аракет кылыңыз же баракты жаңыртыңыз."
+      },
+      "addresses_loading_issue": {
+        "description": "Туташуу катасы. Интернет байланышыңызды текшерип, кайра аракет кылыңыз."
+      },
+      "banner_title": {
+        "one": "{{count}} ката табылды",
+        "other": "Ката табылды: {{count}}",
+        "few": "Каталар табылды: {{count}}",
+        "many": "Каталар табылды: {{count}}"
+      },
+      "failed_address_creation": {
+        "description": "Даректи түзүүдө көйгөй келип чыкты. Баракты кайра жүктөңүз же интернет туташуусун текшериңиз."
+      },
+      "failed_address_update": {
+        "description": "Даректи жаңыртууда көйгөй келип чыкты. Баракты кайра жүктөңүз же интернет байланышыңызды текшериңиз."
+      },
+      "no_access_to_locations": {
+        "description": "Сизде жайгашкан жерлерге кирүү мүмкүнчүлүгү жок"
+      },
+      "not_found": {
+        "description": "URL дарегин текшериңиз же бир нече мүнөттөн кийин кайталап көрүңүз.",
+        "title": "Баракты жүктөгөндө көйгөй келип чыкты."
+      },
+      "order_not_found": {
+        "description": "Буйрук жок же сизде аны көрүүгө уруксат жок.",
+        "title": "Тапшырык табылган жок"
+      },
+      "profile_update_error": {
+        "description": "Профиль жаңыртылып жатканда көйгөй келип чыкты. Баракчаны кайра жүктөңүз же интернет байланышыңызды текшериңиз."
+      },
+      "retry_action_label": "Кайра аракет кылыңыз",
+      "load_orders_error": {
+        "title": "Заказдар жүктөлгөн жок",
+        "description": "Дагы бир жолу жүктөп көрүңүз же кийинчерээк кайталаңыз.",
+        "retry_button": "Кайта аракет кылуу"
+      },
+      "load_paypal_error": {
+        "description": "PayPal'ды жүктөөдө ката кетти. Кайра аракет кылып көрүңүз."
+      },
+      "load_extension_error": {
+        "title": "Ката",
+        "description": "Баракты жаңыртыңыз же бир нече мүнөттөн кийин кайра аракет кылыңыз.",
+        "refresh_button": "Баракты жаңыртуу"
+      },
+      "already_upgraded": "Кардарлардын аккаунттары жаңыртылды.",
+      "failed_to_upgrade": "Кардарлардын аккаунттарынын жөндөөлөрүн жаңылоо мүмкүн болгон жок.",
+      "logout_everywhere": {
+        "description": "Системадан чыгууда ката кетти. Кайталап көрүңүз."
+      },
+      "resend_link": {
+        "too_many_requests": "Суроолор өтө көп. Кийинчерээк кайталаңыз.",
+        "generic": "Ийгиликсиз суроо"
+      },
+      "profile_name_update_error": {
+        "description": "Атты жаңыртууда көйгөй келип чыкты. Баракты кайра жүктөңүз же интернет байланышын текшериңиз."
+      },
+      "load_address_form_error": {
+        "title": "Дарек формасын жүктөө мүмкүн болгон жок",
+        "description": "Даректин формасын жүктөө мүмкүн болгон жок.",
+        "refresh_button": "Баракты жаңыртуу"
+      },
+      "not_upgraded": "Кардарлардын аккаунттары жаңыртылбай жатат.",
+      "failed_to_revert": "Кардардын аккаунтунун жөндөөлөрүн калыбына келтирүү мүмкүн болгон жок.",
+      "revert_window_expired": "Өзгөртүүлөрдү жокко чыгаруу мөөнөтү бүттү."
+    },
+    "payment_methods": {
+      "title": "Төлөө ыкмалары",
+      "add_payment_method_button": "Төлөм ыкмасын кошуу",
+      "payment_details": {
+        "title": "Төлөм ыкмасы жөнүндө маалымат",
+        "payment_method_expiring_on": "Мөөнөтү {{expiryDate}} бүтөт",
+        "preauthorized_payments": "Алдын ала тастыкталган төлөмдөр",
+        "close_payment_modal": "Жабуу",
+        "close_payment_modal_accessibility_label": "Төлөм ыкмасы тууралуу маалымат камтылган модалдык терезени жабуу",
+        "payment_method_not_found_error": "Төлөм ыкмасы табылган жок",
+        "payment_details_loading": "Төлөм ыкмасы жөнүндө маалыматтарды жүктөө",
+        "pre_authorized_payments": "Алдын ала авторизацияланган төлөмдөр",
+        "total_amount_of_subscription_line_items_left": "жана дагы {{total}}",
+        "total_amount_of_subscription_line_items_left_accessibility_label": "Баары — {{totalItems}}, көрсөтүлөт — {{totalItemsToDisplay}}.",
+        "next_payment_due": "Кийинки төлөм датасы: {{dueDateInMonthDayYear}}",
+        "edit_payment_method_button": "Оңдоо",
+        "edit_payment_method_button_accessibility_label": "Төлөм ыкмасын өзгөртүү, акыркы цифралары – {{lastDigits}}",
+        "credit_card_details_accessibility_label": "{{lastDigits}} менен аяктайт",
+        "billing_title": "Эсеп-фактура дареги",
+        "card_info_title": "Картанын маалыматтары",
+        "payment_method_expired_on": "Жарамдуулук мөөнөтү бүттү {{expiryDate}}",
+        "loading_shop_pay": "Shop Pay жүктөлүп жатат",
+        "invalid_payment_method": "Жараксыз төлөө ыкмасы",
+        "invalid_payment_method_message": "Жаңы заказдарды алууну улантуу үчүн башка кредиттик картаны колдонуңуз.",
+        "replace_payment_method": "Төлөм ыкмасын өзгөртүү",
+        "checkout_card_banner": "Төлөмдүн бул ыкмасы алдын ала авторизацияланган төлөмдөр үчүн гана колдонулушу мүмкүн. Эгер сиз бул дүкөнгө кирген болсоңуз, ал төлөм жүргүзүүдө көрсөтүлбөйт.",
+        "default_checkbox": "Демейки төлөм ыкмасы катары коюу",
+        "default_checkbox_accessibility_label": "Бул төлөм ыкмасын демейки катары коюу",
+        "replace_payment_method_button": "Алмаштыруу"
+      },
+      "delete_payment_method_button": "Өчүрүү",
+      "delete_payment_method_button_accessibility_label": "{{paymentMethodName}} ыкмасын өчүрүү",
+      "back_button": "Кайра",
+      "back_button_accessibility_label": "{{paymentMethodStepTitle}}'га кайтуу",
+      "payment_delete": {
+        "title": "Төлөм ыкмасын өчүрүү",
+        "description_without_replacement": "Бул төлөм ыкмасы жаңы сатып алуулар үчүн жеткиликтүү болбойт.",
+        "description_with_replacement": "Бул төлөм ыкмасы жок кылынгандан кийин алдын ала ырасталган төлөмдөр жабыркайт. Кошумча вариант катары, жаңы заказдарды алууну улантуу үчүн аны башка төлөм ыкмасы менен алмаштырсаңыз болот.",
+        "payment_method_selector_placeholder": "Альтернативдүү төлөм ыкмасын тандаңыз (милдеттүү эмес)",
+        "replace_method_with_new_method_description": "{{currentPaymentMethodName}} алынып, ордуна {{newPaymentMethodName}} кошулат.",
+        "error_when_deleting": "Кечиресиз, ката кетти. Бул төлөм ыкмасын өчүрүү мүмкүн болгон жок. Кийинчерээк кайталап көрүңүз же баракты кайра жүктөңүз.",
+        "delete_and_replace_button": "Жок кылуу жана алмаштыруу",
+        "delete_and_replace_button_accessibility_label": "{{currentPaymentMethodName}} алып салып, ордуна {{newPaymentMethodName}} кошуңуз.",
+        "deleted_successfully": "Төлөм ыкмасы өчүрүлдү.",
+        "payment_method_selector_no_alternative_payment": "Төлөм ыкмасы жок",
+        "loading_available_payment_methods_accessibility_label": "Жеткиликтүү төлөм ыкмалары жүктөлүүдө",
+        "warning_message_with_replacement": {
+          "with_pending_orders_and_subscriptions": "Төлөм ыкмасын өчүрсөңүз, алдын ала ырасталган төлөмдөргө таасирин тийгизет. Эгер башка төлөм ыкмасын тандабасаңыз, учурдагы төлөм реквизиттери колдонуудагы заказдар боюнча бардык ачык төлөмдөрдү жабуу үчүн колдонула берет. Башка төлөм ыкмасын тандоо кызматтарды үзгүлтүксүз алуу үчүн кийинки жазылуу заказдарынын мөөнөтүн узартууга мүмкүндүк берет.",
+          "with_pending_orders": "Бул төлөм ыкмасы жок кылынгандан кийин, ал сиздин эсебиңизден жоголот жана жаңы сатып алуулар үчүн жеткиликтүү болбой калат. Эгер башка төлөм ыкмасын тандабасаңыз, учурдагы маалыматтар бардык бүтпөгөн буйрутмалардагы жабылбаган төлөмдөрдү жоюу үчүн колдонула берет.",
+          "with_subscriptions": "Төлөм ыкмасын өчүрсөңүз, мурда ырасталган төлөмдөргө таасирин тийгизет. Жаңы заказдарды алуу үчүн башка төлөм ыкмасын кошуңуз."
+        },
+        "warning_message_without_replacement": {
+          "with_pending_orders_and_subscriptions": "Төлөм ыкмасын өчүрсөңүз, алдын ала ырасталган төлөмдөргө таасирин тийгизет. Учурдагы төлөм ыкмасы бар буйрутмалардагы бардык төлөнбөгөн төлөмдөрдү жабуу үчүн колдонула берет, бирок сиз жазылууга башка буйрутмаларды ала албайсыз. Жазылууга буйрутмаларды алууну улантуу үчүн башка төлөм ыкмасын кошуңуз.",
+          "with_pending_orders": "Төлөм ыкмасы жок кылынгандан кийин, ал сиздин аккаунтуңуздан жоголот жана жаңы сатып алуулар үчүн жеткиликтүү болбой калат. Бирок, учурдагы реквизиттер азыркы буйрутмалар боюнча бардык төлөнбөгөн төлөмдөрдү жабуу үчүн колдонула берет.",
+          "with_subscriptions": "Төлөмдүн бул ыкмасын өчүргөнүңүз тастыкталган төлөмдөргө таасирин тийгизет. Жаңы заказдарды алууну улантуу үчүн төлөмдүн башка ыкмасын кошуңуз."
+        }
+      },
+      "edit_payment_method": {
+        "title": "Төлөм ыкмасын өзгөртүү",
+        "save_payment_method_button": "Сактоо",
+        "cancel_edit_payment_method_button": "Жокко чыгаруу",
+        "payment_method_updated_toast": "Төлөм ыкмалары өзгөртүлдү"
+      }
     }
   },
   "general": {
