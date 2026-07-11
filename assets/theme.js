@@ -352,10 +352,34 @@
     if (document.querySelector('[data-drawer="favs"]').classList.contains('is-open')) renderFavorites();
   });
 
-  function renderFavorites() {
+  /* старые записи избранного не содержат SKU — дотягиваем его по Ajax один раз */
+  function enrichFavSkus() {
+    var favs = getFavs();
+    var pending = Object.keys(favs).filter(function (id) {
+      return !favs[id].sku && !favs[id].skuChecked && favs[id].url;
+    });
+    if (!pending.length) return;
+    Promise.all(pending.map(function (id) {
+      var m = (favs[id].url || '').match(/\/products\/([^\/?#]+)/);
+      favs[id].skuChecked = true;
+      if (!m) return null;
+      return fetch('/products/' + m[1] + '.js')
+        .then(function (r) { return r.json(); })
+        .then(function (p) {
+          var v = (p.variants || []).find(function (v) { return String(v.id) === String(favs[id].variantId); }) || (p.variants || [])[0];
+          if (v && v.sku) favs[id].sku = v.sku;
+        }).catch(function () {});
+    })).then(function () {
+      setFavs(favs);
+      renderFavorites(true);
+    });
+  }
+
+  function renderFavorites(skipEnrich) {
     var body = document.getElementById('privat-favs-body');
     var empty = document.getElementById('privat-favs-empty');
     if (!body) return;
+    if (!skipEnrich) enrichFavSkus();
     var favs = getFavs();
     var ids = Object.keys(favs);
     if (!ids.length) {
