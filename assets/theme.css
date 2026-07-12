@@ -297,6 +297,7 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-cat-row--all{background:var(--chip);border:none;border-radius:14px;padding:1px 14px;margin-bottom:10px}
 .privat-cat-row--all .privat-cat-row__link{padding:12px 0}
 .privat-cat-row--all .privat-cat-row__mono{background:var(--accent);color:var(--accent-ink)}
+.privat-cat-row__link--static{cursor:default}
 
 .privat-account{flex:1;min-height:0;overflow-y:auto;padding:12px 22px calc(20px + env(safe-area-inset-bottom))}
 .privat-account__text{font-size:13px;line-height:1.55;color:var(--sub);margin:0 0 12px}

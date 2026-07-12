@@ -13,12 +13,17 @@
 {%- comment -%} одна коллекция может встречаться в меню несколько раз —
 приоритет: первое точное совпадение на самом верхнем уровне {%- endcomment -%}
 
+{%- comment -%} chip_prefix — префикс id панелей шторки для чипов текущего
+уровня ('p' = корень, 'p3-' = дети 3-го пункта, '' = панелей нет) {%- endcomment -%}
+{%- assign chip_prefix = 'p' -%}
+
 {%- comment -%} 1) точное совпадение на 1-м уровне {%- endcomment -%}
 {%- for l1 in menu.links -%}
   {%- if crumb1 == nil and l1.active -%}
     {%- assign crumb1 = l1 -%}
     {%- if l1.links.size > 0 -%}
       {%- assign chip_links = l1.links -%}
+      {%- assign chip_prefix = 'p' | append: forloop.index | append: '-' -%}
     {%- else -%}
       {%- assign chip_links = menu.links -%}
       {%- assign active_chip_url = l1.url -%}
@@ -30,6 +35,7 @@
 {%- if crumb1 == nil -%}
   {%- for l1 in menu.links -%}
     {%- if crumb1 == nil -%}
+      {%- assign i1 = forloop.index -%}
       {%- for l2 in l1.links -%}
         {%- if crumb2 == nil and l2.active -%}
           {%- assign crumb1 = l1 -%}
@@ -37,8 +43,10 @@
           {%- assign parent_url = l1.url -%}
           {%- if l2.links.size > 0 -%}
             {%- assign chip_links = l2.links -%}
+            {%- assign chip_prefix = '' -%}
           {%- else -%}
             {%- assign chip_links = l1.links -%}
+            {%- assign chip_prefix = 'p' | append: i1 | append: '-' -%}
             {%- assign active_chip_url = l2.url -%}
           {%- endif -%}
         {%- endif -%}
@@ -60,6 +68,7 @@
               {%- assign crumb3 = l3 -%}
               {%- assign parent_url = l2.url -%}
               {%- assign chip_links = l2.links -%}
+              {%- assign chip_prefix = '' -%}
               {%- assign active_chip_url = l3.url -%}
             {%- endif -%}
           {%- endfor -%}
@@ -100,7 +109,8 @@
   {% if menu.links.size > 0 %}
     {% for link in chip_links %}
       {% if link.url == '#' or link.url == blank %}
-        <button type="button" class="privat-catbar__item" data-open="cats">
+        <button type="button" class="privat-catbar__item" data-open="cats"
+          {%- if chip_prefix != '' and link.links.size > 0 %} data-cat-target="{{ chip_prefix }}{{ forloop.index }}"{% endif %}>
           <span class="privat-catbar__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
           <span class="privat-catbar__name">{{ link.title }}</span>
         </button>
