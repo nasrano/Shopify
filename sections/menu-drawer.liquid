@@ -7,6 +7,14 @@
     <button type="button" class="privat-close" data-close aria-label="Закрыть">✕</button>
   </div>
 
+  {%- assign promo_menu = linklists[settings.promo_menu] -%}
+  {% if promo_menu.links.size > 0 %}
+    <div class="privat-drawer__subhead">Подборки</div>
+    {% for link in promo_menu.links %}
+      <a href="{{ link.url }}" class="privat-drawer__sublink">{{ link.title }}</a>
+    {% endfor %}
+  {% endif %}
+
   <div class="privat-drawer__subhead">Покупателям</div>
   {% render 'shop-links', link_class: 'privat-drawer__sublink' %}
 
