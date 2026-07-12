@@ -1,7 +1,14 @@
+{%- assign img_desktop = section.settings.image | default: section.settings.image_mobile -%}
+{%- assign img_mobile = section.settings.image_mobile | default: section.settings.image -%}
+{% if img_desktop %}
+  <style>
+    #privat-hero-img{background-image:url({{ img_mobile | image_url: width: 1000 }})}
+    @media (min-width:720px){#privat-hero-img{background-image:url({{ img_desktop | image_url: width: 1800 }})}}
+  </style>
+{% endif %}
 <section class="privat-hero">
-  <div class="privat-hero__img" id="privat-hero-img"
-    {% if section.settings.image %}style="background-image:url({{ section.settings.image | image_url: width: 1800 }})"{% endif %}>
-    {% unless section.settings.image %}
+  <div class="privat-hero__img" id="privat-hero-img">
+    {% unless img_desktop %}
       <span class="privat-hero__placeholder">lifestyle фото · пара / уют / тёплый свет</span>
     {% endunless %}
   </div>
@@ -20,7 +27,8 @@
 {
   "name": "Герой",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Изображение (lifestyle)" },
+    { "type": "image_picker", "id": "image", "label": "Изображение — десктоп (горизонтальное)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Изображение — мобильный (вертикальное 3:4)", "info": "Если не задано, на мобильном используется десктопное с обрезкой по центру." },
     { "type": "text", "id": "title", "label": "Заголовок", "default": "Близость — это забота о себе" },
     { "type": "textarea", "id": "subtitle", "label": "Подзаголовок", "default": "Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки." },
     { "type": "text", "id": "primary_label", "label": "Кнопка 1 — текст", "default": "В магазин →" },
