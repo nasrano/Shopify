@@ -226,6 +226,15 @@
         "shop_phone_description": "Сиз Shop тиркемесинин шилтемеси менен SMS аласыз, анын жардамы менен заказыңызга көз салсаңыз болот.",
         "login_reorder_link_text": {
           "one": "бул товарды да сатып алуу"
+        },
+        "out_for_delivery_local_title": "Сиздин заказыңыз жеткирүүгө даяр.",
+        "purchase_order_number_title": "Сатып алуу буйрутмасынын № %{purchase_order_number}",
+        "order_updates_subscribe_to_email_notifications_email_already_exists": "Киргизия\n",
+        "gift_card_resent_confirmation": {
+          "one": "Белек картасы дагы бир жолу жөнөтүлдү.",
+          "other": "Белек карталары кайрадан жөнөтүлдү.",
+          "few": "Белек карталары кайрадан жөнөтүлдү.",
+          "many": "Белек карталары кайрадан жөнөтүлдү."
         }
       },
       "review": {
@@ -566,7 +575,9 @@
       "general": {
         "errors": {
           "sale_attribution": {
-            "unresolvable_target_merchandise_lines": "Сунушталган сатуу атрибуттары учурдагы сүйлөшүүлөрдүн контекстине байланыштуу чечилгис."
+            "unresolvable_target_merchandise_lines": "Сунушталган сатуу атрибуттары учурдагы сүйлөшүүлөрдүн контекстине байланыштуу чечилгис.",
+            "staff_member_not_exist": "Бул кызматкер учурдагы дүкөндө жок.",
+            "location_not_exist": "Бул жайгаштыруу учурдагы дүкөндө жок."
           },
           "non_negotiable": {
             "missing_non_negotiable_terms": "Сатып алуучуңуздун сунушу талашсыз шарттарды камтышы керек.",
@@ -632,6 +643,36 @@
             "bundle_requires_components": "Товарлар жыйындысында компоненттер жок.",
             "title_too_long": "Продуктунун аталышы өтө узун.",
             "title_empty": "Продукттун аталышы көрсөтүлгөн эмес."
+          },
+          "buyer_identity": {
+            "email_domain_is_invalid": "Көрсөтүлгөн домен менен көйгөйдү чечүү мүмкүн эмес.",
+            "missing_contact_method": "Жарамдуу байланыш ыкмасы жок.",
+            "invalid_customer_profile": "Жараксыз кардар профили берилди.",
+            "checkout_completion_target_is_invalid_proc": "Заказды толтуруунун максаты жараксыз.",
+            "personal_order_not_allowed": "Бул дүкөндө жеке буйрутмалар кабыл алынбайт."
+          },
+          "delivery": {
+            "out_of_stock_at_origin_location": "Өндүрүлгөн жеринде товар жок."
+          },
+          "discount": {
+            "custom_discount_not_honoured": "Берилген жеке арзандатуу эске алынган жок."
+          },
+          "tax": {
+            "delivery_price_is_abstract": "Жеткирүүнүн тиешелүү баасы абстракттуу.",
+            "proposed_allocations_required": "\"Сунушталган бөлүштүрүүлөр\" деген талаа жок.",
+            "merchandise_terms_must_be_defined": "Товар үчүн шарттарды аныктоо керек.",
+            "merchandise_discount_terms_must_be_defined": "Товардын арзандатуу шарттарын аныктоо керек.",
+            "delivery_discount_terms_must_be_defined": "Жеткирүүгө арзандатуу шарттарын аныктоо зарыл."
+          },
+          "payment": {
+            "manual_payments_not_allowed_for_b2b": "B2B дүкөндөрүндө кол менен төлөөгө жол берилбейт.",
+            "credit_card_last_name_required": "\"Фамилия\" талаасы нөлгө барабар болбошу керек.",
+            "store_credit_not_enabled": "Бул дүкөн үчүн товардык кредит кошулган эмес.",
+            "store_credit_insufficient_funds": "Товардык насыя эсебинде каражат жетишсиз.",
+            "gift_cards_not_allowed_for_b2b": "Белек карталары B2B дүкөндөрүндө кабыл алынбайт."
+          },
+          "tip": {
+            "only_one_tip_line_allowed": "Чай пул үчүн бир нече сап кошууга болбойт."
           }
         },
         "full_price": "Жалпы баасы:",
@@ -1366,6 +1407,18 @@
         "merchandise": {
           "sold_out": "Сатылды",
           "available": "Жеткиликтүү"
+        },
+        "inventory": {
+          "sold_out": {
+            "storefront_body": "Дүкөнгө кайтып келип, соодаңызды улантыңыз"
+          }
+        },
+        "estimated_wait_time": {
+          "less_than_one": "Болжолдуу күтүү убактысы: бир мүнөттөн аз",
+          "one": "Күтүү болжолдуу убактысы: {{count}} мүнөт.",
+          "other": "Болжолдуу күтүү убактысы: {{count}} мүн.",
+          "few": "Болжолдуу күтүү убактысы: {{count}} мүн.",
+          "many": "Болжолдуу күтүү убактысы: {{count}} мүн."
         }
       },
       "payment_errors": {
@@ -1765,8 +1818,12 @@
             "phone": "Телефон номериңизди жазыңыз",
             "billing_first_name": "Эсеп-фактура дарегинин атын көрсөтүңүз",
             "billing_address1": "Эсеп-фактураны жөнөтүүчү даректи киргизиңиз",
-            "billing_address2": "Эсеп-фактура дарегиңиздин үйүнүн, батиринин ж.б. номерин жазыңыз"
+            "billing_address2": "Эсеп-фактура дарегиңиздин үйүнүн, батиринин ж.б. номерин жазыңыз",
+            "billing_city": "Эсеп-фактура дарегинин шаарын көрсөтүңүз"
           }
+        },
+        "scrim": {
+          "continue_purchase_in_window": "{{walletName}} терезесинен сатып алууну улантыңыз"
         }
       },
       "payment_summary": {
@@ -2270,6 +2327,16 @@
           "other": "Арзандатуулар",
           "few": "Арзандатуулар",
           "many": "Арзандатуулар"
+        },
+        "add_discount_or_gift_card": "Арзандатуу кодун же белек картасын кошуңуз",
+        "applied_discount_message": "Жалпы буйрутманын суммасынан %{amount} үнөмдөлгөн",
+        "discount_savings_notice": "%{discount_amount} суммасындагы арзандатууну эске алуу менен",
+        "scroll_order_summary": "Көбүрөөк өнүмдөрдү көрүү үчүн ылдый жылдырыңыз",
+        "deferred_payment_info": {
+          "due_on_fulfillment_title": "%{amount_due} өлчөмүндөгү төлөм аткарууга даяр"
+        },
+        "discount_discovery": {
+          "back_to_finalize_order": "Буйрутманы бүтүрүүгө кайтуу"
         }
       },
       "delivery_options": {
@@ -2364,7 +2431,9 @@
             "few": "«{{section}}» бөлүмүндөгү каталар: {{count}}",
             "many": "«{{section}}» бөлүмүндөгү каталар: {{count}}"
           }
-        }
+        },
+        "subscription_changed": "Жазылууларыңыздын бирине өзгөртүүлөр киргизилди.",
+        "violations_title": "{{violation}}: жеткиликсиз же туура эмес"
       },
       "review_address_modal": {
         "title": "Даректи текшерүү",
@@ -2483,21 +2552,87 @@
         }
       },
       "stock": {
-        "price_column_header": "Баасы"
+        "price_column_header": "Баасы",
+        "unpurchasable_product": {
+          "header": "Кээ бир нерселер корзиңизден өчүрүлдү",
+          "message": "Бул өнүмдөрдү B2B сатып алууларына колдонууга болбойт."
+        },
+        "unpurchasable_product_generic": {
+          "header": "Кээ бир нерселер корзиңизден өчүрүлдү"
+        },
+        "unshippable_product": {
+          "header": {
+            "one": "Буюмдарды жеткирүү мүмкүн эмес: %{count}",
+            "other": "Буюмдарды жеткирүү мүмкүн эмес: %{count}",
+            "few": "Буюмдарды жеткирүү мүмкүн эмес: %{count}",
+            "many": "Буюмдарды жеткирүү мүмкүн эмес: %{count}"
+          }
+        }
       },
       "pickup_point": {
         "or": "же",
         "search_button": "Издөө",
         "selector_tab_list": "Тизме",
-        "address_label": "Дарек"
+        "address_label": "Дарек",
+        "pickup_unavailable_banner_title": {
+          "one": "Сиздин товарыңыз үчүн өз алдынча алып кетүүчү пункттар жок",
+          "other": "Сиздин товарларыңыз үчүн жеткиликтүү алып кетүү пункттары жок",
+          "few": "Сиздин товарларыңыз үчүн жеткиликтүү алып кетүү пункттары жок",
+          "many": "Сиздин товарларыңыз үчүн жеткиликтүү алып кетүү пункттары жок"
+        }
       },
       "billing": {
         "address_form": {
           "cancel": "Жокко чыгаруу"
-        }
+        },
+        "address_more": "Бул жеткирүү дареги үчүн башка аракеттерди көрсөтүү"
       },
       "b2b_errors": {
-        "log_out_link_text": "Чыгуу"
+        "log_out_link_text": "Чыгуу",
+        "lost_permissions_title": "Жайгашкан жерге кирүүгө уруксат жок"
+      },
+      "deliverability": {
+        "not_deliverable": {
+          "title": {
+            "one": "Буюмдарды жеткирүү мүмкүн эмес: %{count}",
+            "other": "Буюмдарды жеткирүү мүмкүн эмес: %{count}",
+            "few": "Буюмдарды жеткирүү мүмкүн эмес: %{count}",
+            "many": "Буюмдарды жеткирүү мүмкүн эмес: %{count}"
+          }
+        }
+      },
+      "note": {
+        "length_exceeds_maximum": "Эскертүүнү 5000 белгиден азга кыскартыңыз."
+      },
+      "redeemable_errors": {
+        "gift_card": {
+          "duplicate": "Белек картасы буга чейин буйрутмаңызга колдонулган",
+          "insufficient_funds": "Бул белек картасында каражат түгөндү",
+          "expired": "Бул белек картасынын мөөнөтү бүттү",
+          "invalid": "Жарамдуу белек картасын көрсөтүңүз"
+        }
+      },
+      "shop_pay_external": {
+        "errors": {
+          "problem_loading": "Shop Pay жүктөлүп жатканда көйгөй келип чыкты."
+        }
+      },
+      "one": {
+        "errors": {
+          "merchandise": {
+            "gift_card_price_must_be_greater_than_zero": "Белек картасынын номиналы 0дөн жогору болушу керек."
+          }
+        }
+      },
+      "payment_challenge_modal": {
+        "instructions": "Сатып алууну {{paymentMethod}} кодун колдонуп бүтүрүңүз",
+        "qr_code": {
+          "instructions": "Сатып алууну {{paymentMethod}} кодун колдонуп бүтүрүңүз"
+        }
+      },
+      "merchandise_unavailable_in_buyer_location": {
+        "change_address_only": "Улантуу үчүн жеткирүү дарегиңизди өзгөртүңүз.",
+        "change_address_or_remove": "Жеткирүү дарегин өзгөртүңүз же %{remove_action}."
       }
     },
     "sentence": {
@@ -2682,6 +2817,25 @@
           "few": "Башкача айтканда",
           "many": "Башкача айтканда"
         }
+      },
+      "cart": {
+        "missing_parameters": "жарамдуу идентификатор же сап параметри көрсөтүлгөн эмес",
+        "too_many_line_items_error": "Себеттеги буюмдардын максималдуу саны: %{max}.",
+        "shipping_address_not_required": "Бул себеттин ичиндегилерге жеткирүү талап кылынбайт",
+        "selling_plan_not_applicable": "Сатуу планын версияга колдонууга мүмкүн эмес",
+        "digital_product_not_available_for_company_locations": "Бул өнүмдү бизнес заказга кошууга мүмкүн эмес",
+        "less_than_minimum": "Бул товардын эң аз саны — %{min}.",
+        "more_than_maximum": "Бул товардын эң көп саны — %{max}.",
+        "merchandise_line_transformers": {
+          "run_error": "Себетти иштеп чыгууда ката кетти."
+        },
+        "cart_attributes_error": "Корзинанын атрибуттары жараксыз маалыматтарды камтыйт."
+      },
+      "storefront": {
+        "invalid_password": "Туура эмес сырсөз. Кайра аракет кылыңыз."
+      },
+      "tags": {
+        "add_products": "%{tag} теги бар өнүмдөрдү тандап издөөнү тарытыңыз"
       }
     },
     "page_titles": {
@@ -2750,6 +2904,26 @@
       "buyer_consent_product": "Бул позиция мезгил-мезгили менен же кийинкиге калтырылган төлөм болуп саналат. Улантуу менен, мен %{cancellationPolicyLink} шарттарына макул болом. Ошентип, мен заказ толугу менен аткарылмайынча же мен жокко чыгарбасам, эгер бул каралса, төлөм ыкмамдан белгиленген даталарда, көрсөтүлгөн суммаларда, тиешелүү жыштык менен акча алууга уруксат берем.",
       "buyer_consent_cart": "Себеттеги бир же бир нече позиция үчүн кийинкиге калтырылган же мезгил-мезгили менен төлөм тандалды. Улантуу менен, мен %{cancellationPolicyLink} шарттарына макул болом. Ошону менен мен буйрутмам толугу менен аткарылмайынча же жокко чыгарбасам (эгер мүмкүн болсо), көрсөтүлгөн суммадагы төлөмдү белгиленген күндөрдө, тиешелүү жыштык менен төлөм ыкмасынан алууга уруксат берем.",
       "cancellation_policy": "жокко чыгаруу саясаты"
+    },
+    "email_marketing": {
+      "subscribed": {
+        "confirmation": "Биздин катка жазылганыңыз үчүн рахмат.",
+        "disclaimer": "Сиз каалаган убакта жазылууңузду токтото аласыз."
+      },
+      "unsubscribed": {
+        "confirmation": "Электрондук каттарды алуу токтотулду."
+      },
+      "open_tracking": {
+        "opt_out": {
+          "visibility": "Биз каттарыбызды ачканыңызды билбейбиз."
+        },
+        "no_longer_track": {
+          "status_html": "<b>Каттардын ачылганы көзөмөлдөнбөйт.</b>"
+        }
+      },
+      "sms_unsubscribe_confirm": {
+        "message": "СМС-маркетинг жазылуусунан баш тарткыңыз келеби?"
+      }
     }
   },
   "customer_accounts": {
@@ -3499,7 +3673,10 @@
       "fridayAbbreviation": "ЖК",
       "saturdayAbbreviation": "ишб.",
       "sundayAbbreviation": "Кыргызстандын тоолорунда мөңгүлөр, түбөлүк карлар, таштак беттер, бийик тоолуу көлдөр жана суулар, бийик тоолуу шалбаалар жана кургак талаалар, жарым чөлдөр, чөлдөр жана дарыя өрөөндөрү бар.",
-      "reviewItemHeaderSection": "Бөлүм"
+      "reviewItemHeaderSection": "Бөлүм",
+      "showNextMonth": "Кийинки айды көрсөтүү, {{month}} {{year}}",
+      "showPreviousMonth": "Мурунку айды көрсөтүү, {{month}} {{year}}",
+      "externalNewWindow": "Тышкы веб-сайтты жаңы терезеде ачат."
     },
     "orders": {
       "list_title_pending_orders_accessibility_label": "Буйрутмалар: тариздөөнү күтүүдө",
@@ -4212,7 +4389,26 @@
     },
     "shop_ads": {
       "previous_button": "Артка",
-      "next_button": "Уландысы"
+      "next_button": "Уландысы",
+      "title": "Сизге жага турган башка өнүмдөр",
+      "subtitle": "Чектелген убакыт ичинде жеткиликтүү"
+    },
+    "settings": {
+      "log_out_everywhere": {
+        "warning_message": "Сиз бул түзмөктөн да чыгып кетесиз."
+      }
+    },
+    "active_inspector": {
+      "extension": {
+        "unselect": "{{extensionName}} кеңейтүүсүнүн тандоосун жокко чыгаруу",
+        "move_down": "Кеңейтүүнү кийинки позицияга жылдыруу",
+        "move_up": "Кеңейтүүнү мурунку ордуна жылдыруу"
+      }
+    },
+    "throttle": {
+      "too_many_attempts": {
+        "description": "Бир нече мүнөттөн кийин кайра аракет кылып көрүңүз"
+      }
     }
   },
   "general": {
@@ -4285,6 +4481,7 @@
     }
   },
   "password_page": {
-    "submit": "Кирүү"
+    "submit": "Кирүү",
+    "text": "Дүкөн азырынча жабык. Кирүү үчүн сырсөздү киргизиңиз."
   }
 }
