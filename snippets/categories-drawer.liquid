@@ -52,7 +52,7 @@
         <div class="privat-catnav__panel" data-cat-panel="p{{ i1 }}">
           <button type="button" class="privat-cat-back" data-cat-back="root">‹ Все категории</button>
           {% unless l1.url == '#' or l1.url == blank %}
-            <div class="privat-cat-row">
+            <div class="privat-cat-row privat-cat-row--all">
               <a href="{{ l1.url }}" class="privat-cat-row__link privat-cat-row__link--all">
                 <span class="privat-cat-row__mono">{{ l1.title | slice: 0, 1 | upcase }}</span>
                 <span class="privat-cat-row__name">Все «{{ l1.title }}» →</span>
@@ -85,7 +85,7 @@
             <div class="privat-catnav__panel" data-cat-panel="p{{ i1 }}-{{ i2 }}">
               <button type="button" class="privat-cat-back" data-cat-back="p{{ i1 }}">‹ {{ l1.title }}</button>
               {% unless l2.url == '#' or l2.url == blank %}
-                <div class="privat-cat-row">
+                <div class="privat-cat-row privat-cat-row--all">
                   <a href="{{ l2.url }}" class="privat-cat-row__link privat-cat-row__link--all">
                     <span class="privat-cat-row__mono">{{ l2.title | slice: 0, 1 | upcase }}</span>
                     <span class="privat-cat-row__name">Все «{{ l2.title }}» →</span>

@@ -290,8 +290,13 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-cat-row__name{flex:1;font-family:'Manrope',sans-serif;font-size:14.5px;font-weight:600;color:var(--ink)}
 .privat-cat-row__drill{flex:none;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--accent);font-size:16px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-left:10px}
 .privat-cat-row__drill:hover{border-color:var(--accent)}
-.privat-cat-back{display:inline-flex;align-items:center;gap:6px;border:none;background:none;color:var(--sub);font-weight:700;font-size:12.5px;padding:12px 0 4px;cursor:pointer;font-family:'Manrope',sans-serif}
-.privat-cat-back:hover{color:var(--accent)}
+/* шапка подуровня: пилюля «назад» + выделенная строка «Все …» */
+.privat-cat-back{display:inline-flex;align-items:center;gap:5px;margin:10px 0 12px;border:1px solid var(--line);border-radius:100px;
+  background:var(--card);color:var(--accent);font-weight:700;font-size:11.5px;padding:7px 14px;cursor:pointer;font-family:'Manrope',sans-serif}
+.privat-cat-back:hover{border-color:var(--accent)}
+.privat-cat-row--all{background:var(--chip);border:none;border-radius:14px;padding:1px 14px;margin-bottom:10px}
+.privat-cat-row--all .privat-cat-row__link{padding:12px 0}
+.privat-cat-row--all .privat-cat-row__mono{background:var(--accent);color:var(--accent-ink)}
 
 .privat-account{flex:1;min-height:0;overflow-y:auto;padding:12px 22px calc(20px + env(safe-area-inset-bottom))}
 .privat-account__text{font-size:13px;line-height:1.55;color:var(--sub);margin:0 0 12px}

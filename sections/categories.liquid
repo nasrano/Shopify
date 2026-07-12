@@ -13,15 +13,20 @@
   <div class="privat-cats__grid">
     {% if menu.links.size > 0 %}
       {% for link in menu.links %}
-        {% if link.url == '#' or link.url == blank %}
-          {% if link.links.size > 0 %}
-            <button type="button" class="privat-cat" data-open="cats" data-cat-target="p{{ forloop.index }}">
-              <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
-              <span class="privat-cat__name">{{ link.title }}</span>
-            </button>
-          {% endif %}
-        {% else %}
-          <a href="{{ link.url }}" class="privat-cat">
+        {%- comment -%} карточка всегда ведёт на коллекцию: свою, а у родителя
+        без ссылки («#») — на первую дочернюю {%- endcomment -%}
+        {%- assign cat_url = '' -%}
+        {%- unless link.url == '#' or link.url == blank -%}
+          {%- assign cat_url = link.url -%}
+        {%- else -%}
+          {%- for child in link.links -%}
+            {%- if cat_url == '' -%}
+              {%- unless child.url == '#' or child.url == blank -%}{%- assign cat_url = child.url -%}{%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endunless -%}
+        {% if cat_url != '' %}
+          <a href="{{ cat_url }}" class="privat-cat">
             <span class="privat-cat__mono">{{ link.title | slice: 0, 1 | upcase }}</span>
             <span class="privat-cat__name">{{ link.title }}</span>
           </a>
