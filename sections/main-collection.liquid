@@ -10,43 +10,64 @@
 {%- assign crumb1 = nil -%}{%- assign crumb2 = nil -%}{%- assign crumb3 = nil -%}
 {%- assign parent_url = routes.all_products_collection_url -%}
 
+{%- comment -%} одна коллекция может встречаться в меню несколько раз —
+приоритет: первое точное совпадение на самом верхнем уровне {%- endcomment -%}
+
+{%- comment -%} 1) точное совпадение на 1-м уровне {%- endcomment -%}
 {%- for l1 in menu.links -%}
-  {%- if l1.active or l1.child_active -%}
+  {%- if crumb1 == nil and l1.active -%}
     {%- assign crumb1 = l1 -%}
-    {%- if l1.active -%}
-      {%- if l1.links.size > 0 -%}
-        {%- assign chip_links = l1.links -%}
-      {%- else -%}
-        {%- assign chip_links = menu.links -%}
-        {%- assign active_chip_url = l1.url -%}
-      {%- endif -%}
+    {%- if l1.links.size > 0 -%}
+      {%- assign chip_links = l1.links -%}
     {%- else -%}
+      {%- assign chip_links = menu.links -%}
+      {%- assign active_chip_url = l1.url -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} 2) точное совпадение на 2-м уровне {%- endcomment -%}
+{%- if crumb1 == nil -%}
+  {%- for l1 in menu.links -%}
+    {%- if crumb1 == nil -%}
       {%- for l2 in l1.links -%}
-        {%- if l2.active or l2.child_active -%}
+        {%- if crumb2 == nil and l2.active -%}
+          {%- assign crumb1 = l1 -%}
           {%- assign crumb2 = l2 -%}
           {%- assign parent_url = l1.url -%}
-          {%- if l2.active -%}
-            {%- if l2.links.size > 0 -%}
-              {%- assign chip_links = l2.links -%}
-            {%- else -%}
-              {%- assign chip_links = l1.links -%}
-              {%- assign active_chip_url = l2.url -%}
-            {%- endif -%}
+          {%- if l2.links.size > 0 -%}
+            {%- assign chip_links = l2.links -%}
           {%- else -%}
-            {%- for l3 in l2.links -%}
-              {%- if l3.active -%}
-                {%- assign crumb3 = l3 -%}
-                {%- assign parent_url = l2.url -%}
-                {%- assign chip_links = l2.links -%}
-                {%- assign active_chip_url = l3.url -%}
-              {%- endif -%}
-            {%- endfor -%}
+            {%- assign chip_links = l1.links -%}
+            {%- assign active_chip_url = l2.url -%}
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
-  {%- endif -%}
-{%- endfor -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} 3) точное совпадение на 3-м уровне {%- endcomment -%}
+{%- if crumb1 == nil -%}
+  {%- for l1 in menu.links -%}
+    {%- if crumb1 == nil -%}
+      {%- for l2 in l1.links -%}
+        {%- if crumb2 == nil -%}
+          {%- for l3 in l2.links -%}
+            {%- if crumb3 == nil and l3.active -%}
+              {%- assign crumb1 = l1 -%}
+              {%- assign crumb2 = l2 -%}
+              {%- assign crumb3 = l3 -%}
+              {%- assign parent_url = l2.url -%}
+              {%- assign chip_links = l2.links -%}
+              {%- assign active_chip_url = l3.url -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 
 <div class="privat-crumbs privat-crumbs--coll">
   <div class="privat-crumbs__path">
