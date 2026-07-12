@@ -10,6 +10,17 @@
 {%- assign crumb1 = nil -%}{%- assign crumb2 = nil -%}{%- assign crumb3 = nil -%}
 {%- assign parent_url = routes.all_products_collection_url -%}
 
+{%- comment -%} 0) подборки (Хиты, Новинки, Скидки): если текущая коллекция
+есть в «Меню подборок», лента показывает его пункты вместо категорий {%- endcomment -%}
+{%- assign promo_menu = linklists[settings.promo_menu] -%}
+{%- for p in promo_menu.links -%}
+  {%- if crumb1 == nil and p.active -%}
+    {%- assign crumb1 = p -%}
+    {%- assign chip_links = promo_menu.links -%}
+    {%- assign active_chip_url = p.url -%}
+  {%- endif -%}
+{%- endfor -%}
+
 {%- comment -%} одна коллекция может встречаться в меню несколько раз —
 приоритет: первое точное совпадение на самом верхнем уровне {%- endcomment -%}
 
