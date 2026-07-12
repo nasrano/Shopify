@@ -1215,7 +1215,8 @@
         "saved_credit_card_actions": {
           "edit": "Түзөтүү",
           "delete": "Өчүрүү"
-        }
+        },
+        "twint_label": "ТВИНТ"
       },
       "localized_fields": {
         "additional_information": {
@@ -2253,7 +2254,23 @@
           "vpt": "ВБТ"
         },
         "automatic_discount_tooltip": "Автоматтык түрдө колдонулган арзандатууларды өчүрүү мүмкүн эмес",
-        "alternative_payment_currency_chinese_yuan": "Колдонмодогу %{wallet} тиркемесинде кытай юанындагы жыйынтыктоочу сумманы ырастаңыз."
+        "alternative_payment_currency_chinese_yuan": "Колдонмодогу %{wallet} тиркемесинде кытай юанындагы жыйынтыктоочу сумманы ырастаңыз.",
+        "discount_title": "Арзандатуу",
+        "tip_label": "Кеңеш",
+        "taxes_label": "Салыктар",
+        "total_label": "Жалпысынан",
+        "price_label": "Баасы",
+        "collapse_order_summary_short": "Жашыруу",
+        "unit_price": {
+          "accessible_separator": "үчүн"
+        },
+        "recurring_total_label": "Жыйынтыгында",
+        "discount_title_stacking": {
+          "one": "Арзандатуу",
+          "other": "Арзандатуулар",
+          "few": "Арзандатуулар",
+          "many": "Арзандатуулар"
+        }
       },
       "delivery_options": {
         "ship": "Жөнөтүү",
@@ -2464,6 +2481,23 @@
           "few": "Сатып алуу: %{product_name} жана дагы бир нече товар (%{count})",
           "many": "Сатып алуу: %{product_name} жана дагы бир нече позиция (%{count})"
         }
+      },
+      "stock": {
+        "price_column_header": "Баасы"
+      },
+      "pickup_point": {
+        "or": "же",
+        "search_button": "Издөө",
+        "selector_tab_list": "Тизме",
+        "address_label": "Дарек"
+      },
+      "billing": {
+        "address_form": {
+          "cancel": "Жокко чыгаруу"
+        }
+      },
+      "b2b_errors": {
+        "log_out_link_text": "Чыгуу"
       }
     },
     "sentence": {
@@ -2638,6 +2672,15 @@
           "voided": "Жокко чыгарылган",
           "partially_paid": "Жарым-жартылай төлөнгөн",
           "partially_refunded": "Каражат жарым-жартылай кайтарылган"
+        },
+        "transaction_status": {
+          "success": "Даяр",
+          "error": "Ката"
+        },
+        "cancel_reason": {
+          "other": "Башкача айтканда",
+          "few": "Башкача айтканда",
+          "many": "Башкача айтканда"
         }
       }
     },
@@ -2652,7 +2695,9 @@
         "few": "%{count} натыйжалар «%{terms}» сурамы боюнча",
         "many": "\"%{terms}\" суроосу боюнча %{count} натыйжа табылды"
       },
-      "blog_or_article_with_error": "%{title}: ката табылды"
+      "blog_or_article_with_error": "%{title}: ката табылды",
+      "addresses": "Даректер",
+      "search": "Издөө"
     },
     "cart": {
       "discounts_with_count": "Колдонулган арзандатуулар: %{count}"
@@ -3445,7 +3490,16 @@
       "increase": "Кошуу {{type}}",
       "decrease": "Жоюу {{type}}",
       "minimumReached": "Минималдуу мааниге жетишилди: {{value}}",
-      "maximumReached": "{{value}}: максималдуу мааниге жетти"
+      "maximumReached": "{{value}}: максималдуу мааниге жетти",
+      "wednesday": "шаршемби",
+      "mondayAbbreviation": "дш",
+      "tuesdayAbbreviation": "Шейш.",
+      "wednesdayAbbreviation": "шарш.",
+      "thursdayAbbreviation": "эмне",
+      "fridayAbbreviation": "ЖК",
+      "saturdayAbbreviation": "ишб.",
+      "sundayAbbreviation": "Кыргызстандын тоолорунда мөңгүлөр, түбөлүк карлар, таштак беттер, бийик тоолуу көлдөр жана суулар, бийик тоолуу шалбаалар жана кургак талаалар, жарым чөлдөр, чөлдөр жана дарыя өрөөндөрү бар.",
+      "reviewItemHeaderSection": "Бөлүм"
     },
     "orders": {
       "list_title_pending_orders_accessibility_label": "Буйрутмалар: тариздөөнү күтүүдө",
@@ -4155,6 +4209,10 @@
         },
         "update_success": "Маркетинг жөндөөлөрү жаңыртылды"
       }
+    },
+    "shop_ads": {
+      "previous_button": "Артка",
+      "next_button": "Уландысы"
     }
   },
   "general": {
@@ -4221,6 +4279,12 @@
     },
     "reset": {
       "title": "Жаңы сырсөз"
+    },
+    "addresses": {
+      "title": "Даректер"
     }
+  },
+  "password_page": {
+    "submit": "Кирүү"
   }
 }
