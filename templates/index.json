@@ -17,8 +17,7 @@
         "title": "Близость — это забота о себе",
         "subtitle": "Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки.",
         "primary_label": "В магазин →",
-        "primary_url": "",
-        "secondary_label": "Каталог"
+        "primary_url": ""
       }
     },
     "trust": {
@@ -42,10 +41,22 @@
             "text": "4.9 — оценка покупателей"
           }
         },
+        "chip_RhR6Li": {
+          "type": "chip",
+          "settings": {
+            "text": "Бесплатная консультация"
+          }
+        },
         "chip-4": {
           "type": "chip",
           "settings": {
             "text": "Подбор в WhatsApp"
+          }
+        },
+        "chip_HkPJbK": {
+          "type": "chip",
+          "settings": {
+            "text": "Наличные и QR"
           }
         }
       },
@@ -53,7 +64,9 @@
         "chip-1",
         "chip-2",
         "chip-3",
-        "chip-4"
+        "chip_RhR6Li",
+        "chip-4",
+        "chip_HkPJbK"
       ],
       "settings": {}
     },
