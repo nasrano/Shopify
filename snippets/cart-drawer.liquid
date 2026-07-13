@@ -21,7 +21,7 @@
   <div class="privat-sheet__body" id="privat-cart-body" style="display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}">
     {% for item in cart.items %}
       <div class="privat-line-item" data-line-key="{{ item.key }}">
-        <div class="privat-line-item__thumb" {% if item.image %}style="background-image:url({{ item.image | image_url: width: 160 }})"{% endif %}></div>
+        <div class="privat-line-item__thumb" {% if item.image %}style="background-image:url({{ item.image | image_url: width: 240 }})"{% endif %}></div>
         <div class="privat-line-item__body">
           <div class="privat-line-item__name privat-fav-row__name">{{ item.product.title }}</div>
           {% if item.sku != blank %}<div class="privat-line-item__code">Код: {{ item.sku }}</div>{% endif %}

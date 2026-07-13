@@ -202,22 +202,11 @@
   }
 
   var lastCartCount = null;
-  /* фото в строках корзины/избранного: квадрат высотой во всю строку —
-     ширина берётся из фактической высоты (второй проход учитывает
-     перенос текста из-за сузившейся колонки) */
-  function squareThumbs() {
-    var thumbs = document.querySelectorAll('.privat-line-item__thumb:not(.privat-line-item__thumb--sm)');
-    if (!thumbs.length) return;
-    function pass() {
-      thumbs.forEach(function (t) { t.style.width = t.offsetHeight + 'px'; });
-    }
-    pass();
-    requestAnimationFrame(pass);
+  /* уменьшенное превью для Ajax-картинок корзины (полноразмер грузится долго) */
+  function thumbUrl(u) {
+    if (!u) return u;
+    return u + (u.indexOf('?') > -1 ? '&' : '?') + 'width=240';
   }
-  window.addEventListener('resize', function () {
-    clearTimeout(squareThumbs._t);
-    squareThumbs._t = setTimeout(squareThumbs, 120);
-  });
 
   function cartBadge(count) {
     var badge = document.getElementById('privat-cart-badge');
@@ -265,7 +254,7 @@
       body.style.display = 'flex';
       if (summary) summary.style.display = 'flex';
       body.innerHTML = cart.items.map(function (item) {
-        var img = item.image ? 'background-image:url(' + item.image + ')' : '';
+        var img = item.image ? 'background-image:url(' + thumbUrl(item.image) + ')' : '';
         return '' +
           '<div class="privat-line-item" data-line-key="' + item.key + '">' +
             '<div class="privat-line-item__thumb" style="' + img + '"></div>' +
@@ -283,7 +272,6 @@
           '</div>';
       }).join('');
       if (totalEl) totalEl.textContent = formatMoney(cart.total_price);
-      squareThumbs();
     }
 
     if (cartData) { paint(cartData); return; }
@@ -432,7 +420,6 @@
           '</button>' +
         '</div>';
     }).join('');
-    squareThumbs();
   }
 
   /* ---------------- account: switch login <-> register views ---------------- */
@@ -656,7 +643,6 @@
     setupReveals();
     setupParallax();
     syncFavButtons();
-    squareThumbs();
     var cartDataEl = document.getElementById('privat-cart-data');
     if (cartDataEl) {
       try { cartBadge(JSON.parse(cartDataEl.textContent).item_count); } catch (e) {}
