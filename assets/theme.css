@@ -473,7 +473,7 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 /* ===== tablet ≥720px ===== */
 @media (min-width:720px){
   .privat-app{width:100%;box-shadow:none}
-  .privat-trust{flex-wrap:wrap;justify-content:center;overflow:visible;padding:20px 24px 6px}
+  .privat-trust{padding:20px 24px 6px}
   .privat-cats__grid{grid-template-columns:repeat(6,1fr);gap:10px}
   .privat-cat{min-height:96px;padding:14px 6px 12px}
   .privat-cat__name{font-size:11.5px}

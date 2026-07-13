@@ -47,13 +47,34 @@
           "settings": {
             "text": "Подбор в WhatsApp"
           }
+        },
+        "chip-5": {
+          "type": "chip",
+          "settings": {
+            "text": "Сертифицированные товары"
+          }
+        },
+        "chip-6": {
+          "type": "chip",
+          "settings": {
+            "text": "Оплата: наличные · карта · Мбанк"
+          }
+        },
+        "chip-7": {
+          "type": "chip",
+          "settings": {
+            "text": "Замена при браке — 14 дней"
+          }
         }
       },
       "block_order": [
         "chip-1",
         "chip-2",
         "chip-3",
-        "chip-4"
+        "chip-4",
+        "chip-5",
+        "chip-6",
+        "chip-7"
       ],
       "settings": {}
     },
