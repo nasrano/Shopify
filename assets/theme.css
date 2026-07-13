@@ -230,6 +230,9 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   box-shadow:0 20px 70px rgba(25,15,10,.3);animation:dcSlideUp .3s cubic-bezier(.3,.8,.3,1);display:none;flex-direction:column;height:58%}
 .privat-sheet.is-open{display:flex}
 .privat-sheet.is-closing{animation:dcSlideDown .26s cubic-bezier(.5,0,.7,.4) forwards}
+/* фейд снизу списка избранного — намёк, что он листается (как в категориях) */
+.privat-sheet--favs::after{content:'';position:absolute;left:0;right:0;bottom:0;height:48px;z-index:1;pointer-events:none;
+  background:linear-gradient(to top, var(--bg) 12%, transparent);border-radius:0 0 26px 26px}
 .privat-drawer.is-closing{animation:dcSlideLOut .24s cubic-bezier(.5,0,.7,.4) forwards}
 .privat-backdrop.is-closing{animation:dcFadeOut .26s ease forwards}
 .privat-sheet__head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px;flex:none}
