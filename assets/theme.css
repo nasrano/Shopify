@@ -73,7 +73,9 @@ img{max-width:100%;display:block}
 .privat-hero__sub{font-size:14.5px;line-height:1.55;color:var(--sub);margin:0 0 18px;max-width:32ch}
 .privat-hero__ctas{display:flex;gap:10px}
 .privat-btn{flex:none;border:none;cursor:pointer;background:var(--ink);color:var(--bg);font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;letter-spacing:.05em;padding:14px 26px;border-radius:100px}
+.privat-btn:hover{color:var(--bg);filter:brightness(1.15)}
 .privat-btn--outline{border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;padding:14px 22px}
+.privat-btn--outline:hover{color:var(--ink);background:var(--chip);filter:none}
 
 /* ===== trust chips ===== */
 .privat-trust{display:flex;gap:8px;overflow-x:auto;padding:16px 16px 4px;scroll-padding:0 16px;scroll-snap-type:x proximity}
