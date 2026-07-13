@@ -110,7 +110,7 @@ button.privat-cat{font-family:'Manrope',sans-serif}
 .privat-carousel__track{display:flex;gap:10px;overflow-x:auto;padding:2px 16px 8px;scroll-padding:0 16px;scroll-snap-type:x mandatory}
 .privat-card{flex:none;width:176px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .privat-carousel--soft .privat-card{border:none}
-.privat-card__imgwrap{position:relative;height:150px;background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 10px, transparent 10px 20px);
+.privat-card__imgwrap{position:relative;aspect-ratio:1/1;background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 10px, transparent 10px 20px);
   background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center}
 .privat-carousel--soft .privat-card__imgwrap{background-color:var(--bg)}
 .privat-card__ph{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--sub)}
@@ -404,7 +404,6 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-coll__count{font-size:12px;color:var(--sub);flex:none}
 .privat-coll__products{padding:14px 16px 8px}
 .privat-card__code{font-size:10px;color:var(--sub);letter-spacing:.04em}
-.privat-grid2 .privat-card__imgwrap{height:auto;aspect-ratio:1/1}
 .privat-loadmore{display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 0 4px}
 .privat-loadmore__btn{border:1.5px solid var(--ink);cursor:pointer;background:var(--card);color:var(--ink);font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:700;padding:14px 38px;border-radius:100px}
 .privat-loadmore__btn:hover{background:var(--chip)}
@@ -484,7 +483,6 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-why__grid{grid-template-columns:repeat(4,1fr)}
   .privat-grid2{grid-template-columns:repeat(3,1fr);gap:12px}
   .privat-card{width:200px}
-  .privat-card__imgwrap{height:170px}
   .privat-hero__title{font-size:38px}
   .privat-hero__sub{font-size:15.5px;max-width:44ch}
   .privat-page{padding:28px 24px 40px}
@@ -521,7 +519,6 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-cats__grid{gap:12px}
   .privat-cat{min-height:104px}
   .privat-card{width:232px}
-  .privat-card__imgwrap{height:200px}
   .privat-card__name{font-size:13.5px}
   .privat-grid2{grid-template-columns:repeat(4,1fr)}
   .privat-review{width:340px}
