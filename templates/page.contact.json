@@ -5,7 +5,7 @@
       "blocks": {
         "row-1": { "type": "row", "settings": { "key": "Адрес", "value": "Калык Акиева 116, Бишкек" } },
         "row-2": { "type": "row", "settings": { "key": "Телефон", "value": "0500 690 690", "url": "tel:+996500690690" } },
-        "row-3": { "type": "row", "settings": { "key": "Режим", "value": "Ежедневно 10:00 – 22:00" } },
+        "row-3": { "type": "row", "settings": { "key": "Режим", "value": "Ежедневно 11:00 – 24:00" } },
         "row-4": { "type": "row", "settings": { "key": "Доставка", "value": "1 час по Бишкеку · 24 ч по КР" } },
         "row-5": { "type": "row", "settings": { "key": "Оплата", "value": "Наличные · карта · Мбанк" } }
       },
