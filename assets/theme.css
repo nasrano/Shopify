@@ -198,7 +198,9 @@ button.privat-cat{font-family:'Manrope',sans-serif}
 
 /* ===== side drawer (menu) ===== */
 .privat-drawer{position:absolute;top:8px;bottom:8px;left:8px;z-index:70;width:82%;max-width:330px;background:var(--bg);border-radius:26px;
-  box-shadow:0 20px 70px rgba(25,15,10,.3);animation:dcSlideL .28s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;padding:20px 22px;overflow-y:auto;display:none}
+  box-shadow:0 20px 70px rgba(25,15,10,.3);animation:dcSlideL .28s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;padding:20px 22px;overflow:hidden;display:none}
+/* ссылки листаются, низ (тема, контакты) закреплён */
+.privat-drawer__scroll{position:relative;flex:1;min-height:0;overflow-y:auto;margin:0 -6px;padding:0 6px}
 .privat-drawer.is-open{display:flex}
 .privat-drawer__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
 .privat-drawer__logo-name{font-family:'Prata',serif;font-size:19px;letter-spacing:.14em;color:var(--ink)}
