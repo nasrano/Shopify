@@ -1,8 +1,9 @@
 {%- comment -%}
   Юридические ссылки: из «Юридического меню» (настройки темы), а пока оно не
-  настроено — автоматически из заполненных политик магазина (Settings →
-  Policies). Политики доставки и возврата объединяются в одну ссылку
-  «Доставка и возврат». params: link_class
+  настроено — из заполненных политик магазина (Settings → Policies) в
+  фиксированном порядке: Доставка и возврат (объединяет refund+shipping),
+  Условия обслуживания, Политика конфиденциальности, Контактная информация,
+  Правовое уведомление. params: link_class
 {%- endcomment -%}
 {%- assign m = linklists[settings.legal_menu] -%}
 {%- if m.links.size > 0 -%}
@@ -10,28 +11,37 @@
     <a href="{{ link.url }}" class="{{ link_class }}">{{ link.title }}</a>
   {%- endfor -%}
 {%- else -%}
-  {%- assign delivery_page = pages['oplata-i-dostavka'] -%}
-  {%- if delivery_page.url == blank -%}{%- assign delivery_page = pages['delivery'] -%}{%- endif -%}
-  {%- if delivery_page.url != blank -%}
-    <a href="{{ delivery_page.url }}" class="{{ link_class }}">Оплата и доставка</a>
-  {%- endif -%}
-  {%- assign has_refund = false -%}
-  {%- assign has_shipping = false -%}
+  {%- assign p_refund = nil -%}
+  {%- assign p_shipping = nil -%}
+  {%- assign p_terms = nil -%}
+  {%- assign p_privacy = nil -%}
+  {%- assign p_contact = nil -%}
+  {%- assign p_legal = nil -%}
   {%- for policy in shop.policies -%}
     {%- if policy.body != blank -%}
-      {%- if policy.url contains 'refund-policy' -%}{%- assign has_refund = true -%}{%- endif -%}
-      {%- if policy.url contains 'shipping-policy' -%}{%- assign has_shipping = true -%}{%- endif -%}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- for policy in shop.policies -%}
-    {%- if policy.body != blank -%}
-      {%- if policy.url contains 'shipping-policy' and has_refund -%}
-        {%- comment -%} объединено с политикой возврата {%- endcomment -%}
-      {%- elsif policy.url contains 'refund-policy' and has_shipping -%}
-        <a href="{{ policy.url }}" class="{{ link_class }}">Доставка и возврат</a>
-      {%- else -%}
-        <a href="{{ policy.url }}" class="{{ link_class }}">{{ policy.title }}</a>
+      {%- if policy.url contains 'refund-policy' -%}{%- assign p_refund = policy -%}
+      {%- elsif policy.url contains 'shipping-policy' -%}{%- assign p_shipping = policy -%}
+      {%- elsif policy.url contains 'terms-of-service' -%}{%- assign p_terms = policy -%}
+      {%- elsif policy.url contains 'privacy-policy' -%}{%- assign p_privacy = policy -%}
+      {%- elsif policy.url contains 'contact-information' -%}{%- assign p_contact = policy -%}
+      {%- elsif policy.url contains 'legal-notice' -%}{%- assign p_legal = policy -%}
       {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
+  {%- assign p_delivery = p_refund | default: p_shipping -%}
+  {%- if p_delivery -%}
+    <a href="{{ p_delivery.url }}" class="{{ link_class }}">Доставка и возврат</a>
+  {%- endif -%}
+  {%- if p_terms -%}
+    <a href="{{ p_terms.url }}" class="{{ link_class }}">Условия обслуживания</a>
+  {%- endif -%}
+  {%- if p_privacy -%}
+    <a href="{{ p_privacy.url }}" class="{{ link_class }}">Политика конфиденциальности</a>
+  {%- endif -%}
+  {%- if p_contact -%}
+    <a href="{{ p_contact.url }}" class="{{ link_class }}">Контактная информация</a>
+  {%- endif -%}
+  {%- if p_legal -%}
+    <a href="{{ p_legal.url }}" class="{{ link_class }}">Правовое уведомление</a>
+  {%- endif -%}
 {%- endif -%}
