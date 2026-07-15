@@ -563,7 +563,8 @@
       dot.style.height = size + 'px';
       dot.style.left = startX + 'px';
       dot.style.top = startY + 'px';
-      if (photo.style.backgroundImage) dot.style.backgroundImage = photo.style.backgroundImage;
+      var photoImg = document.getElementById('privat-pp-photo-img');
+      if (photoImg && photoImg.src) dot.style.backgroundImage = 'url(' + photoImg.src + ')';
       var bgColor = photo.getAttribute('data-photo-bg');
       if (bgColor) dot.style.backgroundColor = bgColor;
       app.appendChild(dot);
@@ -580,8 +581,11 @@
       if (e.target.closest('[data-pp-qty-dec]')) { qty = Math.max(1, qty - 1); sync(); return; }
       var thumb = e.target.closest('[data-thumb]');
       if (thumb) {
-        var photo = document.getElementById('privat-pp-photo');
-        if (photo) photo.style.backgroundImage = 'url(' + thumb.getAttribute('data-image-url') + ')';
+        var photoImg = document.getElementById('privat-pp-photo-img');
+        if (photoImg) {
+          photoImg.removeAttribute('srcset');
+          photoImg.src = thumb.getAttribute('data-image-url');
+        }
         document.querySelectorAll('[data-thumb]').forEach(function (t) {
           t.classList.toggle('is-active', t === thumb);
         });

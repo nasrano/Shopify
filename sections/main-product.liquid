@@ -9,9 +9,20 @@
 <article class="privat-pp" id="privat-pp">
 
   <div class="privat-pp__photo" id="privat-pp-photo"
-    {%- if photo_bg != blank %} data-photo-bg="{{ photo_bg }}"{% endif %}
-    style="{% if photo_bg != blank %}background-color:{{ photo_bg }};{% endif %}{% if product.featured_image %}background-image:url({{ product.featured_image | image_url: width: 900 }});{% endif %}">
-    {% unless product.featured_image %}<span class="privat-card__ph">фото товара</span>{% endunless %}
+    {%- if photo_bg != blank %} data-photo-bg="{{ photo_bg }}" style="background-color:{{ photo_bg }}"{% endif %}>
+    {% if product.featured_image %}
+      <img class="privat-pp__media" id="privat-pp-photo-img"
+        src="{{ product.featured_image | image_url: width: 900 }}"
+        srcset="{{ product.featured_image | image_url: width: 600 }} 600w,
+                {{ product.featured_image | image_url: width: 900 }} 900w,
+                {{ product.featured_image | image_url: width: 1200 }} 1200w"
+        sizes="(min-width: 1080px) 560px, 100vw"
+        width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        fetchpriority="high" loading="eager" decoding="async">
+    {% else %}
+      <span class="privat-card__ph">фото товара</span>
+    {% endif %}
     {% if on_sale %}
       {% assign pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price %}
       <span class="privat-pp__badge" id="privat-pp-badge">−{{ pct }}%</span>
