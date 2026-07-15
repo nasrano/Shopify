@@ -451,6 +451,8 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-blog-card:hover{color:inherit;border-color:var(--accent)}
 .privat-blog-card__img{position:relative;aspect-ratio:16/9;background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 12px, transparent 12px 24px);
   background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center}
+.privat-blog-card__img--photo{background-image:none}
+.privat-blog-card__media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .privat-blog-card__date{position:absolute;top:10px;left:10px;background:var(--card);color:var(--sub);font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:100px}
 .privat-blog-card__body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
 .privat-blog-card__title{font-family:'Prata',serif;font-size:17px;color:var(--ink);line-height:1.35}

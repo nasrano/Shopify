@@ -5,9 +5,19 @@
     <div class="privat-blog__grid">
       {% for article in blog.articles %}
         <a href="{{ article.url }}" class="privat-blog-card">
-          <div class="privat-blog-card__img"
-            {% if article.image %}style="background-image:url({{ article.image | image_url: width: 800 }})"{% endif %}>
-            {% unless article.image %}<span class="privat-card__ph">фото записи</span>{% endunless %}
+          <div class="privat-blog-card__img{% if article.image %} privat-blog-card__img--photo{% endif %}">
+            {% if article.image %}
+              <img class="privat-blog-card__media"
+                src="{{ article.image | image_url: width: 800 }}"
+                srcset="{{ article.image | image_url: width: 400 }} 400w,
+                        {{ article.image | image_url: width: 800 }} 800w"
+                sizes="(min-width: 720px) 420px, 100vw"
+                width="{{ article.image.width }}" height="{{ article.image.height }}"
+                alt="{{ article.title | escape }}"
+                {% if forloop.index <= 2 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+            {% else %}
+              <span class="privat-card__ph">фото записи</span>
+            {% endif %}
             <span class="privat-blog-card__date">{{ article.published_at | date: '%d.%m.%Y' }}</span>
           </div>
           <div class="privat-blog-card__body">

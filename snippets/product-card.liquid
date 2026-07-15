@@ -1,4 +1,4 @@
-{%- comment -%} params: product, badge ("none" | "new" | "sale") {%- endcomment -%}
+{%- comment -%} params: product, badge ("none" | "new" | "sale"), eager (bool — первые видимые карточки), priority (bool — LCP-кандидаты) {%- endcomment -%}
 {%- assign variant = product.selected_or_first_available_variant -%}
 {%- assign on_sale = false -%}
 {%- if variant.compare_at_price > variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
@@ -16,7 +16,7 @@
         sizes="(min-width: 1080px) 232px, (min-width: 720px) 200px, 50vw"
         width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
         alt="{{ product.featured_image.alt | default: product.title | escape }}"
-        loading="lazy" decoding="async">
+        {% if eager %}loading="eager"{% if priority %} fetchpriority="high"{% endif %}{% else %}loading="lazy"{% endif %} decoding="async">
     {% else %}
       <span class="privat-card__ph">фото товара</span>
     {% endif %}

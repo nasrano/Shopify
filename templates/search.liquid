@@ -15,7 +15,10 @@
         <div class="privat-grid2">
           {% for item in search.results %}
             {% if item.object_type == 'product' %}
-              {% render 'product-card', product: item, badge: 'none' %}
+              {%- assign card_eager = false -%}{%- assign card_priority = false -%}
+              {%- if forloop.index <= 4 -%}{%- assign card_eager = true -%}{%- endif -%}
+              {%- if forloop.index <= 2 -%}{%- assign card_priority = true -%}{%- endif -%}
+              {% render 'product-card', product: item, badge: 'none', eager: card_eager, priority: card_priority %}
             {% else %}
               <a href="{{ item.url }}" class="privat-panel" style="grid-column:1/-1;display:block;text-decoration:none">
                 <div class="privat-fav-row__name" style="color:var(--ink)">{{ item.title }}</div>

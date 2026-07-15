@@ -159,7 +159,10 @@
   <section class="privat-coll__products">
     <div class="privat-grid2" id="privat-coll-grid" data-total="{{ collection.products_count }}">
       {% for product in collection.products %}
-        {% render 'product-card', product: product, badge: 'none' %}
+        {%- assign card_eager = false -%}{%- assign card_priority = false -%}
+        {%- if forloop.index <= 4 -%}{%- assign card_eager = true -%}{%- endif -%}
+        {%- if forloop.index <= 2 -%}{%- assign card_priority = true -%}{%- endif -%}
+        {% render 'product-card', product: product, badge: 'none', eager: card_eager, priority: card_priority %}
       {% else %}
         <p class="privat-form-note" style="grid-column:1/-1">В этой коллекции пока пусто.</p>
       {% endfor %}
