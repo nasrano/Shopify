@@ -1,16 +1,28 @@
 {%- assign img_desktop = section.settings.image | default: section.settings.image_mobile -%}
 {%- assign img_mobile = section.settings.image_mobile | default: section.settings.image -%}
-{% if img_desktop %}
-  <style>
-    #privat-hero-img{background-image:url({{ img_mobile | image_url: width: 1000 }})}
-    @media (min-width:720px){#privat-hero-img{background-image:url({{ img_desktop | image_url: width: 1800 }})}}
-  </style>
-{% endif %}
 <section class="privat-hero">
   <div class="privat-hero__img" id="privat-hero-img">
-    {% unless img_desktop %}
+    {%- if img_mobile -%}
+      <picture>
+        {%- if img_desktop -%}
+          <source media="(min-width:720px)"
+            srcset="{{ img_desktop | image_url: width: 1200 }} 1200w,
+                    {{ img_desktop | image_url: width: 1800 }} 1800w"
+            sizes="100vw">
+        {%- endif -%}
+        <img class="privat-hero__media"
+          src="{{ img_mobile | image_url: width: 800 }}"
+          srcset="{{ img_mobile | image_url: width: 600 }} 600w,
+                  {{ img_mobile | image_url: width: 800 }} 800w,
+                  {{ img_mobile | image_url: width: 1000 }} 1000w"
+          sizes="100vw"
+          width="{{ img_mobile.width }}" height="{{ img_mobile.height }}"
+          alt="{{ section.settings.title | default: 'PRIVAT' | escape }}"
+          fetchpriority="high" loading="eager" decoding="async">
+      </picture>
+    {%- else -%}
       <span class="privat-hero__placeholder">lifestyle фото · пара / уют / тёплый свет</span>
-    {% endunless %}
+    {%- endif -%}
   </div>
   <div class="privat-hero__scrim"></div>
   <div class="privat-hero__tag" id="privat-hero-tag">
