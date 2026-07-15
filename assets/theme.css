@@ -116,6 +116,9 @@ button.privat-cat{font-family:'Manrope',sans-serif}
 .privat-carousel--soft .privat-card__imgwrap{background-color:var(--bg)}
 .privat-card__ph{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--sub)}
 .privat-card__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* когда фото есть — полосатую заглушку не показываем (просвечивала бы сквозь прозрачные PNG) */
+.privat-card__imgwrap--photo{background-image:none}
+.privat-pp__photo--photo{background-image:none}
 .privat-card__fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border:none;border-radius:50%;background:var(--card);cursor:pointer;font-size:15px;line-height:1;color:var(--ink);display:flex;align-items:center;justify-content:center}
 .privat-card__fav.is-active{color:var(--accent)}
 [data-fav-toggle] svg{display:block;pointer-events:none}

@@ -8,7 +8,7 @@
 
 <article class="privat-pp" id="privat-pp">
 
-  <div class="privat-pp__photo" id="privat-pp-photo"
+  <div class="privat-pp__photo{% if product.featured_image %} privat-pp__photo--photo{% endif %}" id="privat-pp-photo"
     {%- if photo_bg != blank %} data-photo-bg="{{ photo_bg }}" style="background-color:{{ photo_bg }}"{% endif %}>
     {% if product.featured_image %}
       <img class="privat-pp__media" id="privat-pp-photo-img"

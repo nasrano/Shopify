@@ -6,7 +6,7 @@
 {%- if product.featured_image -%}{%- assign fav_image = product.featured_image | image_url: width: 200 -%}{%- endif -%}
 
 <div class="privat-card">
-  <a href="{{ product.url }}" class="privat-card__imgwrap">
+  <a href="{{ product.url }}" class="privat-card__imgwrap{% if product.featured_image %} privat-card__imgwrap--photo{% endif %}">
     {% if product.featured_image %}
       <img class="privat-card__img"
         src="{{ product.featured_image | image_url: width: 400 }}"
