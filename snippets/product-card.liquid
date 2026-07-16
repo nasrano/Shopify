@@ -1,4 +1,5 @@
-{%- comment -%} params: product, badge ("none" | "new" | "sale"), eager (bool — первые видимые карточки), priority (bool — LCP-кандидаты) {%- endcomment -%}
+{%- comment -%} params: product, badge ("none" | "new" | "sale"), eager (bool — первые видимые карточки), priority (bool — LCP-кандидаты). Товары без остатков не рендерим вовсе. {%- endcomment -%}
+{%- unless product.available == false -%}
 {%- assign variant = product.selected_or_first_available_variant -%}
 {%- assign on_sale = false -%}
 {%- if variant.compare_at_price > variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
@@ -56,3 +57,4 @@
     </button>
   </div>
 </div>
+{%- endunless -%}

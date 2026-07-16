@@ -1,16 +1,24 @@
 <section class="privat-page">
   <h1 class="privat-page__title">{{ 'general.search.title' | t }}</h1>
 
+  {%- comment -%} запрос вида "variants.sku:XXX*" — повторный поиск по коду товара; пользователю показываем чистый терм {%- endcomment -%}
+  {%- assign clean_terms = search.terms | remove: 'variants.sku:' | remove: '*' -%}
+
   <form action="{{ routes.search_url }}" method="get" role="search" style="margin-bottom:18px">
     <input type="hidden" name="type" value="product">
-    <input class="privat-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+    <input class="privat-input" type="search" name="q" value="{{ clean_terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
   </form>
 
   {% if search.performed %}
     {% if search.results_count == 0 %}
-      <p class="privat-form-note">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+      {% if search.terms contains 'variants.sku:' %}
+        <p class="privat-form-note">{{ 'general.search.no_results' | t: terms: clean_terms }}</p>
+      {% else %}
+        <p class="privat-form-note">Ищем по коду товара…</p>
+        <script>(function(){var t={{ search.terms | json }};location.replace({{ routes.search_url | json }} + '?type=product&q=' + encodeURIComponent('variants.sku:' + t + '*'));})();</script>
+      {% endif %}
     {% else %}
-      <p class="privat-form-note">{{ 'general.search.results_for' | t: terms: search.terms }}</p>
+      <p class="privat-form-note">{{ 'general.search.results_for' | t: terms: clean_terms }}</p>
       {% paginate search.results by 12 %}
         <div class="privat-grid2">
           {% for item in search.results %}

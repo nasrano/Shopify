@@ -353,6 +353,7 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-back-btn{flex:none;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--accent);border:1px solid var(--line);border-radius:100px;padding:6px 12px;background:var(--card);cursor:pointer}
 
 /* ===== product page ===== */
+.privat-pp__left{display:contents}
 .privat-pp__photo{position:relative;width:100%;aspect-ratio:1/1;background:var(--soft) repeating-linear-gradient(45deg, var(--chip) 0 12px, transparent 12px 24px);
   background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;transition:background .4s ease}
 .privat-pp__photo[data-photo-bg]{background-size:contain;background-repeat:no-repeat}
@@ -567,8 +568,10 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
     max-width:1140px;margin:0 auto;padding:16px 24px 60px;align-items:start}
   .privat-pp > *{grid-column:2}
   .privat-pp .privat-crumbs{grid-row:1;padding:0 0 14px}
-  .privat-pp__photo{grid-column:1;grid-row:2 / span 8;border-radius:20px;overflow:hidden}
-  .privat-pp__thumbs{grid-column:1;grid-row:10;padding:12px 0 0}
+  /* фото+миниатюры — один блок, чтобы высота правой колонки (описание) их не разносила */
+  .privat-pp__left{display:block;grid-column:1;grid-row:2 / span 8}
+  .privat-pp__photo{border-radius:20px;overflow:hidden}
+  .privat-pp__thumbs{padding:12px 0 0}
   .privat-pp__head,.privat-pp__buy,.privat-trust--pp,.privat-pp__section{padding-left:0;padding-right:0}
   .privat-pp__title{font-size:32px}
   .privat-pp__price{font-size:30px}

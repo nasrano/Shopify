@@ -5,7 +5,8 @@
   </div>
   <div class="privat-carousel__track">
     {%- assign src_collection = section.settings.collection | default: collections.all -%}
-    {% for product in src_collection.products limit: section.settings.limit %}
+    {%- assign src_products = src_collection.products | where: 'available' -%}
+    {% for product in src_products limit: section.settings.limit %}
       {% render 'product-card', product: product, badge: section.settings.badge %}
     {% endfor %}
   </div>
