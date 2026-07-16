@@ -569,7 +569,8 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
   .privat-pp > *{grid-column:2}
   .privat-pp .privat-crumbs{grid-row:1;padding:0 0 14px}
   /* фото+миниатюры — один блок, чтобы высота правой колонки (описание) их не разносила */
-  .privat-pp__left{display:block;grid-column:1;grid-row:2 / span 8}
+  /* min-width:0 — иначе ряд миниатюр (overflow-x) распирает колонку и ломает раскладку */
+  .privat-pp__left{display:block;grid-column:1;grid-row:2 / span 8;min-width:0}
   .privat-pp__photo{border-radius:20px;overflow:hidden}
   .privat-pp__thumbs{padding:12px 0 0}
   .privat-pp__head,.privat-pp__buy,.privat-trust--pp,.privat-pp__section{padding-left:0;padding-right:0}
