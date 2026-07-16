@@ -179,16 +179,19 @@
 
 {% if section.settings.show_seo %}
   <section class="privat-seo">
-    <h2 class="privat-h2 privat-h2--sm">
-      {%- if section.settings.seo_heading != blank -%}
-        {{ section.settings.seo_heading }}
-      {%- else -%}
-        {{ collection.title }} — купить в Бишкеке с доставкой
-      {%- endif -%}
-    </h2>
     {%- if collection.description != blank -%}
+      {%- if section.settings.seo_heading != blank -%}
+        <h2 class="privat-h2 privat-h2--sm">{{ section.settings.seo_heading }}</h2>
+      {%- endif -%}
       <div class="privat-seo__lead rte">{{ collection.description }}</div>
     {%- else -%}
+      <h2 class="privat-h2 privat-h2--sm">
+        {%- if section.settings.seo_heading != blank -%}
+          {{ section.settings.seo_heading }}
+        {%- else -%}
+          {{ collection.title }} — купить в Бишкеке с доставкой
+        {%- endif -%}
+      </h2>
       <p class="privat-seo__lead">{{ section.settings.seo_text }}</p>
     {%- endif -%}
     {% if section.settings.seo_sub1_heading != blank %}
