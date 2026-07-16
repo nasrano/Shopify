@@ -171,7 +171,8 @@
       {%- if section.settings.seo_heading != blank -%}
         <h2 class="privat-h2 privat-h2--sm">{{ section.settings.seo_heading }}</h2>
       {%- endif -%}
-      <div class="privat-seo__lead rte">{{ collection.description }}</div>
+      {%- comment -%} h1 из rich-text понижаем до h2 — H1 на странице один (заголовок коллекции) {%- endcomment -%}
+      <div class="privat-seo__lead rte">{{ collection.description | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' }}</div>
     {%- else -%}
       <h2 class="privat-h2 privat-h2--sm">
         {%- if section.settings.seo_heading != blank -%}

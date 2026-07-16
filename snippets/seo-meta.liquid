@@ -1,0 +1,100 @@
+{%- comment -%}
+  Open Graph + Twitter Card + JSON-LD (Product, BreadcrumbList).
+  Подключается из layout/theme.liquid в <head>.
+{%- endcomment -%}
+
+{%- assign og_type = 'website' -%}
+{%- if template contains 'product' -%}{%- assign og_type = 'product' -%}{%- endif -%}
+
+{%- assign og_image = blank -%}
+{%- if template contains 'product' and product.featured_image -%}
+  {%- assign og_image = product.featured_image -%}
+{%- elsif template contains 'collection' -%}
+  {%- if collection.image -%}
+    {%- assign og_image = collection.image -%}
+  {%- elsif collection.products.first.featured_image -%}
+    {%- assign og_image = collection.products.first.featured_image -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if og_image == blank and shop.brand.cover_image -%}
+  {%- assign og_image = shop.brand.cover_image -%}
+{%- endif -%}
+{%- if og_image == blank and shop.brand.logo -%}
+  {%- assign og_image = shop.brand.logo -%}
+{%- endif -%}
+
+<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ meta_description | escape }}">
+<meta property="og:url" content="{{ canonical_url }}">
+{%- if og_image != blank %}
+<meta property="og:image" content="https:{{ og_image | image_url: width: 1200 }}">
+{%- if og_image.width %}
+<meta property="og:image:width" content="{{ og_image.width | at_most: 1200 }}">
+{%- endif %}
+{%- endif %}
+{%- if template contains 'product' %}
+<meta property="product:price:amount" content="{{ product.price | money_without_currency | strip_html | remove: ' ' }}">
+<meta property="product:price:currency" content="{{ shop.currency }}">
+{%- endif %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{{ meta_description | escape }}">
+{%- if og_image != blank %}
+<meta name="twitter:image" content="https:{{ og_image | image_url: width: 1200 }}">
+{%- endif %}
+
+{%- if template contains 'product' %}
+{%- assign v = product.selected_or_first_available_variant -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  {%- if product.featured_image %}
+  "image": ["https:{{ product.featured_image | image_url: width: 1200 }}"],
+  {%- endif %}
+  "description": {{ product.description | strip_html | truncatewords: 50 | json }},
+  {%- if v.sku != blank %}
+  "sku": {{ v.sku | json }},
+  {%- endif %}
+  "brand": {"@type": "Brand", "name": "PRIVAT"},
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": {{ shop.currency | json }},
+    "price": {{ product.price | divided_by: 100.0 | json }},
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "url": {{ request.origin | append: product.url | json }}
+  }
+}
+</script>
+{%- assign bc_col = product.collections.first -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": {{ request.origin | append: '/' | json }}}
+    {%- if bc_col -%}
+    ,{"@type": "ListItem", "position": 2, "name": {{ bc_col.title | json }}, "item": {{ request.origin | append: bc_col.url | json }}}
+    ,{"@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ request.origin | append: product.url | json }}}
+    {%- else -%}
+    ,{"@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": {{ request.origin | append: product.url | json }}}
+    {%- endif -%}
+  ]
+}
+</script>
+{%- elsif template contains 'collection' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": {{ request.origin | append: '/' | json }}},
+    {"@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ request.origin | append: collection.url | json }}}
+  ]
+}
+</script>
+{%- endif %}

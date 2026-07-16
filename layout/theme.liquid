@@ -9,10 +9,12 @@
     {%- assign meta_description = 'PRIVAT — магазин товаров для взрослых в Бишкеке. Бережный подбор без неловкости, анонимная упаковка, доставка за 1 час.' -%}
   {%- endif -%}
   <meta name="description" content="{{ meta_description | escape }}">
+  {% render 'seo-meta', meta_description: meta_description %}
   <title>
     {{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}
     {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
-    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    {%- comment -%} бренд добавляем, только если его ещё нет в хранимом title; проверка по 'PRIVAT'/'Privat' устойчива к латинской C в «Cекс» {%- endcomment -%}
+    {%- unless page_title contains 'PRIVAT' or page_title contains 'Privat' or page_title contains 'privat' %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
