@@ -14,7 +14,7 @@
   <div class="privat-article__meta">{{ article.published_at | date: '%d.%m.%Y' }}{% if article.author != blank %} · {{ article.author }}{% endif %}</div>
 
   {% if article.image %}
-    <img class="privat-article__img" src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | escape }}"
+    <img class="privat-article__img" src="{{ article.image | image_url: width: 1200, format: 'webp' }}" alt="{{ article.image.alt | escape }}"
       width="1200" height="{{ 1200 | divided_by: article.image.aspect_ratio | round }}">
   {% endif %}
 

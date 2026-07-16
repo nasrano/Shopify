@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <link rel="canonical" href="{{ canonical_url }}">
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
+  {%- assign meta_description = page_description | default: shop.description -%}
+  {%- if meta_description == blank -%}
+    {%- assign meta_description = 'PRIVAT — магазин товаров для взрослых в Бишкеке. Бережный подбор без неловкости, анонимная упаковка, доставка за 1 час.' -%}
   {%- endif -%}
+  <meta name="description" content="{{ meta_description | escape }}">
   <title>
     {{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}
     {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}

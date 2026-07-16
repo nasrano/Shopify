@@ -12,10 +12,10 @@
     {%- if photo_bg != blank %} data-photo-bg="{{ photo_bg }}" style="background-color:{{ photo_bg }}"{% endif %}>
     {% if product.featured_image %}
       <img class="privat-pp__media" id="privat-pp-photo-img"
-        src="{{ product.featured_image | image_url: width: 900 }}"
-        srcset="{{ product.featured_image | image_url: width: 600 }} 600w,
-                {{ product.featured_image | image_url: width: 900 }} 900w,
-                {{ product.featured_image | image_url: width: 1200 }} 1200w"
+        src="{{ product.featured_image | image_url: width: 900, format: 'webp' }}"
+        srcset="{{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
+                {{ product.featured_image | image_url: width: 900, format: 'webp' }} 900w,
+                {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
         sizes="(min-width: 1080px) 560px, 100vw"
         width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
         alt="{{ product.featured_image.alt | default: product.title | escape }}"
@@ -31,7 +31,7 @@
       data-product-id="{{ product.id }}"
       data-product-title="{{ product.title | escape }}"
       data-product-price="{{ variant.price | money }}"
-      data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 200 }}{% endif %}"
+      data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 200, format: 'webp' }}{% endif %}"
       data-product-url="{{ product.url }}"
       data-product-sku="{{ variant.sku | escape }}"
       data-variant-id="{{ variant.id }}"
@@ -42,8 +42,8 @@
     <div class="privat-pp__thumbs">
       {% for image in product.images %}
         <button type="button" class="privat-pp__thumb{% if forloop.first %} is-active{% endif %}"
-          data-thumb data-image-url="{{ image | image_url: width: 900 }}"
-          style="background-image:url({{ image | image_url: width: 128 }})" aria-label="Фото {{ forloop.index }}"></button>
+          data-thumb data-image-url="{{ image | image_url: width: 900, format: 'webp' }}"
+          style="background-image:url({{ image | image_url: width: 128, format: 'webp' }})" aria-label="Фото {{ forloop.index }}"></button>
       {% endfor %}
     </div>
   {% endif %}

@@ -8,9 +8,9 @@
           <div class="privat-blog-card__img{% if article.image %} privat-blog-card__img--photo{% endif %}">
             {% if article.image %}
               <img class="privat-blog-card__media"
-                src="{{ article.image | image_url: width: 800 }}"
-                srcset="{{ article.image | image_url: width: 400 }} 400w,
-                        {{ article.image | image_url: width: 800 }} 800w"
+                src="{{ article.image | image_url: width: 800, format: 'webp' }}"
+                srcset="{{ article.image | image_url: width: 400, format: 'webp' }} 400w,
+                        {{ article.image | image_url: width: 800, format: 'webp' }} 800w"
                 sizes="(min-width: 720px) 420px, 100vw"
                 width="{{ article.image.width }}" height="{{ article.image.height }}"
                 alt="{{ article.title | escape }}"

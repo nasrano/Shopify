@@ -3,16 +3,16 @@
 {%- assign on_sale = false -%}
 {%- if variant.compare_at_price > variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
 {%- assign fav_image = '' -%}
-{%- if product.featured_image -%}{%- assign fav_image = product.featured_image | image_url: width: 200 -%}{%- endif -%}
+{%- if product.featured_image -%}{%- assign fav_image = product.featured_image | image_url: width: 200, format: 'webp' -%}{%- endif -%}
 
 <div class="privat-card">
   <a href="{{ product.url }}" class="privat-card__imgwrap{% if product.featured_image %} privat-card__imgwrap--photo{% endif %}">
     {% if product.featured_image %}
       <img class="privat-card__img"
-        src="{{ product.featured_image | image_url: width: 400 }}"
-        srcset="{{ product.featured_image | image_url: width: 300 }} 300w,
-                {{ product.featured_image | image_url: width: 400 }} 400w,
-                {{ product.featured_image | image_url: width: 600 }} 600w"
+        src="{{ product.featured_image | image_url: width: 400, format: 'webp' }}"
+        srcset="{{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
+                {{ product.featured_image | image_url: width: 400, format: 'webp' }} 400w,
+                {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w"
         sizes="(min-width: 1080px) 232px, (min-width: 720px) 200px, 50vw"
         width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
         alt="{{ product.featured_image.alt | default: product.title | escape }}"

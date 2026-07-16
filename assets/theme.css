@@ -194,7 +194,7 @@ button.privat-cat{font-family:'Manrope',sans-serif}
   background:color-mix(in srgb, var(--card) 92%, transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);
   padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
 .privat-nav__btn{border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--sub)}
-.privat-nav__btn.is-active{color:var(--accent)}
+.privat-nav__btn.is-active{color:var(--accent-deep)}
 .privat-nav__label{font-size:10px;font-weight:600}
 
 /* ===== overlay backdrop ===== */
