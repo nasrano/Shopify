@@ -27,6 +27,12 @@
         "default": "996500690690"
       },
       {
+        "type": "text",
+        "id": "portal_url",
+        "label": "Адрес портала продавца",
+        "info": "Например https://portal.privat.kg — при клике «в WhatsApp» сайт отправит туда код заявки и gclid для конверсий Google Ads. Пусто — выключено."
+      },
+      {
         "type": "collection",
         "id": "empty_cart_collection",
         "label": "Коллекция для пустой корзины",

@@ -26,7 +26,7 @@
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
-  <script>document.documentElement.classList.remove('no-js');</script>
+  <script>document.documentElement.classList.remove('no-js');window.__privatPortal={{ settings.portal_url | default: '' | json }};</script>
   <script>
     (function () {
       try {

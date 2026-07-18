@@ -256,6 +256,18 @@
       log.push({ code: code, gclid: getGclid(), total: total, ts: new Date().toISOString() });
       localStorage.setItem('privat-wa-orders', JSON.stringify(log.slice(-50)));
     } catch (e) {}
+    /* маячок на портал продавца: связка «код заявки ↔ gclid» для офлайн-конверсий.
+       text/plain — простой запрос без CORS-preflight, ответ не важен */
+    try {
+      var portal = window.__privatPortal;
+      if (portal && getGclid()) {
+        var payload = JSON.stringify({ code: code, gclid: getGclid(), total: total,
+          currency: (window.Shopify && Shopify.currency && Shopify.currency.active) || 'KGS' });
+        var url = portal.replace(/\/$/, '') + '/api/ref';
+        if (navigator.sendBeacon) navigator.sendBeacon(url, new Blob([payload], { type: 'text/plain' }));
+        else fetch(url, { method: 'POST', body: payload, keepalive: true, headers: { 'Content-Type': 'text/plain' } });
+      }
+    } catch (e) {}
     try {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
