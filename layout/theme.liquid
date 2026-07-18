@@ -14,7 +14,61 @@
     endif
   -%}
   {%- if noindex -%}<meta name="robots" content="noindex, follow">{%- endif -%}
+  {%- liquid
+    # Автогенерация SEO title (цель 50–60 симв.), когда своё SEO-поле не заполнено:
+    # page_title == названию товара/коллекции значит, что кастомного title нет.
+    # Лесенка суффиксов — берём самый длинный, влезающий в 60 (та же логика,
+    # что в scripts/seo/seo_update.py; менять — синхронно в обоих местах).
+    assign seo_title = page_title
+    if template contains 'product' and page_title == product.title
+      assign t_base = page_title
+      if product.metafields.custom.h1_suffix != blank
+        assign t_base = t_base | append: ' (' | append: product.metafields.custom.h1_suffix | append: ')'
+      endif
+      assign seo_title = t_base | append: ' — купить в Бишкеке | Секс шоп PRIVAT'
+      if seo_title.size > 60
+        assign seo_title = t_base | append: ' — купить в Бишкеке | PRIVAT'
+      endif
+      if seo_title.size > 60
+        assign seo_title = t_base | append: ' | Секс шоп PRIVAT'
+      endif
+      if seo_title.size > 60
+        assign seo_title = t_base | append: ' | PRIVAT'
+      endif
+    elsif template contains 'collection' and page_title == collection.title
+      assign seo_title = page_title | append: ' — купить в Бишкеке недорого ❤️ Секс шоп Privat'
+      if seo_title.size > 60
+        assign seo_title = page_title | append: ' — купить в Бишкеке ❤️ Секс шоп Privat'
+      endif
+      if seo_title.size > 60
+        assign seo_title = page_title | append: ' — купить в Бишкеке ❤️ Privat'
+      endif
+      if seo_title.size > 60
+        assign seo_title = page_title | append: ' ❤️ Секс шоп Privat | Бишкек'
+      endif
+      if seo_title.size > 60
+        assign seo_title = page_title | append: ' ❤️ Privat Бишкек'
+      endif
+    endif
+  -%}
   {%- assign meta_description = page_description | default: shop.description -%}
+  {%- liquid
+    # если SEO description не задан, Shopify подставляет в page_description обрезок
+    # тела описания товара/коллекции — распознаём это по совпадению начала текста
+    # и считаем «не заданным», чтобы сработала наша формула ниже
+    if meta_description != blank
+      assign md_head = meta_description | slice: 0, 100
+      assign body_head = '~none~'
+      if template contains 'product'
+        assign body_head = product.description | strip_html | strip | slice: 0, 100
+      elsif template contains 'collection'
+        assign body_head = collection.description | strip_html | strip | slice: 0, 100
+      endif
+      if md_head == body_head
+        assign meta_description = ''
+      endif
+    endif
+  -%}
   {%- if meta_description == blank -%}
     {%- comment -%} у страниц без своего description — свой fallback на каждый шаблон, чтобы не плодить дубли {%- endcomment -%}
     {%- if template contains 'blog' or template contains 'article' -%}
@@ -33,12 +87,12 @@
     {%- endif -%}
   {%- endif -%}
   <meta name="description" content="{{ meta_description | escape }}">
-  {% render 'seo-meta', meta_description: meta_description %}
+  {% render 'seo-meta', meta_description: meta_description, seo_title: seo_title %}
   <title>
-    {{ page_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}
+    {{ seo_title }}{% if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif %}
     {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
-    {%- comment -%} бренд добавляем, только если его ещё нет в хранимом title; проверка по 'PRIVAT'/'Privat' устойчива к латинской C в «Cекс» {%- endcomment -%}
-    {%- unless page_title contains 'PRIVAT' or page_title contains 'Privat' or page_title contains 'privat' %} &ndash; {{ shop.name }}{% endunless -%}
+    {%- comment -%} бренд добавляем, только если его ещё нет в title; проверка по 'PRIVAT'/'Privat' устойчива к латинской C в «Cекс» {%- endcomment -%}
+    {%- unless seo_title contains 'PRIVAT' or seo_title contains 'Privat' or seo_title contains 'privat' %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
 
   {%- if settings.favicon -%}

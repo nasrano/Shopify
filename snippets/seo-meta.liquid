@@ -25,7 +25,8 @@
 
 <meta property="og:site_name" content="{{ shop.name | escape }}">
 <meta property="og:type" content="{{ og_type }}">
-<meta property="og:title" content="{{ page_title | escape }}">
+{%- assign og_title = seo_title | default: page_title -%}
+<meta property="og:title" content="{{ og_title | escape }}">
 <meta property="og:description" content="{{ meta_description | escape }}">
 <meta property="og:url" content="{{ canonical_url }}">
 {%- if og_image != blank %}
@@ -40,7 +41,7 @@
 {%- endif %}
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:title" content="{{ og_title | escape }}">
 <meta name="twitter:description" content="{{ meta_description | escape }}">
 {%- if og_image != blank %}
 <meta name="twitter:image" content="https:{{ og_image | image_url: width: 1200 }}">

@@ -199,7 +199,7 @@ def model_number(handle: str) -> str:
     return m.group(1) if m else "1"
 
 
-def cmd_generate(src="seo_current.csv", dst="seo_proposed.csv"):
+def cmd_generate(src="seo_current.csv", dst="seo_proposed.csv", only_missing=False):
     if not os.path.exists(src):
         cmd_export(src)
     with open(src, encoding="utf-8-sig") as f:
@@ -257,6 +257,13 @@ def cmd_generate(src="seo_current.csv", dst="seo_proposed.csv"):
             "cur_description": r["cur_description"], "new_description": desc,
             "desc_len": len(desc), "flags": ";".join(flags),
         })
+
+    if only_missing:
+        # режим для регулярного запуска: трогаем только записи без заполненных SEO-полей
+        out = [r for r in out if not r["cur_title"] or not r["cur_description"]]
+        if not out:
+            print("Все SEO-поля заполнены — обновлять нечего.")
+            return
 
     with open(dst, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=list(out[0].keys()))
@@ -347,7 +354,9 @@ if __name__ == "__main__":
     if cmd == "export":
         cmd_export()
     elif cmd == "generate":
-        cmd_generate()
+        if "--only-missing" in args and os.path.exists("seo_current.csv"):
+            os.remove("seo_current.csv")  # всегда свежая выгрузка в регулярном режиме
+        cmd_generate(only_missing="--only-missing" in args)
     elif cmd == "apply":
         cmd_apply(dry="--dry-run" in args)
     else:
