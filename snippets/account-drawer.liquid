@@ -57,9 +57,6 @@
           <p class="privat-form-note">Заказов пока нет — самое время выбрать что-нибудь приятное.</p>
         {%- endfor -%}
       </div>
-      <div class="privat-account__links">
-        <a href="{{ routes.account_addresses_url }}" class="privat-btn privat-btn--outline">Адреса доставки</a>
-      </div>
       <a href="{{ routes.account_logout_url }}" class="privat-account__submit" style="display:block;text-align:center;text-decoration:none;margin-top:10px">Выйти</a>
     {% else %}
       <div data-acc-view="login">
