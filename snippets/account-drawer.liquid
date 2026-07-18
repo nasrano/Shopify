@@ -5,9 +5,59 @@
   </div>
   <div class="privat-account">
     {% if customer %}
-      <p class="privat-account__text">Здравствуйте, {{ customer.first_name | default: customer.email }}! Заказы, адреса и избранное — под рукой.</p>
+      <p class="privat-account__text">Здравствуйте, {{ customer.first_name | default: customer.email }}!</p>
+      {%- assign cb_available = customer.metafields.portal.cashback.value | default: 0 -%}
+      {%- assign cb_plus = 0 -%}
+      {%- assign cb_minus = 0 -%}
+      {%- for order in customer.orders -%}
+        {%- for tag in order.tags -%}
+          {%- if tag contains 'кэшбэк+' -%}
+            {%- assign cb_v = tag | remove: 'кэшбэк+' | plus: 0 -%}
+            {%- assign cb_plus = cb_plus | plus: cb_v -%}
+          {%- elsif tag contains 'кэшбэк-' -%}
+            {%- assign cb_v = tag | remove: 'кэшбэк-' | plus: 0 -%}
+            {%- assign cb_minus = cb_minus | plus: cb_v -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+      <div class="privat-acc-cb">
+        <div class="privat-acc-cb__main">Кэшбэк: <b>{{ cb_available }} сом</b> доступно</div>
+        <div class="privat-acc-cb__sub">начислено {{ cb_plus }} · потрачено {{ cb_minus }}</div>
+      </div>
+      <div class="privat-acc-orders">
+        {%- for order in customer.orders limit: 30 -%}
+          {%- assign o_plus = 0 -%}
+          {%- assign o_minus = 0 -%}
+          {%- for tag in order.tags -%}
+            {%- if tag contains 'кэшбэк+' -%}{%- assign o_plus = tag | remove: 'кэшбэк+' | plus: 0 -%}{%- endif -%}
+            {%- if tag contains 'кэшбэк-' -%}{%- assign o_minus = tag | remove: 'кэшбэк-' | plus: 0 -%}{%- endif -%}
+          {%- endfor -%}
+          <details class="privat-acc-order"{% if order.cancelled %} data-cancelled{% endif %}>
+            <summary>
+              <span class="privat-acc-order__name">{{ order.name }} · {{ order.total_price | money }}
+                {%- if o_plus > 0 %} <span class="privat-acc-badge">+{{ o_plus }}</span>{% endif -%}
+                {%- if o_minus > 0 %} <span class="privat-acc-badge privat-acc-badge--minus">−{{ o_minus }}</span>{% endif -%}
+                {%- if order.cancelled %} <span class="privat-acc-badge privat-acc-badge--cancel">отменён</span>{% endif -%}
+              </span>
+              <span class="privat-acc-order__meta">{{ order.created_at | date: '%d.%m.%Y' }} · {{ order.line_items.size }} поз.</span>
+            </summary>
+            <div class="privat-acc-order__items">
+              {%- for line in order.line_items -%}
+                <div class="privat-acc-item">
+                  {%- if line.image -%}
+                    <img src="{{ line.image | image_url: width: 96, format: 'webp' }}" width="40" height="40" loading="lazy" alt="">
+                  {%- endif -%}
+                  <span class="privat-acc-item__name">{{ line.title }}</span>
+                  <span>{{ line.quantity }} × {{ line.final_price | money }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          </details>
+        {%- else -%}
+          <p class="privat-form-note">Заказов пока нет — самое время выбрать что-нибудь приятное.</p>
+        {%- endfor -%}
+      </div>
       <div class="privat-account__links">
-        <a href="{{ routes.account_url }}" class="privat-btn privat-btn--outline">Мои заказы</a>
         <a href="{{ routes.account_addresses_url }}" class="privat-btn privat-btn--outline">Адреса доставки</a>
       </div>
       <a href="{{ routes.account_logout_url }}" class="privat-account__submit" style="display:block;text-align:center;text-decoration:none;margin-top:10px">Выйти</a>

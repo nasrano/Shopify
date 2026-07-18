@@ -197,6 +197,26 @@ button.privat-cat{font-family:'Manrope',sans-serif}
 .privat-nav__btn.is-active{color:var(--accent-deep)}
 .privat-nav__label{font-size:12px;font-weight:600}
 
+/* ===== аккаунт: кэшбэк и заказы в шторке ===== */
+.privat-acc-cb{background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.privat-acc-cb__main{font-size:14.5px;color:var(--ink)}
+.privat-acc-cb__sub{font-size:12px;color:var(--sub);margin-top:2px}
+.privat-acc-orders{max-height:44dvh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.privat-acc-order{border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.privat-acc-order[data-cancelled]{opacity:.55}
+.privat-acc-order summary{list-style:none;cursor:pointer;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.privat-acc-order summary::-webkit-details-marker{display:none}
+.privat-acc-order[open] summary{border-bottom:1px solid var(--line)}
+.privat-acc-order__name{font-weight:600;font-size:13.5px;color:var(--ink);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.privat-acc-order__meta{font-size:12px;color:var(--sub)}
+.privat-acc-order__items{padding:8px 12px 10px;display:flex;flex-direction:column;gap:8px}
+.privat-acc-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink)}
+.privat-acc-item img{width:40px;height:40px;border-radius:10px;object-fit:cover;flex:none;background:var(--soft)}
+.privat-acc-item__name{flex:1;min-width:0}
+.privat-acc-badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:100px;background:#E7F2E4;color:#2F6B33}
+.privat-acc-badge--minus{background:#F7DCD6;color:#96594B}
+.privat-acc-badge--cancel{background:var(--chip);color:var(--sub)}
+
 /* ===== overlay backdrop ===== */
 .privat-backdrop{position:absolute;inset:0;z-index:60;background:rgba(25,15,10,.42);animation:dcFade .25s ease;display:none}
 .privat-backdrop.is-open{display:block}
