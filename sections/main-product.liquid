@@ -68,7 +68,12 @@
   </div>
 
   <section class="privat-pp__head">
-    <h1 class="privat-pp__title">{{ product.title }}</h1>
+    {%- comment -%}
+      Уникальность H1 для одноимённых товаров: человекочитаемое уточнение из метаполя
+      custom.h1_suffix («чёрные с кружевом», «модель 3»), а не код товара в названии.
+      Заполняется скриптом scripts/seo/seo_update.py или вручную в админке.
+    {%- endcomment -%}
+    <h1 class="privat-pp__title">{{ product.title }}{% if product.metafields.custom.h1_suffix != blank %} <span class="privat-pp__title-suffix">({{ product.metafields.custom.h1_suffix }})</span>{% endif %}</h1>
     <div class="privat-pp__meta">
       {% if variant.sku != blank %}Код товара: <b id="privat-pp-sku">{{ variant.sku }}</b> · {% endif -%}
       <span id="privat-pp-stock">{% if variant.available %}В наличии{% else %}Нет в наличии{% endif %}</span>

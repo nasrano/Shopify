@@ -4,9 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="alternate" hreflang="ru" href="{{ canonical_url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+  {%- liquid
+    # служебные страницы не должны попадать в индекс — убирает и дубли description по ним
+    assign noindex = false
+    if template contains 'cart' or template contains 'search' or template contains 'customers' or template contains 'gift_card' or request.path contains '/policies/'
+      assign noindex = true
+    endif
+  -%}
+  {%- if noindex -%}<meta name="robots" content="noindex, follow">{%- endif -%}
   {%- assign meta_description = page_description | default: shop.description -%}
   {%- if meta_description == blank -%}
-    {%- assign meta_description = 'PRIVAT — магазин товаров для взрослых в Бишкеке. Бережный подбор без неловкости, анонимная упаковка, доставка за 1 час.' -%}
+    {%- comment -%} у страниц без своего description — свой fallback на каждый шаблон, чтобы не плодить дубли {%- endcomment -%}
+    {%- if template contains 'blog' or template contains 'article' -%}
+      {%- assign meta_description = 'Блог PRIVAT — честные статьи об интимной жизни, гайды по выбору игрушек и уходу за ними. Без стеснения и мифов.' -%}
+    {%- elsif template contains 'list-collections' -%}
+      {%- assign meta_description = 'Все категории товаров секс шопа PRIVAT в Бишкеке: игрушки, бельё, смазки, БДСМ и другое. Анонимная доставка за 1 час по Бишкеку.' -%}
+    {%- elsif template contains 'collection' -%}
+      {%- assign meta_description = collection.title | append: ' — купить в Бишкеке с анонимной доставкой за 1 час. Секс шоп PRIVAT: дискретная упаковка, оплата при получении. ☎ 0500-690-690' -%}
+    {%- elsif template contains 'product' -%}
+      {%- assign price_str = product.price | money_without_currency | strip_html | remove: ' ' -%}
+      {%- assign meta_description = 'Купить ' | append: product.title | append: ' в Бишкеке — ' | append: price_str | append: ' сом. Анонимная доставка за 1 час, дискретная упаковка. Секс шоп PRIVAT.' -%}
+    {%- elsif template contains 'page' -%}
+      {%- assign meta_description = page.title | append: ' — секс шоп PRIVAT, Бишкек. Магазин товаров для взрослых: анонимная доставка за 1 час, дискретная упаковка, консультации без неловкости.' -%}
+    {%- else -%}
+      {%- assign meta_description = 'PRIVAT — магазин товаров для взрослых в Бишкеке. Бережный подбор без неловкости, анонимная упаковка, доставка за 1 час. ☎ 0500-690-690' -%}
+    {%- endif -%}
   {%- endif -%}
   <meta name="description" content="{{ meta_description | escape }}">
   {% render 'seo-meta', meta_description: meta_description %}
@@ -16,6 +40,14 @@
     {%- comment -%} бренд добавляем, только если его ещё нет в хранимом title; проверка по 'PRIVAT'/'Privat' устойчива к латинской C в «Cекс» {%- endcomment -%}
     {%- unless page_title contains 'PRIVAT' or page_title contains 'Privat' or page_title contains 'privat' %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
+
+  {%- if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ settings.favicon | image_url: width: 192, height: 192 }}">
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+  {%- elsif shop.brand.logo -%}
+    <link rel="icon" type="image/png" href="{{ shop.brand.logo | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

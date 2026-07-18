@@ -386,6 +386,7 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-pp__thumb.is-active{border-color:var(--accent)}
 .privat-pp__head{padding:16px 20px 4px}
 .privat-pp__title{font-family:'Prata',serif;font-size:24px;line-height:1.25;font-weight:400;color:var(--ink);margin:0;text-wrap:pretty}
+.privat-pp__title-suffix{font-size:.72em;color:var(--sub)}
 .privat-pp__meta{font-size:12px;color:var(--sub);margin-top:7px;letter-spacing:.04em}
 .privat-pp__meta b{font-weight:700;color:var(--ink)}
 .privat-pp__price-row{display:flex;align-items:baseline;gap:12px;margin-top:14px}
