@@ -224,13 +224,66 @@
     if (menuCount) menuCount.textContent = String(count);
   }
 
+  /* ---------------- заявка + gclid (атрибуция Google Ads) ---------------- */
+  function storeGclid() {
+    try {
+      var m = location.search.match(/[?&]gclid=([^&]+)/);
+      if (m) localStorage.setItem('privat-gclid', JSON.stringify({ v: decodeURIComponent(m[1]), t: Date.now() }));
+    } catch (e) {}
+  }
+  function getGclid() {
+    try {
+      var s = JSON.parse(localStorage.getItem('privat-gclid') || 'null');
+      if (s && s.v && (Date.now() - s.t) < 90 * 24 * 3600 * 1000) return s.v;
+    } catch (e) {}
+    return '';
+  }
+  function newOrderCode() {
+    return String(Date.now()).slice(-6);
+  }
+  /* формат сообщения заказа: портал продавца детектит «заявка XXXXXX» */
+  function buildWaOrderMsg(code, items, total) {
+    var lines = ['Здравствуйте! Я хочу оформить заказ (заявка ' + code + '):', ''];
+    items.forEach(function (it, n) {
+      lines.push((n + 1) + ') ' + it.title + ' х ' + it.qty + ' = ' + formatMoney(it.sum));
+    });
+    lines.push('', 'Общая сумма: ' + formatMoney(total));
+    return lines.join('\n');
+  }
+  function trackWaOrder(code, total) {
+    try {
+      var log = JSON.parse(localStorage.getItem('privat-wa-orders') || '[]');
+      log.push({ code: code, gclid: getGclid(), total: total, ts: new Date().toISOString() });
+      localStorage.setItem('privat-wa-orders', JSON.stringify(log.slice(-50)));
+    } catch (e) {}
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'wa_order_click',
+        order_code: code,
+        value: total / 100,
+        currency: (window.Shopify && Shopify.currency && Shopify.currency.active) || 'KGS',
+        gclid: getGclid()
+      });
+    } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-wa-checkout],[data-wa-buy]');
+    if (!a) return;
+    var code = a.getAttribute('data-order-code');
+    if (code) trackWaOrder(code, parseInt(a.getAttribute('data-order-total') || '0', 10));
+  });
+
   function syncWaCheckout(cart) {
     var btn = document.getElementById('privat-cart-checkout');
     if (!btn || !btn.hasAttribute('data-wa-checkout')) return;
-    var msg = 'Здравствуйте! Я хочу заказать: ' + cart.items.map(function (i) {
-      return i.product_title + ' — ' + i.quantity + ' шт × ' + formatMoney(i.price);
-    }).join('; ') + '. Итого ' + formatMoney(cart.total_price);
-    btn.href = 'https://wa.me/' + btn.getAttribute('data-wa-phone') + '?text=' + encodeURIComponent(msg);
+    var code = newOrderCode();
+    var items = cart.items.map(function (i) {
+      return { title: i.product_title, qty: i.quantity, sum: (i.final_line_price != null ? i.final_line_price : i.price * i.quantity) };
+    });
+    btn.href = 'https://wa.me/' + btn.getAttribute('data-wa-phone') + '?text=' + encodeURIComponent(buildWaOrderMsg(code, items, cart.total_price));
+    btn.setAttribute('data-order-code', code);
+    btn.setAttribute('data-order-total', String(cart.total_price));
   }
 
   function renderCart(cartData) {
@@ -538,12 +591,15 @@
       }
       if (totalEl) totalEl.textContent = formatMoney(v.price * qty);
       if (buyNow) {
-        var msg = 'Здравствуйте! Я хочу заказать ' + buyNow.getAttribute('data-product-title') +
-          (v.sku ? ', код ' + v.sku : '') +
-          (select ? ' (' + v.title + ')' : '') +
-          ', ' + qty + ' шт × ' + formatMoney(v.price) +
-          ', итого ' + formatMoney(v.price * qty);
-        buyNow.href = 'https://wa.me/' + buyNow.getAttribute('data-wa-phone') + '?text=' + encodeURIComponent(msg);
+        var orderCode = newOrderCode();
+        var itemTitle = buyNow.getAttribute('data-product-title') +
+          (v.sku ? ' (код ' + v.sku + ')' : '') +
+          (select ? ', ' + v.title : '');
+        var itemSum = v.price * qty;
+        buyNow.href = 'https://wa.me/' + buyNow.getAttribute('data-wa-phone') + '?text=' +
+          encodeURIComponent(buildWaOrderMsg(orderCode, [{ title: itemTitle, qty: qty, sum: itemSum }], itemSum));
+        buyNow.setAttribute('data-order-code', orderCode);
+        buyNow.setAttribute('data-order-total', String(itemSum));
       }
     }
 
@@ -645,6 +701,7 @@
 
   /* ---------------- init ---------------- */
   document.addEventListener('DOMContentLoaded', function () {
+    storeGclid();
     setupReveals();
     setupParallax();
     syncFavButtons();

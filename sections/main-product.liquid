@@ -4,7 +4,11 @@
 {%- assign photo_bg = product.metafields.custom.photo_bg -%}
 {%- assign bc_collection = collection | default: product.collections.first -%}
 {%- assign wa_digits = section.settings.whatsapp_phone | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
-{%- capture wa_message -%}Здравствуйте! Я хочу заказать {{ product.title }}{% if variant.sku != blank %}, код {{ variant.sku }}{% endif %}, 1 шт × {{ variant.price | money }}{%- endcapture -%}
+{%- capture nl %}
+{% endcapture -%}
+{%- capture wa_message -%}
+Здравствуйте! Я хочу оформить заказ:{{ nl }}{{ nl }}1) {{ product.title }}{% if variant.sku != blank %} (код {{ variant.sku }}){% endif %} х 1 = {{ variant.price | money }}{{ nl }}{{ nl }}Общая сумма: {{ variant.price | money }}
+{%- endcapture -%}
 
 <article class="privat-pp" id="privat-pp">
 
@@ -103,7 +107,7 @@
     {% if section.settings.show_buy_now and wa_digits != blank %}
       <a class="privat-buy-now" id="privat-pp-buynow" target="_blank" rel="noopener"
         href="https://wa.me/{{ wa_digits }}?text={{ wa_message | strip | url_encode }}"
-        data-wa-phone="{{ wa_digits }}"
+        data-wa-phone="{{ wa_digits }}" data-wa-buy
         data-product-title="{{ product.title | escape }}">
         Купить сейчас · <span id="privat-pp-total">{{ variant.price | money }}</span>
       </a>
