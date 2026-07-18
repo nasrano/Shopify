@@ -43,7 +43,8 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "portal_url": "https://portal.privat.kg"
   },
   "presets": {
     "Default": {}
