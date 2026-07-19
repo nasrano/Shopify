@@ -199,9 +199,26 @@ def sync_inventory(st, skumap):
 
 # ---------------- 2. заказы ----------------
 def order_exists(name):
-    r = gql('query($q: String!) { orders(first: 1, query: $q) { nodes { id name cancelledAt } } }',
+    r = gql("""query($q: String!) { orders(first: 1, query: $q) {
+                 nodes { id name cancelledAt displayFulfillmentStatus } } }""",
             {"q": f"name:{name}"})["orders"]["nodes"]
     return r[0] if r else None
+
+
+def fulfill_order(order_id):
+    """Отметить заказ выполненным (все открытые fulfillment orders)."""
+    fos = gql('query($id: ID!) { order(id: $id) { fulfillmentOrders(first: 5) { nodes { id status } } } }',
+              {"id": order_id})["order"]["fulfillmentOrders"]["nodes"]
+    ids = [f["id"] for f in fos if f["status"] in ("OPEN", "IN_PROGRESS", "SCHEDULED", "ON_HOLD")]
+    if not ids: return False
+    r = gql("""mutation($fulfillment: FulfillmentInput!) {
+                 fulfillmentCreate(fulfillment: $fulfillment) {
+                   fulfillment { id } userErrors { field message } } }""",
+            {"fulfillment": {"lineItemsByFulfillmentOrder": [{"fulfillmentOrderId": i} for i in ids],
+                             "notifyCustomer": False}})["fulfillmentCreate"]
+    if r["userErrors"]:
+        log(f"fulfill ошибка: {r['userErrors']}"); return False
+    return True
 
 
 def money(x):
@@ -213,7 +230,8 @@ def sync_orders(st, skumap):
     new_wm = wm
     orders = okw("sale.order", "search_read",
                  ["&", ["write_date", ">", wm], ["state", "in", ["sale", "done", "cancel"]]],
-                 fields=["name", "date_order", "write_date", "amount_total", "partner_id", "state"],
+                 fields=["name", "date_order", "write_date", "amount_total", "partner_id",
+                         "state", "delivery_status"],
                  order="write_date asc", limit=300)
     if not orders:
         return
@@ -252,7 +270,15 @@ def sync_orders(st, skumap):
                 else: cancelled += 1; log(f"отменён заказ {o['name']}")
             new_wm = max(new_wm, o["write_date"]); continue
         if existing:
-            new_wm = max(new_wm, o["write_date"]); continue   # уже есть (изменения сумм не трогаем)
+            # заказ уже есть: дожимаем выполненность, если в Odoo доставлен, а тут нет
+            if (o.get("delivery_status") == "full"
+                    and existing.get("displayFulfillmentStatus") == "UNFULFILLED"):
+                try:
+                    if fulfill_order(existing["id"]):
+                        log(f"заказ {o['name']} отмечен выполненным")
+                except Exception as e:
+                    log(f"fulfill {o['name']} недоступен: {str(e)[:120]}")
+            new_wm = max(new_wm, o["write_date"]); continue   # изменения сумм не трогаем
         when = o["date_order"].replace(" ", "T") + "Z"
         items, total, discount = [], 0.0, 0.0
         for l in by_order.get(o["id"], []):
@@ -292,6 +318,11 @@ def sync_orders(st, skumap):
             log(f"ЗАКАЗ {o['name']} ошибка: {r['userErrors']}")
         else:
             created += 1
+            if o.get("delivery_status") == "full":
+                try:
+                    fulfill_order(r["order"]["id"])
+                except Exception as e:
+                    log(f"fulfill {o['name']} недоступен: {str(e)[:120]}")
         new_wm = max(new_wm, o["write_date"])
     if created or cancelled:
         log(f"заказы: создано {created}, отменено {cancelled}")
