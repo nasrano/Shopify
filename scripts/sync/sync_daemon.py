@@ -378,18 +378,30 @@ def sync_products(st, skumap):
     for p in new_skus[:10]:   # не больше 10 за прогон
         sku = p["default_code"].strip()
         full = okw("product.product", "search_read", [["default_code", "=", sku]],
-                   fields=["name", "barcode", "image_1920", "description_ecommerce",
-                           "website_description", "description_sale"],
+                   fields=["name", "barcode", "product_tmpl_id", "image_1920",
+                           "description_ecommerce", "website_description", "description_sale"],
                    limit=1, context={"lang": "ru_RU"})[0]
-        media = None
+        # вся галерея: главное фото + дополнительные (пустые записи пропускаем)
+        blobs = []
         if full.get("image_1920"):
-            try:
-                import base64
-                blob = base64.b64decode(full["image_1920"])
-                urlres = staged_upload_png(f"{sku}.png", blob)
-                media = [{"originalSource": urlres, "mediaContentType": "IMAGE", "alt": full["name"]}]
-            except Exception as e:
-                log(f"НОВЫЙ {sku}: фото не загрузилось ({e})")
+            blobs.append(full["image_1920"])
+        tmpl_id = full["product_tmpl_id"][0] if full.get("product_tmpl_id") else None
+        if tmpl_id:
+            img_ids = okw("product.image", "search", [["product_tmpl_id", "=", tmpl_id]])
+            for im in (oread("product.image", img_ids, ["image_1920"]) if img_ids else []):
+                if im.get("image_1920"):
+                    blobs.append(im["image_1920"])
+        media = None
+        if blobs:
+            import base64
+            media = []
+            for i, b64 in enumerate(blobs, start=1):
+                try:
+                    urlres = staged_upload_png(f"{sku}_{i}.png", base64.b64decode(b64))
+                    media.append({"originalSource": urlres, "mediaContentType": "IMAGE", "alt": full["name"]})
+                except Exception as e:
+                    log(f"НОВЫЙ {sku}: фото {i} не загрузилось ({e})")
+            media = media or None
         desc = (full.get("description_ecommerce") or full.get("website_description")
                 or full.get("description_sale") or "")
         inp = {"title": full["name"], "status": "DRAFT", "vendor": "Privat.kg",
