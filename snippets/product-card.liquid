@@ -10,10 +10,11 @@
   <a href="{{ product.url }}" class="privat-card__imgwrap{% if product.featured_image %} privat-card__imgwrap--photo{% endif %}">
     {% if product.featured_image %}
       <img class="privat-card__img"
-        src="{{ product.featured_image | image_url: width: 400, format: 'webp' }}"
-        srcset="{{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
-                {{ product.featured_image | image_url: width: 400, format: 'webp' }} 400w,
-                {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w"
+        src="{{ product.featured_image | image_url: width: 320, format: 'webp' }}"
+        srcset="{{ product.featured_image | image_url: width: 240, format: 'webp' }} 240w,
+                {{ product.featured_image | image_url: width: 320, format: 'webp' }} 320w,
+                {{ product.featured_image | image_url: width: 480, format: 'webp' }} 480w,
+                {{ product.featured_image | image_url: width: 640, format: 'webp' }} 640w"
         sizes="(min-width: 1080px) 232px, (min-width: 720px) 200px, 50vw"
         width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
         alt="{{ product.featured_image.alt | default: product.title | escape }}"
