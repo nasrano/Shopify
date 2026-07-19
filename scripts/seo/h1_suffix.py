@@ -26,7 +26,7 @@ def get_token():
     if _token_cache:
         return _token_cache
     tok = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")
-    if tok.startswith("shpat_"):
+    if tok.startswith("shpat_") or tok.startswith("atkn_"):
         _token_cache = tok
         return tok
     cid = os.environ.get("SHOPIFY_CLIENT_ID", "")
