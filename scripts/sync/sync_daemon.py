@@ -19,9 +19,10 @@ import urllib.request, urllib.error
 import xmlrpc.client
 from datetime import datetime, timezone
 
-SYNC_DIR = os.path.expanduser("~/Downloads/sync")
+SYNC_DIR = os.environ.get("SYNC_DIR") or os.path.expanduser("~/Downloads/sync")
 STATE_F = os.path.join(SYNC_DIR, "state.json")
 LOCK_F = os.path.join(SYNC_DIR, "sync.lock")
+DISABLED_F = os.path.join(SYNC_DIR, "DISABLED")   # существует -> прогоны пропускаются
 
 # --- реквизиты: из окружения, иначе из ~/Downloads/sync/.env ---
 def load_env():
@@ -411,6 +412,8 @@ def sync_products(st, skumap):
 
 
 def run():
+    if os.path.exists(DISABLED_F):
+        log("прогон пропущен: файл DISABLED (удалите его для включения синка)"); return
     if os.path.exists(LOCK_F) and time.time() - os.path.getmtime(LOCK_F) < 3600:
         log("прогон пропущен: lock"); return
     open(LOCK_F, "w").write(str(os.getpid()))
