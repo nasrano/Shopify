@@ -29,7 +29,13 @@
         if product.metafields.custom.h1_suffix != blank
           assign t_base = t_base | append: ' (' | append: product.metafields.custom.h1_suffix | append: ')'
         endif
-        assign seo_title = t_base | append: ' — купить в Бишкеке | Секс шоп PRIVAT'
+        assign seo_title = t_base | append: ' — купить в Бишкеке с доставкой за 1 час | Секс шоп PRIVAT'
+        if seo_title.size > 60
+          assign seo_title = t_base | append: ' — купить в Бишкеке недорого | Секс шоп PRIVAT'
+        endif
+        if seo_title.size > 60
+          assign seo_title = t_base | append: ' — купить в Бишкеке | Секс шоп PRIVAT'
+        endif
         if seo_title.size > 60
           assign seo_title = t_base | append: ' — купить в Бишкеке | PRIVAT'
         endif
@@ -39,6 +45,10 @@
         if seo_title.size > 60
           assign seo_title = t_base | append: ' | PRIVAT'
         endif
+      endif
+    elsif template == 'index'
+      if page_title.size < 50
+        assign seo_title = 'Секс шоп PRIVAT — интим-товары в Бишкеке, доставка за 1 час'
       endif
     elsif template contains 'collection' and collection != blank
       if collection.metafields.custom.seo_title != blank
@@ -75,7 +85,28 @@
         if product.metafields.custom.h1_suffix != blank
           assign p_base = p_base | append: ' (' | append: product.metafields.custom.h1_suffix | append: ')'
         endif
-        assign meta_description = 'Купить ' | append: p_base | append: ' в Бишкеке — ' | append: price_str | append: ' сом. Анонимная доставка за 1 час, дискретная упаковка. Секс шоп PRIVAT.'
+        # лесенка: база + хвосты, пока не наберём 130, не превышая 160
+        assign meta_description = 'Купить ' | append: p_base | append: ' в Бишкеке — ' | append: price_str | append: ' сом.'
+        assign d_try = meta_description | append: ' Анонимная доставка за 1 час, дискретная упаковка.'
+        if meta_description.size < 130 and d_try.size <= 160
+          assign meta_description = d_try
+        endif
+        assign d_try = meta_description | append: ' Оплата при получении.'
+        if meta_description.size < 130 and d_try.size <= 160
+          assign meta_description = d_try
+        endif
+        assign d_try = meta_description | append: ' Секс шоп PRIVAT ☎ 0500-690-690.'
+        if meta_description.size < 130 and d_try.size <= 160
+          assign meta_description = d_try
+        endif
+        assign d_try = meta_description | append: ' Бережный подбор без неловкости.'
+        if meta_description.size < 130 and d_try.size <= 160
+          assign meta_description = d_try
+        endif
+        assign d_try = meta_description | append: ' Работаем ежедневно.'
+        if meta_description.size < 130 and d_try.size <= 160
+          assign meta_description = d_try
+        endif
       endif
     elsif template contains 'list-collections'
       assign meta_description = 'Все категории товаров секс шопа PRIVAT в Бишкеке: игрушки, бельё, смазки, БДСМ и другое. Анонимная доставка за 1 час по Бишкеку.'
