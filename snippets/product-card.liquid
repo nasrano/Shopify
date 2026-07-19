@@ -1,5 +1,4 @@
-{%- comment -%} params: product, badge ("none" | "new" | "sale"), eager (bool — первые видимые карточки), priority (bool — LCP-кандидаты). Товары без остатков не рендерим вовсе. {%- endcomment -%}
-{%- unless product.available == false -%}
+{%- comment -%} params: product, badge ("none" | "new" | "sale"), eager (bool — первые видимые карточки), priority (bool — LCP-кандидаты). Скрытие распроданных теперь на уровне каталога: демон переводит товар с нулевым остатком в статус «Скрытый» (UNLISTED) — в коллекции он не попадает. Здесь распроданное больше не прячем: между продажей и следующим синком карточка честно показывает «Нет в наличии». {%- endcomment -%}
 {%- assign variant = product.selected_or_first_available_variant -%}
 {%- assign on_sale = false -%}
 {%- if variant.compare_at_price > variant.price -%}{%- assign on_sale = true -%}{%- endif -%}
@@ -58,4 +57,3 @@
     </button>
   </div>
 </div>
-{%- endunless -%}
