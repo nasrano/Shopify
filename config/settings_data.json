@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "favicon": "shopify://shop_images/favicon.svg",
+    "portal_url": "https://portal.privat.kg",
     "categories_menu": "categories",
     "promo_menu": "link-list",
     "sections": {
@@ -43,8 +45,7 @@
         }
       }
     },
-    "content_for_index": [],
-    "portal_url": "https://portal.privat.kg"
+    "content_for_index": []
   },
   "presets": {
     "Default": {}
