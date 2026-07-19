@@ -16,13 +16,52 @@ custom.h1_suffix («модель 2», «модель 3»…). Тема сама 
 import csv, json, os, re, sys, time, urllib.request
 
 STORE = os.environ.get("SHOPIFY_STORE", "")
-TOKEN = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")
 CSV_FILE = "dubli.csv"
+_token_cache = ""
+
+
+def get_token():
+    """shpat_-токен напрямую, либо обмен client_id+secret приложения из Dev Dashboard."""
+    global _token_cache
+    if _token_cache:
+        return _token_cache
+    tok = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")
+    if tok.startswith("shpat_"):
+        _token_cache = tok
+        return tok
+    cid = os.environ.get("SHOPIFY_CLIENT_ID", "")
+    sec = os.environ.get("SHOPIFY_CLIENT_SECRET", "") or (tok if tok.startswith("shpss_") else "")
+    if not (cid and sec):
+        sys.exit(
+            "Нужны переменные окружения:\n"
+            "  export SHOPIFY_STORE=\"0fd8ca-b7.myshopify.com\"\n"
+            "и либо токен custom app:  export SHOPIFY_ADMIN_TOKEN=shpat_...\n"
+            "либо реквизиты приложения из Dev Dashboard:\n"
+            "  export SHOPIFY_CLIENT_ID=...\n"
+            "  export SHOPIFY_CLIENT_SECRET=shpss_..."
+        )
+    req = urllib.request.Request(
+        f"https://{STORE}/admin/oauth/access_token",
+        data=json.dumps({"client_id": cid, "client_secret": sec,
+                         "grant_type": "client_credentials"}).encode(),
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req) as r:
+            _token_cache = json.loads(r.read())["access_token"]
+            return _token_cache
+    except urllib.error.HTTPError as e:
+        sys.exit(
+            f"Не удалось получить токен (HTTP {e.code}): {e.read().decode()[:300]}\n"
+            "Проверь в Dev Dashboard: приложение установлено на магазин и в его настройках "
+            "заданы Admin API scopes read_products и write_products."
+        )
 
 
 def gql(query, variables=None):
-    if not STORE or not TOKEN:
-        sys.exit("Сначала задайте переменные: export SHOPIFY_STORE=... и export SHOPIFY_ADMIN_TOKEN=shpat_...")
+    if not STORE:
+        sys.exit("Задайте: export SHOPIFY_STORE=\"0fd8ca-b7.myshopify.com\"")
+    TOKEN = get_token()
     req = urllib.request.Request(
         f"https://{STORE}/admin/api/2026-01/graphql.json",
         data=json.dumps({"query": query, "variables": variables or {}}).encode(),
