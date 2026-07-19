@@ -126,12 +126,13 @@ def save_state(st):
 
 # ---------------- справочники Shopify ----------------
 def shopify_variants():
-    """sku -> {variantId, productId, inventoryItemId, price, title}"""
+    """sku -> {variantId, productId, inventoryItemId, price, title, status, tracked}"""
     q = """
     query($cursor: String) {
       productVariants(first: 250, after: $cursor) {
         pageInfo { hasNextPage endCursor }
-        nodes { id sku price product { id title status } inventoryItem { id unitCost { amount } } }
+        nodes { id sku price product { id title status tracksInventory }
+                inventoryItem { id unitCost { amount } } }
       }
     }"""
     out, cursor = {}, None
@@ -143,7 +144,8 @@ def shopify_variants():
                 out[sku] = {"variantId": v["id"], "productId": v["product"]["id"],
                             "itemId": v["inventoryItem"]["id"], "price": v["price"],
                             "cost": (v["inventoryItem"].get("unitCost") or {}).get("amount"),
-                            "title": v["product"]["title"]}
+                            "title": v["product"]["title"], "status": v["product"]["status"],
+                            "tracked": v["product"]["tracksInventory"]}
         if not page["pageInfo"]["hasNextPage"]: return out
         cursor = page["pageInfo"]["endCursor"]
 
@@ -173,6 +175,7 @@ def sync_inventory(st, skumap):
 
     locs = shopify_locations()
     changes = []
+    changed_skus = set()
     cache = st.get("stock_cache", {})
     all_skus = set(stock) | set(cache)
     for sku in all_skus:
@@ -183,6 +186,7 @@ def sync_inventory(st, skumap):
             if had != want:
                 changes.append({"inventoryItemId": skumap[sku]["itemId"],
                                 "locationId": loc_id, "quantity": want})
+                changed_skus.add(sku)
     if changes:
         M = """
         mutation($input: InventorySetQuantitiesInput!) {
@@ -195,6 +199,36 @@ def sync_inventory(st, skumap):
             if r["userErrors"]: log(f"ОСТАТКИ ошибка: {r['userErrors'][:2]}")
         log(f"остатки: обновлено {len(changes)} позиций")
     st["stock_cache"] = {sku: {k: int(v) for k, v in d.items()} for sku, d in stock.items()}
+    return stock, changed_skus
+
+
+# ---------------- 1b. видимость: нулевой остаток -> Скрытый (unlisted) ----------------
+def manage_visibility(skumap, stock):
+    """Товар с нулевым суммарным остатком -> UNLISTED (из сеток/поиска пропадает, прямая
+    ссылка живёт — SEO не страдает). Появился остаток -> ACTIVE. Сверяем ВСЕ товары каждый
+    прогон (самоисцеление), но мутации шлём только на реально несовпавшие. Трогаем лишь
+    ACTIVE/UNLISTED и только трекаемые: DRAFT/ARCHIVED и нетрекаемые (напр. «M») не трогаем."""
+    M = "mutation($input: ProductInput!) { productUpdate(input: $input) { userErrors { field message } } }"
+    hid = shown = 0
+    for sku, info in skumap.items():
+        if not info.get("tracked"):
+            continue
+        cur = info.get("status")
+        if cur not in ("ACTIVE", "UNLISTED"):
+            continue
+        total = sum(stock.get(sku, {}).values())
+        desired = "ACTIVE" if total > 0 else "UNLISTED"
+        if cur == desired:
+            continue
+        r = gql(M, {"input": {"id": info["productId"], "status": desired}})["productUpdate"]
+        if r["userErrors"]:
+            log(f"видимость {sku} ошибка: {r['userErrors']}")
+        else:
+            info["status"] = desired
+            if desired == "UNLISTED": hid += 1
+            else: shown += 1
+    if hid or shown:
+        log(f"видимость: скрыто {hid}, возвращено на витрину {shown}")
 
 
 # ---------------- 2. заказы ----------------
@@ -463,7 +497,8 @@ def run():
     try:
         st = load_state()
         skumap = shopify_variants()
-        sync_inventory(st, skumap)
+        stock, changed_skus = sync_inventory(st, skumap)
+        manage_visibility(skumap, stock)
         sync_orders(st, skumap)
         sync_products(st, skumap)
         save_state(st)
