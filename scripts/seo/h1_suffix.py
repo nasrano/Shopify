@@ -78,11 +78,15 @@ def gql(query, variables=None):
                 sys.exit(f"Ошибка API: {json.dumps(data['errors'], ensure_ascii=False)[:300]}")
             return data["data"]
         except urllib.error.HTTPError as e:
-            if e.code == 429:
-                time.sleep(2 ** attempt)
+            if e.code == 429 or e.code >= 500:
+                # троттлинг и случайные 502/503 от Shopify — ретраим с паузой
+                time.sleep(3 * (attempt + 1))
                 continue
             sys.exit(f"HTTP {e.code}: {e.read().decode()[:300]}")
-    sys.exit("API перегружен, попробуйте позже")
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            time.sleep(3 * (attempt + 1))
+            continue
+    sys.exit("API перегружен (не ответил после 5 попыток), попробуйте позже")
 
 
 def find_duplicates():
