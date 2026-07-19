@@ -12,8 +12,8 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/hf_20260713_073820_a8e4dc68-75f1-4a28-b856-d4502b62167a.png",
-        "image_mobile": "shopify://shop_images/hf_20260713_081922_773cbebb-a0eb-4fca-a996-da3fae6b6629.png",
+        "image": "shopify://shop_images/hero-desktop.jpg",
+        "image_mobile": "shopify://shop_images/hero-mobile.jpg",
         "title": "Близость — это забота о себе",
         "subtitle": "Подберём бережно, честно и без неловкости. Анонимно — от выбора до доставки.",
         "primary_label": "В магазин →",
