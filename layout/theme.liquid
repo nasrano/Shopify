@@ -15,77 +15,91 @@
   -%}
   {%- if noindex -%}<meta name="robots" content="noindex, follow">{%- endif -%}
   {%- liquid
-    # Автогенерация SEO title (цель 50–60 симв.), когда своё SEO-поле не заполнено:
-    # page_title == названию товара/коллекции значит, что кастомного title нет.
+    # SEO title (цель 50–60 симв.) для товаров и коллекций ВСЕГДА генерируется темой
+    # по формуле — сохранённые в админке SEO-поля игнорируются (у старых товаров они
+    # кривые: обрезаны посреди слова, с кодами). Точечно переопределить можно
+    # метаполем custom.seo_title у товара/коллекции.
     # Лесенка суффиксов — берём самый длинный, влезающий в 60 (та же логика,
     # что в scripts/seo/seo_update.py; менять — синхронно в обоих местах).
     assign seo_title = page_title
-    if template contains 'product' and page_title == product.title
-      assign t_base = page_title
-      if product.metafields.custom.h1_suffix != blank
-        assign t_base = t_base | append: ' (' | append: product.metafields.custom.h1_suffix | append: ')'
+    if template contains 'product'
+      if product.metafields.custom.seo_title != blank
+        assign seo_title = product.metafields.custom.seo_title
+      else
+        assign t_base = product.title
+        if product.metafields.custom.h1_suffix != blank
+          assign t_base = t_base | append: ' (' | append: product.metafields.custom.h1_suffix | append: ')'
+        endif
+        assign seo_title = t_base | append: ' — купить в Бишкеке | Секс шоп PRIVAT'
+        if seo_title.size > 60
+          assign seo_title = t_base | append: ' — купить в Бишкеке | PRIVAT'
+        endif
+        if seo_title.size > 60
+          assign seo_title = t_base | append: ' | Секс шоп PRIVAT'
+        endif
+        if seo_title.size > 60
+          assign seo_title = t_base | append: ' | PRIVAT'
+        endif
       endif
-      assign seo_title = t_base | append: ' — купить в Бишкеке | Секс шоп PRIVAT'
-      if seo_title.size > 60
-        assign seo_title = t_base | append: ' — купить в Бишкеке | PRIVAT'
-      endif
-      if seo_title.size > 60
-        assign seo_title = t_base | append: ' | Секс шоп PRIVAT'
-      endif
-      if seo_title.size > 60
-        assign seo_title = t_base | append: ' | PRIVAT'
-      endif
-    elsif template contains 'collection' and page_title == collection.title
-      assign seo_title = page_title | append: ' — купить в Бишкеке недорого ❤️ Секс шоп Privat'
-      if seo_title.size > 60
-        assign seo_title = page_title | append: ' — купить в Бишкеке ❤️ Секс шоп Privat'
-      endif
-      if seo_title.size > 60
-        assign seo_title = page_title | append: ' — купить в Бишкеке ❤️ Privat'
-      endif
-      if seo_title.size > 60
-        assign seo_title = page_title | append: ' ❤️ Секс шоп Privat | Бишкек'
-      endif
-      if seo_title.size > 60
-        assign seo_title = page_title | append: ' ❤️ Privat Бишкек'
+    elsif template contains 'collection' and collection != blank
+      if collection.metafields.custom.seo_title != blank
+        assign seo_title = collection.metafields.custom.seo_title
+      else
+        assign c_base = collection.title
+        assign seo_title = c_base | append: ' — купить в Бишкеке недорого ❤️ Секс шоп Privat'
+        if seo_title.size > 60
+          assign seo_title = c_base | append: ' — купить в Бишкеке ❤️ Секс шоп Privat'
+        endif
+        if seo_title.size > 60
+          assign seo_title = c_base | append: ' — купить в Бишкеке ❤️ Privat'
+        endif
+        if seo_title.size > 60
+          assign seo_title = c_base | append: ' ❤️ Секс шоп Privat | Бишкек'
+        endif
+        if seo_title.size > 60
+          assign seo_title = c_base | append: ' ❤️ Privat Бишкек'
+        endif
       endif
     endif
   -%}
-  {%- assign meta_description = page_description | default: shop.description -%}
   {%- liquid
-    # если SEO description не задан, Shopify подставляет в page_description обрезок
-    # тела описания товара/коллекции — распознаём это по совпадению начала текста
-    # и считаем «не заданным», чтобы сработала наша формула ниже
-    if meta_description != blank
-      assign md_head = meta_description | slice: 0, 100
-      assign body_head = '~none~'
-      if template contains 'product'
-        assign body_head = product.description | strip_html | strip | slice: 0, 100
-      elsif template contains 'collection'
-        assign body_head = collection.description | strip_html | strip | slice: 0, 100
+    # Meta description (цель 130–160 симв.): для товаров и коллекций — всегда формула
+    # (переопределение — метаполе custom.seo_description); для остальных шаблонов
+    # берём заданный page_description, а при его отсутствии — свой fallback на шаблон.
+    assign meta_description = ''
+    if template contains 'product'
+      if product.metafields.custom.seo_description != blank
+        assign meta_description = product.metafields.custom.seo_description
+      else
+        assign price_str = product.price | money_without_currency | strip_html | remove: ' '
+        assign p_base = product.title
+        if product.metafields.custom.h1_suffix != blank
+          assign p_base = p_base | append: ' (' | append: product.metafields.custom.h1_suffix | append: ')'
+        endif
+        assign meta_description = 'Купить ' | append: p_base | append: ' в Бишкеке — ' | append: price_str | append: ' сом. Анонимная доставка за 1 час, дискретная упаковка. Секс шоп PRIVAT.'
       endif
-      if md_head == body_head
-        assign meta_description = ''
+    elsif template contains 'list-collections'
+      assign meta_description = 'Все категории товаров секс шопа PRIVAT в Бишкеке: игрушки, бельё, смазки, БДСМ и другое. Анонимная доставка за 1 час по Бишкеку.'
+    elsif template contains 'collection' and collection != blank
+      if collection.metafields.custom.seo_description != blank
+        assign meta_description = collection.metafields.custom.seo_description
+      else
+        assign meta_description = collection.title | append: ' — купить в Бишкеке с анонимной доставкой за 1 час. Секс шоп PRIVAT: дискретная упаковка, оплата при получении. ☎ 0500-690-690'
+      endif
+    elsif template contains 'blog' or template contains 'article'
+      assign meta_description = page_description | default: 'Блог PRIVAT — честные статьи об интимной жизни, гайды по выбору игрушек и уходу за ними. Без стеснения и мифов.'
+    elsif template contains 'page'
+      assign meta_description = page_description | default: ''
+      if meta_description == blank
+        assign meta_description = page.title | append: ' — секс шоп PRIVAT, Бишкек. Магазин товаров для взрослых: анонимная доставка за 1 час, дискретная упаковка, консультации без неловкости.'
+      endif
+    else
+      assign meta_description = page_description | default: shop.description
+      if meta_description == blank
+        assign meta_description = 'PRIVAT — магазин товаров для взрослых в Бишкеке. Бережный подбор без неловкости, анонимная упаковка, доставка за 1 час. ☎ 0500-690-690'
       endif
     endif
   -%}
-  {%- if meta_description == blank -%}
-    {%- comment -%} у страниц без своего description — свой fallback на каждый шаблон, чтобы не плодить дубли {%- endcomment -%}
-    {%- if template contains 'blog' or template contains 'article' -%}
-      {%- assign meta_description = 'Блог PRIVAT — честные статьи об интимной жизни, гайды по выбору игрушек и уходу за ними. Без стеснения и мифов.' -%}
-    {%- elsif template contains 'list-collections' -%}
-      {%- assign meta_description = 'Все категории товаров секс шопа PRIVAT в Бишкеке: игрушки, бельё, смазки, БДСМ и другое. Анонимная доставка за 1 час по Бишкеку.' -%}
-    {%- elsif template contains 'collection' -%}
-      {%- assign meta_description = collection.title | append: ' — купить в Бишкеке с анонимной доставкой за 1 час. Секс шоп PRIVAT: дискретная упаковка, оплата при получении. ☎ 0500-690-690' -%}
-    {%- elsif template contains 'product' -%}
-      {%- assign price_str = product.price | money_without_currency | strip_html | remove: ' ' -%}
-      {%- assign meta_description = 'Купить ' | append: product.title | append: ' в Бишкеке — ' | append: price_str | append: ' сом. Анонимная доставка за 1 час, дискретная упаковка. Секс шоп PRIVAT.' -%}
-    {%- elsif template contains 'page' -%}
-      {%- assign meta_description = page.title | append: ' — секс шоп PRIVAT, Бишкек. Магазин товаров для взрослых: анонимная доставка за 1 час, дискретная упаковка, консультации без неловкости.' -%}
-    {%- else -%}
-      {%- assign meta_description = 'PRIVAT — магазин товаров для взрослых в Бишкеке. Бережный подбор без неловкости, анонимная упаковка, доставка за 1 час. ☎ 0500-690-690' -%}
-    {%- endif -%}
-  {%- endif -%}
   <meta name="description" content="{{ meta_description | escape }}">
   {% render 'seo-meta', meta_description: meta_description, seo_title: seo_title %}
   <title>
