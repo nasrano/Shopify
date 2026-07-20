@@ -1,5 +1,10 @@
 <section class="privat-blog">
-  <h1 class="privat-page__title">{{ blog.title }}</h1>
+  {%- comment -%}
+    H1 держим чистым и коротким. Длинный SEO-текст из поля «Заголовок» блога (blog.title)
+    остаётся только в теге <title> (см. layout/theme.liquid). Переопределить H1 можно
+    метаполем blog custom.h1; по умолчанию — «Блог».
+  {%- endcomment -%}
+  <h1 class="privat-page__title">{{ blog.metafields.custom.h1 | default: 'Блог' }}</h1>
 
   {% paginate blog.articles by 12 %}
     <div class="privat-blog__grid">
