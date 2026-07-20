@@ -746,12 +746,26 @@
     }
     function initAuto() {
       var wrap = document.getElementById('privat-loadmore');
-      if (!wrap || !('IntersectionObserver' in window)) return;  // без IO остаётся кнопка «Показать ещё»
-      wrap.classList.add('is-auto');   // прячем кнопку (CSS), показываем спиннер при загрузке
-      var io = new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) if (entries[i].isIntersecting) { checkAndLoad(); break; }
-      }, { rootMargin: '600px 0px' });
-      io.observe(wrap);
+      if (!wrap) return;
+      wrap.classList.add('is-auto');   // авто-режим: прячем кнопку (CSS), спиннер при загрузке
+      // Основной механизм — IntersectionObserver
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) if (entries[i].isIntersecting) { checkAndLoad(); break; }
+        }, { rootMargin: '600px 0px' });
+        io.observe(wrap);
+      }
+      // Подстраховка обычным скроллом (тема скроллит внутри #privat-scroller;
+      // capture ловит scroll с любого контейнера, даже если IO не сработал)
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { ticking = false; checkAndLoad(); });
+      }
+      document.addEventListener('scroll', onScroll, { passive: true, capture: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      checkAndLoad();  // короткая первая страница — сразу дотягиваем
     }
     if (document.readyState !== 'loading') initAuto();
     else document.addEventListener('DOMContentLoaded', initAuto);
