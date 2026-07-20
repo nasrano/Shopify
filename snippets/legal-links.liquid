@@ -8,7 +8,7 @@
 {%- assign m = linklists[settings.legal_menu] -%}
 {%- if m.links.size > 0 -%}
   {%- for link in m.links -%}
-    <a href="{{ link.url }}" class="{{ link_class }}">{{ link.title }}</a>
+    <a href="{% render 'nav-url', url: link.url %}" class="{{ link_class }}">{{ link.title }}</a>
   {%- endfor -%}
 {%- else -%}
   {%- assign p_refund = nil -%}

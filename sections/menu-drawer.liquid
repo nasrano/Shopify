@@ -12,7 +12,7 @@
     {% if promo_menu.links.size > 0 %}
       <div class="privat-drawer__subhead">Подборки</div>
       {% for link in promo_menu.links %}
-        <a href="{{ link.url }}" class="privat-drawer__sublink">{{ link.title }}</a>
+        <a href="{% render 'nav-url', url: link.url %}" class="privat-drawer__sublink">{{ link.title }}</a>
       {% endfor %}
     {% endif %}
 

@@ -1,0 +1,14 @@
+{%- comment -%}
+  Нормализация URL пункта меню.
+  Абсолютные ссылки на собственный домен (в т.ч. www.privat.kg) приводятся к
+  относительным, чтобы навигация никогда не уводила на старый сайт — что бы ни
+  было прописано в самом пункте меню. Внешние ссылки не трогаются.
+  Использование: <a href="{% render 'nav-url', url: link.url %}">
+{%- endcomment -%}
+{%- liquid
+  assign u = url | remove: 'https://www.privat.kg' | remove: 'http://www.privat.kg' | remove: 'https://privat.kg' | remove: 'http://privat.kg'
+  if u == blank
+    assign u = routes.root_url
+  endif
+  echo u
+-%}

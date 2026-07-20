@@ -6,7 +6,7 @@
 {%- assign m = linklists[settings.footer_menu] -%}
 {%- if m.links.size > 0 -%}
   {%- for link in m.links -%}
-    <a href="{{ link.url }}" class="{{ link_class }}">{{ link.title }}</a>
+    <a href="{% render 'nav-url', url: link.url %}" class="{{ link_class }}">{{ link.title }}</a>
   {%- endfor -%}
 {%- else -%}
   <a href="{{ routes.root_url }}" class="{{ link_class }}">Главная</a>
