@@ -161,11 +161,14 @@ def sync_inventory(st, skumap):
     pids = sorted({q["product_id"][0] for q in quants})
     sku_of = {}
     for i in range(0, len(pids), 500):
-        for p in oread("product.product", pids[i:i + 500], ["default_code"]):
-            sku_of[p["id"]] = (p.get("default_code") or "").strip()
+        # active=False -> архивный дубль с тем же default_code; его квоты НЕ считаем,
+        # иначе сток разных товаров склеивается (архивные -1/+1 портят сумму активного)
+        for p in oread("product.product", pids[i:i + 500], ["default_code", "active"]):
+            if p.get("active"):
+                sku_of[p["id"]] = (p.get("default_code") or "").strip()
     stock = {}
     for q in quants:
-        sku = sku_of.get(q["product_id"][0])
+        sku = sku_of.get(q["product_id"][0])   # у архивных None -> квота пропускается
         if not sku: continue
         leaf = q["location_id"][1].split("/")[-1]
         loc = LOCATION_MAP.get(leaf)
@@ -203,33 +206,59 @@ def sync_inventory(st, skumap):
     return stock, changed_skus
 
 
-# ---------------- 1b. видимость: нулевой остаток -> Скрытый (unlisted) ----------------
-def manage_visibility(skumap, stock):
-    """Товар с нулевым суммарным остатком -> UNLISTED (из сеток/поиска пропадает, прямая
-    ссылка живёт — SEO не страдает). Появился остаток -> ACTIVE. Сверяем ВСЕ товары каждый
-    прогон (самоисцеление), но мутации шлём только на реально несовпавшие. Трогаем лишь
-    ACTIVE/UNLISTED и только трекаемые: DRAFT/ARCHIVED и нетрекаемые (напр. «M») не трогаем."""
+# ---------------- 1b. видимость: РЕШЕНИЕ ВНУТРИ SHOPIFY по остатку ----------------
+def manage_visibility(st, skumap, stock):
+    """Решение принимается ВНУТРИ Shopify по его же остатку (который демон синкнул из Odoo):
+    суммарный остаток по обеим локациям 0 -> UNLISTED (из коллекций/поиска/sitemap уходит,
+    прямая ссылка 200 OK), есть остаток -> ACTIVE. Odoo здесь не читается — по нему идёт
+    отдельная сверка (reconcile), и логика совпадает, т.к. остаток Shopify = остаток Odoo.
+
+    Запись решается по собственному кэшу демона vis_cache (что он сам выставил), а НЕ по
+    статусу из bulk-запроса productVariants — тот отдаёт устаревшее значение (read-replica
+    лаг) и раньше давал ложную качель. Статус Shopify нужен лишь чтобы не трогать DRAFT
+    (новый товар на модерации) и ARCHIVED — они стабильны. Нетрекаемые (напр. «M») пропускаем."""
     M = "mutation($input: ProductInput!) { productUpdate(input: $input) { userErrors { field message } } }"
+    vis = st.get("vis_cache", {})
     hid = shown = 0
     for sku, info in skumap.items():
         if not info.get("tracked"):
             continue
         cur = info.get("status")
-        if cur not in ("ACTIVE", "UNLISTED"):
+        if cur not in ("ACTIVE", "UNLISTED"):   # DRAFT/ARCHIVED не трогаем
             continue
-        total = sum(stock.get(sku, {}).values())
+        total = sum(stock.get(sku, {}).values())   # остаток Shopify (= синкнутый из Odoo)
         desired = "ACTIVE" if total > 0 else "UNLISTED"
-        if cur == desired:
-            continue
+        if sku not in vis:
+            vis[sku] = cur                        # сид из текущего статуса Shopify
+        if vis[sku] == desired:
+            continue                              # уже выставляли — лаг bulk-чтения игнорируем
         r = gql(M, {"input": {"id": info["productId"], "status": desired}})["productUpdate"]
         if r["userErrors"]:
             log(f"видимость {sku} ошибка: {r['userErrors']}")
         else:
+            vis[sku] = desired
             info["status"] = desired
             if desired == "UNLISTED": hid += 1
             else: shown += 1
+    st["vis_cache"] = vis
     if hid or shown:
         log(f"видимость: скрыто {hid}, возвращено на витрину {shown}")
+
+
+# ---------------- сверка с Odoo (только проверка, ничего не меняет) ----------------
+def reconcile(skumap, stock):
+    """Сверяет логику: активных в Shopify (по кэшу видимости/остатку) vs видимых в Odoo
+    (is_published И остаток на варианте). Пишет расхождение в лог — ничего не меняет."""
+    active_sh = sum(1 for sku, i in skumap.items()
+                    if i.get("tracked") and sum(stock.get(sku, {}).values()) > 0)
+    try:
+        vis_odoo = okw("product.product", "search_count",
+                       [["default_code", "!=", False], ["is_published", "=", True],
+                        ["qty_available", ">", 0]])
+    except Exception as e:
+        log(f"сверка: не смог прочитать Odoo ({str(e)[:80]})"); return
+    diff = active_sh - vis_odoo
+    log(f"сверка: активных Shopify(по остатку)={active_sh} vs видимых Odoo={vis_odoo} | расхождение={diff}")
 
 
 # ---------------- 2. заказы ----------------
@@ -499,7 +528,8 @@ def run():
         st = load_state()
         skumap = shopify_variants()
         stock, changed_skus = sync_inventory(st, skumap)
-        manage_visibility(skumap, stock)
+        manage_visibility(st, skumap, stock)
+        reconcile(skumap, stock)
         sync_orders(st, skumap)
         sync_products(st, skumap)
         save_state(st)
