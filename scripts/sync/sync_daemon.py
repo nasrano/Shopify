@@ -23,6 +23,9 @@ SYNC_DIR = os.environ.get("SYNC_DIR") or os.path.expanduser("~/Downloads/sync")
 STATE_F = os.path.join(SYNC_DIR, "state.json")
 LOCK_F = os.path.join(SYNC_DIR, "sync.lock")
 DISABLED_F = os.path.join(SYNC_DIR, "DISABLED")   # существует -> прогоны пропускаются
+# существует -> ПОСТ-ПЕРЕЕЗДНЫЙ режим: Odoo выключен, видимость держим по остатку самого
+# Shopify (портал сам списывает сток при заказе). Синк из Odoo не запускается.
+SHOPIFY_ONLY_F = os.path.join(SYNC_DIR, "SHOPIFY_ONLY")
 
 # --- реквизиты: из окружения, иначе из ~/Downloads/sync/.env ---
 def load_env():
@@ -518,6 +521,41 @@ def sync_products(st, skumap):
     st["prices_cache"] = cache
 
 
+# ---------------- ПОСТ-ПЕРЕЕЗД: видимость по собственному остатку Shopify ----------------
+def run_shopify_only(st):
+    """Odoo выключен. Держим active/unlisted по остатку самого Shopify (портал списывает
+    сток при продаже). Один проход: читаем sku + статус + остаток, решаем как обычно."""
+    q = """
+    query($cursor: String) {
+      productVariants(first: 200, after: $cursor) {
+        pageInfo { hasNextPage endCursor }
+        nodes { sku product { id status }
+          inventoryItem { tracked
+            inventoryLevels(first: 5) { nodes { quantities(names: ["available"]) { quantity } } } } }
+      }
+    }"""
+    skumap, sh_stock, cursor = {}, {}, None
+    while True:
+        page = gql(q, {"cursor": cursor})["productVariants"]
+        for v in page["nodes"]:
+            sku = (v["sku"] or "").strip()
+            if not sku:
+                continue
+            it = v["inventoryItem"]
+            skumap.setdefault(sku, {"productId": v["product"]["id"],
+                                    "status": v["product"]["status"], "tracked": it["tracked"]})
+            tot = sum(x["quantity"] for lvl in it["inventoryLevels"]["nodes"]
+                      for x in lvl["quantities"])
+            sh_stock[sku] = sh_stock.get(sku, 0) + tot
+        if not page["pageInfo"]["hasNextPage"]:
+            break
+        cursor = page["pageInfo"]["endCursor"]
+    stock = {sku: {"shopify": tot} for sku, tot in sh_stock.items()}
+    manage_visibility(st, skumap, stock)
+    active = sum(1 for s, i in skumap.items() if i.get("tracked") and sh_stock.get(s, 0) > 0)
+    log(f"пост-переезд: активных по остатку Shopify = {active}")
+
+
 def run():
     if os.path.exists(DISABLED_F):
         log("прогон пропущен: файл DISABLED (удалите его для включения синка)"); return
@@ -526,6 +564,12 @@ def run():
     open(LOCK_F, "w").write(str(os.getpid()))
     try:
         st = load_state()
+        if os.path.exists(SHOPIFY_ONLY_F):
+            # пост-переездный режим: Odoo не трогаем, видимость по остатку Shopify
+            run_shopify_only(st)
+            save_state(st)
+            log("прогон завершён (режим Shopify-only)")
+            return
         skumap = shopify_variants()
         stock, changed_skus = sync_inventory(st, skumap)
         manage_visibility(st, skumap, stock)
