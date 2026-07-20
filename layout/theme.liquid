@@ -199,7 +199,9 @@
     (function () {
       try {
         var saved = localStorage.getItem('privat-theme');
-        if (saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Светлая тема — по умолчанию. Тёмная включается только если пользователь
+        // сам переключил тумблер (системная prefers-color-scheme намеренно игнорируется).
+        if (saved === 'dark') {
           document.documentElement.setAttribute('data-theme', 'dark');
         }
       } catch (e) {}
