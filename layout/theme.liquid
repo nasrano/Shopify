@@ -173,6 +173,18 @@
     <link rel="icon" type="image/png" href="{{ shop.brand.logo | image_url: width: 32, height: 32 }}">
   {%- endif -%}
 
+  {%- comment -%} LCP: preload баннера главной ИЗ HEAD — браузер находит его сразу, а не в теле после CSS/шрифтов. {%- endcomment -%}
+  {%- if template == 'index' and settings.hero_mobile -%}
+    <link rel="preload" as="image" media="(max-width:719px)" href="{{ settings.hero_mobile | image_url: width: 800, format: 'webp' }}"
+      imagesrcset="{{ settings.hero_mobile | image_url: width: 600, format: 'webp' }} 600w, {{ settings.hero_mobile | image_url: width: 800, format: 'webp' }} 800w, {{ settings.hero_mobile | image_url: width: 1000, format: 'webp' }} 1000w"
+      imagesizes="100vw" fetchpriority="high">
+  {%- endif -%}
+  {%- if template == 'index' and settings.hero_desktop -%}
+    <link rel="preload" as="image" media="(min-width:720px)" href="{{ settings.hero_desktop | image_url: width: 1800, format: 'webp' }}"
+      imagesrcset="{{ settings.hero_desktop | image_url: width: 1200, format: 'webp' }} 1200w, {{ settings.hero_desktop | image_url: width: 1800, format: 'webp' }} 1800w"
+      imagesizes="100vw" fetchpriority="high">
+  {%- endif -%}
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"

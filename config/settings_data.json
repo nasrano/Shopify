@@ -10,6 +10,8 @@
 {
   "current": {
     "favicon": "shopify://shop_images/favicon.svg",
+    "hero_desktop": "shopify://shop_images/hero-desktop.jpg",
+    "hero_mobile": "shopify://shop_images/hero-mobile.jpg",
     "portal_url": "https://portal.privat.kg",
     "categories_menu": "categories",
     "promo_menu": "link-list",

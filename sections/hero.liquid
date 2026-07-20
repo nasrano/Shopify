@@ -1,13 +1,10 @@
-{%- assign img_desktop = section.settings.image | default: section.settings.image_mobile -%}
-{%- assign img_mobile = section.settings.image_mobile | default: section.settings.image -%}
-{%- if img_mobile -%}
-  <link rel="preload" as="image" media="(max-width:719px)" href="{{ img_mobile | image_url: width: 800, format: 'webp' }}"
-    imagesrcset="{{ img_mobile | image_url: width: 600, format: 'webp' }} 600w, {{ img_mobile | image_url: width: 800, format: 'webp' }} 800w, {{ img_mobile | image_url: width: 1000, format: 'webp' }} 1000w"
-    imagesizes="100vw" fetchpriority="high">
-  <link rel="preload" as="image" media="(min-width:720px)" href="{{ img_desktop | image_url: width: 1800, format: 'webp' }}"
-    imagesrcset="{{ img_desktop | image_url: width: 1200, format: 'webp' }} 1200w, {{ img_desktop | image_url: width: 1800, format: 'webp' }} 1800w"
-    imagesizes="100vw" fetchpriority="high">
-{%- endif -%}
+{%- comment -%}
+  Картинки берём из настроек темы (settings.hero_*) — та же ссылка, что preload в <head>
+  (layout/theme.liquid), поэтому баннер грузится рано (LCP). Настройки секции — запасной вариант.
+  Здесь preload НЕ дублируем — он уже в head.
+{%- endcomment -%}
+{%- assign img_desktop = settings.hero_desktop | default: section.settings.image | default: section.settings.image_mobile -%}
+{%- assign img_mobile = settings.hero_mobile | default: section.settings.image_mobile | default: section.settings.image -%}
 <section class="privat-hero">
   <div class="privat-hero__img" id="privat-hero-img">
     {%- if img_mobile -%}

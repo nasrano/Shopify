@@ -19,6 +19,25 @@
     ]
   },
   {
+    "name": "Главная: баннер (Hero)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Картинки баннера главной. Задавайте их ЗДЕСЬ — тема подгрузит их в первую очередь (быстрая загрузка, хороший PageSpeed). Секция Hero покажет эти же картинки."
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_desktop",
+        "label": "Баннер — десктоп"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_mobile",
+        "label": "Баннер — мобильный"
+      }
+    ]
+  },
+  {
     "name": "Заказ и WhatsApp",
     "settings": [
       {
