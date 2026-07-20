@@ -245,7 +245,7 @@
   function buildWaOrderMsg(code, items, total) {
     var lines = ['Здравствуйте! Я хочу оформить заказ (заявка ' + code + '):', ''];
     items.forEach(function (it, n) {
-      lines.push((n + 1) + ') ' + it.title + ' х ' + it.qty + ' = ' + formatMoney(it.sum));
+      lines.push((n + 1) + ') ' + it.title + (it.sku ? ' (код ' + it.sku + ')' : '') + ' х ' + it.qty + ' = ' + formatMoney(it.sum));
     });
     lines.push('', 'Общая сумма: ' + formatMoney(total));
     return lines.join('\n');
@@ -291,7 +291,7 @@
     if (!btn || !btn.hasAttribute('data-wa-checkout')) return;
     var code = newOrderCode();
     var items = cart.items.map(function (i) {
-      return { title: i.product_title, qty: i.quantity, sum: (i.final_line_price != null ? i.final_line_price : i.price * i.quantity) };
+      return { title: i.product_title, sku: i.sku, qty: i.quantity, sum: (i.final_line_price != null ? i.final_line_price : i.price * i.quantity) };
     });
     btn.href = 'https://wa.me/' + btn.getAttribute('data-wa-phone') + '?text=' + encodeURIComponent(buildWaOrderMsg(code, items, cart.total_price));
     btn.setAttribute('data-order-code', code);
@@ -605,11 +605,10 @@
       if (buyNow) {
         var orderCode = newOrderCode();
         var itemTitle = buyNow.getAttribute('data-product-title') +
-          (v.sku ? ' (код ' + v.sku + ')' : '') +
           (select ? ', ' + v.title : '');
         var itemSum = v.price * qty;
         buyNow.href = 'https://wa.me/' + buyNow.getAttribute('data-wa-phone') + '?text=' +
-          encodeURIComponent(buildWaOrderMsg(orderCode, [{ title: itemTitle, qty: qty, sum: itemSum }], itemSum));
+          encodeURIComponent(buildWaOrderMsg(orderCode, [{ title: itemTitle, sku: v.sku, qty: qty, sum: itemSum }], itemSum));
         buyNow.setAttribute('data-order-code', orderCode);
         buyNow.setAttribute('data-order-total', String(itemSum));
       }

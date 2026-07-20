@@ -49,7 +49,7 @@
       {%- capture wa_cart_msg -%}
 Здравствуйте! Я хочу оформить заказ:{{ nl }}
 {%- for item in cart.items -%}
-{{ nl }}{{ forloop.index }}) {{ item.product.title }} х {{ item.quantity }} = {{ item.final_line_price | money }}
+{{ nl }}{{ forloop.index }}) {{ item.product.title }}{% if item.sku != blank %} (код {{ item.sku }}){% endif %} х {{ item.quantity }} = {{ item.final_line_price | money }}
 {%- endfor -%}
 {{ nl }}{{ nl }}Общая сумма: {{ cart.total_price | money }}
       {%- endcapture -%}
