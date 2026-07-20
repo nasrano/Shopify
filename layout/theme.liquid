@@ -45,6 +45,32 @@
         if seo_title.size > 60
           assign seo_title = t_base | append: ' | PRIVAT'
         endif
+        # длинное имя не влезло даже с ' | PRIVAT' -> режем ИМЯ по границе слова и
+        # добавляем код товара для уникальности (суффикс тут опускаем — код надёжнее).
+        if seo_title.size > 66
+          assign sku_code = product.selected_or_first_available_variant.sku
+          assign code_part = ''
+          if sku_code != blank
+            assign code_part = ' · ' | append: sku_code
+          endif
+          assign budget = 66 | minus: code_part.size | minus: 9
+          assign short_name = ''
+          assign _words = product.title | split: ' '
+          for _w in _words
+            assign _trial = short_name | append: _w | append: ' '
+            assign _tl = _trial | strip | size
+            if _tl <= budget
+              assign short_name = _trial
+            else
+              break
+            endif
+          endfor
+          assign short_name = short_name | strip
+          if short_name == blank
+            assign short_name = product.title | truncate: budget, ''
+          endif
+          assign seo_title = short_name | append: code_part | append: ' | PRIVAT'
+        endif
       endif
     elsif template == 'index'
       if page_title.size < 50
