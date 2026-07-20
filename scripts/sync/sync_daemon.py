@@ -182,7 +182,8 @@ def sync_inventory(st, skumap):
         if sku not in skumap: continue
         for loc_name, loc_id in locs.items():
             want = int(stock.get(sku, {}).get(loc_name, 0))
-            had = cache.get(sku, {}).get(loc_name)
+            # кэш хранит только локации с остатком; отсутствие = 0, иначе фантомные «изменения»
+            had = cache.get(sku, {}).get(loc_name, 0)
             if had != want:
                 changes.append({"inventoryItemId": skumap[sku]["itemId"],
                                 "locationId": loc_id, "quantity": want})
