@@ -682,33 +682,80 @@
     sync();
   })();
 
-  /* ---------------- collection: load more ---------------- */
-  document.addEventListener('click', function (e) {
-    var btn = e.target.closest('[data-load-more]');
-    if (!btn) return;
-    e.preventDefault();
-    var url = btn.getAttribute('data-next-url');
-    if (!url || btn.disabled) return;
-    btn.disabled = true;
-    fetch(url).then(function (r) { return r.text(); }).then(function (html) {
-      var doc = new DOMParser().parseFromString(html, 'text/html');
-      var grid = document.getElementById('privat-coll-grid');
-      var newGrid = doc.getElementById('privat-coll-grid');
-      if (grid && newGrid) {
-        while (newGrid.firstElementChild) grid.appendChild(newGrid.firstElementChild);
-      }
-      var shownEl = document.querySelector('[data-shown-count]');
-      if (shownEl && grid) shownEl.textContent = String(grid.querySelectorAll('.privat-card').length);
-      var nextBtn = doc.querySelector('[data-load-more]');
-      if (nextBtn && nextBtn.getAttribute('data-next-url')) {
-        btn.setAttribute('data-next-url', nextBtn.getAttribute('data-next-url'));
-        btn.disabled = false;
-      } else {
-        btn.remove();
-      }
-      syncFavButtons();
-    }).catch(function () { btn.disabled = false; });
-  });
+  /* ---------------- collection: автоподгрузка при скролле ---------------- */
+  (function () {
+    var loading = false;
+
+    function doLoadMore(btn, onDone) {
+      var url = btn && btn.getAttribute('data-next-url');
+      if (!url || loading) { if (onDone) onDone(); return; }
+      loading = true;
+      var wrap = document.getElementById('privat-loadmore');
+      var spin = wrap && wrap.querySelector('.privat-loadmore__spin');
+      if (spin) spin.hidden = false;
+      if (btn.disabled !== undefined) btn.disabled = true;
+      fetch(url).then(function (r) { return r.text(); }).then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var grid = document.getElementById('privat-coll-grid');
+        var newGrid = doc.getElementById('privat-coll-grid');
+        if (grid && newGrid) {
+          while (newGrid.firstElementChild) grid.appendChild(newGrid.firstElementChild);
+        }
+        var shownEl = document.querySelector('[data-shown-count]');
+        if (shownEl && grid) shownEl.textContent = String(grid.querySelectorAll('.privat-card').length);
+        var nextBtn = doc.querySelector('[data-load-more]');
+        if (nextBtn && nextBtn.getAttribute('data-next-url')) {
+          btn.setAttribute('data-next-url', nextBtn.getAttribute('data-next-url'));
+          if (btn.disabled !== undefined) btn.disabled = false;
+        } else if (wrap) {
+          wrap.remove();           // страниц больше нет
+        }
+        syncFavButtons();
+        loading = false;
+        if (spin) spin.hidden = true;
+        if (onDone) onDone();
+      }).catch(function () {
+        loading = false;
+        if (spin) spin.hidden = true;
+        if (btn.disabled !== undefined) btn.disabled = false;
+        if (onDone) onDone();
+      });
+    }
+
+    // Фолбэк: ручной клик (если IntersectionObserver недоступен — кнопка видна)
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-load-more]');
+      if (!btn) return;
+      e.preventDefault();
+      doLoadMore(btn);
+    });
+
+    // Автоподгрузка: как только «хвост» списка подходит к экрану — тянем следующую страницу
+    function nearViewport(el, margin) {
+      var r = el.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      return r.top <= vh + margin && r.bottom >= -margin;
+    }
+    function checkAndLoad() {
+      var wrap = document.getElementById('privat-loadmore');
+      if (!wrap || loading) return;
+      var btn = wrap.querySelector('[data-load-more]');
+      if (!btn || !btn.getAttribute('data-next-url')) return;
+      if (!nearViewport(wrap, 600)) return;
+      doLoadMore(btn, checkAndLoad);   // после подгрузки проверяем снова — цепочка для коротких страниц
+    }
+    function initAuto() {
+      var wrap = document.getElementById('privat-loadmore');
+      if (!wrap || !('IntersectionObserver' in window)) return;  // без IO остаётся кнопка «Показать ещё»
+      wrap.classList.add('is-auto');   // прячем кнопку (CSS), показываем спиннер при загрузке
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) if (entries[i].isIntersecting) { checkAndLoad(); break; }
+      }, { rootMargin: '600px 0px' });
+      io.observe(wrap);
+    }
+    if (document.readyState !== 'loading') initAuto();
+    else document.addEventListener('DOMContentLoaded', initAuto);
+  })();
 
   /* ---------------- init ---------------- */
   document.addEventListener('DOMContentLoaded', function () {

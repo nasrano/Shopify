@@ -160,6 +160,7 @@
     {% if paginate.next %}
       <div class="privat-loadmore" id="privat-loadmore">
         <button type="button" class="privat-loadmore__btn" data-load-more data-next-url="{{ paginate.next.url }}">Показать ещё</button>
+        <span class="privat-loadmore__spin" hidden aria-hidden="true"></span>
       </div>
     {% endif %}
   </section>

@@ -441,6 +441,10 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-loadmore__btn:hover{background:var(--chip)}
 .privat-loadmore__btn[disabled]{opacity:.6;cursor:default}
 .privat-loadmore__meta{font-size:12px;color:var(--sub)}
+.privat-loadmore.is-auto{min-height:32px;padding:26px 0 10px}
+.privat-loadmore.is-auto .privat-loadmore__btn{display:none}
+.privat-loadmore__spin{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--line);border-top-color:var(--ink);animation:privat-spin .7s linear infinite}
+@keyframes privat-spin{to{transform:rotate(360deg)}}
 .privat-seo{margin-top:20px;padding:26px 22px 10px;background:var(--soft)}
 .privat-seo h3{font-family:'Prata',serif;font-size:16px;font-weight:400;color:var(--ink);margin:0 0 8px}
 .privat-seo p{font-size:13px;line-height:1.65;color:var(--sub);margin:0 0 14px;text-wrap:pretty}
