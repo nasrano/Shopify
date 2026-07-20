@@ -288,6 +288,51 @@ def fulfill_order(order_id):
     return True
 
 
+def fulfill_sweep(limit=400):
+    """Самоисцеление выполненности: берём пачку невыполненных Odoo-заказов, сверяем их
+    delivery_status в Odoo и доставленные (full) отмечаем выполненными. НЕ зависит от того,
+    поймали ли мы момент смены статуса при инкременте — просто подчищает всё, что доставлено
+    в Odoo, но ещё не выполнено в Shopify. Так ни один заказ не останется невыполненным."""
+    nodes, cursor = [], None
+    while len(nodes) < limit:
+        page = gql("""query($c: String) {
+          orders(first: 60, after: $c, query: "fulfillment_status:unfulfilled AND tag:odoo-import") {
+            pageInfo { hasNextPage endCursor }
+            nodes { name fulfillmentOrders(first: 3) { nodes { id status } } }
+          } }""", {"c": cursor})["orders"]
+        nodes += page["nodes"]
+        if not page["pageInfo"]["hasNextPage"]:
+            break
+        cursor = page["pageInfo"]["endCursor"]
+    nodes = nodes[:limit]
+    if not nodes:
+        return
+    names = [n["name"] for n in nodes]
+    full = set()
+    for i in range(0, len(names), 500):
+        for r in okw("sale.order", "search_read",
+                     [["name", "in", names[i:i + 500]], ["delivery_status", "=", "full"]],
+                     fields=["name"]):
+            full.add(r["name"])
+    done = 0
+    for n in nodes:
+        if n["name"] not in full:
+            continue
+        ids = [f["id"] for f in n["fulfillmentOrders"]["nodes"]
+               if f["status"] in ("OPEN", "IN_PROGRESS", "SCHEDULED", "ON_HOLD")]
+        if not ids:
+            continue
+        r = gql("""mutation($f: FulfillmentInput!) {
+                     fulfillmentCreate(fulfillment: $f) { userErrors { message } } }""",
+                {"f": {"lineItemsByFulfillmentOrder": [{"fulfillmentOrderId": i} for i in ids],
+                       "notifyCustomer": False}})["fulfillmentCreate"]
+        if not r["userErrors"]:
+            done += 1
+        time.sleep(0.1)
+    if done:
+        log(f"выполнено (sweep): {done}")
+
+
 def money(x):
     return {"shopMoney": {"amount": f"{x:.2f}", "currencyCode": "KGS"}}
 
@@ -575,6 +620,7 @@ def run():
         manage_visibility(st, skumap, stock)
         reconcile(skumap, stock)
         sync_orders(st, skumap)
+        fulfill_sweep()          # доразметка выполненных (самоисцеление)
         sync_products(st, skumap)
         save_state(st)
         log("прогон завершён")
