@@ -3,7 +3,7 @@
     <div class="privat-crumbs__path">
       <a href="{{ routes.root_url }}">Главная</a>
       <span>›</span>
-      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <a href="{{ blog.url }}">{{ blog.metafields.custom.h1 | default: 'Блог' }}</a>
       <span>›</span>
       <span class="privat-crumbs__current">{{ article.title }}</span>
     </div>
