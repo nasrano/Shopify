@@ -221,26 +221,35 @@ def manage_visibility(st, skumap, stock):
     лаг) и раньше давал ложную качель. Статус Shopify нужен лишь чтобы не трогать DRAFT
     (новый товар на модерации) и ARCHIVED — они стабильны. Нетрекаемые (напр. «M») пропускаем."""
     M = "mutation($input: ProductInput!) { productUpdate(input: $input) { userErrors { field message } } }"
-    vis = st.get("vis_cache", {})
+    # кэш теперь по товару, а не по SKU — старые ключи-артикулы выбрасываем
+    vis = {k: v for k, v in st.get("vis_cache", {}).items() if str(k).startswith("gid://shopify/Product/")}
     hid = shown = 0
+    # Статус принадлежит ТОВАРУ, поэтому и решение принимаем по товару: суммируем остаток
+    # по ВСЕМ его вариантам. Раньше цикл шёл по SKU и последний вариант перезаписывал статус
+    # всего товара — из-за одного нулевого цвета уезжал в UNLISTED весь многоцветный товар.
+    prods = {}
     for sku, info in skumap.items():
         if not info.get("tracked"):
             continue
-        cur = info.get("status")
+        p = prods.setdefault(info["productId"], {"total": 0, "status": info.get("status"), "skus": []})
+        p["total"] += sum(stock.get(sku, {}).values())
+        p["skus"].append(sku)
+    for pid, p in prods.items():
+        cur = p["status"]
         if cur not in ("ACTIVE", "UNLISTED"):   # DRAFT/ARCHIVED не трогаем
             continue
-        total = sum(stock.get(sku, {}).values())   # остаток Shopify (= синкнутый из Odoo)
-        desired = "ACTIVE" if total > 0 else "UNLISTED"
-        if sku not in vis:
-            vis[sku] = cur                        # сид из текущего статуса Shopify
-        if vis[sku] == desired:
+        desired = "ACTIVE" if p["total"] > 0 else "UNLISTED"
+        if pid not in vis:
+            vis[pid] = cur                        # сид из текущего статуса Shopify
+        if vis[pid] == desired:
             continue                              # уже выставляли — лаг bulk-чтения игнорируем
-        r = gql(M, {"input": {"id": info["productId"], "status": desired}})["productUpdate"]
+        r = gql(M, {"input": {"id": pid, "status": desired}})["productUpdate"]
         if r["userErrors"]:
-            log(f"видимость {sku} ошибка: {r['userErrors']}")
+            log(f"видимость {pid} ошибка: {r['userErrors']}")
         else:
-            vis[sku] = desired
-            info["status"] = desired
+            vis[pid] = desired
+            for s in p["skus"]:
+                skumap[s]["status"] = desired
             if desired == "UNLISTED": hid += 1
             else: shown += 1
     st["vis_cache"] = vis
