@@ -528,11 +528,13 @@
     }
     if (idle) idle.style.display = 'none';
     searchTimer = setTimeout(function () {
-      fetch('/search/suggest.json?q=' + encodeURIComponent(q) + '&resources[type]=product&resources[limit]=10&resources[options][fields]=title,product_type,tag,variants.sku')
+      /* unavailable_products=show — иначе Shopify прячет товары, лежащие только на «Складе»:
+         эта локация не выполняет онлайн-заказы, поэтому они считаются недоступными.
+         Каталог их показывает, и поиск должен вести себя так же — товар есть, просто не в зале. */
+      fetch('/search/suggest.json?q=' + encodeURIComponent(q) + '&resources[type]=product&resources[limit]=10&resources[options][unavailable_products]=show&resources[options][fields]=title,product_type,tag,variants.sku')
         .then(function (r) { return r.json(); })
         .then(function (data) {
           var products = (data.resources && data.resources.results && data.resources.results.products) || [];
-          products = products.filter(function (p) { return p.available !== false; });
           results.innerHTML = products.map(function (p) {
             var imgUrl = p.featured_image ? (p.featured_image.url || p.featured_image) : (p.image || '');
             var img = imgUrl ? 'background-image:url(' + imgUrl + ')' : '';
