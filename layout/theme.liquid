@@ -80,7 +80,11 @@
       if collection.metafields.custom.seo_title != blank
         assign seo_title = collection.metafields.custom.seo_title
       else
+        # /collections/all приходит от Shopify как «Продукты» — в выдаче показываем «Каталог»
         assign c_base = collection.title
+        if collection.handle == 'all'
+          assign c_base = 'Каталог'
+        endif
         assign seo_title = c_base | append: ' — купить в Бишкеке недорого ❤️ Секс шоп Privat'
         if seo_title.size > 60
           assign seo_title = c_base | append: ' — купить в Бишкеке ❤️ Секс шоп Privat'
@@ -140,7 +144,13 @@
       if collection.metafields.custom.seo_description != blank
         assign meta_description = collection.metafields.custom.seo_description
       else
-        assign meta_description = collection.title | append: ' — купить в Бишкеке с анонимной доставкой за 1 час. Секс шоп PRIVAT: дискретная упаковка, оплата при получении. ☎ 0500-690-690'
+        # c_base задаётся только в ветке seo_title выше и может быть не определён,
+        # если у коллекции своё метаполе seo_title — считаем имя здесь самостоятельно
+        assign coll_name = collection.title
+        if collection.handle == 'all'
+          assign coll_name = 'Каталог'
+        endif
+        assign meta_description = coll_name | append: ' — купить в Бишкеке с анонимной доставкой за 1 час. Секс шоп PRIVAT: дискретная упаковка, оплата при получении. ☎ 0500-690-690'
       endif
     elsif template contains 'blog' or template contains 'article'
       assign meta_description = page_description | default: 'Блог PRIVAT — честные статьи об интимной жизни, гайды по выбору игрушек и уходу за ними. Без стеснения и мифов.'
@@ -171,6 +181,17 @@
     <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
   {%- elsif shop.brand.logo -%}
     <link rel="icon" type="image/png" href="{{ shop.brand.logo | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  {%- comment -%} LCP страницы товара: главное фото — это и есть самый большой элемент экрана.
+    Без preload браузер узнаёт о нём только дойдя до разметки, уже после CSS. srcset/sizes здесь
+    обязаны совпадать с <img> в main-product.liquid, иначе будет выбран другой кандидат и файл
+    скачается дважды. {%- endcomment -%}
+  {%- if template contains 'product' and product.featured_image -%}
+    <link rel="preload" as="image" fetchpriority="high"
+      href="{{ product.featured_image | image_url: width: 900, format: 'webp' }}"
+      imagesrcset="{{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w, {{ product.featured_image | image_url: width: 900, format: 'webp' }} 900w, {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
+      imagesizes="(min-width: 1080px) 560px, 100vw">
   {%- endif -%}
 
   {%- comment -%} LCP: preload баннера главной ИЗ HEAD — браузер находит его сразу, а не в теле после CSS/шрифтов. {%- endcomment -%}

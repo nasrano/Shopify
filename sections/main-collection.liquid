@@ -4,6 +4,10 @@
   - активный пункт-лист → чипсы = соседи по уровню, активный подсвечен;
   - вне меню (например /collections/all) → чипсы = верхний уровень.
 {%- endcomment -%}
+{%- comment -%} у виртуальной коллекции /collections/all заголовок приходит от Shopify
+как «Продукты» и в админке не редактируется — показываем «Каталог» {%- endcomment -%}
+{%- assign coll_title = collection.title -%}
+{%- if collection.handle == 'all' -%}{%- assign coll_title = 'Каталог' -%}{%- endif -%}
 {%- assign menu = linklists[settings.categories_menu] -%}
 {%- assign chip_links = menu.links -%}
 {%- assign active_chip_url = '' -%}
@@ -97,7 +101,7 @@
       {% endif %}
     {% else %}
       <span>›</span>
-      <span class="privat-crumbs__current">{{ collection.title }}</span>
+      <span class="privat-crumbs__current">{{ coll_title }}</span>
     {% endif %}
   </div>
   {% if crumb1 %}
@@ -141,7 +145,7 @@
 </div>
 
 <div class="privat-coll__head">
-  <h1 class="privat-coll__title">{{ collection.title }}</h1>
+  <h1 class="privat-coll__title">{{ coll_title }}</h1>
 </div>
 
 {% paginate collection.products by section.settings.per_page %}
@@ -179,7 +183,7 @@
         {%- if section.settings.seo_heading != blank -%}
           {{ section.settings.seo_heading }}
         {%- else -%}
-          {{ collection.title }} — купить в Бишкеке с доставкой
+          {{ coll_title }} — купить в Бишкеке с доставкой
         {%- endif -%}
       </h2>
       <p class="privat-seo__lead">{{ section.settings.seo_text }}</p>
