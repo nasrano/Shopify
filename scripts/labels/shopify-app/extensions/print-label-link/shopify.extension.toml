@@ -1,0 +1,15 @@
+# Admin-link расширение: кнопка «Печать ценника» в меню действий карточки товара.
+# url — относительный путь к приложению (application_url в shopify.app.toml).
+# Shopify сам добавит к нему ?shop=...&id=<productId>&host=... — страница /print
+# читает id как товар, тянет вариант(ы) из Admin API и открывает диалог печати.
+api_version = "2026-04"
+
+[[extensions]]
+name = "t:name"
+handle = "print-label-link"
+type = "admin_link"
+uid = "7f3c1a90-2b6e-4d51-9a2f-0c5e8b41d7a2"
+
+  [[extensions.targeting]]
+  target = "admin.product.action.link"
+  url = "/print?auto=1"

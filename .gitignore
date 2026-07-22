@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
 scripts/seo/*.csv
+scripts/labels/.env.local
+scripts/labels/*.zpl
+scripts/labels/templates.json
+scripts/labels/session.key
+.DS_Store

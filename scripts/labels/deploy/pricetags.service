@@ -1,0 +1,22 @@
+# systemd-юнит для страницы печати ценников.
+# Скопировать в /etc/systemd/system/pricetags.service, затем:
+#   systemctl daemon-reload && systemctl enable --now pricetags
+# Слушает 127.0.0.1:8765 — наружу только через nginx (см. nginx-pricetags.conf).
+[Unit]
+Description=Privat pricetags (страница печати ценников Zebra)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/privat-pricetags
+EnvironmentFile=/opt/privat-pricetags/.env
+ExecStart=/opt/privat-pricetags/venv/bin/python /opt/privat-pricetags/pricetag_server.py
+Restart=on-failure
+RestartSec=3
+# нежёсткая изоляция (не мешает демону синка в /opt/privat-sync)
+NoNewPrivileges=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

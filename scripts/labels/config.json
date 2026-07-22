@@ -1,0 +1,14 @@
+{
+  "store": "0fd8ca-b7.myshopify.com",
+  "api_version": "2026-01",
+  "printer_queue": "Zebra_ZPL",
+  "dpi": 203,
+  "label_mm": { "w": 40, "h": 30 },
+  "margin_mm": 1.5,
+  "currency": "сом",
+  "symbology": "auto",
+  "barcode_source": "sku",
+  "barcode_text": false,
+  "code_label": "Код",
+  "price_label": "Цена"
+}

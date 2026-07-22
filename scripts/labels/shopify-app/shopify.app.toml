@@ -1,0 +1,31 @@
+# Shopify-приложение «Ценники PRIVAT».
+# Тонкое: единственная задача — добавить кнопку-ссылку «Печать ценника» в карточку
+# товара. Кнопка открывает страницу печати (наш pricetag_server на портале), а та
+# сама тянет данные из Admin API (client credentials «Privat API») и вызывает диалог
+# печати браузера. OAuth-доступов приложению не нужно — отсюда пустые scopes.
+#
+# ПЕРВЫЙ ЗАПУСК:
+#   1) поставить Shopify CLI:  npm i -g @shopify/cli@latest
+#   2) cd scripts/labels/shopify-app && shopify app config link   (создаст/привяжет
+#      приложение в вашем Dev Dashboard и впишет client_id ниже)
+#   3) заменить application_url на реальный хост страницы печати (портал)
+#   4) shopify app deploy       (зальёт admin-link расширение)
+#   5) установить приложение на магазин 0fd8ca-b7.myshopify.com
+
+client_id = ""                       # заполнит `shopify app config link`
+name = "Ценники PRIVAT"
+handle = "privat-pricetags"
+application_url = "https://print.privat.kg"   # страница печати уже поднята на портале
+embedded = false                     # false -> кнопка открывает URL в обычной вкладке (нужно для window.print)
+
+[access_scopes]
+scopes = ""                          # данные тянет сама страница печати, не приложение
+
+[auth]
+redirect_urls = [ "https://print.privat.kg/api/auth" ]
+
+[webhooks]
+api_version = "2026-04"
+
+[build]
+include_config_on_deploy = true
