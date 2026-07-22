@@ -187,11 +187,14 @@
     Без preload браузер узнаёт о нём только дойдя до разметки, уже после CSS. srcset/sizes здесь
     обязаны совпадать с <img> в main-product.liquid, иначе будет выбран другой кандидат и файл
     скачается дважды. {%- endcomment -%}
-  {%- if template contains 'product' and product.featured_image -%}
-    <link rel="preload" as="image" fetchpriority="high"
-      href="{{ product.featured_image | image_url: width: 900, format: 'webp' }}"
-      imagesrcset="{{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w, {{ product.featured_image | image_url: width: 900, format: 'webp' }} 900w, {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
-      imagesizes="(min-width: 1080px) 560px, 100vw">
+  {%- if template contains 'product' -%}
+    {%- assign lcp_img = product.featured_image | default: product.images.first -%}
+    {%- if lcp_img -%}
+      <link rel="preload" as="image" fetchpriority="high"
+        href="{{ lcp_img | image_url: width: 900, format: 'webp' }}"
+        imagesrcset="{{ lcp_img | image_url: width: 600, format: 'webp' }} 600w, {{ lcp_img | image_url: width: 900, format: 'webp' }} 900w, {{ lcp_img | image_url: width: 1200, format: 'webp' }} 1200w"
+        imagesizes="(min-width: 1080px) 560px, 100vw">
+    {%- endif -%}
   {%- endif -%}
 
   {%- comment -%} LCP: preload баннера главной ИЗ HEAD — браузер находит его сразу, а не в теле после CSS/шрифтов. {%- endcomment -%}
