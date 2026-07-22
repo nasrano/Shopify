@@ -46,9 +46,15 @@
   {% if product.images.size > 1 %}
     <div class="privat-pp__thumbs">
       {% for image in product.images %}
+        {%- comment -%} миниатюра — настоящий <img>, а не CSS-фон: фон нельзя отложить,
+          и все 7 штук грузились сразу, отнимая канал у главного фото {%- endcomment -%}
         <button type="button" class="privat-pp__thumb{% if forloop.first %} is-active{% endif %}"
           data-thumb data-image-url="{{ image | image_url: width: 900, format: 'webp' }}"
-          style="background-image:url({{ image | image_url: width: 128, format: 'webp' }})" aria-label="Фото {{ forloop.index }}"></button>
+          aria-label="Фото {{ forloop.index }}">
+          <img src="{{ image | image_url: width: 128, format: 'webp' }}" alt=""
+            width="64" height="64" decoding="async"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+        </button>
       {% endfor %}
     </div>
   {% endif %}
