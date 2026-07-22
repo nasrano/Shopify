@@ -187,7 +187,6 @@
     Без preload браузер узнаёт о нём только дойдя до разметки, уже после CSS. srcset/sizes здесь
     обязаны совпадать с <img> в main-product.liquid, иначе будет выбран другой кандидат и файл
     скачается дважды. {%- endcomment -%}
-  <!-- lcpdbg tpl="{{ template }}" title="{{ product.title | truncate: 14, '' }}" imgs="{{ product.images.size }}" feat="{{ product.featured_image | image_url: width: 10 }}" -->
   {%- if template contains 'product' -%}
     {%- assign lcp_img = product.featured_image | default: product.images.first -%}
     {%- if lcp_img -%}
