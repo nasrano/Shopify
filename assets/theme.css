@@ -434,7 +434,11 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-catbar__mono{width:36px;height:36px;border-radius:50%;background:var(--chip);color:var(--accent);font-family:'Prata',serif;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
 .privat-catbar__item.is-active{border-color:var(--accent)}
 .privat-catbar__item.is-active .privat-catbar__mono{background:var(--accent);color:var(--accent-ink)}
-.privat-catbar__name{font-size:10.5px;font-weight:600;color:var(--ink);line-height:1.2}
+/* длинные однословные названия («Мультифункциональные») шире карточки в 92px и
+   переносить их не по чему — разрешаем разрыв внутри слова, с переносом по слогам там,
+   где браузер умеет. Карточки в ряду тянутся до высоты самой высокой (flex stretch). */
+.privat-catbar__name{font-size:10.5px;font-weight:600;color:var(--ink);line-height:1.2;
+  overflow-wrap:break-word;word-break:break-word;hyphens:auto}
 .privat-catbar__item.is-active .privat-catbar__name{font-weight:700}
 .privat-coll__head{padding:12px 20px 4px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .privat-coll__title{font-family:'Prata',serif;font-size:26px;font-weight:400;color:var(--ink);margin:0}
