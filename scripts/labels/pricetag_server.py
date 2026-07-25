@@ -325,16 +325,23 @@ def _font(bold, size):
 # ---- Shopify Admin API (тот же способ авторизации, что в scripts/seo) -------
 
 _token_cache = ""
+_token_expires = 0.0   # unix-время, когда токен станет негодным
 
 
-def get_token():
-    """shpat-токен напрямую либо обмен client_id+secret (client_credentials)."""
-    global _token_cache
-    if _token_cache:
+def get_token(force=False):
+    """shpat-токен напрямую либо обмен client_id+secret (client_credentials).
+
+    Токен client_credentials живёт СУТКИ (Shopify отдаёт expires_in ≈ 86400),
+    поэтому кэш держим до срока и обновляем сами: раньше процесс жил неделями
+    с протухшим токеном и все запросы падали в 401.
+    """
+    global _token_cache, _token_expires
+    if _token_cache and not force and time.time() < _token_expires:
         return _token_cache
     tok = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")
     if tok.startswith("shpat_") or tok.startswith("atkn_"):
         _token_cache = tok
+        _token_expires = float("inf")   # выданный вручную токен не истекает
         return tok
     cid = os.environ.get("SHOPIFY_CLIENT_ID", "")
     sec = os.environ.get("SHOPIFY_CLIENT_SECRET", "") or (tok if tok.startswith("shpss_") else "")
@@ -351,17 +358,22 @@ def get_token():
         headers={"Content-Type": "application/json"},
     )
     with urllib.request.urlopen(req, timeout=20) as r:
-        _token_cache = json.loads(r.read())["access_token"]
+        data = json.loads(r.read())
+    _token_cache = data["access_token"]
+    # минута запаса, чтобы не попасть в момент истечения
+    _token_expires = time.time() + float(data.get("expires_in", 86400)) - 60
     return _token_cache
 
 
 def gql(query, variables=None):
     token = get_token()
-    req = urllib.request.Request(
-        f"https://{CONFIG['store']}/admin/api/{CONFIG['api_version']}/graphql.json",
-        data=json.dumps({"query": query, "variables": variables or {}}).encode(),
-        headers={"Content-Type": "application/json", "X-Shopify-Access-Token": token},
-    )
+    def _request(tok):
+        return urllib.request.Request(
+            f"https://{CONFIG['store']}/admin/api/{CONFIG['api_version']}/graphql.json",
+            data=json.dumps({"query": query, "variables": variables or {}}).encode(),
+            headers={"Content-Type": "application/json", "X-Shopify-Access-Token": tok},
+        )
+    req = _request(token)
     for attempt in range(4):
         try:
             with urllib.request.urlopen(req, timeout=25) as r:
@@ -375,6 +387,10 @@ def gql(query, variables=None):
         except urllib.error.HTTPError as e:
             if e.code == 429 or e.code >= 500:
                 time.sleep(2 * (attempt + 1))
+                continue
+            # 401 = токен отозван/протух раньше срока: берём новый и повторяем
+            if e.code == 401 and attempt == 0:
+                req = _request(get_token(force=True))
                 continue
             raise RuntimeError(f"HTTP {e.code}: {e.read().decode()[:200]}")
     raise RuntimeError("Shopify API перегружен, попробуй ещё раз")
