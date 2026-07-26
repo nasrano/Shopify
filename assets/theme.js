@@ -633,7 +633,7 @@
       dot.style.height = size + 'px';
       dot.style.left = startX + 'px';
       dot.style.top = startY + 'px';
-      var photoImg = document.getElementById('privat-pp-photo-img');
+      var photoImg = visibleGalImg() || document.getElementById('privat-pp-photo-img');
       if (photoImg && photoImg.src) dot.style.backgroundImage = 'url(' + photoImg.src + ')';
       var bgColor = photo.getAttribute('data-photo-bg');
       if (bgColor) dot.style.backgroundColor = bgColor;
@@ -649,17 +649,6 @@
     document.addEventListener('click', function (e) {
       if (e.target.closest('[data-pp-qty-inc]')) { qty = Math.min(99, qty + 1); sync(); return; }
       if (e.target.closest('[data-pp-qty-dec]')) { qty = Math.max(1, qty - 1); sync(); return; }
-      var thumb = e.target.closest('[data-thumb]');
-      if (thumb) {
-        var photoImg = document.getElementById('privat-pp-photo-img');
-        if (photoImg) {
-          photoImg.removeAttribute('srcset');
-          photoImg.src = thumb.getAttribute('data-image-url');
-        }
-        document.querySelectorAll('[data-thumb]').forEach(function (t) {
-          t.classList.toggle('is-active', t === thumb);
-        });
-      }
     });
 
     if (select) select.addEventListener('change', sync);
@@ -682,6 +671,123 @@
     });
 
     sync();
+  })();
+
+  /* ---------------- галерея товара: стрелки + свайп ----------------
+     Свайп достаётся бесплатно: кадры лежат в горизонтальном скроллере
+     со снапом, палец листает их родным скроллом с инерцией. Стрелки и
+     миниатюры просто прокручивают этот же скроллер на нужный кадр. */
+  function galTrack() { return document.querySelector('[data-gal-track]'); }
+
+  /* Плавная прокрутка по горизонтали с подстраховкой: там, где плавный режим
+     не работает (headless-браузеры, старые движки), кадр всё равно встаёт на
+     место — иначе стрелка выглядела бы сломанной. */
+  function scrollX(el, left) {
+    var from = el.scrollLeft;
+    if (left === from) return;
+    if (el.scrollTo) el.scrollTo({ left: left, behavior: 'smooth' });
+    else el.scrollLeft = left;
+    setTimeout(function () { if (el.scrollLeft === from) el.scrollLeft = left; }, 120);
+  }
+
+  /* фото, которое сейчас на экране (для полёта в корзину) */
+  function visibleGalImg() {
+    var gal = galTrack();
+    if (!gal || !gal.clientWidth) return null;
+    var imgs = gal.querySelectorAll('.privat-pp__media');
+    return imgs[Math.round(gal.scrollLeft / gal.clientWidth)] || imgs[0] || null;
+  }
+
+  (function () {
+    var gal = galTrack();
+    if (!gal) return;
+    var slides = gal.querySelectorAll('.privat-gal__slide');
+    if (slides.length < 2) return;
+    var prev = document.querySelector('[data-gal-prev]');
+    var next = document.querySelector('[data-gal-next]');
+    var thumbs = [].slice.call(document.querySelectorAll('[data-thumb]'));
+    var cur = 0;
+
+    function index() {
+      return gal.clientWidth ? Math.round(gal.scrollLeft / gal.clientWidth) : cur;
+    }
+    /* состояние стрелок и миниатюр — отдельно от скролла: после свайпа его
+       приносит событие scroll, после клика мы знаем кадр заранее */
+    function showFrame(i) {
+      cur = i;
+      if (prev) prev.disabled = i <= 0;
+      if (next) next.disabled = i >= slides.length - 1;
+      thumbs.forEach(function (t, n) { t.classList.toggle('is-active', n === i); });
+      var active = thumbs[i];
+      var box = active && active.parentNode;
+      // миниатюру подтягиваем руками (scrollIntoView увёл бы всю страницу) и
+      // только если она вышла за край — иначе ряд дёргается на ровном месте
+      if (box && box.clientWidth > active.offsetWidth) {
+        var left = active.offsetLeft - box.scrollLeft;
+        if (left < 0 || left + active.offsetWidth > box.clientWidth) {
+          scrollX(box, Math.max(0, active.offsetLeft - (box.clientWidth - active.offsetWidth) / 2));
+        }
+      }
+    }
+    function go(i) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      showFrame(i);
+      scrollX(gal, i * gal.clientWidth);
+    }
+
+    if (prev) prev.addEventListener('click', function () { go(cur - 1); });
+    if (next) next.addEventListener('click', function () { go(cur + 1); });
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-thumb]');
+      if (!t) return;
+      var i = thumbs.indexOf(t);
+      if (i >= 0) go(i);
+    });
+
+    var ticking = false;
+    gal.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; showFrame(index()); });
+    }, { passive: true });
+    // поворот экрана меняет ширину кадра — возвращаем текущее фото на место
+    window.addEventListener('resize', function () { gal.scrollLeft = cur * gal.clientWidth; }, { passive: true });
+    showFrame(0);
+  })();
+
+  /* ---------------- ленты со стрелками (категории) ---------------- */
+  (function () {
+    function setup(rail) {
+      var strip = rail.querySelector('[data-rail-track]');
+      var prev = rail.querySelector('[data-rail-prev]');
+      var next = rail.querySelector('[data-rail-next]');
+      if (!strip || !prev || !next) return;
+
+      function step() { return Math.max(140, Math.round(strip.clientWidth * 0.8)); }
+      function by(delta) {
+        var max = strip.scrollWidth - strip.clientWidth;
+        scrollX(strip, Math.max(0, Math.min(max, strip.scrollLeft + delta)));
+        setTimeout(sync, 400);
+      }
+      // стрелку прячем там, где листать уже некуда (и обе — если лента влезла целиком)
+      function sync() {
+        var max = strip.scrollWidth - strip.clientWidth;
+        prev.hidden = strip.scrollLeft <= 4;
+        next.hidden = strip.scrollLeft >= max - 4;
+      }
+
+      prev.addEventListener('click', function () { by(-step()); });
+      next.addEventListener('click', function () { by(step()); });
+      var ticking = false;
+      strip.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { ticking = false; sync(); });
+      }, { passive: true });
+      window.addEventListener('resize', sync, { passive: true });
+      sync();
+    }
+    document.querySelectorAll('[data-rail]').forEach(setup);
   })();
 
   /* ---------------- collection: автоподгрузка при скролле ---------------- */

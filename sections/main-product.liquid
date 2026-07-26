@@ -15,16 +15,27 @@
   <div class="privat-pp__left">
   <div class="privat-pp__photo{% if product.featured_image %} privat-pp__photo--photo{% endif %}" id="privat-pp-photo"
     {%- if photo_bg != blank %} data-photo-bg="{{ photo_bg }}" style="background-color:{{ photo_bg }}"{% endif %}>
-    {% if product.featured_image %}
-      <img class="privat-pp__media" id="privat-pp-photo-img"
-        src="{{ product.featured_image | image_url: width: 900, format: 'webp' }}"
-        srcset="{{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
-                {{ product.featured_image | image_url: width: 900, format: 'webp' }} 900w,
-                {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
-        sizes="(min-width: 1080px) 560px, 100vw"
-        width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
-        alt="{{ product.featured_image.alt | default: product.title | escape }}"
-        fetchpriority="high" loading="eager" decoding="async">
+    {%- comment -%} Галерея: все фото лежат в горизонтальном скроллере со снапом —
+      палец листает их родным скроллом, стрелки и миниатюры прокручивают его же.
+      Первый кадр грузится как раньше (eager + high), остальные — лениво, чтобы
+      не отбирать канал у LCP. {%- endcomment -%}
+    {% if product.images.size > 0 %}
+      <div class="privat-gal" data-gal-track>
+        {% for image in product.images %}
+          <div class="privat-gal__slide">
+            <img class="privat-pp__media"{% if forloop.first %} id="privat-pp-photo-img"{% endif %}
+              src="{{ image | image_url: width: 900, format: 'webp' }}"
+              srcset="{{ image | image_url: width: 600, format: 'webp' }} 600w,
+                      {{ image | image_url: width: 900, format: 'webp' }} 900w,
+                      {{ image | image_url: width: 1200, format: 'webp' }} 1200w"
+              sizes="(min-width: 1080px) 560px, 100vw"
+              width="{{ image.width }}" height="{{ image.height }}"
+              alt="{{ image.alt | default: product.title | escape }}"
+              {% if forloop.first %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
+              decoding="async">
+          </div>
+        {% endfor %}
+      </div>
     {% else %}
       <span class="privat-card__ph">фото товара</span>
     {% endif %}
@@ -41,6 +52,14 @@
       data-product-sku="{{ variant.sku | escape }}"
       data-variant-id="{{ variant.id }}"
       aria-label="В избранное"><svg width="16" height="16" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M11 18.6C6.7 15.3 3.8 12.6 3.8 9.6c0-2.2 1.7-3.9 3.9-3.9 1.3 0 2.5.6 3.3 1.7.8-1.1 2-1.7 3.3-1.7 2.2 0 3.9 1.7 3.9 3.9 0 3-2.9 5.7-7.2 9Z"/></svg></button>
+    {% if product.images.size > 1 %}
+      <button type="button" class="privat-gal__arrow privat-gal__arrow--prev" data-gal-prev aria-label="Предыдущее фото">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"/></svg>
+      </button>
+      <button type="button" class="privat-gal__arrow privat-gal__arrow--next" data-gal-next aria-label="Следующее фото">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"/></svg>
+      </button>
+    {% endif %}
   </div>
 
   {% if product.images.size > 1 %}
@@ -49,8 +68,7 @@
         {%- comment -%} миниатюра — настоящий <img>, а не CSS-фон: фон нельзя отложить,
           и все 7 штук грузились сразу, отнимая канал у главного фото {%- endcomment -%}
         <button type="button" class="privat-pp__thumb{% if forloop.first %} is-active{% endif %}"
-          data-thumb data-image-url="{{ image | image_url: width: 900, format: 'webp' }}"
-          aria-label="Фото {{ forloop.index }}">
+          data-thumb aria-label="Фото {{ forloop.index }}">
           <img src="{{ image | image_url: width: 128, format: 'webp' }}" alt=""
             width="64" height="64" decoding="async"
             loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">

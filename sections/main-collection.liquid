@@ -112,7 +112,8 @@
 {%- comment -%} лента категорий: все пункты уровня из «Меню категорий».
 Чип всегда ведёт на страницу коллекции: свою, а у родителя без ссылки
 («#») — на первую дочернюю. Фолбэк на коллекции — если меню пустое {%- endcomment -%}
-<div class="privat-catbar">
+<div class="privat-rail" data-rail>
+<div class="privat-catbar" data-rail-track>
   {% if menu.links.size > 0 %}
     {% for link in chip_links %}
       {%- assign chip_url = '' -%}
@@ -142,6 +143,13 @@
       {% endunless %}
     {% endfor %}
   {% endif %}
+</div>
+  <button type="button" class="privat-rail__arrow privat-rail__arrow--prev" data-rail-prev hidden aria-label="Категории левее">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"/></svg>
+  </button>
+  <button type="button" class="privat-rail__arrow privat-rail__arrow--next" data-rail-next hidden aria-label="Категории правее">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"/></svg>
+  </button>
 </div>
 
 <div class="privat-coll__head">
