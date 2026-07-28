@@ -850,13 +850,18 @@
        silent: обратно событие не шлём, чтобы не гонять выбор по кругу */
     document.addEventListener('privat:variant', function (e) {
       var id = String((e.detail && e.detail.id) || '');
+      var own = -1, general = -1;
       for (var i = 0; i < slides.length; i++) {
-        if ((slides[i].getAttribute('data-variant-ids') || '').split(',').indexOf(id) >= 0) {
-          if (e.detail.instant) placeFrame(i);
-          else go(i, true);
-          return;
-        }
+        var ids = slides[i].getAttribute('data-variant-ids') || '';
+        if (own < 0 && ids.split(',').indexOf(id) >= 0) own = i;
+        if (general < 0 && !ids) general = i;
       }
+      // У цвета может не быть своего фото (в Odoo не сняли) — тогда общее.
+      // Без этого выбор «назад» на такой цвет оставлял фото соседнего.
+      var to = own >= 0 ? own : general;
+      if (to < 0) return;
+      if (e.detail.instant) placeFrame(to);
+      else go(to, true);
     });
     showFrame(0);
   })();
