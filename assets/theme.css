@@ -463,6 +463,10 @@ a.privat-search__row-add{color:var(--ink)}
 .privat-swatch.is-active .privat-swatch__label{color:var(--accent-deep)}
 .privat-swatch.is-out{opacity:.5}
 .privat-swatch.is-out .privat-swatch__label{text-decoration:line-through}
+/* Вкус и размер — словом, а не картинкой: восемь одинаковых белых флаконов
+   в ряду ничего не подсказывают. Тут плитка становится обычной таблеткой. */
+.privat-swatch--text{width:auto;min-width:0;padding:11px 16px;border-radius:100px}
+.privat-swatch--text .privat-swatch__label{font-size:13px;-webkit-line-clamp:1;white-space:nowrap;padding:0}
 .privat-form-row{display:flex;gap:10px;align-items:stretch}
 .privat-form-row .privat-input{margin:0}
 

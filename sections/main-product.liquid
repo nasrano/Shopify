@@ -10,7 +10,7 @@
 {%- capture nl %}
 {% endcapture -%}
 {%- capture wa_message -%}
-Здравствуйте! Я хочу оформить заказ:{{ nl }}{{ nl }}1) {{ product.title }}{% if variant.sku != blank %} (код {{ variant.sku }}){% endif %} х 1 = {{ variant.price | money }}{{ nl }}{{ nl }}Общая сумма: {{ variant.price | money }}
+Здравствуйте! Я хочу оформить заказ:{{ nl }}{{ nl }}1) {{ product.title }}{% unless product.has_only_default_variant %}, {{ variant.title }}{% endunless %}{% if variant.sku != blank %} (код {{ variant.sku }}){% endif %} х 1 = {{ variant.price | money }}{{ nl }}{{ nl }}Общая сумма: {{ variant.price | money }}
 {%- endcapture -%}
 
 <article class="privat-pp" id="privat-pp">
@@ -122,6 +122,15 @@
       <div class="privat-opts">
         {% for opt in product.options_with_values %}
           {%- assign oi = forloop.index0 -%}
+          {%- comment -%} Фото на плитке помогает только там, где выбирают глазами:
+            цвет и модель видно сразу. У вкуса и аромата все флаконы белые и
+            одинаковые, вкус написан мелким шрифтом на этикетке — восемь белых
+            бутылок в ряд выбрать не помогают, только мешают. Там показываем
+            текстом. Размер — тоже слово, а не картинка. {%- endcomment -%}
+          {%- assign opt_key = opt.name | downcase | strip -%}
+          {%- assign wordy = 'вкус,аромат,размер,объём,объем' | split: ',' -%}
+          {%- assign show_photo = true -%}
+          {%- if wordy contains opt_key -%}{%- assign show_photo = false -%}{%- endif -%}
           <div class="privat-opt">
             <div class="privat-opt__name">{{ opt.name }}: <b data-opt-label="{{ oi }}">{{ opt.selected_value }}</b></div>
             <div class="privat-opt__vals">
@@ -140,8 +149,9 @@
                 {%- comment -%} у варианта нет своего фото (в Odoo не сняли) — плитка
                   берёт общее фото товара, иначе ряд разъезжается на текст и картинки {%- endcomment -%}
                 {%- unless sw_img -%}{%- assign sw_img = product.featured_image -%}{%- endunless -%}
+                {%- unless show_photo -%}{%- assign sw_img = false -%}{%- endunless -%}
                 <button type="button" data-opt-value data-opt-index="{{ oi }}" data-value="{{ val | escape }}"
-                  class="privat-swatch{% if val == opt.selected_value %} is-active{% endif %}{% unless sw_avail %} is-out{% endunless %}"
+                  class="privat-swatch{% unless show_photo %} privat-swatch--text{% endunless %}{% if val == opt.selected_value %} is-active{% endif %}{% unless sw_avail %} is-out{% endunless %}"
                   aria-pressed="{% if val == opt.selected_value %}true{% else %}false{% endif %}"
                   aria-label="{{ opt.name }}: {{ val }}{% unless sw_avail %} (нет в наличии){% endunless %}">
                   {% if sw_img %}
