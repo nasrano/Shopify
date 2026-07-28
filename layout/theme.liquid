@@ -188,7 +188,8 @@
     обязаны совпадать с <img> в main-product.liquid, иначе будет выбран другой кандидат и файл
     скачается дважды. {%- endcomment -%}
   {%- if template contains 'product' -%}
-    {%- assign lcp_img = product.featured_image | default: product.images.first -%}
+    {%- comment -%} у товара с вариантами открывается фото выбранного варианта — его и греем {%- endcomment -%}
+    {%- assign lcp_img = product.selected_or_first_available_variant.featured_image | default: product.featured_image | default: product.images.first -%}
     {%- if lcp_img -%}
       <link rel="preload" as="image" fetchpriority="high"
         href="{{ lcp_img | image_url: width: 900, format: 'webp' }}"

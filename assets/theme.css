@@ -141,6 +141,10 @@ button.privat-cat{font-family:'Manrope',sans-serif}
 .privat-card__old{font-size:12px;color:var(--sub);text-decoration:line-through}
 .privat-card__add{border:none;cursor:pointer;background:var(--chip);color:var(--ink);font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;padding:10px;border-radius:100px}
 .privat-card__add:hover{background:var(--accent);color:var(--accent-ink)}
+.privat-card__add--pick{display:block;text-align:center;color:var(--ink)}
+/* «8 цветов» — чтобы в списке было видно, что у товара есть выбор */
+.privat-card__variants{position:absolute;left:8px;bottom:8px;font-size:9.5px;font-weight:700;padding:4px 8px;border-radius:100px;
+  background:color-mix(in srgb, var(--card) 88%, transparent);color:var(--ink);border:1px solid var(--line);backdrop-filter:blur(6px)}
 
 /* ===== why us ===== */
 .privat-why__grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -357,6 +361,7 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-search__row-name{font-size:13px;font-weight:600;color:var(--ink)}
 .privat-search__row-price{font-family:'Prata',serif;font-size:13.5px;color:var(--ink);margin-top:2px}
 .privat-search__row-add{flex:none;border:none;cursor:pointer;background:var(--chip);color:var(--ink);font-size:11px;font-weight:700;padding:9px 12px;border-radius:100px;font-family:'Manrope',sans-serif}
+a.privat-search__row-add{color:var(--ink)}
 
 /* ===== inner pages ===== */
 .privat-page{padding:22px 16px 30px}
@@ -438,6 +443,20 @@ html[data-theme="dark"] .privat-theme-toggle__knob{transform:translateX(18px)}
 .privat-specs__v{font-size:13px;font-weight:600;color:var(--ink);text-align:right}
 .privat-fly-dot{position:absolute;z-index:95;border-radius:50%;pointer-events:none;box-shadow:0 10px 30px rgba(20,10,5,.25);background:var(--soft);background-size:cover;background-position:center}
 .privat-select{width:100%;border:1.5px solid var(--line);border-radius:100px;background:var(--card);padding:13px 20px;font-family:'Manrope',sans-serif;font-size:14px;color:var(--ink);outline:none;appearance:none}
+/* выбор варианта плитками с фото: список не показывал ни цвет, ни что выбор вообще есть */
+.privat-opts{display:flex;flex-direction:column;gap:14px}
+.privat-opt__name{font-size:12px;color:var(--sub);letter-spacing:.04em;margin-bottom:8px}
+.privat-opt__name b{font-weight:700;color:var(--ink)}
+.privat-opt__vals{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scroll-snap-type:x proximity}
+.privat-swatch{flex:none;scroll-snap-align:start;width:64px;padding:0 0 5px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);
+  color:var(--ink);font-family:'Manrope',sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;overflow:hidden}
+.privat-swatch img{display:block;width:100%;height:62px;object-fit:cover;background:#fff}
+.privat-swatch__label{font-size:10.5px;font-weight:600;line-height:1.2;text-align:center;padding:0 4px;max-width:100%;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.privat-swatch:not(.is-active):hover{border-color:var(--accent)}
+.privat-swatch.is-active{border-color:var(--accent);box-shadow:0 0 0 1.5px var(--accent)}
+.privat-swatch.is-out{opacity:.45}
+.privat-swatch.is-out .privat-swatch__label{text-decoration:line-through}
 .privat-form-row{display:flex;gap:10px;align-items:stretch}
 .privat-form-row .privat-input{margin:0}
 

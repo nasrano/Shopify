@@ -4,6 +4,9 @@
 {%- assign photo_bg = product.metafields.custom.photo_bg -%}
 {%- assign bc_collection = collection | default: product.collections.first -%}
 {%- assign wa_digits = section.settings.whatsapp_phone | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
+{%- comment -%} грузим первым фото выбранного варианта, а не первый кадр: если первый
+  цвет распродан, Shopify выбирает следующий и галерея открывается на его фото {%- endcomment -%}
+{%- assign lcp_img_id = variant.featured_image.id | default: product.images.first.id -%}
 {%- capture nl %}
 {% endcapture -%}
 {%- capture wa_message -%}
@@ -22,7 +25,10 @@
     {% if product.images.size > 0 %}
       <div class="privat-gal" data-gal-track>
         {% for image in product.images %}
-          <div class="privat-gal__slide">
+          {%- comment -%} data-variant-ids — по нему галерея прыгает на фото выбранного цвета {%- endcomment -%}
+          {%- assign img_vids = '' -%}
+          {%- for iv in image.variants -%}{%- assign img_vids = img_vids | append: iv.id | append: ',' -%}{%- endfor -%}
+          <div class="privat-gal__slide"{% if img_vids != '' %} data-variant-ids="{{ img_vids }}"{% endif %}>
             <img class="privat-pp__media"{% if forloop.first %} id="privat-pp-photo-img"{% endif %}
               src="{{ image | image_url: width: 900, format: 'webp' }}"
               srcset="{{ image | image_url: width: 600, format: 'webp' }} 600w,
@@ -31,7 +37,7 @@
               sizes="(min-width: 1080px) 560px, 100vw"
               width="{{ image.width }}" height="{{ image.height }}"
               alt="{{ image.alt | default: product.title | escape }}"
-              {% if forloop.first %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
+              {% if image.id == lcp_img_id %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
               decoding="async">
           </div>
         {% endfor %}
@@ -109,17 +115,47 @@
   </section>
 
   <section class="privat-pp__buy">
-    {% if product.variants.size > 1 %}
-      <select class="privat-select" id="privat-pp-variant" aria-label="Вариант">
-        {% for v in product.variants %}
-          <option value="{{ v.id }}"
-            {% if v.id == variant.id %}selected{% endif %}
-            {% unless v.available %}disabled{% endunless %}>
-            {{ v.title }} — {{ v.price | money }}{% unless v.available %} · нет в наличии{% endunless %}
-          </option>
+    {%- comment -%} Варианты — плитками с фото: выпадающий список не показывал ни цвет,
+      ни что у товара вообще есть выбор. Картинку берём той же ширины, что и миниатюры
+      галереи (128) — у варианта это то же фото, браузер возьмёт его из кэша. {%- endcomment -%}
+    {% unless product.has_only_default_variant %}
+      <div class="privat-opts">
+        {% for opt in product.options_with_values %}
+          {%- assign oi = forloop.index0 -%}
+          <div class="privat-opt">
+            <div class="privat-opt__name">{{ opt.name }}: <b data-opt-label="{{ oi }}">{{ opt.selected_value }}</b></div>
+            <div class="privat-opt__vals">
+              {% for val in opt.values %}
+                {%- assign sw_img = false -%}
+                {%- assign sw_avail = false -%}
+                {%- for v in product.variants -%}
+                  {%- if oi == 0 -%}{%- assign v_val = v.option1 -%}
+                  {%- elsif oi == 1 -%}{%- assign v_val = v.option2 -%}
+                  {%- else -%}{%- assign v_val = v.option3 -%}{%- endif -%}
+                  {%- if v_val == val -%}
+                    {%- if v.available -%}{%- assign sw_avail = true -%}{%- endif -%}
+                    {%- unless sw_img -%}{%- assign sw_img = v.featured_image -%}{%- endunless -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- comment -%} у варианта нет своего фото (в Odoo не сняли) — плитка
+                  берёт общее фото товара, иначе ряд разъезжается на текст и картинки {%- endcomment -%}
+                {%- unless sw_img -%}{%- assign sw_img = product.featured_image -%}{%- endunless -%}
+                <button type="button" data-opt-value data-opt-index="{{ oi }}" data-value="{{ val | escape }}"
+                  class="privat-swatch{% if val == opt.selected_value %} is-active{% endif %}{% unless sw_avail %} is-out{% endunless %}"
+                  aria-pressed="{% if val == opt.selected_value %}true{% else %}false{% endif %}"
+                  aria-label="{{ opt.name }}: {{ val }}{% unless sw_avail %} (нет в наличии){% endunless %}">
+                  {% if sw_img %}
+                    <img src="{{ sw_img | image_url: width: 128, format: 'webp' }}" alt=""
+                      width="64" height="64" loading="lazy" decoding="async">
+                  {% endif %}
+                  <span class="privat-swatch__label">{{ val }}</span>
+                </button>
+              {% endfor %}
+            </div>
+          </div>
         {% endfor %}
-      </select>
-    {% endif %}
+      </div>
+    {% endunless %}
 
     <div class="privat-pp__row">
       <div class="privat-qty">
@@ -129,7 +165,7 @@
       </div>
       <button type="button" class="privat-pp__add" id="privat-pp-add" data-variant-id="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>
         <svg width="18" height="18" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 H18 L17 19 H5 Z"></path><path d="M8 7.5 V6 a3 3 0 0 1 6 0 V7.5"></path></svg>
-        {% if variant.available %}В корзину{% else %}Нет в наличии{% endif %}
+        <span data-add-label>{% if variant.available %}В корзину{% else %}Нет в наличии{% endif %}</span>
       </button>
     </div>
 

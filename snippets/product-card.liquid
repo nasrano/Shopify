@@ -5,6 +5,32 @@
 {%- assign fav_image = '' -%}
 {%- if product.featured_image -%}{%- assign fav_image = product.featured_image | image_url: width: 200, format: 'webp' -%}{%- endif -%}
 
+{%- comment -%} Товар с вариантами: в списке пишем, сколько их («8 цветов»), а вместо
+  «В корзину» ведём на страницу товара — класть в корзину случайный цвет за покупателя
+  нельзя. Слова склоняем по русским правилам: 2-4 цвета, 5+ цветов. {%- endcomment -%}
+{%- assign multi = false -%}
+{%- unless product.has_only_default_variant -%}
+  {%- assign multi = true -%}
+  {%- assign vcount = product.variants.size -%}
+  {%- assign oname = '' -%}
+  {%- if product.options.size == 1 -%}{%- assign oname = product.options.first | downcase -%}{%- endif -%}
+  {%- case oname -%}
+    {%- when 'цвет' -%}{%- assign wforms = 'цвет,цвета,цветов' -%}{%- assign pick_label = 'Выбрать цвет' -%}
+    {%- when 'размер' -%}{%- assign wforms = 'размер,размера,размеров' -%}{%- assign pick_label = 'Выбрать размер' -%}
+    {%- when 'вкус' -%}{%- assign wforms = 'вкус,вкуса,вкусов' -%}{%- assign pick_label = 'Выбрать вкус' -%}
+    {%- when 'модель' -%}{%- assign wforms = 'модель,модели,моделей' -%}{%- assign pick_label = 'Выбрать модель' -%}
+    {%- else -%}{%- assign wforms = 'вариант,варианта,вариантов' -%}{%- assign pick_label = 'Выбрать вариант' -%}
+  {%- endcase -%}
+  {%- assign wforms = wforms | split: ',' -%}
+  {%- assign m10 = vcount | modulo: 10 -%}
+  {%- assign m100 = vcount | modulo: 100 -%}
+  {%- assign wi = 2 -%}
+  {%- if m100 < 11 or m100 > 14 -%}
+    {%- if m10 == 1 -%}{%- assign wi = 0 -%}{%- endif -%}
+    {%- if m10 >= 2 and m10 <= 4 -%}{%- assign wi = 1 -%}{%- endif -%}
+  {%- endif -%}
+{%- endunless -%}
+
 <div class="privat-card">
   <a href="{{ product.url }}" class="privat-card__imgwrap{% if product.featured_image %} privat-card__imgwrap--photo{% endif %}">
     {% if product.featured_image %}
@@ -20,6 +46,10 @@
         {% if eager %}loading="eager"{% if priority %} fetchpriority="high"{% endif %}{% else %}loading="lazy"{% endif %} decoding="async">
     {% else %}
       <span class="privat-card__ph">фото товара</span>
+    {% endif %}
+
+    {% if multi %}
+      <span class="privat-card__variants">{{ vcount }} {{ wforms[wi] }}</span>
     {% endif %}
 
     {% if badge == 'new' %}
@@ -52,8 +82,12 @@
     {% else %}
       <div class="privat-card__price">{{ variant.price | money }}</div>
     {% endif %}
-    <button type="button" class="privat-card__add" data-add-to-cart data-variant-id="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>
-      {% if variant.available %}В корзину{% else %}Нет в наличии{% endif %}
-    </button>
+    {% if multi %}
+      <a class="privat-card__add privat-card__add--pick" href="{{ product.url }}">{{ pick_label }}</a>
+    {% else %}
+      <button type="button" class="privat-card__add" data-add-to-cart data-variant-id="{{ variant.id }}"{% unless variant.available %} disabled{% endunless %}>
+        {% if variant.available %}В корзину{% else %}Нет в наличии{% endif %}
+      </button>
+    {% endif %}
   </div>
 </div>

@@ -539,6 +539,8 @@
             var imgUrl = p.featured_image ? (p.featured_image.url || p.featured_image) : (p.image || '');
             var img = imgUrl ? 'background-image:url(' + imgUrl + ')' : '';
             var variantId = p.variant_id || (p.variants && p.variants[0] && p.variants[0].id) || '';
+            // у товара с вариантами класть в корзину наугад нельзя — ведём выбирать
+            var many = p.variants && p.variants.length > 1;
             return '' +
               '<div class="privat-search__row">' +
                 '<a href="' + p.url + '" class="privat-line-item__thumb" style="width:46px;height:46px;min-height:46px;' + img + '"></a>' +
@@ -546,7 +548,9 @@
                   '<a href="' + p.url + '" class="privat-search__row-name" style="color:inherit;text-decoration:none">' + p.title + '</a>' +
                   '<div class="privat-search__row-price">' + p.price + '</div>' +
                 '</div>' +
-                (variantId ? '<button class="privat-search__row-add" data-add-to-cart data-variant-id="' + variantId + '">В корзину</button>' : '') +
+                (many
+                  ? '<a class="privat-search__row-add" href="' + p.url + '">Выбрать</a>'
+                  : (variantId ? '<button class="privat-search__row-add" data-add-to-cart data-variant-id="' + variantId + '">В корзину</button>' : '')) +
               '</div>';
           }).join('') || '<div class="privat-search__idle">Ничего не найдено</div>';
         });
@@ -561,10 +565,12 @@
     try { product = JSON.parse(jsonEl.textContent); } catch (e) { return; }
     if (!product || !product.variants || !product.variants.length) return;
 
-    var select = document.getElementById('privat-pp-variant');
     var qtyEl = document.getElementById('privat-pp-qty');
     var addBtn = document.getElementById('privat-pp-add');
+    var swatches = [].slice.call(document.querySelectorAll('[data-opt-value]'));
+    var labels = [].slice.call(document.querySelectorAll('[data-opt-label]'));
     var qty = 1;
+    var curId = addBtn ? addBtn.getAttribute('data-variant-id') : '';
 
     function variantById(id) {
       for (var i = 0; i < product.variants.length; i++) {
@@ -573,9 +579,55 @@
       return null;
     }
     function currentVariant() {
-      if (select) return variantById(select.value) || product.variants[0];
-      return variantById(addBtn && addBtn.getAttribute('data-variant-id')) || product.variants[0];
+      return variantById(curId) || product.variants[0];
     }
+
+    /* Клик по плитке меняет один параметр, остальные оставляем как есть. Если
+       такой комбинации нет (у товара с двумя параметрами не все пары существуют) —
+       берём любой вариант с выбранным значением, лучше доступный. */
+    function pickVariant(oi, val) {
+      var want = (currentVariant().options || []).slice();
+      want[oi] = val;
+      var exact = null, loose = null;
+      for (var i = 0; i < product.variants.length; i++) {
+        var v = product.variants[i];
+        if (v.options[oi] !== val) continue;
+        if (!loose || (!loose.available && v.available)) loose = v;
+        var same = true;
+        for (var k = 0; k < want.length; k++) {
+          if (v.options[k] !== want[k]) { same = false; break; }
+        }
+        if (same) exact = v;
+      }
+      return exact || loose;
+    }
+
+    function paintSwatches(v) {
+      swatches.forEach(function (sw) {
+        var on = v.options[+sw.getAttribute('data-opt-index')] === sw.getAttribute('data-value');
+        sw.classList.toggle('is-active', on);
+        sw.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      labels.forEach(function (el) {
+        el.textContent = v.options[+el.getAttribute('data-opt-label')] || '';
+      });
+    }
+
+    /* галерея живёт в своём модуле ниже — просим её показать фото варианта */
+    function showVariantPhoto(v, instant) {
+      document.dispatchEvent(new CustomEvent('privat:variant', { detail: { id: v.id, instant: instant } }));
+    }
+
+    /* ...и наоборот: пролистали фото до другого цвета — выбор едет за ним, иначе
+       покупатель смотрит на зелёную и кладёт в корзину синюю */
+    document.addEventListener('privat:frame', function (e) {
+      var ids = (e.detail && e.detail.ids) || [];
+      if (ids.indexOf(String(curId)) >= 0) return;
+      var v = variantById(ids[0]);
+      if (!v) return;
+      curId = String(v.id);
+      sync();
+    });
 
     function sync() {
       var v = currentVariant();
@@ -602,12 +654,22 @@
       if (addBtn) {
         addBtn.disabled = !v.available;
         addBtn.setAttribute('data-variant-id', String(v.id));
+        var addLabel = addBtn.querySelector('[data-add-label]');
+        if (addLabel) addLabel.textContent = v.available ? 'В корзину' : 'Нет в наличии';
+      }
+      paintSwatches(v);
+      // сердечко на фото запоминает именно выбранный вариант
+      var fav = document.querySelector('.privat-pp__photo [data-fav-toggle]');
+      if (fav) {
+        fav.setAttribute('data-variant-id', String(v.id));
+        fav.setAttribute('data-product-price', formatMoney(v.price));
+        fav.setAttribute('data-product-sku', v.sku || '');
       }
       if (totalEl) totalEl.textContent = formatMoney(v.price * qty);
       if (buyNow) {
         var orderCode = newOrderCode();
         var itemTitle = buyNow.getAttribute('data-product-title') +
-          (select ? ', ' + v.title : '');
+          (product.variants.length > 1 ? ', ' + v.title : '');
         var itemSum = v.price * qty;
         buyNow.href = 'https://wa.me/' + buyNow.getAttribute('data-wa-phone') + '?text=' +
           encodeURIComponent(buildWaOrderMsg(orderCode, [{ title: itemTitle, sku: v.sku, qty: qty, sum: itemSum }], itemSum));
@@ -649,9 +711,15 @@
     document.addEventListener('click', function (e) {
       if (e.target.closest('[data-pp-qty-inc]')) { qty = Math.min(99, qty + 1); sync(); return; }
       if (e.target.closest('[data-pp-qty-dec]')) { qty = Math.max(1, qty - 1); sync(); return; }
+      var sw = e.target.closest('[data-opt-value]');
+      if (sw) {
+        var v = pickVariant(+sw.getAttribute('data-opt-index'), sw.getAttribute('data-value'));
+        if (!v) return;
+        curId = String(v.id);
+        sync();
+        showVariantPhoto(v);
+      }
     });
-
-    if (select) select.addEventListener('change', sync);
 
     if (addBtn) addBtn.addEventListener('click', function () {
       var v = currentVariant();
@@ -671,6 +739,10 @@
     });
 
     sync();
+    // сразу открываемся на фото выбранного варианта: если первый цвет распродан,
+    // Shopify выберет следующий, а галерея всё равно начнётся с первого кадра.
+    // Ждём тика — галерея подписывается на событие ниже по файлу.
+    setTimeout(function () { showVariantPhoto(currentVariant(), true); }, 0);
   })();
 
   /* ---------------- галерея товара: стрелки + свайп ----------------
@@ -729,10 +801,31 @@
         }
       }
     }
-    function go(i) {
+    /* какие варианты живут на этом кадре — чтобы выбор ехал за фото */
+    function emitFrame(i) {
+      var ids = (slides[i].getAttribute('data-variant-ids') || '').split(',').filter(Boolean);
+      if (ids.length) document.dispatchEvent(new CustomEvent('privat:frame', { detail: { ids: ids } }));
+    }
+    function go(i, silent) {
       i = Math.max(0, Math.min(slides.length - 1, i));
       showFrame(i);
       scrollX(gal, i * gal.clientWidth);
+      if (!silent) emitFrame(i);
+    }
+    /* поставить кадр без анимации (открытие страницы). На первом тике ширина
+       кадра ещё может быть нулевой — тогда повторяем, пока разложится. */
+    function placeFrame(i) {
+      showFrame(i);
+      var put = function () {
+        if (!gal.clientWidth) return false;
+        gal.scrollLeft = i * gal.clientWidth;
+        return true;
+      };
+      if (put()) return;
+      var tries = 0;
+      var again = function () { if (!put() && ++tries < 30) requestAnimationFrame(again); };
+      requestAnimationFrame(again);
+      window.addEventListener('load', put, { once: true });
     }
 
     if (prev) prev.addEventListener('click', function () { go(cur - 1); });
@@ -748,10 +841,23 @@
     gal.addEventListener('scroll', function () {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(function () { ticking = false; showFrame(index()); });
+      requestAnimationFrame(function () { ticking = false; showFrame(index()); emitFrame(index()); });
     }, { passive: true });
     // поворот экрана меняет ширину кадра — возвращаем текущее фото на место
     window.addEventListener('resize', function () { gal.scrollLeft = cur * gal.clientWidth; }, { passive: true });
+
+    /* выбрали цвет — листаем на фото этого варианта (у слайда есть data-variant-ids).
+       silent: обратно событие не шлём, чтобы не гонять выбор по кругу */
+    document.addEventListener('privat:variant', function (e) {
+      var id = String((e.detail && e.detail.id) || '');
+      for (var i = 0; i < slides.length; i++) {
+        if ((slides[i].getAttribute('data-variant-ids') || '').split(',').indexOf(id) >= 0) {
+          if (e.detail.instant) placeFrame(i);
+          else go(i, true);
+          return;
+        }
+      }
+    });
     showFrame(0);
   })();
 
